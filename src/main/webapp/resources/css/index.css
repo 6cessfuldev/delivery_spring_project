@@ -1,0 +1,58 @@
+.header-box{
+    background-image: url(/resources/source/pizza.jpg);
+    background-size : 3600px;
+    background-position: -100px;
+    height: 300px;
+    padding-top:100px;
+	text-align: center;
+}
+
+.header-box h1 {
+	color : white;
+	font-weight: 700;
+}
+
+.search-box{
+}
+
+.gps-btn{
+	background-color : white;
+	box-shadow: none;
+	border: none;
+	height: 48px;
+	width: 45px;
+	border-radius: 5px;
+}
+
+.search-input-box{
+	display: inline-flex;
+
+}
+
+#search-input{
+	color:grey;
+	height:48px;
+	width: 300px;
+	border:none;
+	border-bottom-left-radius : 8px;
+	border-top-left-radius : 8px;
+	box-shadow: none;
+	outline: none;
+	font-size:15px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#search-btn{
+	border-bottom-right-radius : 8px;
+	border-top-right-radius : 8px;
+	height:48px;
+	width:70px;
+	background-color : red;
+	box-shadow: none;
+	border: none;
+	color:white;
+	font-weight: 600;
+	margin: 0;
+	padding: 0;
+}

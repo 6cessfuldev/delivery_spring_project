@@ -1,0 +1,48 @@
+header{
+    height: 68px;
+    background-color: #FF6E31;
+}
+
+.nav{
+    float: right;
+    margin-right: 300px;
+}
+.logo{
+    margin-left:20% ;
+}
+
+.nav-link {
+    color: white;
+}
+.nav-item{
+    margin-right: 30px;
+}
+.box{
+    border: 1px solid orange;
+    border-radius: 10px;
+
+}
+
+
+@media screen and (max-width: 1200px) {
+
+    .logo{
+        margin-left:15% ;
+    }
+    .nav{
+        margin-right: 150px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .logo{
+        margin-left:10% ;
+    }
+    .nav{
+        margin-right: 30px;
+    }
+    .nav-item{
+        margin-right: 10px;
+    }
+}
