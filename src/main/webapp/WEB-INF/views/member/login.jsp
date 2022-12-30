@@ -7,6 +7,12 @@
 <title>로그인</title>
 </head>
 <body>
-
+    <div class="container">
+        <form action="/member/login">
+            <input type="text" class="text-field" id="user_email" placeholder="이메일을 입력해주세요.">
+            <input type="password" class="text-field" id="user_pw" placeholder="비밀번호를 입력해주세요.">
+            <button type="submit">로그인</button>
+        </form>
+    </div>
 </body>
 </html>
