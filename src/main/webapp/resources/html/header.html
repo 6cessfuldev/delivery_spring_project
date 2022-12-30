@@ -1,98 +1,80 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>header</title>
-    <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-    <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 
-        header {
-            height: 90px;
-            background-color: rgb(153, 217, 234);
-        }
+<style>
 
-        .fs-4 {
-            width: 100px;
-            height: 80px;
-            margin-left: 400px;
-            padding-bottom: 20px;
-        }
+	header{
+		height: 68px;
+		background-color: rgb(153, 217, 234);;
+	}
 
-        .nav {
-            margin-right: 20%;
-        }
+	.nav{
+		float: right;
+		margin-right: 300px;
+	}
+	.logo{
+		margin-left:20% ;
+	}
 
-        .nav-item {
-            font-size: 17px;
-            padding-right: 30px;
-            padding-top: 7px;
-        }
-        
-        .nav-link {
-            color: white;
-        }
+	.nav-link {
+		color: white;
+	}
+	.nav-item{
+		margin-right: 40px;
+	}
+	.box{
+		border: 1px solid white;
+        border-radius: 10px;
 
-        .nav-link:hover{
-            color: rgb(153, 217, 234);
-            background-color: white;
-        }
+	}
+	
 
-        .box{
-            border: 1px solid white;
-            border-radius: 10px;
-        }
+	@media screen and (max-width: 1200px) {
 
-        @media screen and (max-width: 1200px) {
-          
-          .fs-4{
-              float: left;
-              margin-left: 250px;
-          }
+		.logo{
+			margin-left:15% ;
+		}
+		.nav{
+			margin-right: 150px;
+		}
+	}
 
-          .nav{
-              float: right;
-              margin-right: 150px;
-          }
+	@media screen and (max-width: 768px) {
 
-      }
+		.logo{
+			margin-left:10% ;
+		}
+		.nav{
+			margin-right: 30px;
+		}
+		.nav-item{
+			margin-right: 10px;
+		}
+	}
 
-        @media screen and (max-width: 768px) {
-          
-            .fs-4{
-              float: left;
-              margin-left: 50px;
-          }
-
-          .nav{
-              float: right;
-              margin-right: 50px;
-          }
-        }
-
-        
-    </style>
+</style>
 </head>
 
 <body>
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <img src="/resources/source/logo.png" class="bi me-2 fs-4" alt="">
-        </a>
-
-        <ul class="nav nav-pills">
-            <li class="nav-item"><div class="box"><a href="#" class="nav-link">로그인</a></div></li>
-            <li class="nav-item"><div class="box"><a href="#" class="nav-link">장바구니</a></div></li>
-        </ul>
-    </header>
-
+	<header class="pt-2">
+		<a href="/" class="logo">
+		  <img src="/resources/source/logo.png" alt="logo" class="bi me-2" width="80" height="50">
+		</a>
+  
+		<ul class="nav nav-pills pt-1">
+		  <li class="nav-item"><div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div></li>
+		  <li class="nav-item"><div class="box"><a href="#" class="nav-link">장바구니</a><div></li>
+		</ul>
+	  </header>
+	<div class="container bg-dark">
+		
+	</div>
 
 </body>
-
 </html>
