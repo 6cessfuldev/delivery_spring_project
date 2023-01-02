@@ -24,7 +24,9 @@ header{
     border-radius: 10px;
 
 }
-
+#logo_img{
+	 margin-top:-35px ;
+}
 
 @media screen and (max-width: 1200px) {
 
