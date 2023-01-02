@@ -1,3 +1,18 @@
+@media screen and (max-width: 1020px) {
+
+	.category{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 768px) {
+
+	.header-box{
+		display: none;
+	}
+}
+
+
 .header-box{
     background-image: url(/resources/source/pizza.jpg);
     background-size : 3600px;
@@ -82,8 +97,8 @@ main{
 }
 
 .category-btn{
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-top: 18px;
 	width: 100%;
 	height: 100%;
@@ -91,7 +106,6 @@ main{
 }
 
 .contents{
-	height: 1000px;
 	width: 100%;
 	background-color: rgb(235, 232, 232);
 	box-shadow: inset 0px 6px 6px -6px #666;
@@ -99,13 +113,83 @@ main{
 }
 
 .diner-detail{
-	background-color: #666;
+	margin-right: 10px;
 	width: 650px;
 	height: 1000px;
+}
+
+.diner-header{
+	margin-bottom: 30px;
+	width: 100%;
+	border: rgb(209, 203, 203) 1px solid;
+}
+
+.diner-name{
+	border-bottom: 1px solid rgb(209, 203, 203);
+	padding-left: 6px;
+	padding-top: 6px;
+	height: 38px;
+
+}
+
+.diner-info{
+	display: flex;
+	padding-top: 8px;
+	line-height: 0.5;
+	font-size: 13px;
+}
+
+.diner-img{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.score{
+	color:rgb(194, 194, 34);
+}
+
+.diner-notice{
+	height: 38px;
+	padding-left: 10px;
+	padding-top: 8px;
+	border-top:  rgb(209, 203, 203) 1px solid;
+	font-size: 12px;
+}
+
+.diner-notice>p{
+	font-weight: 600;
+}
+
+.diner-notice>p>span{
+	color: grey;
+}
+
+.diner-menu{
+	border: rgb(209, 203, 203) 1px solid;
+}
+
+.diner-menu>ul{
+	width: 100%;
+}
+
+.diner-menu>ul>li{
+	width: 33%;
+	border: none;
+}
+.diner-menu>ul>li>button{
+	color:black;
+	width: 100%;
+	height: 45px;
+	border: none;
+	background-color: white;
+}
+
+.clicked{
+	border-bottom: 5px solid red;
+	border-width: 5px;
 }
 
 .basket{
 	background-color: antiquewhite;
 	width: 350px;
-	height: 1000px;
 }

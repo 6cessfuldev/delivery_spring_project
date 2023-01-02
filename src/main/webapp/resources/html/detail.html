@@ -7,6 +7,18 @@
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+
+<link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
+
+<!-- basic ALS css -->
+<link rel="stylesheet" type="text/css" media="screen" href="/resources/css/slider.css" />
+
+<!-- your jQuery version -->
+<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js" ></script>
+
+<!-- your ALS version -->
+<script type="text/javascript" src="/resources/js/jquery.als-2.1.min.js" ></script>
+
 </head>
 <body>
 	<header class="pt-2">
@@ -70,7 +82,7 @@
 		}
 	}
 	</style>
-<link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
+
 
 <div class="header-box">
     <div class="search-box">
@@ -133,8 +145,83 @@
 	<div class="contents bg-light d-flex justify-content-center pt-3">
         
         <div class="diner-detail">
+            <div class=diner-header>
+                <div class="diner-name">
+                    인천상륙덮글이
+                </div>
+                <div class="diner-info">
+                    <div class="diner-img">
+                        <img src="/resources/source/kakao.jpg" alt="" width="70" height="70">
+                    </div>
+                    <div class="diner-infos"
+                        <p class="score">★★★★☆</p>
+                        <p>최소주문금액 9,000원</p>
+                        <p>결제 <span>신용카드, 현금, 요기서결제</span></p>
+                        <p>배달시간 <span>38분~48분</span></p>
+                    </div>
+                </div>
+                <div class="diner-notice">
+                    <p>사장님 알림 <span>9월 7일부터 신규오픈 "인천상륙 덮글이" 인천 상륙 덮글이 우리나라 월드컵 16강 기원 리...</span></p>
+                </div>
+            </div>
 
+            <div class="diner-menu">
+                <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="bg-light" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">메뉴</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="bg-light" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">리뷰</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="clicked bg-light" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">정보</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                        <!-- define a container with class "als-container": this will be the object binded to ALS; we suggest to give it an ID
+to retrieve it easily during ALS inizialization -->
+
+                    <div class="als-container" id="my-als-list">
+
+                        <!-- if you choose manual scrolling (which is set by default), insert <span> with class "als-prev"  and "als-next": 
+                        they define the buttons "previous" and "next"; within the <span> you can use images or simple text -->	
+                        
+                        <span class="als-prev"><img src="images/prev.png" alt="prev" title="previous" /></span>
+                        
+                        <!-- define a container with class "als-viewport": this will be the viewport for the list visible elements -->
+                        
+                        <div class="als-viewport">
+                        
+                        <!-- define a container with class "als-wrapper": this will be the wrapper for the list elements, 
+                        it can be a classic <ul> element or even a <div> element -->
+                        
+                            <ul class="als-wrapper">
+                        
+                        <!-- define the list elements, each must have class "als-item"; they can be classic <li> elements 
+                        or generic <div> elements and they can contain anything: text, images, ... -->
+                        
+                            <li class="als-item">orange</li> <!-- text only -->
+                            <li class="als-item"><img src="images/fruits/apple.png" alt="apple" title="apple" /></li> <!-- image -->
+                            <li class="als-item"><img src="images/fruits/banana.png" alt="banana" title="banana" />banana</li> <!-- image + text -->
+                        
+                            </ul> <!-- als-wrapper end -->
+                        </div> <!-- als-viewport end -->
+                        <span class="als-next"><img src="images/next.png" alt="next" title="next" /></span> <!-- "next" button -->
+                        </div> <!-- als-container end -->
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">리뷰...</div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">정보...</div>
+                  </div>
+            </div>
         </div>
+
+       
+
+
+
+
+
         <div class="basket">
 
         </div>
@@ -166,6 +253,14 @@
 
   </div>
 </footer>
+
+<!-- in our example the container has id="my-als-list" thus ALS is initialized like this -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#my-als-list").als();
+	});	
+</script>
 
 </body>
 </html>
