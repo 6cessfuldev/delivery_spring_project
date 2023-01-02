@@ -58,7 +58,7 @@
 		<p id="notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#" id="li_a">이용약관</a> &nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#" id="li_a">청소년보호정책</a> &nbsp;| &nbsp;<a href="#" id="li_a">고객센터</a></p>
 	</div>
 	<div class="container pt-3 d-flex">
-		<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo.png" width="100px"></img></a>
+		<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo2.png" width="130px"></img></a>
 		<div class="footer-com">
 			<p class="footer-com-name">주식회사 장대한상상
             <p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; | 대표이사 : KYK</p>		
