@@ -41,4 +41,9 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String testList() {
+		return "list";
+	}
+	
 }
