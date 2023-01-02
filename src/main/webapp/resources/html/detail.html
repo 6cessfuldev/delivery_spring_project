@@ -4,20 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+
 <link type="text/css" rel="stylesheet" href="/resources/css/header.css">
 
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
 
-<!-- basic ALS css -->
-<link rel="stylesheet" type="text/css" media="screen" href="/resources/css/slider.css" />
-
-<!-- your jQuery version -->
-<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js" ></script>
-
-<!-- your ALS version -->
-<script type="text/javascript" src="/resources/js/jquery.als-2.1.min.js" ></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
 
 </head>
 <body>
@@ -77,10 +72,13 @@
 		
 		@media screen and (max-width: 1200px) {
 	
-		#img_a{
-			display:none;
+			#img_a{
+				display:none;
+			}
 		}
-	}
+
+
+
 	</style>
 
 
@@ -176,44 +174,82 @@
                     <li class="nav-item" role="presentation">
                       <button class="clicked bg-light" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">정보</button>
                     </li>
-                  </ul>
-                  <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                        <!-- define a container with class "als-container": this will be the object binded to ALS; we suggest to give it an ID
-to retrieve it easily during ALS inizialization -->
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                	<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                    
+					<!-- Slider main container -->
+						<div class="swiper">
+							<!-- Additional required wrapper -->
+							<div class="swiper-wrapper">
+							<!-- Slides -->
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							</div>
+							<!-- If we need pagination -->
+							<div class="swiper-pagination"></div>
+						
+							<!-- If we need navigation buttons -->
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						
+							<!-- If we need scrollbar -->
+							<div class="swiper-scrollbar"></div>
+						</div>
+                	</div>
+					<div class="accordion" id="accordionPanelsStayOpenExample">
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+							<button class="accordion-button bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+							  Accordion Item #1
+							</button>
+						  </h2>
+						  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+							<div class="accordion-body">
+							  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+							</div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+							  Accordion Item #2
+							</button>
+						  </h2>
+						  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+							<div class="accordion-body">
+							  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+							</div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+							  Accordion Item #3
+							</button>
+						  </h2>
+						  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+							<div class="accordion-body">
+							  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+							</div>
+						  </div>
+						</div>
+					  </div>
 
-                    <div class="als-container" id="my-als-list">
-
-                        <!-- if you choose manual scrolling (which is set by default), insert <span> with class "als-prev"  and "als-next": 
-                        they define the buttons "previous" and "next"; within the <span> you can use images or simple text -->	
-                        
-                        <span class="als-prev"><img src="images/prev.png" alt="prev" title="previous" /></span>
-                        
-                        <!-- define a container with class "als-viewport": this will be the viewport for the list visible elements -->
-                        
-                        <div class="als-viewport">
-                        
-                        <!-- define a container with class "als-wrapper": this will be the wrapper for the list elements, 
-                        it can be a classic <ul> element or even a <div> element -->
-                        
-                            <ul class="als-wrapper">
-                        
-                        <!-- define the list elements, each must have class "als-item"; they can be classic <li> elements 
-                        or generic <div> elements and they can contain anything: text, images, ... -->
-                        
-                            <li class="als-item">orange</li> <!-- text only -->
-                            <li class="als-item"><img src="images/fruits/apple.png" alt="apple" title="apple" /></li> <!-- image -->
-                            <li class="als-item"><img src="images/fruits/banana.png" alt="banana" title="banana" />banana</li> <!-- image + text -->
-                        
-                            </ul> <!-- als-wrapper end -->
-                        </div> <!-- als-viewport end -->
-                        <span class="als-next"><img src="images/next.png" alt="next" title="next" /></span> <!-- "next" button -->
-                        </div> <!-- als-container end -->
-                    </div>
-                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">리뷰...</div>
-                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">정보...</div>
-                  </div>
-            </div>
+				  	<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">리뷰...</div>
+					<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">정보...</div>
+				</div>
+        	</div>
         </div>
 
        
@@ -224,8 +260,11 @@ to retrieve it easily during ALS inizialization -->
 
         <div class="basket">
 
-        </div>
 
+		
+		
+		
+		</div>
 
 	</div>
 
@@ -254,13 +293,13 @@ to retrieve it easily during ALS inizialization -->
   </div>
 </footer>
 
+<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
 <!-- in our example the container has id="my-als-list" thus ALS is initialized like this -->
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#my-als-list").als();
-	});	
-</script>
+<script type="text/javascript" src="/resources/js/detail.js"></script>
 
 </body>
 </html>

@@ -189,6 +189,18 @@ main{
 	border-width: 5px;
 }
 
+.swiper {
+	width: 600px;
+	height: 150px;
+}
+
+.swiper-slide{
+	background-image: url("/resources/source/chicken.png");
+	background-position: cover;
+	background-size: 130px 130px;
+	background-repeat: no-repeat;
+}
+
 .basket{
 	background-color: antiquewhite;
 	width: 350px;
