@@ -40,7 +40,8 @@ public class MemberController {
 	public void loginGet() {}
 	
 	
-		
+	@GetMapping("/order")
+	public void orderGet() {}
 		
 
 }

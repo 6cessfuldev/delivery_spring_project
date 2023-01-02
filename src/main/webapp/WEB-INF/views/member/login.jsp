@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../include/header.jsp"></jsp:include>
+
 <link type="text/css" rel="stylesheet" href="/resources/css/login.css">
-	<!-- <main> -->
+
+<jsp:include page="../include/header.jsp"></jsp:include>
    <div id="login_wrapper">
         <div id="login_content">
             <img src="/resources/source/logo2.png" id="login_logo">
@@ -29,5 +30,5 @@
              <br><br><br><br>
         </div>
     </div>
-<!-- </main> -->
+
 <jsp:include page="../include/footer2.jsp"></jsp:include>

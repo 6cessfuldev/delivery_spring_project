@@ -6,7 +6,7 @@ header{
     background-color:rgba(96, 145, 81);
 }
 #logo_img{
-	 margin-top:-35px ;
+    margin-top:-35px ;
 }
 header>.nav{
     float: right;
@@ -26,9 +26,6 @@ header>nav>.nav-item{
     border: 1px solid rgb(31, 49, 25);
     border-radius: 10px;
 
-}
-#logo_img{
-	 margin-top:-35px ;
 }
 
 @media screen and (max-width: 1200px) {
