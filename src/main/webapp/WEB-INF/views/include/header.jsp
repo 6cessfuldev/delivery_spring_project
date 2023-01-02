@@ -19,6 +19,6 @@
   
 		<ul class="nav nav-pills pt-1">
 		  <li class="nav-item"><div class="box"><a href="/member/login" class="nav-link" aria-current="page">로그인</a></div></li>
-		  <li class="nav-item"><div class="box"><a href="/member/order" class="nav-link">장바구니</a><div></li>
+		  <li class="nav-item"><div class="box"><a href="" class="nav-link">장바구니</a><div></li>
 		</ul>
 	  </header>
