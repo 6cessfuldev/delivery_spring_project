@@ -1,8 +1,10 @@
 header{
     height: 68px;
-    background-color: #FF6E31;
+    background-color:rgba(96, 145, 81);
 }
-
+#logo_img{
+	 margin-top:-35px ;
+}
 header>.nav{
     float: right;
     margin-right: 300px;
@@ -18,11 +20,13 @@ header>nav>.nav-item{
     margin-right: 30px;
 }
 .box{
-    border: 1px solid orange;
+    border: 1px solid rgb(31, 49, 25);
     border-radius: 10px;
 
 }
-
+#logo_img{
+	 margin-top:-35px ;
+}
 
 @media screen and (max-width: 1200px) {
 
