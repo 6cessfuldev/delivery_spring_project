@@ -3,20 +3,20 @@ header{
     background-color:rgba(96, 145, 81);
 }
 #logo_img{
-	 margin-top:-35px ;
+    margin-top:-35px ;
 }
-.nav{
+header>.nav{
     float: right;
     margin-right: 300px;
 }
-.logo{
+header>.logo{
     margin-left:20% ;
 }
 
-.nav-link {
+.box>.nav-link {
     color: white;
 }
-.nav-item{
+header>nav>.nav-item{
     margin-right: 30px;
 }
 .box{
@@ -24,29 +24,26 @@ header{
     border-radius: 10px;
 
 }
-#logo_img{
-	 margin-top:-35px ;
-}
 
 @media screen and (max-width: 1200px) {
 
-    .logo{
+    header>.logo{
         margin-left:15% ;
     }
-    .nav{
+    header>.nav{
         margin-right: 150px;
     }
 }
 
 @media screen and (max-width: 768px) {
 
-    .logo{
+    header>.logo{
         margin-left:10% ;
     }
-    .nav{
+    header>.nav{
         margin-right: 30px;
     }
-    .nav-item{
+    header>nav>.nav-item{
         margin-right: 10px;
     }
 }
