@@ -71,55 +71,82 @@
 }
 </style>
 <style>
-#login_wrapper{
+#order_wrapper{
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     background-color: rgba(250, 250, 250);
 }
-#login_content{
+#order_content{
     margin: auto;
     text-align: center;
-   /*  border: 1px solid black; */
+    width: 1000px;
 }
-#login_logo{
-    width: 200px;
-    height: 160px;
+#order_icon{
+    float: left;
+    width: 80px;
+    height: 80px;
 }
-#login_box{
+#order{
+    width: 900px;
+    height: 230px;
+    margin: auto;
+    background-color: white;
     /* border: 1px solid black; */
-    width: 860px;
 }
-#login_input1,#login_input2{
-    width: 850px;
-    height: 45px;
-    border: 1px solid rgb(214, 209, 209);
-    font-size: 14px;
-    text-indent: 2%;
-}
-#login_input2{
-    border-top: none;
+#order_p1{
+    font-size: 20px;
+    font-weight: 600;
 }
 ::placeholder {
     color: rgba(88, 77, 77, 0.938);
   }
-#login_check{
+#order_post, #order_addr{
+    width: 400px;
+    height: 40px;
+    border: 1px solid rgb(214, 209, 209);
+}
+#order_addrInput{
+    width: 810px;
+    height: 40px;
+    border: 1px solid rgb(214, 209, 209);
+}
+#order_p2{
+    float: left;
+    width: 240px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(88, 77, 77, 0.938);
+    text-indent: 17%;
+    margin-top: 5px;
+    
+}
+#order_num{
+    float: right;
+    width: 80px;
+    height: 40px;
+    font-size: 17px;
+    border: none;
+    background-color: rgba(96, 145, 81);
+    color: white;
+    margin-top: 10px;
+    margin-right: 45px;
+}
+#order_check{
     float: left;
     width: 15px;
     height: 15px;
-    background: white;
-    border: 1px solid rgb(214, 209, 209);
+    margin-top: 13px;
+    margin-left: 20px;
+    color: rgba(88, 77, 77, 0.938);
 }
-
-#login_checkLabel{
+#order_checkLabel{
     float: left;
-    width: 100px;
-    height: 30px;
-    font-size: 15px;
-    margin-top: -3px;
+    font-size: 13PX;
+    margin-top: 11px;
+    margin-left: 7px;
 }
-
-input[id="login_check"]:checked::after{
+input[id="order_check"]:checked::after{
     display: inline-block;
     font-size: 10px;
     color: white;
@@ -128,75 +155,171 @@ input[id="login_check"]:checked::after{
     content:'✔';
     width: 15px;
     height: 15px;
-    background-color: rgb(154,217,234);
+    background-color: rgba(96, 145, 81);
 }
-#login_aBox{
-    float: right;
-}
-#login_a{
-    text-decoration: none;
-    font-size: 15px;
-    color: rgba(88, 77, 77, 0.788);
-}
-#login_button{
-    width: 860px;
-    height: 45px;
-    background-color: rgba(196, 195, 190, 0.788);
-    border: none;
-    font-size: 18px;
-    color: white;
-}
-#login_buttonA1,#login_buttonA2{
-    width: 415px;
-    height: 45px;
-    border: 1px solid rgb(214, 209, 209);
+#order_checkDiv{
+    width: 900px;
+    height: 185px;
+    margin: auto;
     background-color: white;
-    font-size: 15px;
-    color: rgba(88, 77, 77, 0.788);
-    float: left;
+    font-size: 18px;
+    color: rgba(59, 56, 56, 0.938);
 }
-#login_buttonA2{
-    float: right;
-}
-#login_img{
-    width: 700px;
-    height: 600px;
-}
-#login_icon{
+#order_checkbox{
     width: 20px;
     height: 20px;
-    border: none;
+}
+input[id="order_checkbox"]:checked::after{
+    display: inline-block;
+    font-size: 15px;
+    color: white;
+    text-align: center;
     position: absolute;
-    margin-left: -25px;
+    content:'✔';
+    width: 20px;
+    height: 20px;
+    background-color: rgba(96, 145, 81);
+}
+#order_p3{
+    font-size: 16px;
+}
+#order_req{
+    width: 750px;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid rgb(214, 209, 209);
+}
+#order_reqSel{
+    width: 742px;
+    height: 30px;
+    color: rgba(88, 77, 77, 0.938);
+    border: 1px solid rgb(214, 209, 209);
+}
+#order_pay{
+    width: 900px;
+    height: 280px;
+    margin: auto;
+    background-color: white;
+    font-size: 20px;
+    color: rgba(59, 56, 56, 0.938);
+}
+#order_pay{
+    text-align: left;
+    text-indent: 4%;
+    font-size: 17px;
+    font-weight: 600;
+}
+ #order_payBut,#order_payBut2,#order_cupon{
+    width: 200px;
+    height: 40px;
+    font-size: 17px;
+    border: none;
+    background-color: rgba(96, 145, 81);
+    color: white;
+    margin-left: 20px;
+}
+#order_payBut2{
+    margin-top: 10px;
+} 
+#order_payInfo{
+    width: 900px;
+    height: 280px;
+    margin: auto;
+    background-color: white;
+    font-size: 17px;
+    color: rgba(59, 56, 56, 0.938);
+}
+#order_ul{
+    text-decoration: none;
+    list-style: none;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 600;
+}
+#order_payAll{
+    width: 230px;
+    height: 50px;
+    border: 3px solid rgba(96, 145, 81);
+    background-color: white;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(96, 145, 81);
 }
 </style>
 
 <main>
-    <div id="login_wrapper">
-        <div id="login_content">
-            <img src="/resources/source/logo2.png" id="login_logo">
-            <div id="login_box">
-        <form action="">
-            <input type="text" id="login_input1" placeholder="이메일 주소 입력(필수)"><br>
-            <input type="text" id="login_input2" placeholder="비밀번호 입력(필수)"><br><br>
-            <input type="checkbox" id="login_check">
-            <label for="login_check" id="login_checkLabel"><span>자동 로그인</span></label>
-            <div id="login_aBox">
-            <a href="" id="login_a">아이디 찾기  |</a>
-            <a href="" id="login_a">비밀번호 찾기</a><br>
-            </div>
-            <br><br>
-            <button id="login_button">로그인</button>
-        </form>
-            </div>
+     <div id="order_wrapper">
+        <div id="order_content">
+            <div id="order_img">
+                <!-- <a href="#" id="order_iconA"><img id="order_icon" src="/img/back.png"></a>
+                <img src="/img/logo.png" id="order_logo"> -->
+                <a href="#" id="order_iconA"><img id="order_icon" src="/resources/source/home.png"></a>
+             </div><br><br><br><br><br><br>
+            <div id="order">
+                <p id="order_p1">주문자 정보</p>
+                <input id="order_post"  type="text" placeholder="주소입력(클릭)" readonly onclick="findAddr()">
+                <input id="order_addr" type="text" placeholder="" readonly> <br><br>
+                <input type="text" id="order_addrInput" placeholder="상세주소를 입력하세요."><br>
+                <p id="order_p2">연락처 010-0000-0000</p> 
+                <input type="checkbox" id="order_check">
+                <label for="order_check" id="order_checkLabel"><span>안심번호 사용</span></label>
+                <button id="order_num">변경</button>
+        </div>
+        <br><br>
+        <div id="order_checkDiv">
             <br>
-            <button id="login_buttonA1"><img src="/resources/source/naver.jpg" id="login_icon">네이버로 로그인</button>
-            <button id="login_buttonA2"><img src="/resources/source/kakao.jpg" id="login_icon">카카오로 로그인</button>
-            <br><br><br>
-            <img src="/resources/source/event.gif" id="login_img">
-             <br><br><br><br>
+            <input type="checkbox" id="order_checkbox">&nbsp;&nbsp;&nbsp;일회용 수저, 포크 안 주셔도 돼요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="order_checkbox">&nbsp;&nbsp;&nbsp;문 앞에 놓고, 벨 눌러주세요
+            <br>
+            <p id="order_p3">사장님!&nbsp;&nbsp;
+            <input type="text" id="order_req" placeholder="예)맵게 해주세요"></p>
+            <p id="order_p3">배달원님!&nbsp;&nbsp;
+            <select id="order_reqSel">
+                <option>벨 누르지 말고 노크해주세요</option>
+                <option>도착하기 전에 전화해주세요</option>
+                <option>요청사항 없음</option>
+            </select></p>
+        </div>
+        <br><br>
+        <div id="order_pay">
+            <p id="order_payP">바로결제</p>
+                <button type="button" id="order_payBut">페이코</button>
+                <button type="button" id="order_payBut">카카오페이</button>
+                <button type="button" id="order_payBut">네이버페이</button><br>
+                <button type="button" id="order_payBut2">신용카드</button>
+                <button type="button" id="order_payBut2">핸드폰결제</button><br><br>
+                <p id="order_payP">만나서결제</p>
+            <button type="button" id="order_cupon">쿠폰사용</button>
+        </div>
+        <div id="order_payInfo">
+            <ul id="order_ul">
+                <li id="order_li">주문금액 00,000원</li>
+                <li id="order_li">배달비 0,000원</li>
+                <li id="order_li">총 결제금액 00,000원</li>
+            </ul>
+            <button type="button" id="order_payAll">결제하기</button>
+        </div>
         </div>
     </div>
+
+<script>
+    function findAddr(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                console.log(data);
+                var roadAddr = data.roadAddress; 
+                var jibunAddr = data.jibunAddress;
+                document.getElementById('order_post').value = data.zonecode;
+                if(roadAddr !== ''){
+                    document.getElementById("order_addr").value = roadAddr;
+                } 
+                else if(jibunAddr !== ''){
+                    document.getElementById("order_addr").value = jibunAddr;
+                }
+            }
+        }).open();
+    }
+    </script>
 </main>
 
 <footer class="footer mt-auto py-3 bg-light">
