@@ -61,8 +61,8 @@ main{
 .category{
 	height: 60px;
 	width: 100%;
-	border-bottom: 1px solid black;
-	box-shadow: 0 4px 4px -4px black;
+	border-bottom: 1px solid rgb(209, 203, 203);
+	
 }
 
 .category>ul{
@@ -97,10 +97,11 @@ main{
 }
 
 .selection-wrap{
+	box-shadow: inset 0px 6px 6px -6px #666;
 	width: 100%;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid rgb(209, 203, 203);
 }
 
 #category-select{
@@ -111,7 +112,7 @@ main{
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	border-color: grey;
+	border-color: rgb(209, 203, 203);
 	font-size: 14px;
 	padding-top: 2px;
 	padding-left: 10px;

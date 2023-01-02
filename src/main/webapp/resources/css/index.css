@@ -142,7 +142,7 @@ main{
 .pork{
 	background-image: url("/resources/source/pork.png"); 
 	background-size: 260px;
-	background-position:40px 60px;
+	background-position:20px 60px;
 	background-repeat: no-repeat;
 }
 
@@ -157,6 +157,13 @@ main{
 	background-image: url("/resources/source/kimbob.png"); 
 	background-size: 340px;
 	background-position:-20px 40px;
+	background-repeat: no-repeat;
+}
+
+.dessert{
+	background-image: url("/resources/source/dessert.png"); 
+	background-size: 240px;
+	background-position:25px 40px;
 	background-repeat: no-repeat;
 }
 
