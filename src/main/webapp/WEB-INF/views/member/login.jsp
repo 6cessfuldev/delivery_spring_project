@@ -15,7 +15,7 @@
             <div id="login_aBox">
             <a href="" id="login_a">아이디 찾기  |</a>
             <a href="" id="login_a">비밀번호 찾기  |</a>
-            <a href="/member/singup" id="login_a">회원가입</a><br>
+            <a href="/member/signup" id="login_a">회원가입</a><br>
             </div>
             <br><br>
             <button id="login_button">로그인</button>
