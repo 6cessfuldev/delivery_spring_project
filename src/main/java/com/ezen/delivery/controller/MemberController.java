@@ -26,6 +26,7 @@ public class MemberController {
 	
 	@PostMapping("/signup")
 	public String signUpPost(Model model, UserVO uvo) {
+		log.info(uvo.toString());
 		boolean isUp = usv.signUp(uvo);
 		if(isUp) {
 			return "/member/login";
@@ -34,6 +35,9 @@ public class MemberController {
 			return "/member/signup";
 		}
 	}
+	
+	@GetMapping("/login")
+	public void loginGet() {}
 		
 		
 
