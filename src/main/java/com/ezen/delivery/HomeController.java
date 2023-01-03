@@ -43,7 +43,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String testList() {
-		return "list";
+		return "/diner/list";
 	}
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String testDetail() {
+		return "/diner/detail";
+	}
+	
 	
 }
