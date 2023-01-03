@@ -46,7 +46,8 @@ public class MemberController {
 	public void findPwGet() {}
 	
 	
-		
+	@GetMapping("/order")
+	public void orderGet() {}
 		
 
 }
