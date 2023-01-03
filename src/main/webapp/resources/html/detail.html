@@ -4,9 +4,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+
 <link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+
+<link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+
 </head>
 <body>
 	<header class="pt-2">
@@ -65,12 +72,15 @@
 		
 		@media screen and (max-width: 1200px) {
 	
-		#img_a{
-			display:none;
+			#img_a{
+				display:none;
+			}
 		}
-	}
+
+
+
 	</style>
-<link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
+
 
 <div class="header-box">
     <div class="search-box">
@@ -133,12 +143,128 @@
 	<div class="contents bg-light d-flex justify-content-center pt-3">
         
         <div class="diner-detail">
+            <div class=diner-header>
+                <div class="diner-name">
+                    인천상륙덮글이
+                </div>
+                <div class="diner-info">
+                    <div class="diner-img">
+                        <img src="/resources/source/kakao.jpg" alt="" width="70" height="70">
+                    </div>
+                    <div class="diner-infos"
+                        <p class="score">★★★★☆</p>
+                        <p>최소주문금액 9,000원</p>
+                        <p>결제 <span>신용카드, 현금, 요기서결제</span></p>
+                        <p>배달시간 <span>38분~48분</span></p>
+                    </div>
+                </div>
+                <div class="diner-notice">
+                    <p>사장님 알림 <span>9월 7일부터 신규오픈 "인천상륙 덮글이" 인천 상륙 덮글이 우리나라 월드컵 16강 기원 리...</span></p>
+                </div>
+            </div>
 
+            <div class="diner-menu">
+                <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="bg-light" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">메뉴</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="bg-light" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">리뷰</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="clicked bg-light" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">정보</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                	<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                    
+					<!-- Slider main container -->
+						<div class="swiper">
+							<!-- Additional required wrapper -->
+							<div class="swiper-wrapper">
+							<!-- Slides -->
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							<div class="swiper-slide">Slide 1</div>
+							<div class="swiper-slide">Slide 2</div>
+							<div class="swiper-slide">Slide 3</div>
+							</div>
+							<!-- If we need pagination -->
+							<div class="swiper-pagination"></div>
+						
+							<!-- If we need navigation buttons -->
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						
+							<!-- If we need scrollbar -->
+							<div class="swiper-scrollbar"></div>
+						</div>
+                	</div>
+					<div class="accordion" id="accordionPanelsStayOpenExample">
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+							<button class="accordion-button bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+							  Accordion Item #1
+							</button>
+						  </h2>
+						  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+							<div class="accordion-body">
+							  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+							</div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+							  Accordion Item #2
+							</button>
+						  </h2>
+						  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+							<div class="accordion-body">
+							  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+							</div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+							  Accordion Item #3
+							</button>
+						  </h2>
+						  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+							<div class="accordion-body">
+							  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+				  	<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">리뷰...</div>
+					<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">정보...</div>
+				</div>
+        	</div>
         </div>
+
+       
+
+
+
+
+
         <div class="basket">
 
-        </div>
 
+		
+		
+		
+		</div>
 
 	</div>
 
@@ -166,6 +292,14 @@
 
   </div>
 </footer>
+
+<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<!-- in our example the container has id="my-als-list" thus ALS is initialized like this -->
+
+<script type="text/javascript" src="/resources/js/detail.js"></script>
 
 </body>
 </html>

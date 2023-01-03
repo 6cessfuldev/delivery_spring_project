@@ -245,10 +245,6 @@ main{
 
 @media screen and (max-width: 576px) {
 
-	.header-box{
-		display: none;
-	}
-
 	.diner-card{
 		width: 480px;
 	}
