@@ -39,8 +39,15 @@ public class MemberController {
 	@GetMapping("/login")
 	public void loginGet() {}
 	
+	@GetMapping("/find_id")
+	public void findIdGet() {}
 	
-		
+	@GetMapping("/find_pw")
+	public void findPwGet() {}
+	
+	
+	@GetMapping("/order")
+	public void orderGet() {}
 		
 
 }

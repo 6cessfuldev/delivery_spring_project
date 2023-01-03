@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../include/header.jsp"></jsp:include>
+
 <link type="text/css" rel="stylesheet" href="/resources/css/login.css">
-	<!-- <main> -->
+
+<jsp:include page="../include/header.jsp"></jsp:include>
    <div id="login_wrapper">
         <div id="login_content">
             <img src="/resources/source/logo2.png" id="login_logo">
@@ -13,8 +14,8 @@
             <input type="checkbox" id="login_check">
             <label for="login_check" id="login_checkLabel"><span>자동 로그인</span></label>
             <div id="login_aBox">
-            <a href="" id="login_a">아이디 찾기  |</a>
-            <a href="" id="login_a">비밀번호 찾기  |</a>
+            <a href="/member/find_id" id="login_a">아이디 찾기  |</a>
+            <a href="/member/find_pw" id="login_a">비밀번호 찾기  |</a>
             <a href="/member/signup" id="login_a">회원가입</a><br>
             </div>
             <br><br>
@@ -29,5 +30,5 @@
              <br><br><br><br>
         </div>
     </div>
-<!-- </main> -->
+
 <jsp:include page="../include/footer2.jsp"></jsp:include>
