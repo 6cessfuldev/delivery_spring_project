@@ -5,7 +5,7 @@
 
 	 <div class="pw-wrap">
         <form action="" class="form-field">
-            <input type="text" class="email-input" placeholder="먹어요에 가입한 이메일 주소 입력">
+            <input type="email" class="email-input" name="user_email" id="user_email" placeholder="먹어요에 가입한 이메일 주소 입력">
 			<ul>
 				<li class="pw-msg">
 					입력하신 이메일 주소로 비밀번호 재설정 메일이 발송됩니다.

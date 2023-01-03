@@ -24,6 +24,10 @@
     outline: 1px solid rgba(96, 145, 81);
 }
 
+.t1{
+    border-bottom: none;
+}
+
 .text-wrap{
     list-style-type: none;
 }
@@ -47,8 +51,8 @@
     width: 40px;
     height: 28px;
     position: absolute;
-    right: 33.3%;
-    top: 10.96%;
+    right: 35.2%;
+    top: 10%;
     font-size: 13px;
     background-color: white;
     border: 1px solid rgb(219, 216, 216);
