@@ -6,4 +6,6 @@ public interface UserService {
 
 	boolean signUp(UserVO uvo);
 
+	UserVO isUser(String user_email, String user_pw);
+
 }

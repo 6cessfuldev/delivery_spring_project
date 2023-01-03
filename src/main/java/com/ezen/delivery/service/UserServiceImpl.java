@@ -23,13 +23,14 @@ public class UserServiceImpl implements UserService {
 	public boolean signUp(UserVO uvo) {
 		log.info(">>> signup check2");
 		
-		UserVO tmpUser = udao.getUser(uvo.getUser_email());
-		
-		if(tmpUser == null) {
+		if(uvo.getUser_email() == null || uvo.getUser_email().length() == 0) {
 			return false;
 		}
-		
-		if(uvo.getUser_email() == null || uvo.getUser_email().length() == 0) {
+
+		UserVO tmpUser = udao.getUser(uvo.getUser_email());
+
+		if(tmpUser != null) {
+			log.info("존재하는 이메일 입니다.");
 			return false;
 		}
 		
@@ -38,8 +39,20 @@ public class UserServiceImpl implements UserService {
 		uvo.setUser_pw(encodePw);
 		
 		int isOk = udao.insertUser(uvo);
-		
 		return true;
+	}
+
+	@Override
+	public UserVO isUser(String user_email, String user_pw) {
+		UserVO uvo = udao.getUser(user_email);
+		
+		if(uvo == null) {return null;}
+		
+		if(passwordEncoder.matches(user_pw, uvo.getUser_pw())) {
+			return uvo;
+		} else {
+			return null;			
+		}
 	}
 
 }
