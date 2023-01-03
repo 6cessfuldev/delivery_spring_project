@@ -69,6 +69,10 @@
 	padding: 0;
 }
 
+.wrapper{
+	position: relative;
+}
+
 main{
 	width: 100%;
 }
@@ -115,7 +119,6 @@ main{
 .diner-detail{
 	margin-right: 10px;
 	width: 650px;
-	height: 1000px;
 }
 
 .diner-header{
@@ -201,7 +204,255 @@ main{
 	background-repeat: no-repeat;
 }
 
-.basket{
-	background-color: antiquewhite;
-	width: 350px;
+
+
+.accordion-body{
+	padding:0;
+}
+
+.diner-menu-card{
+	border-bottom: 1px solid rgb(209, 203, 203);
+	height: 110px;
+}
+
+.diner-menu-table{
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+	line-height: 0.6;
+}
+
+.diner-menu-title{
+	font-weight: 700;
+}
+
+.diner-menu-combo{
+	color: grey;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.diner-menu-price{
+	font-size: 14px;
+}
+
+.diner-menu-img{
+	float: right;
+}
+
+.diner-score{
+	padding: 20px;
+	
+}
+
+.diner-score-total{
+	width: 120px;
+	padding: 10px;
+	height: 60px;
+	border-right: 1px solid rgb(192, 185, 185);
+}
+
+.total-score{
+	text-align: center;
+	font-size: 50px;
+	line-height: 0.3;
+}
+
+.total-star{
+	text-align: center;
+	color:rgb(192, 192, 12);
+}
+
+.diner-score-each{
+	padding-bottom: 0;
+}
+
+.diner-score-each>ul>li{
+	list-style: none;
+	font-size: 13px;
+}
+
+.diner-score-each>ul{
+	padding-left: 20px;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.diner-score-each>ul>li{
+	margin-top: 1px;
+}
+
+.diner-score-each>ul>li>span:nth-child(2){
+	color:rgb(228, 228, 36);
+}
+
+.diner-score-each>ul>li>span:nth-child(3){
+	color:rgb(182, 182, 13);
+}
+
+.review-count{
+	font-size: 13px;
+	padding: 14px;
+	border-top: 1px solid rgb(209, 203, 203);
+	height: 50px;
+}
+
+.review{
+	padding: 10px;
+	border-top: 1px solid rgb(209, 203, 203);
+}
+
+.reviewer-id{
+	font-weight: 800;
+}
+
+.review-head>a{
+	float: right;
+}
+
+.review-time-ago{
+	color:grey;
+	font-size: 13px;
+}
+
+.review-point{
+	font-size: 14px;
+	color : grey;
+}
+
+.review-star-point{
+	color : rgb(221, 221, 20);
+}
+
+.star{
+	color : rgb(221, 221, 20);
+}
+
+.review-img{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 350px;
+	background-image: url("/resources/source/reivew.jpg");
+	background-size: cover;
+}
+
+.review-menu{
+	font-size: 13px;
+	color: rgb(82, 184, 150);
+	margin-bottom: 6px;
+}
+
+.review-content{
+	font-size: 15px;
+}
+
+.add-review{
+	cursor: pointer;
+	border-top: 1px solid rgb(209, 203, 203);
+	height: 100px;
+	text-align: center;
+}
+
+.info-list{
+	padding:15px;
+}
+
+.notice-title{
+	border-bottom: 1px solid grey;
+	padding: 5px;
+	font-weight: 700;
+}
+
+.info-item{
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.info-text{
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 2;
+}
+
+.info-text-narrow{
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.info-list-title{
+	display: inline-block;
+	width: 100px;
+	color: grey;
+}
+
+
+.sub-title{
+	background-color: rgb(66, 62, 62);
+	padding: 10px;
+	color: white;
+}
+
+.sub-title>span:nth-child(2){
+	float: right;
+}
+
+.basket-item{
+	font-size: 14px;
+	padding: 10px;
+	border: 1px solid rgb(209, 203, 203);
+}
+
+.basket-menu{
+	margin-bottom : 10px;
+}
+
+.basket-menu-price{
+	height: 30px;
+}
+
+.basket-menu-price a{
+	padding-bottom: 20px;
+	align-items: center;
+	text-align: center;
+	display: inline-block;
+	text-decoration: none;
+	color : black;
+	border: 1px solid rgb(209, 203, 203);
+	width: 20px;
+	height: 15px;
+}
+
+.basket-menu-price>div:nth-child(1){
+	float: left;
+}
+
+.basket-menu-price>div:nth-child(2){
+	float: right;
+}
+
+.basket-deli-price{
+	text-align: right;
+	padding:10px;
+	height: 50px;
+	border: 1px solid rgb(209, 203, 203);
+}
+
+.basket-deli-price>span{
+	font-size: 14px;
+}
+
+.basket-total-price{
+	background-color:antiquewhite;
+	text-align: right;
+	padding:10px;
+	height: 50px;
+	border: 1px solid rgb(209, 203, 203);
+}
+
+.basket-total-price>span{
+	color:rgb(226, 69, 69);
+	font-weight: 700;
+
 }
