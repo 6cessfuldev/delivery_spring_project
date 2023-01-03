@@ -1,5 +1,7 @@
 package com.ezen.delivery.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -14,12 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 public class DinerServiceImpl implements DinerService {
 
 	@Inject
-	private DinerDAO ddao;
+	DinerDAO ddao;
 
 	@Override
-	public int insert(DinerVO dvo) {
-		
-		return ddao.insert(dvo);
+	public List<DinerVO> getList() {
+		return ddao.selectDinerList();
 	}
 	
 }

@@ -13,6 +13,16 @@ import lombok.ToString;
 @ToString
 public class DinerVO {
 
-	private int dno;
-	private String name;
+	private int diner_code;
+	private int diner_file_code;
+	private String diner_name;
+	private int diner_min_pay;
+	private String diner_address;
+	private long diner_notice;
+	private String diner_open_time;
+	private String diner_close_time;
+	private String diner_method_pay;
+	private String diner_business_name;
+	private String diner_company_num;
+
 }
