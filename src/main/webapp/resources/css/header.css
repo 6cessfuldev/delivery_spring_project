@@ -3,10 +3,10 @@ html, body {
 }
 header{
     height: 68px;
-    background-color:rgba(96, 145, 81);
+    background-color:#e3e1e2;
 }
 #logo_img{
-    margin-top:-35px ;
+  margin-top:-23px;
 }
 header>.nav{
     float: right;
@@ -16,16 +16,21 @@ header>.logo{
     margin-left:20% ;
 }
 
-.box>.nav-link {
-    color: white;
+.box>.nav-link,.box2>.nav-link {
+    color: rgba(59, 56, 56, 0.938);
+   
 }
 header>nav>.nav-item{
     margin-right: 30px;
 }
-.box{
-    border: 1px solid rgb(31, 49, 25);
-    border-radius: 10px;
+.box,.box2{
+    border: 1px solid rgba(59, 56, 56, 0.938);
+    /*  margin-right:10px; */
+   /*  border-radius: 10px; */
 
+}
+.box2{
+	border-left:none;
 }
 
 @media screen and (max-width: 1200px) {
