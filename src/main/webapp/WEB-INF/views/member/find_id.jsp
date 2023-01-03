@@ -6,7 +6,7 @@
 	<div class="join-wrap">
         <form action="">
             <li class="text-wrap">
-                <input type="text" class="text-field" placeholder="(필수)휴대폰 전화번호 입력(-제외)">
+                <input type="text" class="text-field t1" placeholder="(필수)휴대폰 전화번호 입력(-제외)">
                 <button type="button" class="cerBtn">인증</button>
             </li>
             <li class="text-wrap">

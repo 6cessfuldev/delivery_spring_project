@@ -1,6 +1,8 @@
 package com.ezen.delivery.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,12 +41,30 @@ public class MemberController {
 	@GetMapping("/login")
 	public void loginGet() {}
 	
+	@PostMapping("/login")
+	public String loginPost(Model model, String user_email, String user_pw, HttpServletRequest req) {
+		log.info(">>> user_email : " + user_email + " >>> user_pw : " + user_pw);
+		UserVO isUser = usv.isUser(user_email, user_pw);
+		
+		if(isUser != null) {
+			HttpSession session = req.getSession();
+			session.setAttribute("ses", isUser);
+			
+			model.addAttribute("user", isUser);
+			model.addAttribute("msg", "1");
+			return "redirect:home";
+		} else {
+			model.addAttribute("msg", "0");
+			return "/member/login";
+		}
+	}
+	
+	
 	@GetMapping("/find_id")
 	public void findIdGet() {}
 	
 	@GetMapping("/find_pw")
 	public void findPwGet() {}
-	
 	
 	@GetMapping("/order")
 	public void orderGet() {}
