@@ -227,7 +227,7 @@
 		    <artifactId>tika-parsers</artifactId>
 		    <version>1.28</version>
 		</dependency>	  
-		
+
 		<!-- 비동기 통신을 위한 JSON 관련 lib -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>

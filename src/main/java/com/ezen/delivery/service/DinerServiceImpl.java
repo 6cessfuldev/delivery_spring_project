@@ -40,11 +40,12 @@ public class DinerServiceImpl implements DinerService {
 
 	@Override
 	public int reviewFile(ReviewDTO rdto) {
-		int isOk = ridao.insertFile(rdto.getFList());
+		//파일 먼저 등록
+		int isOk = ridao.insertReviewImgFile(rdto.getFList());
 		//여러개를,,등록,,,,
 		if(isOk>0 && rdto.getFList().size()>0) {
 			//가장 큰 파일코드 가져오기!
-			int  rimgfc = 
+			int  rimgfilecode = ridao.
 			for(ReviewVO rvo : rdto.getFList()){
 				rvo.setRFileCode(rFileCode);
 				log.info("insert Review : "+rvo.toString());
