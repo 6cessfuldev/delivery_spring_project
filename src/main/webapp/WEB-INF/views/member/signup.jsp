@@ -10,8 +10,8 @@
 		<form action="/member/signup" class="wrap-input" method="post">
 			<img src="/resources/source/logo2.png" class="logoImg"><br>
 			<div id="box">
-				<input type="email" class="input" name="user_email" id="user_email" placeholder="Email"><br><br>
-				<button type="button" class="eBtn"  onclick="add_textbox()">인증</button>
+				<input type="email" class="input email_input" name="user_email" id="user_email" placeholder="Email"><br><br>
+				<button type="button" class="eBtn" onclick="add_textbox()">인증</button>
 			</div>
 			<input type="password" class="input" name="user_pw" id="user_pw" placeholder="Password"><br><br>
 			<input type="password" class="input" name="user_pwCheck" id="user_pwCheck" placeholder="Reconfirm Password"><br><br>

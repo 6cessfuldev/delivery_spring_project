@@ -30,7 +30,9 @@
 				<p>event</p>
 			</div>
 			<div class='card-box all'>
-				<p><a href="/diner/list">전체보기</a></p>
+
+				<a href="/diner/list"><p>전체보기</p></a>
+
 			</div>
 			<div class='card-box forone'>
 				<p>1인분 주문</p>
