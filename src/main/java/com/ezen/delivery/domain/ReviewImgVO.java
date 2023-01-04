@@ -14,7 +14,7 @@ import lombok.ToString;
 public class ReviewImgVO {
 
 	private int review_img_code;
-	private int review_img_file_code;
+	private int review_code;
 	private String review_img_uuid;
 	private String review_img_save_dir;
 	private long review_img_size;
