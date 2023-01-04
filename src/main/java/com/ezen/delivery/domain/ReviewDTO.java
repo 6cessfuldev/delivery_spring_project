@@ -1,18 +1,19 @@
 package com.ezen.delivery.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class NaverVO {
-
-	private String n_email;
-	private String n_name;
+public class ReviewDTO {
+	private ReviewVO rvo;
+	private List<ReviewImgVO> fList;
 }
