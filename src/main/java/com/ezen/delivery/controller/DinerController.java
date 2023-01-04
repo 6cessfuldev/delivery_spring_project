@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
 import com.ezen.delivery.domain.DinerVO;
-import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
@@ -63,8 +62,9 @@ public class DinerController {
 		int isOk = dsv.reviewFile(new ReviewDTO(rvo, fList));
 		rttr.addAttribute("isOk", isOk>0 ? "1":"0");
 		log.info("reviewFile register >> "+ (isOk>0 ? "OK":"FAIL"));
-		return "/diner/detail";
-
+		return "/diner/detail";	
+	}
+	
 	@GetMapping(value="/moreList", produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<DinerVO>> moreList(){
 		

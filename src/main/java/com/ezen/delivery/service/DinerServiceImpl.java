@@ -1,7 +1,5 @@
 package com.ezen.delivery.service;
 
-
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,7 +35,6 @@ public class DinerServiceImpl implements DinerService {
 		return ddao.selectDinerList();
 	}
 
-
 	@Override
 	public int reviewFile(ReviewDTO rdto) {
 		//파일 먼저 등록
@@ -51,9 +48,7 @@ public class DinerServiceImpl implements DinerService {
 				log.info("insert Review : "+rvo.toString());
 				isOk += rdao.insertFile(rvo);
 			}
-			
 		}  
 		return 0;
-
-	
+	}
 }
