@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/list.css">
 
@@ -85,258 +86,37 @@
 			</div>
 		</div>
 		<div class="registered py-5 bg-light">
-			<div class="one-row justify-content-center">
-				<div class="diner-card bg-white" id="diner-card">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span class="del-option">요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				<div class="diner-card bg-white">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span>요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				
-			</div>
-			<!-- row -->
-			<div class="one-row justify-content-center">
-				<div class="diner-card bg-white" id="diner-card">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span class="del-option">요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				<div class="diner-card bg-white">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span>요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				
-			</div>
-			<!-- row -->
-			<div class="one-row justify-content-center">
-				<div class="diner-card bg-white" id="diner-card">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span class="del-option">요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				<div class="diner-card bg-white">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span>요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				
-			</div>
-			<!-- row -->
-			<div class="one-row justify-content-center">
-				<div class="diner-card bg-white" id="diner-card">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span class="del-option">요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				<div class="diner-card bg-white">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span>요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				
-			</div>
-			<!-- row -->
-			<div class="one-row justify-content-center">
-				<div class="diner-card bg-white" id="diner-card">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span class="del-option">요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				<div class="diner-card bg-white">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span>요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				
-			</div>
-			<!-- row -->
-			<div class="one-row justify-content-center">
-				<div class="diner-card bg-white" id="diner-card">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span class="del-option">요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				<div class="diner-card bg-white">
-					<div class="diner-img">
-						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
-					</div>
-					<div class="diner-body">
-						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
-						<p class="diner-text">
-						<span class="score">★3.8</span>
-						| 리뷰 1902 | 사장님댓글 791 
-						</p>
-						<p class="diner-text">
-						<span>요기서결제</span> |
-						<span>20000원 이상 배달</span>
-						</p>
-						<p class="delivery-time">
-						22분
-						</p>
-					</div>
-				</div>
-				
-			</div>
-			<!-- row -->
+				<c:forEach items="${list}" var="diner" varStatus="status" >
+					<c:if test="${status.index%2==0}">
+						<div class="one-row justify-content-center"> 
+					</c:if>
+					<!--  -->
+					<c:if test="${status.index%2!=0 || status.index+1!=fn:length(list)}">
+						<div class="diner-card bg-white" id="diner-card">
+							<div class="diner-img">
+								<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+							</div>
+							<div class="diner-body">
+								<h5 class="diner-title">${diner.diner_name}</h5>
+								<p class="diner-text">
+								<span class="score">★3.8</span>
+								| 리뷰 1902 | 사장님댓글 791 
+								</p>
+								<p class="diner-text">
+								<span class="del-option">${diner.diner_method_pay}</span> |
+								<span>${diner.diner_min_pay}원 이상 배달</span>
+								</p>
+								<p class="delivery-time">
+								22분
+								</p>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${status.index%2==1 || status.index+1 == fn:length(list)}"> 
+						</div>
+					</c:if>
+				</c:forEach>
+			
 		</div>
 	</div>
 
