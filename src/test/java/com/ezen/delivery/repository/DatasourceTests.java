@@ -1,16 +1,18 @@
 package com.ezen.delivery.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+
+import java.sql.Connection;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.ezen.delivery.domain.UserVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,20 +22,37 @@ import lombok.extern.slf4j.Slf4j;
 public class DatasourceTests {
 
 	@Inject
-	private UserDAO udao;
+	private DataSource dataSource;
+	
+	@Inject
+	private SqlSessionFactory factory;
 	
 	@Test
-	public void userdaoInsertTest(){
+	public void testConnection() {
 		
-		UserVO uvo = new UserVO();
-		uvo.setUser_birth(null);
-		uvo.setUser_birth(null);
-		uvo.setUser_birth(null);
-		uvo.setUser_birth(null);
-		uvo.setUser_birth(null);
-
-		int isOk = udao.insertUser(uvo);
+		try {
+			Connection con = dataSource.getConnection();
+			log.info(con.toString());
+			
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 		
 	}
+	
+	@Test
+	public void testMybatis() {
+		
+		try {
+			SqlSession session = factory.openSession();
+			Connection con = session.getConnection();
+			
+			log.info(session.toString());
+			log.info(con.toString());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+		
 
 }
