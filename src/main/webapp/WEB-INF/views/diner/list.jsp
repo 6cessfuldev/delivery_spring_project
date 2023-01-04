@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/list.css">
+<script type="text/javascript" src="/resources/js/paging.js"></script>
 
 <div class="header-box">
     <div class="search-box">

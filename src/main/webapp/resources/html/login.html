@@ -2,6 +2,8 @@
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="/resources/css/login.css">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="/resources/js/naver_login.js"></script> -->
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -25,7 +27,8 @@
         </form>
             </div>
             <br>
-            <button id="login_buttonA1"><img src="/resources/source/naver.jpg" id="login_icon">네이버로 로그인</button>
+            <button id="naver_id_login">네이버로 로그인</button>
+            <!-- <button id="login_buttonA1"><img src="/resources/source/naver.jpg" id="login_icon">네이버로 로그인</button> -->
             <button id="login_buttonA2"><img src="/resources/source/kakao.jpg" id="login_icon">카카오로 로그인</button>
             <br><br><br>
             <img src="/resources/source/event.gif" id="login_img">
@@ -33,4 +36,15 @@
         </div>
     </div>
 </body>
+ <script type="text/javascript">
+
+	var NaverLogin = new naver.LoginWithNaverId(
+	{
+		clientId : "BwPXQd2HaNZ5eWMSnF7z",
+		callbackUrl : "http://localhost:8089/resources/html/callback",
+		isPopup : false,
+		loginButton: {color:"white", type:3, height:60},
+	});
+	naverLogin.init();
+  </script>
 </html>
