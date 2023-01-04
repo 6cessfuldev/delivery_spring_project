@@ -202,6 +202,19 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- 비동기 통신을 위한 JSON 관련 lib -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.13.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		    <version>2.13.0</version>
+		</dependency>
 
 	</dependencies>
 	<build>
