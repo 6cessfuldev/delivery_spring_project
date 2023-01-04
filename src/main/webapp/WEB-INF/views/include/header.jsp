@@ -14,11 +14,11 @@
 <body>
 	<header class="pt-2">
 		<a href="/" class="logo">
-		  <img src="/resources/source/logo.png" alt="logo" class="bi me-2" width="80" height="50">
+		  <img src="/resources/source/logo2.png" alt="logo" id="logo_img" class="bi me-2" width="200" height="120">
 		</a>
   
 		<ul class="nav nav-pills pt-1">
-		  <li class="nav-item"><div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div></li>
-		  <li class="nav-item"><div class="box"><a href="#" class="nav-link">장바구니</a><div></li>
+		  <li class="nav-item"><div class="box"><a href="/member/login" class="nav-link" aria-current="page">로그인</a></div></li>
+		  <li class="nav-item"><div class="box2"><a href="" class="nav-link">장바구니</a></div></li>
 		</ul>
 	  </header>

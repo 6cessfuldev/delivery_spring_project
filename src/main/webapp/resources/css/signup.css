@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.wrap-sign{
+   position: relative;
+   display: flex;
+   justify-content: center;
+}
+
+.wrap-input{
+    line-height: 110%;
+}
+
+.wrap-input input:focus{
+    outline: 1px solid rgb(96, 145, 81);
+}
+
+.input{
+    width: 400px;
+    height: 50px;
+    font-size: 14px;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+
+::placeholder{
+    text-indent: 10px;
+}
+
+.eBtn{
+    width: 50px;
+    height: 32px;
+    position: absolute;
+    right: 40.2%;
+    top: 169px;
+    font-size: 13px;
+    background-color: white;
+    border: 1px solid rgb(151, 143, 143);
+    border-radius: 10px;
+}
+
+.checkNum{
+    width: 400px;
+    height: 50px;
+    font-size: 14px;
+    box-sizing: border-box;
+    text-indent: 10px;
+}
+
+.checkNum:focus{
+    outline: 1px solid rgb(96, 145, 81);
+}
+
+.cBtn{
+    width: 50px;
+    height: 32px;
+    position: absolute;
+    right: 40.2%;
+    top: 236px;
+    font-size: 13px;
+    background-color: white;
+    border: 1px solid rgb(151, 143, 143);
+    border-radius: 10px;
+}
+
+.logoImg{
+    width: 200px;
+    height: 160px;
+    margin-bottom: 0;
+    margin-left: 22%;
+}
+
+.signupBtn{
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(96, 145, 81);
+    background-color: white;
+    border: rgb(96, 145, 81);
+    outline: 2px solid rgb(153, 156, 152);
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.signupBtn:hover{
+    background-color: rgb(96, 145, 81);
+    color: white;
+}
+
+.correct{
+    color: green;
+}
+
+.incorrect{
+    color: red;
+}

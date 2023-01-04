@@ -30,4 +30,5 @@ public class DinerController {
 		int isOk = dsv.insert(dvo);
 		log.info(isOk+"");
 	}
+	
 }

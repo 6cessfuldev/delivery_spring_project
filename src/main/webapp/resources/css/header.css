@@ -1,48 +1,57 @@
+html, body {
+    height: 100%;
+}
 header{
     height: 68px;
-    background-color: #FF6E31;
+    background-color:#e3e1e2;
 }
-
-.nav{
+#logo_img{
+  margin-top:-23px;
+}
+header>.nav{
     float: right;
     margin-right: 300px;
 }
-.logo{
+header>.logo{
     margin-left:20% ;
 }
 
-.nav-link {
-    color: white;
+.box>.nav-link,.box2>.nav-link {
+    color: rgba(59, 56, 56, 0.938);
+   
 }
-.nav-item{
+header>nav>.nav-item{
     margin-right: 30px;
 }
-.box{
-    border: 1px solid orange;
-    border-radius: 10px;
+.box,.box2{
+    border: 1px solid rgba(59, 56, 56, 0.938);
+    /*  margin-right:10px; */
+   /*  border-radius: 10px; */
 
 }
-
+.box2{
+	border-left:none;
+}
 
 @media screen and (max-width: 1200px) {
 
-    .logo{
+    header>.logo{
         margin-left:15% ;
     }
-    .nav{
+    header>.nav{
         margin-right: 150px;
     }
 }
 
 @media screen and (max-width: 768px) {
 
-    .logo{
+    header>.logo{
         margin-left:10% ;
     }
-    .nav{
+    header>.nav{
         margin-right: 30px;
     }
-    .nav-item{
+    header>nav>.nav-item{
         margin-right: 10px;
     }
 }

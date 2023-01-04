@@ -1,0 +1,67 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.join-wrap{
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    background-color: #e3e7ea;
+    padding-top: 20px;
+}
+
+.text-field{
+    position: relative;
+    width: 600px;
+    height: 40px;
+    font-size: 13px;
+    border: 1px solid rgb(218, 217, 217);
+    text-indent: 10px;
+}
+
+.text-field:focus{
+    outline: 1px solid rgba(96, 145, 81);
+}
+
+.t1{
+    border-bottom: none;
+}
+
+.text-wrap{
+    list-style-type: none;
+}
+
+.form-field{
+    margin-bottom: 30px;
+}
+
+.msg{
+    font-size: 11px;
+    margin-top: 10px;
+    color: rgb(121, 115, 115);
+}
+
+::placeholder{
+    text-indent: 10px;
+    color: rgb(139, 136, 136);
+}
+
+.cerBtn{
+    width: 40px;
+    height: 28px;
+    position: absolute;
+    right: 35.2%;
+    top: 10%;
+    font-size: 13px;
+    background-color: white;
+    border: 1px solid rgb(219, 216, 216);
+}
+
+.findBtn{
+    width: 600px;
+    height: 35px;
+    border: 1px solid rgb(219, 216, 216);
+    font-size: 13px;
+    background-color: white;
+}

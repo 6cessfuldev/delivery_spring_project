@@ -1,0 +1,460 @@
+@media screen and (max-width: 1020px) {
+
+	.category{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 768px) {
+
+	.header-box{
+		display: none;
+	}
+}
+
+
+.header-box{
+    background-image: url(/resources/source/pizza.jpg);
+    background-size : 3600px;
+    background-position: -100px;
+    height: 150px;
+    padding-top:50px;
+	text-align: center;
+}
+
+.header-box h1 {
+	color : white;
+	font-weight: 700;
+}
+
+.gps-btn{
+	background-color : white;
+	box-shadow: none;
+	border: none;
+	height: 48px;
+	width: 45px;
+	border-radius: 5px;
+}
+
+.search-input-box{
+	display: inline-flex;
+
+}
+
+#search-input{
+	color:grey;
+	height:48px;
+	width: 300px;
+	border:none;
+	border-bottom-left-radius : 8px;
+	border-top-left-radius : 8px;
+	box-shadow: none;
+	outline: none;
+	font-size:15px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#search-btn{
+	border-bottom-right-radius : 8px;
+	border-top-right-radius : 8px;
+	height:48px;
+	width:70px;
+	background-color : red;
+	box-shadow: none;
+	border: none;
+	color:white;
+	font-weight: 600;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper{
+	position: relative;
+}
+
+main{
+	width: 100%;
+}
+
+.category{
+	height: 60px;
+	width: 100%;
+	border-bottom: 1px solid rgb(209, 203, 203);
+	
+}
+
+.category>ul{
+	height: 60px;
+	display: flex;
+}
+
+.category>.nav>li{
+	height: 60px;
+	font-size: 14px;
+
+}
+
+.category>.nav>li:hover{
+	background-color: black;
+	color: white;
+}
+
+.category-btn{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 18px;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.contents{
+	width: 100%;
+	background-color: rgb(235, 232, 232);
+	box-shadow: inset 0px 6px 6px -6px #666;
+	
+}
+
+.diner-detail{
+	margin-right: 10px;
+	width: 650px;
+}
+
+.diner-header{
+	margin-bottom: 30px;
+	width: 100%;
+	border: rgb(209, 203, 203) 1px solid;
+}
+
+.diner-name{
+	border-bottom: 1px solid rgb(209, 203, 203);
+	padding-left: 6px;
+	padding-top: 6px;
+	height: 38px;
+
+}
+
+.diner-info{
+	display: flex;
+	padding-top: 8px;
+	line-height: 0.5;
+	font-size: 13px;
+}
+
+.diner-img{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.score{
+	color:rgb(194, 194, 34);
+}
+
+.diner-notice{
+	height: 38px;
+	padding-left: 10px;
+	padding-top: 8px;
+	border-top:  rgb(209, 203, 203) 1px solid;
+	font-size: 12px;
+}
+
+.diner-notice>p{
+	font-weight: 600;
+}
+
+.diner-notice>p>span{
+	color: grey;
+}
+
+.diner-menu{
+	border: rgb(209, 203, 203) 1px solid;
+}
+
+.diner-menu>ul{
+	width: 100%;
+}
+
+.diner-menu>ul>li{
+	width: 33%;
+	border: none;
+}
+.diner-menu>ul>li>button{
+	color:black;
+	width: 100%;
+	height: 45px;
+	border: none;
+	background-color: white;
+}
+
+.clicked{
+	border-bottom: 5px solid red;
+	border-width: 5px;
+}
+
+.swiper {
+	width: 600px;
+	height: 150px;
+}
+
+.swiper-slide{
+	background-image: url("/resources/source/chicken.png");
+	background-position: cover;
+	background-size: 130px 130px;
+	background-repeat: no-repeat;
+}
+
+
+
+.accordion-body{
+	padding:0;
+}
+
+.diner-menu-card{
+	border-bottom: 1px solid rgb(209, 203, 203);
+	height: 110px;
+}
+
+.diner-menu-table{
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+	line-height: 0.6;
+}
+
+.diner-menu-title{
+	font-weight: 700;
+}
+
+.diner-menu-combo{
+	color: grey;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.diner-menu-price{
+	font-size: 14px;
+}
+
+.diner-menu-img{
+	float: right;
+}
+
+.diner-score{
+	padding: 20px;
+	
+}
+
+.diner-score-total{
+	width: 120px;
+	padding: 10px;
+	height: 60px;
+	border-right: 1px solid rgb(192, 185, 185);
+}
+
+.total-score{
+	text-align: center;
+	font-size: 50px;
+	line-height: 0.3;
+}
+
+.total-star{
+	text-align: center;
+	color:rgb(192, 192, 12);
+}
+
+.diner-score-each{
+	padding-bottom: 0;
+}
+
+.diner-score-each>ul>li{
+	list-style: none;
+	font-size: 13px;
+}
+
+.diner-score-each>ul{
+	padding-left: 20px;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.diner-score-each>ul>li{
+	margin-top: 1px;
+}
+
+.diner-score-each>ul>li>span:nth-child(2){
+	color:rgb(228, 228, 36);
+}
+
+.diner-score-each>ul>li>span:nth-child(3){
+	color:rgb(182, 182, 13);
+}
+
+.review-count{
+	font-size: 13px;
+	padding: 14px;
+	border-top: 1px solid rgb(209, 203, 203);
+	height: 50px;
+}
+
+.review{
+	padding: 10px;
+	border-top: 1px solid rgb(209, 203, 203);
+}
+
+.reviewer-id{
+	font-weight: 800;
+}
+
+.review-head>a{
+	float: right;
+}
+
+.review-time-ago{
+	color:grey;
+	font-size: 13px;
+}
+
+.review-point{
+	font-size: 14px;
+	color : grey;
+}
+
+.review-star-point{
+	color : rgb(221, 221, 20);
+}
+
+.star{
+	color : rgb(221, 221, 20);
+}
+
+.review-img{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 350px;
+	background-image: url("/resources/source/reivew.jpg");
+	background-size: cover;
+}
+
+.review-menu{
+	font-size: 13px;
+	color: rgb(82, 184, 150);
+	margin-bottom: 6px;
+}
+
+.review-content{
+	font-size: 15px;
+}
+
+.add-review{
+	cursor: pointer;
+	border-top: 1px solid rgb(209, 203, 203);
+	height: 100px;
+	text-align: center;
+}
+
+.info-list{
+	padding:15px;
+}
+
+.notice-title{
+	border-bottom: 1px solid grey;
+	padding: 5px;
+	font-weight: 700;
+}
+
+.info-item{
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.info-text{
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 2;
+}
+
+.info-text-narrow{
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.info-list-title{
+	display: inline-block;
+	width: 100px;
+	color: grey;
+}
+
+
+.sub-title{
+	background-color: rgb(66, 62, 62);
+	padding: 10px;
+	color: white;
+}
+
+.sub-title>span:nth-child(2){
+	float: right;
+}
+
+.basket-item{
+	font-size: 14px;
+	padding: 10px;
+	border-left: 1px solid rgb(209, 203, 203);
+	border-right: 1px solid rgb(209, 203, 203);;
+	border-bottom: 1px solid rgb(209, 203, 203);
+}
+
+.basket-menu{
+	margin-bottom : 10px;
+}
+
+.basket-menu-price{
+	height: 30px;
+}
+
+.basket-menu-price a{
+	padding-bottom: 20px;
+	align-items: center;
+	text-align: center;
+	display: inline-block;
+	text-decoration: none;
+	color : black;
+	border: 1px solid rgb(209, 203, 203);
+	width: 20px;
+	height: 15px;
+}
+
+.basket-menu-price>div:nth-child(1){
+	float: left;
+}
+
+.basket-menu-price>div:nth-child(2){
+	float: right;
+}
+
+.basket-deli-price{
+	text-align: right;
+	padding:10px;
+	height: 50px;
+	border: 1px solid rgb(209, 203, 203);
+}
+
+.basket-deli-price>span{
+	font-size: 14px;
+}
+
+.basket-total-price{
+	background-color:antiquewhite;
+	text-align: right;
+	padding:10px;
+	height: 50px;
+	border: 1px solid rgb(209, 203, 203);
+}
+
+.basket-total-price>span{
+	color:rgb(226, 69, 69);
+	font-weight: 700;
+
+}

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+</head>
+<body>
+	<header class="pt-2">
+		<a href="/" class="logo">
+		  <img src="/resources/source/logo.png" alt="logo" class="bi me-2" width="80" height="50">
+		</a>
+  
+		<ul class="nav nav-pills pt-1">
+		  <li class="nav-item"><div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div></li>
+		  <li class="nav-item"><div class="box"><a href="#" class="nav-link">장바구니</a><div></li>
+		</ul>
+	  </header>
+	  <style>
+		footer{
+		 color : grey;
+		}
+		
+		footer a{
+			color :grey;
+			text-decoration: none;
+		}
+		
+		#div_not{
+			text-align : center;
+			padding-top : 15px;
+			border-bottom : 1px solid grey;
+			border-top : 1px solid grey;
+		}
+		.container{
+			width:100%;
+		}
+		
+		#notice{
+			font-size: 12px;
+		}
+		
+		.footer-com{
+			margin-top: 15px;
+		}
+		
+		.footer-com-name{
+			font-size: 15px;
+			color : black;
+			font-weight: 700;
+		}
+		
+		.callcenter{
+			font-size:20px;
+			font-weight: 800;
+			margin-right : 10px;
+		}
+		
+		#p-2{
+			font-size: 10px;
+		}
+		
+		@media screen and (max-width: 1200px) {
+	
+		#img_a{
+			display:none;
+		}
+	}
+	</style>
+<link type="text/css" rel="stylesheet" href="/resources/css/list.css">
+
+<div class="header-box">
+    <div class="search-box">
+        <button type="button" class="gps-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
+        </button>
+        <div class="search-input-box">
+            <input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요."></input>
+            <button id="search-btn" type="button">검색</button>
+        </div>
+    </div>
+</div>
+<main>
+	<div class="category">
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+				<div class="category-btn">전체보기</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">1인분 주문</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">프랜차이즈</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">치킨</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">피자/양식</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">중국집</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">한식</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">일식/돈까스</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">족발/보쌈</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">야식</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">분식</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">카페/디저트</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn">편의점/마트</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="contents bg-light">
+		
+		<div class="selection-wrap">
+			<div class="row justify-content-end">
+				<div class="col-6 ">
+					<select name="" id="category-option">
+						<option value="">기본 정렬순</option>
+						<option value="">거리순</option>
+						<option value="">별점순</option>
+						<option value="">리뷰 많은 순</option>
+					</select>
+				</div>
+				<div class="col-6">
+					<select name="" id="search-option">
+						<option value="">기본 정렬순</option>
+						<option value="">거리순</option>
+						<option value="">별점순</option>
+						<option value="">리뷰 많은 순</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="registered py-5 bg-light">
+			<div class="one-row justify-content-center">
+				<div class="diner-card bg-white" id="diner-card">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span class="del-option">요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				<div class="diner-card bg-white">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span>요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- row -->
+			<div class="one-row justify-content-center">
+				<div class="diner-card bg-white" id="diner-card">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span class="del-option">요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				<div class="diner-card bg-white">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span>요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- row -->
+			<div class="one-row justify-content-center">
+				<div class="diner-card bg-white" id="diner-card">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span class="del-option">요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				<div class="diner-card bg-white">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span>요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- row -->
+			<div class="one-row justify-content-center">
+				<div class="diner-card bg-white" id="diner-card">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span class="del-option">요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				<div class="diner-card bg-white">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span>요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- row -->
+			<div class="one-row justify-content-center">
+				<div class="diner-card bg-white" id="diner-card">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span class="del-option">요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				<div class="diner-card bg-white">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span>요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- row -->
+			<div class="one-row justify-content-center">
+				<div class="diner-card bg-white" id="diner-card">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span class="del-option">요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				<div class="diner-card bg-white">
+					<div class="diner-img">
+						<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+					</div>
+					<div class="diner-body">
+						<h5 class="diner-title">탐나라종합어시장-모래내시장점</h5>
+						<p class="diner-text">
+						<span class="score">★3.8</span>
+						| 리뷰 1902 | 사장님댓글 791 
+						</p>
+						<p class="diner-text">
+						<span>요기서결제</span> |
+						<span>20000원 이상 배달</span>
+						</p>
+						<p class="delivery-time">
+						22분
+						</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- row -->
+		</div>
+	</div>
+</main>
+
+
+
+
+
+
+<footer class="footer mt-auto py-3 bg-light">
+	<div id="div_not" ">
+		<p id="notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#" id="li_a">이용약관</a> &nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#" id="li_a">청소년보호정책</a> &nbsp;| &nbsp;<a href="#" id="li_a">고객센터</a></p>
+	</div>
+	<div class="container pt-3 d-flex">
+		<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo.png" width="100px"></img></a>
+		<div class="footer-com">
+			<p class="footer-com-name">주식회사 장대한상상
+            <p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; | 대표이사 : KYK</p>		
+            <span class="callcenter">고객만족센터 0000-0000</span><span id="p-1">24시간, 연중무휴</span>
+            <br> <br>
+            <p id="p-2">주식회사 위대한상상은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 요기요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 위대한상상은 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. Copyright MUGAYO. All Rights Reserved.</p>
+		</div>
+            
+
+  </div>
+</footer>
+
+</body>
+</html>
