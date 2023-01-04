@@ -1,7 +1,5 @@
 package com.ezen.delivery.service;
 
-
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,22 +35,28 @@ public class DinerServiceImpl implements DinerService {
 		return ddao.selectDinerList();
 	}
 
-
 	@Override
 	public int reviewFile(ReviewDTO rdto) {
-		int isOk = ridao.insertFile(rdto.getFList());
-		//여러개를,,등록,,,,
-		if(isOk>0 && rdto.getFList().size()>0) {
-			//가장 큰 파일코드 가져오기!
-			int  rimgfc = 
-			for(ReviewVO rvo : rdto.getFList()){
-				rvo.setRFileCode(rFileCode);
-				log.info("insert Review : "+rvo.toString());
-				isOk += rdao.insertFile(rvo);
-			}
-			
-		}  
+		// TODO Auto-generated method stub
 		return 0;
+	}
 
-	
+
+//	@Override
+//	public int reviewFile(ReviewDTO rdto) {
+//		int isOk = ridao.insertFile(rdto.getFList());
+//		//여러개를,,등록,,,,
+//		if(isOk>0 && rdto.getFList().size()>0) {
+//			//가장 큰 파일코드 가져오기!
+//			int  rimgfc = 
+//			for(ReviewVO rvo : rdto.getFList()){
+//				rvo.setRFileCode(rFileCode);
+//				log.info("insert Review : "+rvo.toString());
+//				isOk += rdao.insertFile(rvo);
+//			}
+//			
+//		}  
+//		return 0;
+//
+//	}
 }
