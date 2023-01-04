@@ -1,8 +1,11 @@
 package com.ezen.delivery.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,16 +22,12 @@ public class DinerController {
 	@Inject
 	private DinerService dsv;
 	
-	@GetMapping("/register")
-	public void register() {
-		
-		log.info("diner/register");
-		
-		DinerVO dvo = new DinerVO();
-		dvo.setName("피자에땅");
-		
-		int isOk = dsv.insert(dvo);
-		log.info(isOk+"");
-	}
+
 	
+	@GetMapping("/list")
+	public String list(Model model) {
+		List<DinerVO> list = dsv.getList();
+		model.addAttribute("list",list);
+		return "/diner/list";
+	}
 }
