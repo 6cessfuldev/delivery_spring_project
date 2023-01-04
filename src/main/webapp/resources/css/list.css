@@ -73,10 +73,14 @@ main{
 .category>.nav>li{
 	height: 60px;
 	font-size: 14px;
-
 }
 
 .category>.nav>li:hover{
+	background-color: black;
+	color: white;
+}
+
+.active{
 	background-color: black;
 	color: white;
 }

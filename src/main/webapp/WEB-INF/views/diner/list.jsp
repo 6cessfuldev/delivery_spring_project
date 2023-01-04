@@ -14,52 +14,59 @@
             </svg>
         </button>
         <div class="search-input-box">
-            <input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요."></input>
+            <input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요." value="${addr.jibunAddr}"></input>
             <button id="search-btn" type="button">검색</button>
         </div>
     </div>
 </div>
+		<form id="addr-form" action="/diner/search" method="get">
+			<input type="text" id="jibunAddr" name="jibunAddr" value="${addr.jibunAddr}" hidden>
+			<input type="text" id="siNm" name="siNm" value="${addr.siNm}" hidden>
+			<input type="text" id="sggNm" name="sggNm" value="${addr.sggNm}" hidden>
+			<input type="text" id="emdNm" name="emdNm" value="${addr.emdNm}" hidden>
+			<input type="text" name="category" value="${category}" hidden>
+		</form>
 <main>
 	<div class="category">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
-				<div class="category-btn">전체보기</div>
+				<div class="category-btn" data-cat="0">전체보기</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">1인분 주문</div>
+				<div class="category-btn" data-cat="1">1인분 주문</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">프랜차이즈</div>
+				<div class="category-btn" data-cat="2">프랜차이즈</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">치킨</div>
+				<div class="category-btn" data-cat="3">치킨</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">피자/양식</div>
+				<div class="category-btn" data-cat="4">피자/양식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">중국집</div>
+				<div class="category-btn" data-cat="5">중국집</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">한식</div>
+				<div class="category-btn" data-cat="6">한식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">일식/돈까스</div>
+				<div class="category-btn" data-cat="7">일식/돈까스</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">족발/보쌈</div>
+				<div class="category-btn" data-cat="8">족발/보쌈</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">야식</div>
+				<div class="category-btn" data-cat="9">야식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">분식</div>
+				<div class="category-btn" data-cat="10">분식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">카페/디저트</div>
+				<div class="category-btn" data-cat="11">카페/디저트</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">편의점/마트</div>
+				<div class="category-btn" data-cat="12">편의점/마트</div>
 			</li>
 		</ul>
 	</div>
@@ -123,5 +130,8 @@
 
 </main>
 <div id="endList"></div>
+<script>
+let category = '<c:out value="${category}" />';
+</script>
 <script src="/resources/js/list.js"></script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>

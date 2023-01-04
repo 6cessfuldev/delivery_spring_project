@@ -71,6 +71,14 @@
 			<input type="text" name="confmKey" value="devU01TX0FVVEgyMDIzMDEwNDE1NDQxMzExMzQwMTE=" hidden/>
 			<input type="text" id="keyword" name="keyword" value="" hidden/>
 		</form>
+
+		<form id="addr-form" action="/diner/search" method="get">
+			<input type="text" id="jibunAddr" name="jibunAddr" value="" hidden>
+			<input type="text" id="siNm" name="siNm" value="" hidden>
+			<input type="text" id="sggNm" name="sggNm" value="" hidden>
+			<input type="text" id="emdNm" name="emdNm" value="" hidden>
+			<input type="text" name="category" value="0" hidden>
+		</form>
 	</div>
 
 	<script>
@@ -150,10 +158,15 @@
 				let div = $('<div>').prop({className: classname});
 				div.addClass('addr');
 				div.click(function(){
-					console.log("click");
-					$("#search-input").val(addr.jibunAddr);	
-					window.location = "/member/list/";
+					console.log(addr);
 					exten.hide();
+					$("#search-input").val(addr.jibunAddr);	
+					$("#jibunAddr").val(addr.jibunAddr);
+					$("#siNm").val(addr.siNm);
+					$("#sggNm").val(addr.sggNm);
+					$("#emdNm").val(addr.emdNm);
+					$("#addr-form").submit();
+					
 					
 				})
 				
@@ -163,7 +176,7 @@
 				div.append(
 					$('<div>').prop({
 						className: 'jibun-addr',
-						innerHTML: addr.jibunAddr
+						innerHTML: addr.roadAddr
 					})
 				);
 				div.append(

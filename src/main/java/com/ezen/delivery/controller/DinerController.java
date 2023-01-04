@@ -17,11 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.DeliveryRangeVO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
-import com.ezen.delivery.repository.UserDAO;
 import com.ezen.delivery.service.DinerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,14 +35,23 @@ public class DinerController {
 	private DinerService dsv;
 	@Inject
 	private FileHandler fhd;
-	@Inject
-	private UserDAO userDao;
-
 	
 	@GetMapping("/list")
 	public String list(Model model) {
 		List<DinerVO> list = dsv.getList();
 		model.addAttribute("list",list);
+		return "/diner/list";
+	}
+	
+	@GetMapping("/search")
+	public String searchAll (DeliveryRangeVO dvo, int category, Model model) {
+		
+		log.info(category+"");
+		log.info(dvo.toString());
+		
+		model.addAttribute("category", category);
+		model.addAttribute("addr", dvo);
+		
 		return "/diner/list";
 	}
 	

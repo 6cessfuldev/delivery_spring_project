@@ -1,4 +1,13 @@
-// javascript
+$(".category").children('ul').children('li:eq('+category+')').addClass("active");
+
+$(".category").children('ul').children('li').click(function(){
+
+	let cat = $(this).data("cat");
+	console.log(cat);
+
+})
+
+
 const listEnd = document.querySelector("#endList");
 const option = {
     root: null,
