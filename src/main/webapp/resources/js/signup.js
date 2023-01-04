@@ -21,6 +21,20 @@ const add_textbox = () => {
     // newP.innerHTML = "<div class='mail_check_wrap'><div class='mail_check_input_box' id='mail_check_input_box_false'><input type='text' class='checkNum mail_check_input' placeholder='이메일로 전송된 인증번호를 입력해주세요.' dis></div><div class='mail_check_button'><input type='button' class='cBtn' value='check'></div><div class='clearfix'></div><span id='mail_check_input_box_warn'></span></div>";
     box.appendChild(newP);
 
+    $(".mail_check_input").focus(function () {
+        console.log("blur in");
+        var inputCode = $(".mail_check_input").val();        // 입력코드    
+        var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
+    
+        if (inputCode == code) {
+            checkResult.html("인증번호가 일치합니다.");
+            checkResult.attr("class", "correct");
+        } else {
+            checkResult.html("인증번호를 다시 확인해주세요.");
+            checkResult.attr("class", "incorrect");
+        }
+    
+    });
 }
 
 // 인증번호 이메일 전송
@@ -41,7 +55,7 @@ $(".eBtn").click(function () {
             checkBox.attr("disabled", false);
             boxWrap.attr("id", "mail_check_input_box_true");
             code = data;
-
+            console.log(code);
         }
 
     });
@@ -49,8 +63,10 @@ $(".eBtn").click(function () {
 });
 
 // 인증번호 비교
-$(".mail_check_input").blur(function () {
+$(".mail_check_input").css("backgroundColor","yellow");
 
+$(".mail_check_input").focus(function () {
+    console.log("blur in");
     var inputCode = $(".mail_check_input").val();        // 입력코드    
     var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
 
