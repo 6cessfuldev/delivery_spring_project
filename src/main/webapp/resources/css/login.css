@@ -74,7 +74,7 @@ input[id="login_check"]:checked::after{
     font-size: 18px;
     color: white;
 }
-#login_buttonA1,#login_buttonA2{
+/* #login_buttonA1,#login_buttonA2{
     width: 415px;
     height: 45px;
     border: 1px solid rgb(214, 209, 209);
@@ -82,10 +82,14 @@ input[id="login_check"]:checked::after{
     font-size: 15px;
     color: rgba(88, 77, 77, 0.788);
     float: left;
-}
-#login_buttonA2{
+} */
+/* #login_n_k{
+	border: 1px solid rgb(214, 209, 209);
+} */
+
+/* #login_buttonA2{
     float: right;
-}
+} */
 #login_img{
     width: 700px;
     height: 600px;
