@@ -91,3 +91,11 @@
     background-color: rgb(96, 145, 81);
     color: white;
 }
+
+.correct{
+    color: green;
+}
+
+.incorrect{
+    color: red;
+}

@@ -3,6 +3,7 @@ package com.ezen.delivery.service;
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.domain.UserVO;
@@ -17,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	private UserDAO udao;
 	@Inject
-	BCryptPasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public boolean signUp(UserVO uvo) {

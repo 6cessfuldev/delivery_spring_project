@@ -62,8 +62,6 @@ public class DinerController {
 		log.info("reviewFile register >> "+ (isOk>0 ? "OK":"FAIL"));
 		return "/diner/detail";
 	}
-
-	
 }
 	
 	
