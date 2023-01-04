@@ -4,14 +4,14 @@
 }
 
 .pw-wrap{
-    height: 220px;
+    height: 315px;
     display: flex;
     justify-content: center;
     background-color: #e3e7ea;
     padding-top: 20px;
 }
 
-.email-input{
+.email-input, .checkNum{
     width: 600px;
     height: 40px;
     font-size: 12px;
@@ -20,9 +20,22 @@
     margin-bottom: 10px;
 }
 
-.email-input:focus{
+.email-input:focus, .checkNum:focus{
     outline: 1px solid rgba(96, 145, 81);
 }
+
+.cBtn{
+    width: 50px;
+    height: 32px;
+    position: absolute;
+    right: 34.8%;
+    top: 142px;
+    font-size: 13px;
+    background-color: white;
+    border: 1px solid rgb(219, 216, 216);
+    border-radius: 10px;
+}
+
 
 .pw-msg{
     font-size: 11.5px;
@@ -41,4 +54,27 @@
     font-size: 13px;
     background-color: rgba(96, 145, 81);
 
+}
+
+span{
+    font-size: 12px;
+}
+
+.correct{
+    color: green;
+}
+
+.incorrect{
+    color: red;
+}
+
+.resetBtn{
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(58, 57, 57);
+    border: 1px solid rgb(126, 120, 120);
+    border-radius: 10px;
+    background-color: white;
 }
