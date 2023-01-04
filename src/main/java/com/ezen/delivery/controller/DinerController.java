@@ -30,6 +30,4 @@ public class DinerController {
 		model.addAttribute("list",list);
 		return "/diner/list";
 	}
-	
-	
 }
