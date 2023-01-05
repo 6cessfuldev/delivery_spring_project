@@ -7,24 +7,28 @@
 <script type="text/javascript" src="/resources/js/paging.js"></script>
 
 <div class="header-box">
-    <div class="search-box">
-        <button type="button" class="gps-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-            </svg>
-        </button>
-        <div class="search-input-box">
-            <input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요." value="${addr.jibunAddr}"></input>
-            <button id="search-btn" type="button">검색</button>
-        </div>
-    </div>
+	<div class="search-box">
+		<button type="button" class="gps-btn">
+			<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+				  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+			</svg>
+		</button>
+		<div class="search-input-box">
+			<div>
+			<input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요." value="${sessionScope.addr.jibunAddr}"></input>
+				<div class="search-extention">
+				
+				</div>
+			</div>
+			<button id="search-btn" type="button">검색</button>
+		</div>
+	</div>
 </div>
 		<form id="addr-form" action="/diner/search" method="get">
-			<input type="text" id="jibunAddr" name="jibunAddr" value="${addr.jibunAddr}" hidden>
-			<input type="text" id="siNm" name="siNm" value="${addr.siNm}" hidden>
-			<input type="text" id="sggNm" name="sggNm" value="${addr.sggNm}" hidden>
-			<input type="text" id="emdNm" name="emdNm" value="${addr.emdNm}" hidden>
-			<input type="text" name="category" value="${category}" hidden>
+			<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.addr.jibunAddr}" hidden>
+			<input type="text" id="x" name="lng" value="${sessionScope.addr.lng}" hidden>
+			<input type="text" id="y" name="lat" value="${sessionScope.addr.lat}" hidden>
+			<input type="text" id="category" name="category" value="${sessionScope.category}" hidden>
 		</form>
 <main>
 	<div class="category">
@@ -94,12 +98,12 @@
 			</div>
 		</div>
 		<div class="registered py-5 bg-light">
-				<c:forEach items="${list}" var="diner" varStatus="status" >
+				<c:forEach items="${dList}" var="diner" varStatus="status" >
 					<c:if test="${status.index%2==0}">
 						<div class="one-row justify-content-center"> 
 					</c:if>
 					<!--  -->
-					<c:if test="${status.index%2!=0 || status.index+1!=fn:length(list)}">
+					<c:if test="${status.index%2!=0 || status.index+1!=fn:length(dList)}">
 						<div class="diner-card bg-white" id="diner-card">
 							<div class="diner-img">
 								<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
@@ -131,7 +135,8 @@
 </main>
 <div id="endList"></div>
 <script>
-let category = '<c:out value="${category}" />';
+let category = '<c:out value="${sessionScope.category}" />';
 </script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 <script src="/resources/js/list.js"></script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>

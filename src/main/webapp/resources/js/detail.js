@@ -20,18 +20,3 @@ const swiper = new Swiper('.swiper', {
     },
     width : 150
 });
-
-// var gallery = new SimpleLightbox('.gallery a',{
-//   overlay:true
-// });
-
-// gallery.open();
-
-(function() {
-  if (Galleria) { $("body").text('Galleria works') }
-}());
-
-(function() {
-  Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
-  Galleria.run('.galleria');
-}());

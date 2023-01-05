@@ -64,53 +64,26 @@
 	</main>
 
 	<div class="hidden-form">
-		<form name="form" id="form" method="post">
-			<input type="text" name="currentPage" value="1" hidden/>
-			<input type="text" name="countPerPage" value="5" hidden/>
-			<input type="text" name="resultType" value="json" hidden/>
-			<input type="text" name="confmKey" value="devU01TX0FVVEgyMDIzMDEwNDE1NDQxMzExMzQwMTE=" hidden/>
-			<input type="text" id="keyword" name="keyword" value="" hidden/>
-		</form>
 
 		<form id="addr-form" action="/diner/search" method="get">
 			<input type="text" id="jibunAddr" name="jibunAddr" value="" hidden>
-			<input type="text" id="siNm" name="siNm" value="" hidden>
-			<input type="text" id="sggNm" name="sggNm" value="" hidden>
-			<input type="text" id="emdNm" name="emdNm" value="" hidden>
+			<input type="text" id="x" name="lng" value="" hidden>
+			<input type="text" id="y" name="lat" value="" hidden>
 			<input type="text" name="category" value="0" hidden>
 		</form>
 	</div>
 
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 	<script>
 	
 	let exten = $(".search-extention");
 	exten.hide();
+	
+	var options = {
+			size: 5
+	}
 
-	$("#search-btn").click(function(){
-		
-		let keyword = $("#search-input").val();
-		console.log(keyword);
-		if (!checkSearchedWord(keyword)) {
-			return ;
-		}
-		$("#keyword").val(keyword);
-
-		$.ajax({
-			url :"https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do"  //인터넷망
-			,type:"post"
-			,data:$("#form").serialize()
-			,dataType:"jsonp"
-			,crossDomain:true
-			,success:function(jsonStr){
-				addSearchBox(jsonStr);
-			}
-			,error: function(xhr,status, error){
-				alert("에러발생");
-			}
-		});
-	})
-
-	$("#search-input").on("click keyup", function(){
+	function searchAdrr(){
 		let keyword = $("#search-input").val();
 		
 		if(keyword=="") {
@@ -123,36 +96,41 @@
 		if (!checkSearchedWord(keyword)) {
 			return ;
 		}
+		
+		if(keyword.length<3) return;
+		
 		$("#keyword").val(keyword);
+		
+		var places = new kakao.maps.services.Places();
+		
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				addSearchBox(result);
+			}
+		};
+		places.keywordSearch(keyword, callback, options);
+	}
+	
+	$("#search-btn").click(function(){
+		searchAdrr();
+	})
 
-		$.ajax({
-			url :"https://business.juso.go.kr/addrlink/addrLinkApiJsonp.do"  //인터넷망
-			,type:"post"
-			,data:$("#form").serialize()
-			,dataType:"jsonp"
-			,crossDomain:true
-			,success:function(jsonStr){
-				addSearchBox(jsonStr);
-			}
-			,error: function(xhr,status, error){
-				alert("에러발생");
-			}
-		});
+	$("#search-input").on("click keyup", function(){
+		searchAdrr();
 	})
 	
-	function addSearchBox(jsonStr){	
-		if(jsonStr.results.juso==null) {
+	function addSearchBox(result){	
+		if(result==null) {
 			console.log("data null");
 			return;
 		}
 		
-		if(jsonStr.results.juso.length>0){
+		if(result.length>0){
 			exten.html("");
 			exten.show();
-			for(let i=0; i<jsonStr.results.juso.length; i++ ){
+			for(let i=0; i<result.length; i++ ){
 
-				let addr = jsonStr.results.juso[i];
-				
+				let addr = result[i];
 				let classname = "addr"+i;
 				
 				let div = $('<div>').prop({className: classname});
@@ -160,29 +138,24 @@
 				div.click(function(){
 					console.log(addr);
 					exten.hide();
-					$("#search-input").val(addr.jibunAddr);	
-					$("#jibunAddr").val(addr.jibunAddr);
-					$("#siNm").val(addr.siNm);
-					$("#sggNm").val(addr.sggNm);
-					$("#emdNm").val(addr.emdNm);
-					$("#addr-form").submit();
-					
-					
+					$("#search-input").val(addr.address_name);	
+					$("#jibunAddr").val(addr.address_name);
+					$("#x").val(addr.x);
+					$("#y").val(addr.y);
+					$("#addr-form").submit();	
 				})
 				
-				
 				exten.append(div);
-
 				div.append(
 					$('<div>').prop({
 						className: 'jibun-addr',
-						innerHTML: addr.roadAddr
+						innerHTML: addr.address_name
 					})
 				);
 				div.append(
 					$('<div>').prop({
 						className: 'doro-addr',
-						innerHTML: "[도로명]"+addr.jibunAddr
+						innerHTML: (addr.road_address_name!="" ? "[도로명]"+addr.road_address_name:" ")
 					})
 				);
 			}
@@ -219,5 +192,6 @@
 	}
 
 	</script>
+
 	<!-- <script src="/resources/js/index.js"></script> -->
 <jsp:include page="./include/footer2.jsp"></jsp:include>

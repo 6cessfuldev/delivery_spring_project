@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.domain.DestVO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
@@ -32,24 +33,21 @@ public class DinerServiceImpl implements DinerService {
 
 	@Override
 	public int reviewFile(ReviewDTO rdto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
-//	@Override
-//	public int reviewFile(ReviewDTO rdto) {
-//		//파일 먼저 등록
-//		int isOk = ridao.insertReviewImgFile(rdto.getFList());
-//		//여러개를,,등록,,,,
-//		if(isOk>0 && rdto.getFList().size()>0) {
-//			//가장 큰 파일코드 가져오기!
-//			int  rimgfilecode = ridao.
-//			for(ReviewVO rvo : rdto.getFList()){
-//				rvo.setRFileCode(rFileCode);
-//				log.info("insert Review : "+rvo.toString());
-//				isOk += rdao.insertFile(rvo);
-//			}
-//		}  
-//		return 0;
-//	}
+	@Override
+	public List<DinerVO> getFirstListByCategory(DestVO dsvo, int category) {
+		
+		return ddao.selectTenDinerByCategory(dsvo, category);
+	}
+
+	@Override
+	public int register(DinerVO dvo) {
+		
+		return ddao.insert(dvo);
+	}
+
+
 }

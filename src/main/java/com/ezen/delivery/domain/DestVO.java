@@ -1,5 +1,7 @@
 package com.ezen.delivery.domain;
 
+import org.apache.poi.hpsf.Decimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DeliveryRangeVO {
+public class DestVO {
 
 	private String jibunAddr;
-	private String SiNm;
-	private String sggNm;
-	private String emdNm;
+	private String lng;
+	private String lat;
 	
 }
