@@ -18,7 +18,7 @@ public class DinerVO {
 	private String diner_name;
 	private int diner_min_pay;
 	private String diner_address;
-	private long diner_notice;
+	private String diner_notice;
 	private String diner_open_time;
 	private String diner_close_time;
 	private String diner_method_pay;

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/list.css">
+<script type="text/javascript" src="/resources/js/paging.js"></script>
 
 <div class="header-box">
     <div class="search-box">
@@ -97,7 +98,7 @@
 								<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
 							</div>
 							<div class="diner-body">
-								<h5 class="diner-title">${diner.diner_name}</h5>
+								<a href="/detail"><h5 class="diner-title">${diner.diner_name}</h5></a>
 								<p class="diner-text">
 								<span class="score">★3.8</span>
 								| 리뷰 1902 | 사장님댓글 791 
@@ -121,5 +122,6 @@
 	</div>
 
 </main>
-
+<div id="endList"></div>
+<script src="/resources/js/list.js"></script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>

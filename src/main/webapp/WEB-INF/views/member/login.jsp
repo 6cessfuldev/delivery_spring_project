@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <title>먹어요</title>
+
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+
 <link type="text/css" rel="stylesheet" href="/resources/css/login.css">
+
 
 <jsp:include page="../include/header.jsp"></jsp:include>
    <div id="login_wrapper">
@@ -23,12 +30,22 @@
         </form>
             </div>
             <br>
-            <button id="login_buttonA1"><img src="/resources/source/naver.jpg" id="login_icon">네이버로 로그인</button>
-            <button id="login_buttonA2"><img src="/resources/source/kakao.jpg" id="login_icon">카카오로 로그인</button>
+            <%
+    String clientId = "BwPXQd2HaNZ5eWMSnF7z";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8089/member/callback", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+         + "&client_id=" + clientId
+         + "&redirect_uri=" + redirectURI
+         + "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+  <a href="<%=apiURL%>"><img  width="250" height="55" src="/resources/source/btnW.png"/></a>
+	       
             <br><br><br>
             <img src="/resources/source/event.gif" id="login_img">
              <br><br><br><br>
         </div>
     </div>
-
 <jsp:include page="../include/footer2.jsp"></jsp:include>

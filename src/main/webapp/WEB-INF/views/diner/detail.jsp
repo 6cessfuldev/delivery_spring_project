@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
 <link
@@ -271,6 +272,31 @@
 							<p>리뷰 472개 / 사장님댓글 452개</p>
 						</div>
 						<div class="review">
+						
+					    <div class="review_box">
+                               <form action="">
+                                <div class="review_spanBox">
+                                    <span class="review_span">얼마나 만족하셨나요?</span><br>
+                                    <span class="review_starT">맛&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
+                                    <span class="review_starT">양&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
+                                    <span class="review_starT">배달&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
+                                </div>
+                                <br>
+                                <div class="review_multiplebox">
+                                    <label for="review_multiple" class="review_multipleT" >사진</label>
+                                   <input type="file" id="review_multiple" name="files" style="display: none" multiple>
+                                  </div>
+                                내용
+                                <br>
+                                <textarea name="content" class="review_content" rows="6" cols="100" 
+                                placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
+                                <div class="review_insertBox">
+                                  <button type="submit" class="review_insert">완료</button>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                        
 							<div class="review-head">
 								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
 							</div>

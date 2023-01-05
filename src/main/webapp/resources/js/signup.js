@@ -29,7 +29,6 @@ const add_checkBox = () => {
     newP.innerHTML += `<span id="mail_check_input_box_warn"></span></div>`;
     box.appendChild(newP);
 
-
     // 인증번호 비교
     $(".cBtn").click(function () {
         console.log("click cBtn");
@@ -70,7 +69,6 @@ $(".eBtn").click(function () {
     });
 
 });
-
 
 // 유효성 검사
 document.querySelector('.signupBtn').addEventListener('click', function () {
