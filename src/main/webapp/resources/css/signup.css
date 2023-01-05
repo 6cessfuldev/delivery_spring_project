@@ -15,7 +15,7 @@
 }
 
 .wrap-input input:focus{
-    outline: 1px solid rgb(96, 145, 81);
+    outline: 2px solid rgb(151, 143, 143);
 }
 
 .input{
@@ -30,16 +30,33 @@
     text-indent: 10px;
 }
 
-.eBtn{
+.eBtn, .cBtn, .dupBtn{
     width: 50px;
     height: 32px;
     position: absolute;
     right: 40.2%;
-    top: 169px;
     font-size: 13px;
     background-color: white;
     border: 1px solid rgb(151, 143, 143);
     border-radius: 10px;
+}
+
+.eBtn{
+    top: 170px;
+}
+
+.cBtn{
+    top: 236px;
+}
+
+#id-box{
+    position: relative;
+}
+
+.dupBtn{
+    position: absolute;
+    top: 15%;
+    right: 3.4%;
 }
 
 .checkNum{
@@ -54,17 +71,6 @@
     outline: 1px solid rgb(96, 145, 81);
 }
 
-.cBtn{
-    width: 50px;
-    height: 32px;
-    position: absolute;
-    right: 40.2%;
-    top: 236px;
-    font-size: 13px;
-    background-color: white;
-    border: 1px solid rgb(151, 143, 143);
-    border-radius: 10px;
-}
 
 .logoImg{
     width: 200px;
@@ -90,6 +96,10 @@
 .signupBtn:hover{
     background-color: rgb(96, 145, 81);
     color: white;
+}
+
+span{
+    font-size: 12px;
 }
 
 .correct{

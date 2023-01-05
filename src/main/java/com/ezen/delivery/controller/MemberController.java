@@ -149,6 +149,9 @@ public class MemberController {
 	@GetMapping("/find_pw")
 	public void findPwGet() {
 	}
+	
+	@GetMapping("/update_pw")
+	public void updatePwGet() {}
 
 	@GetMapping("/order")
 	public void orderGet() {

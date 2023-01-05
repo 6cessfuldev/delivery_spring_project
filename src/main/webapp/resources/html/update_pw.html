@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 	<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
-	<link type="text/css" rel="stylesheet" href="/resources/css/find_id.css">
+	<link type="text/css" rel="stylesheet" href="/resources/css/update_pw.css">
 </head>
 
 <body>
@@ -79,27 +79,14 @@
 		}
 	</style>
 
-	<div class="join-wrap">
-		<form action="/member/find_id" method="post">
-			<div id="box">
-				<li class="text-wrap">
-					<input type="text" class="text-field t1 email-input" id="user_email" placeholder="(필수)이메일 주소 입력">
-					<button type="button" class="cerBtn">전송</button>
-				</li>
-			</div>
-			<li class="text-wrap">
-				<input type="text" class="text-field t2 mail_check_input" placeholder="인증번호 입력">
-				<div class='mail_check_button'>
-					<input type='button' class='cBtn' value='인증'>
-				</div>
-				<div class='clearfix'></div>
-				<span id="mail_check_input_box_warn"></span>
-			</li>
-			<p class="msg">인증번호가 도착하지 않았을 경우 '인증'버튼을 다시 눌러주세요.</p>
-			<div id="id_hint"></div>
-			<button type="button" class="findBtn">아이디 찾기</button>
-		</form>
-	</div>
+<div class="reset-wrap">
+	<form class="form-box" action="/member/reset_pw" method="post">
+		<img src="/resources/source/logo2.png" class="logoImg"><br>
+		<input type="password" class="text-field" id="new_pw" placeholder="새로운 비밀번호 입력"><br><br>
+		<input type="password" class="text-field" id="new_pwCheck" placeholder="비밀번호 재확인"><br><br>
+		<button type="button" class="changeBtn">Update My Password</button>
+	</form>
+</div>
 
 	<footer class="footer mt-auto py-3 bg-light">
 		<div id="div_not" ">
@@ -127,88 +114,24 @@
 
 	<script>
 
-		var code = "";
+		document.querySelector('.changeBtn').addEventListener('click', function(){
+			const new_pw = document.getElementById('new_pw').value;
+			const new_pwCheck = document.getElementById('new_pwCheck').value;
 
-		// 인증번호 이메일 전송
-		$(".cerBtn").click(function () {
-			console.log("click");
-
-			var email = $(".email-input").val(); // 입력한 이메일
-
-			if (email == "" || email == null) {
-				alert("이메일을 입력해주세요.");
+			if(new_pw == "" || new_pw == null){
+				alert("비밀번호를 입력해주세요.");
+				return;
+			} else if (new_pwCheck == "" || new_pwCheck == null){
+				alert("비밀번호 재확인을 입력해주세요.");
+				return;
+			} else if (new_pw != new_pwCheck){
+				alert("비밀번호가 일치하지 않습니다.");
 				return;
 			}
 
-			$.ajax({
-
-				type: "GET",
-				url: "mailCheck?email=" + email,
-				success: function (data) {
-
-					code = data;
-					console.log(code);
-				}
-
-			});
-
-			alert("입력하신 이메일로 인증번호가 전송되었습니다.");
-
-		});
-
-
-		// 인증번호 비교
-		$(".cBtn").click(function () {
-
-			var email = $(".email-input").val(); // 입력한 이메일
-
-			if (email == "" || email == null) {
-				alert("이메일을 입력해주세요.");
-				return;
-			}
-
-			console.log("click findBtn");
-			var inputCode = $(".mail_check_input").val();        // 입력코드    
-			console.log(inputCode);
-			var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
-
-			if (inputCode == code) {
-				checkResult.html("인증번호가 일치합니다.");
-				checkResult.attr("class", "correct");
-			} else {
-				checkResult.html("인증번호를 다시 확인해주세요.");
-				checkResult.attr("class", "incorrect");
-			}
-
-		});
-
-		// 아이디 찾기
-		let once = 0;
-
-		$(".findBtn").click(function () {
-			const checkMsg = document.getElementById('mail_check_input_box_warn').innerHTML;
-			if (checkMsg == "인증번호가 일치합니다.") {
-
-					once++;
-					if (once > 1) {
-						return;
-					}
-
-					const id_hint = document.getElementById("id_hint");
-					const newP = document.createElement('p');
-
-					newP.innerHTML = `<div class="hint_box">`;
-					newP.innerHTML += `<p class='hintMsg'>회원님의 아이디는 <span class='getId'>mye***</span> 입니다.</p>`;
-					newP.innerHTML += `</div>`;
-
-					id_hint.appendChild(newP);
-
-
-				} else {
-					alert("이메일 인증을 해주세요.");
-			}
-
+			$(".form-box").submit();
 		})
+
 	</script>
 
 </body>
