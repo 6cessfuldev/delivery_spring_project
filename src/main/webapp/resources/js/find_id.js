@@ -60,23 +60,43 @@ $(".findBtn").click(function () {
     const checkMsg = document.getElementById('mail_check_input_box_warn').innerHTML;
     if (checkMsg == "인증번호가 일치합니다.") {
 
-            once++;
-            if (once > 1) {
-                return;
+        once++;
+        if (once > 1) {
+            return;
+        }
+
+        let user_email = $('#user_email').val();
+        console.log(user_email);
+
+        $.ajax({
+
+            url: '/member/find_id',
+            type: 'post',
+            data: { "user_email" : user_email },
+            
+            success: function (result) {
+                if (result != null) {
+                    console.log(result);
+                    const id_hint = document.getElementById("id_hint");
+                    const newP = document.createElement('p');
+
+                    newP.innerHTML = `<div class="hint_box">`;
+                    newP.innerHTML += `<p class='hintMsg'>회원님의 아이디는 <font id="getId" size="5" color="green"></font> 입니다.</p>`;
+                    newP.innerHTML += `</div>`;
+
+                    id_hint.appendChild(newP);
+
+                    $("#getId").html(result);
+                }
+            },
+            error: function () {
+                alert("서버요청실패");
             }
-
-            const id_hint = document.getElementById("id_hint");
-            const newP = document.createElement('p');
-
-            newP.innerHTML = `<div class="hint_box">`;
-            newP.innerHTML += `<p class='hintMsg'>회원님의 아이디는 <span class='getId'>mye***</span> 입니다.</p>`;
-            newP.innerHTML += `</div>`;
-
-            id_hint.appendChild(newP);
+        })
 
 
-        } else {
-            alert("이메일 인증을 해주세요.");
+    } else {
+        alert("이메일 인증을 해주세요.");
     }
 
 })

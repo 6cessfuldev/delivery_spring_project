@@ -86,6 +86,9 @@ const add_checkBox = () => {
             insertP.innerHTML += `</div>`;
             resetPw.appendChild(insertP);
 
+            // 이메일 정보 담기
+            localStorage.setItem('email', $(".email-input").val());
+
         }
 
     });

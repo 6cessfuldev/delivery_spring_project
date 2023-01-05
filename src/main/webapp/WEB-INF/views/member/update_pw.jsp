@@ -5,11 +5,12 @@
 <link type="text/css" rel="stylesheet" href="/resources/css/update_pw.css">
 
 <div class="reset-wrap">
-	<form class="form-box" action="/member/reset_pw" method="post">
+	<form class="form-box">
 		<img src="/resources/source/logo2.png" class="logoImg"><br>
 		<input type="password" class="text-field" id="new_pw" placeholder="새로운 비밀번호 입력"><br><br>
 		<input type="password" class="text-field" id="new_pwCheck" placeholder="비밀번호 재확인"><br><br>
 		<button type="button" class="changeBtn">Update My Password</button>
+		<div id="updateMsg"></div>
 	</form>
 </div>
 

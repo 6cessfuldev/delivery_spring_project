@@ -29,6 +29,7 @@ const add_checkBox = () => {
     newP.innerHTML += `<span id="mail_check_input_box_warn"></span></div>`;
     box.appendChild(newP);
 
+
     // 인증번호 비교
     $(".cBtn").click(function () {
         console.log("click cBtn");
@@ -70,18 +71,45 @@ $(".eBtn").click(function () {
 
 });
 
+// 아이디 중복 검사
+$('#user_id').keyup(function () {
+    let user_id = $('#user_id').val();
+    console.log(user_id);
+    $.ajax({
+        url: "/member/userIdCheck",
+        type: "post",
+        data: { "user_id": user_id },
+        dataType: 'json',
+        success: function (result) {
+            if (result == 1) {
+                $("#id_feedback").html('이미 사용중인 아이디입니다.');
+                $("#id_feedback").attr('color', '#dc3545');
+            } else {
+                $("#id_feedback").html('사용할 수 있는 아이디입니다.');
+                $("#id_feedback").attr('color', '#609151');
+            }
+        },
+        error: function () {
+            alert("서버요청실패");
+        }
+    })
+})
+
 // 유효성 검사
 document.querySelector('.signupBtn').addEventListener('click', function () {
     const user_email = document.getElementById('user_email').value;
+    const user_id = document.getElementById('user_id').value;
     const user_pw = document.getElementById('user_pw').value;
     const user_pwCheck = document.getElementById('user_pwCheck').value;
     const user_name = document.getElementById('user_name').value;
     const user_birth = document.getElementById('user_birth').value;
     const user_phone = document.getElementById('user_phone').value;
-    const user_nick = document.getElementById('user_nick').value;
 
     if (user_email == "" || user_email == null) {
         alert("이메일을 입력해주세요.");
+        return;
+    } else if (user_id == "" || user_id == null) {
+        alert("아이디를 입력해주세요.");
         return;
     } else if (user_pw == "" || user_pw == null) {
         alert("비밀번호를 입력해주세요.");
@@ -95,15 +123,36 @@ document.querySelector('.signupBtn').addEventListener('click', function () {
     } else if (user_birth == "" || user_birth == null) {
         alert("생년월일을 입력해주세요.");
         return;
-    } else if (user_phone == "" || user_phone == null) {
+    } else if (isNaN(user_birth) || user_birth.length != 6) {
+        alert("생년월일 형식에 맞게 입력해주세요.");
+        return;
+    }
+    else if (user_phone == "" || user_phone == null) {
         alert("핸드폰 번호를 입력해주세요.");
         return;
-    } else if (user_nick == "" || user_nick == null) {
-        alert("닉네임을 입력해주세요.");
+    } else if (isNaN(user_phone) || user_phone.length != 11) {
+        alert("핸드폰 번호를 형식에 맞게 입력해주세요.");
         return;
-    } else if(user_pw != user_pwCheck){
+    }
+    else if (user_pw != user_pwCheck) {
         alert("비밀번호가 일치하지 않습니다.");
         return;
+    } else {
+        var pw = user_pw;
+        var num = pw.search(/[0-9]/g);
+        var eng = pw.search(/[a-z]/ig);
+        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+        if (pw.length < 8 || pw.length > 20) {
+            alert("8자리 ~ 20자리 이내로 입력해주세요.");
+            return;
+        } else if (pw.search(/\s/) != -1) {
+            alert("비밀번호는 공백 없이 입력해주세요.");
+            return;
+        } else if (num < 0 || eng < 0 || spe < 0) {
+            alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+            return;
+        }
     }
 
     $(".wrap-input").submit();

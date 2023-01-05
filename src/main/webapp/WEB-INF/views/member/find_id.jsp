@@ -5,7 +5,7 @@
 <link type="text/css" rel="stylesheet" href="/resources/css/find_id.css">
 
 <div class="join-wrap">
-    <form action="/member/find_id" method="post">
+    <form action="/member/find_id" class="find_id" method="post">
         <div id="box">
             <li class="text-wrap">
                 <input type="text" class="text-field t1 email-input" id="user_email" placeholder="(필수)이메일 주소 입력">

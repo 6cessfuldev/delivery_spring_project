@@ -6,11 +6,29 @@
 <mapper namespace="com.ezen.delivery.repository.UserDAO">
 	<select id="getUser" resultType="com.ezen.delivery.domain.UserVO">
 		select * from user 
-		where user_email = #{user_email}
+		where user_id = #{user_id}
 	</select>
 	
 	<insert id="insertUser">
-		insert into user (user_email, user_pw, user_name, user_phone, user_birth, user_nick)
-		values (#{user_email}, #{user_pw}, #{user_name}, #{user_phone}, #{user_birth}, #{user_nick})
+		insert into user (user_id, user_email, user_pw, user_name, user_phone, user_birth)
+		values (#{user_id}, #{user_email}, #{user_pw}, #{user_name}, #{user_phone}, #{user_birth})
 	</insert>
+	
+	<select id="selectId" resultType="int">
+		select count(*) from user where user_id =#{user_id}
+	</select>
+	
+	<select id="selectAllId" resultType="java.lang.String">
+		select user_id from user
+	</select>
+	
+	<select id="findIdByEmail" resultType="com.ezen.delivery.domain.UserVO">
+		select user_id from user
+		where user_email = #{user_email} 
+	</select>
+	
+	<update id="updatePw">
+		update user set user_pw = #{new_pw}, user_mod_date = now()
+		where user_email = #{getEmail}
+	</update>
 </mapper>
