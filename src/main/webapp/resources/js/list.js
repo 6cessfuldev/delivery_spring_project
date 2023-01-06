@@ -1,11 +1,52 @@
+//주소 검색
+function searchAddress(keyword){
+	var places = new kakao.maps.services.Places();
+	var callback = function(result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			return result;
+		}
+	};
+	places.keywordSearch(keyword, callback, options);
+	return null;
+}
+
+/* HTML5 geolocation */
+function getLocation() {
+  if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+	alert("Geolocation is not supported by this browser.");
+  }
+}
+/* geolocation에서 가져온 좌표값으로 카카오맵api에서 주소 검색 후 가장 가까운 주소 5개를 검색해 검색창 확장 div에 뿌리기 */
+function showPosition(position) {
+  
+  // 카카오맵에서 주소 검색
+	var geocoder = new kakao.maps.services.Geocoder();
+	var coord = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	var callback = function(result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			console.log(result[0]);
+			
+			if(searchAddress(result[0].address.address_name)==null){
+				searchAddr(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
+			}else{
+				searchAddr(result[0].address.address_name);
+			}
+			$("#search-input").val(result[0].address.address_name);
+		}
+	};
+	geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+}
+
 let exten = $(".search-extention");
 
 var options = {
     size: 5
 }
 
-function searchAdrr(){
-    let keyword = $("#search-input").val();
+function searchAddr(keyword){
+ 
 
     if(keyword=="") {
         exten.hide();
@@ -33,11 +74,13 @@ function searchAdrr(){
 }
 
 	$("#search-btn").click(function(){
-		searchAdrr();
+		let keyword = $("#search-input").val();
+		searchAddr(keyword);
 	})
 
 	$("#search-input").on("click keyup", function(){
-		searchAdrr();
+		let keyword = $("#search-input").val();
+		searchAddr(keyword);
 	})
 	
 	function addSearchBox(result){	
@@ -66,9 +109,7 @@ function searchAdrr(){
 					$("#y").val(addr.y);
 					$("#addr-form").submit();
 					
-					
 				})
-				
 				
 				exten.append(div);
 
@@ -117,12 +158,12 @@ function searchAdrr(){
 	return true ;
 	}
 
-
-$(".category").children('ul').children('li:eq('+category+')').addClass("active");
+$("#cate-"+category).parent().addClass("active");
 
 $(".category").children('ul').children('li').click(function(){
 
-	let cat = $(this).children('div').attr("data-cat");
+	let cat = $(this).children('div').attr('id');
+	cat = cat.substring(5,cat.length);
 	console.log(cat);
     $("#category").val(cat);
     $("#addr-form").submit();
@@ -156,7 +197,7 @@ function addList(){
     let add = "";
 
 	if(listCnt<0) return;
-	
+
     getListMoreFromServer(listCnt).then(result => {
         console.log(result.length);
         if(result!=null && result.length>0){

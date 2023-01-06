@@ -8,24 +8,18 @@
 </select>
 
 <select id="selectList" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner where diner_category_num = #{category} order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 20 
+	select * from diner order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+</select>
+
+<select id="selectListbyCate" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	select * from diner where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <insert id="insert">
-
 insert into diner(diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
-			 diner_business_name, diner_company_num, diner_addr_point)
-				value(#{diner_file_code}, #{diner_name}, #{diner_address}, #{diner_min_pay}, #{diner_notice}, #{diner_open_time}, #{diner_close_time}, 
-					#{diner_method_pay}, #{diner_business_name}, #{diner_company_num}, POINT(#{diner_addr_lng}, #{diner_addr_lat}))
-					
-					
-<!-- 	
-	where diner_category_num = #{category}
-	insert into diner(diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, 
-					diner_method_pay, diner_business_name, diner_company_num, diner_addr_point)
-				value(#{diner_file_code}, #{diner_name}, #{diner_address}, #{diner_min_pay}, #{diner_notice}, 
-					#{diner_open_time}, #{diner_close_time}, #{diner_method_pay}, #{diner_business_name}, #{diner_company_num}, 
-					ST_GeomFromText('POINT(#{diner_addr_lng} #{diner_addr_lat})')) -->
+			 diner_business_name, diner_company_num, diner_category, diner_addr_point)
+		value(#{diner_file_code}, #{diner_name}, #{diner_address}, #{diner_min_pay}, #{diner_notice}, #{diner_open_time}, #{diner_close_time}, 
+			#{diner_method_pay}, #{diner_business_name}, #{diner_company_num}, #{diner_category}, POINT(#{diner_addr_lng}, #{diner_addr_lat}))
 </insert>
 
 <select id="selectDiner" resultType="com.ezen.delivery.domain.DinerVO">

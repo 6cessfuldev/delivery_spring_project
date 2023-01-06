@@ -19,4 +19,6 @@ public interface DinerDAO {
 
 	DinerVO selectDiner(int diner_code);
 
+	List<DinerVO> selectListbyCate(PagingVO pvo);
+
 }

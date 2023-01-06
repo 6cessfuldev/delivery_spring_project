@@ -15,9 +15,24 @@
 		결제 수단 : <input type="text" name="diner_method_pay"><br>
 		상호명 : <input type="text" name="diner_business_name"><br>
 		사업자등록번호 : <input type="text" name="diner_company_num"><br>
+		카테고리 : 
+		<input type="checkbox" name="category" value="aa">1인분주문
+		<input type="checkbox" name="category" value="ff">프랜차이즈
+		<input type="checkbox" name="category" value="hh">치킨
+		<input type="checkbox" name="category" value="pp">피자/양식
+		<input type="checkbox" name="category" value="cc">중국집
+		<input type="checkbox" name="category" value="kk">한식
+		<input type="checkbox" name="category" value="jj">일식/돈까스
+		<input type="checkbox" name="category" value="mm">족발/보쌈
+		<input type="checkbox" name="category" value="nn">야식
+		<input type="checkbox" name="category" value="tt">분식
+		<input type="checkbox" name="category" value="dd">카페/디저트
+		<input type="checkbox" name="category" value="ss">편의점/마트
+				
+		<br><br>
+		(음식점 위도 & 경도는 자동 입력)
 		<input type="text" id="diner_addr_lng" name="diner_addr_lng" hidden><br>
 		<input type="text" id="diner_addr_lat" name="diner_addr_lat" hidden><br>
-		(음식점 위도 & 경도는 자동 입력)
 		<button type="button" id="dinerInputBtn">등록</button>
 	</form>	
 	
@@ -27,6 +42,9 @@
 
  	$("#dinerInputBtn").click(function(){
 		console.log("clicked");
+		
+		
+		
 		var geocoder = new kakao.maps.services.Geocoder();
 		var callback = function(result, status) {
 		    if (status === kakao.maps.services.Status.OK) {
