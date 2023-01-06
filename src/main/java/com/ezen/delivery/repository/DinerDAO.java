@@ -21,4 +21,6 @@ public interface DinerDAO {
 
 	List<DinerVO> selectListbyCate(PagingVO pvo);
 
+	List<DinerVO> selectListAll();
+
 }

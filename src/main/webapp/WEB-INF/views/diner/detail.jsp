@@ -7,56 +7,64 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
 <main>
-	<div class="category">
+<div class="category">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
-				<div class="category-btn">전체보기</div>
+				<div class="category-btn" id="cate-all" >전체보기</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">1인분 주문</div>
+				<div class="category-btn" id="cate-aa">1인분 주문</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">프랜차이즈</div>
+				<div class="category-btn" id="cate-ff">프랜차이즈</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">치킨</div>
+				<div class="category-btn" id="cate-hh">치킨</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">피자/양식</div>
+				<div class="category-btn" id="cate-pp">피자/양식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">중국집</div>
+				<div class="category-btn" id="cate-cc">중국집</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">한식</div>
+				<div class="category-btn" id="cate-kk">한식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">일식/돈까스</div>
+				<div class="category-btn" id="cate-jj">일식/돈까스</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">족발/보쌈</div>
+				<div class="category-btn" id="cate-mm">족발/보쌈</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">야식</div>
+				<div class="category-btn" id="cate-nn">야식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">분식</div>
+				<div class="category-btn" id="cate-tt">분식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">카페/디저트</div>
+				<div class="category-btn" id="cate-dd">카페/디저트</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">편의점/마트</div>
+				<div class="category-btn" id="cate-ss">편의점/마트</div>
 			</li>
 		</ul>
 	</div>
+
+	<form id="addr-form" action="/diner/search" method="get">
+		<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
+		<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
+		<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
+		<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
+		<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+	</form>
 
 	<div class=" col-sm-8 contents bg-light d-flex justify-content-center pt-3">
 		
 		<div class="diner-detail">
 			<div class=diner-header>
 				<div class="diner-name">
-					인천상륙덮글이
+					${diner.diner_name}
 				</div>
 				<div class="diner-info">
 					<div class="diner-img">
@@ -64,8 +72,8 @@
 					</div>
 					<div class="diner-infos">
 						<p class="score">★★★★☆</p>
-						<p>최소주문금액 9,000원</p>
-						<p>결제 <span>신용카드, 현금, 요기서결제</span></p>
+						<p>최소주문금액 ${diner.diner_min_pay}원</p>
+						<p>결제 <span>${diner.diner_method_pay}</span></p>
 						<p>배달시간 <span>38분~48분</span></p>
 					</div>
 				</div>
@@ -393,31 +401,7 @@
 								</div>
 								<div class="info-text-narrow">
 									<span>
-										🔥9월7일부터 신규오픈 ''인천상륙 덮글이"🔥<br>
-										🎉인천 상륙 덮글이 우리나라월드컵 16강 기원 리뷰이벤트🎉<br>
-										<br>
-										😍맛있고 푸짐한 한끼 식사가 되기 위해 열심히 하겠습니다<br>
-										남겨 주시는 소중한 리뷰는 매장운영에 있어 큰 힘과 큰 도움이 됩니다😍<br>
-										💯요청사항에 닉네임 꼭 남겨주세요 닉네임 없을경우 누락될수있어요 ㅠㅠ💯<br>
-										<br>
-										🎈🍳리뷰 이벤트 품목🍳🎈<br>
-										1.비법양념 김말이 2P<br>
-										2.고구마치즈스틱 2P<br>
-										3.피카츄1P<br>
-										4.스팸후라이<br>
-										5.시즈닝 감자튀김<br>
-										6.탄산음료 (선택) 1개<br>
-										<br>
-										🧡찜 꼭꼭!! 눌러 주시고 별점 5점 부탁드립니다!! 🧡<br>
-										사진이 없어도 괜찮아요 😊 고객님들 께서 남겨주시는 리뷰는 항상 큰 힘이 됩니다 😆<br>
-										💥개선할 점이나 아쉬운 부분이 있으셨다면 😂리뷰보다는 가게로 전화주시면 즉각 조치 하겠습니다 💥<br>
-										<br>
-										후식 겸 간식으로 리뷰이벤트 다양한 음식을 준비했습니다 🍨<br>
-										만족하는 한끼를 위해 열심히 노력 하겠습니다.🍖<br>
-										<br>
-										💖인천상륙 덮글이는💖 고객님들 께서 주문해주시는 한끼 한끼 제 입으로 들어간다 생각하고 깨끗한 식재료와 위생 상태, 올바른 조리방법으로 정직하고 정성껏 조리 할 것을 약속 드립니다😄🤙<br>
-										<br>
-										※❤한끼 식사 든든하고 맛있게 드시고 오늘 하루도 행복한 하루되시길 진심으로 바랍니다❤<br>
+										${diner.diner_notice}
 									</span>	
 								</div>
 							</div>
@@ -430,7 +414,7 @@
 									<span>업체정보</span>
 								</div>
 								<div class="info-text">
-									<span class="info-list-title">영업시간</span> <span>10:30 - 23:45</span> <br>
+									<span class="info-list-title">영업시간</span> <span>${diner.diner_open_time} - ${diner.diner_close_time}</span> <br>
 									<span class="info-list-title">전화번호</span> <span>050712921952</span> <br>
 									<span class="info-list-title">주소</span> <span>10:30 - 23:45</span>
 								</div>
@@ -445,7 +429,7 @@
 								</div>
 								<div class="info-text">
 									<span class="info-list-title">최소주문금액</span> <span>11,000원</span> <br>
-									<span class="info-list-title">결제수단</span> <span>신용가크, 현금, 요기서결제</span>
+									<span class="info-list-title">결제수단</span> <span>${diner.diner_method_pay}</span>
 								</div>
 							</div>
 
@@ -457,8 +441,8 @@
 									<span>사업자정보</span>
 								</div>
 								<div class="info-text">
-									<span class="info-list-title">상호명</span> <span>주식회사케이에프씨코리아</span><br>
-									<span class="info-list-title">사업자등록번호</span> <span>201-81-89723</span>
+									<span class="info-list-title">상호명</span> <span>${diner.diner_business_name}</span><br>
+									<span class="info-list-title">사업자등록번호</span> <span>diner_company_num</span>
 								</div>
 							</div>
 
@@ -541,13 +525,13 @@
 
 </main>
 
-   <script type="text/javascript">
-   const diner_codeVal = '<c:out value="${diner.diner_code}" />';
-   console.log(diner_codeVal);
-   </script>
+<script type="text/javascript">
+	let category = '<c:out value="${sessionScope.pvo.category}" />';
+	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+	console.log(diner_codeVal);
+	console.log(category);
+</script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="/resources/js/reviewfile.js"></script>
-<script type="text/javascript" src="/resources/js/review.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/detail.js"></script>

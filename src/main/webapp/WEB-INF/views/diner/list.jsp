@@ -28,6 +28,9 @@
 			<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
 			<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
 			<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
+			<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+			
+			
 		</form>
 <main>
 	<div class="category">
@@ -103,12 +106,12 @@
 					</c:if>
 					<!--  -->
 					<%-- <c:if test="${status.index%2!=0 || status.index+1!=fn:length(dList)}"> --%>
-						<div class="diner-card bg-white" id="diner-card">
+						<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${diner.diner_code}"'>
 							<div class="diner-img">
 								<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
 							</div>
 							<div class="diner-body">
-								<a href="/diner/detail?diner_code=${diner.diner_code}"><h5 class="diner-title">${diner.diner_name}</h5></a>
+								<h5 class="diner-title">${diner.diner_name}</h5>
 								<p class="diner-text">
 								<span class="score">★3.8</span>
 								| 리뷰 1902 | 사장님댓글 791 
@@ -135,6 +138,7 @@
 <div id="endList"></div>
 <script>
 let category = '<c:out value="${sessionScope.pvo.category}" />';
+$("#search-option option:eq("+"${sessionScope.pvo.order}"+")").prop("selected", true);
 console.log(category);
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>

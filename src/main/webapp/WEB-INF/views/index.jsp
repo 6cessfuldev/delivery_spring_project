@@ -19,7 +19,7 @@
 			</button>
 			<div class="search-input-box">
 				<div>
-				<input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요."></input>
+				<input id="search-input" type="text" placeholder="건물명, 도로명, 지번으로 검색하세요." value="${sessionScope.pvo.jibunAddr}"></input>
 					<div class="search-extention">
 					
 					</div>
@@ -32,50 +32,58 @@
 	
 	<main>
 		<div class="d-flex justify-content-center">
-			<div class='card-box event'>
-				<p>event</p>
-			</div>
-			<div class='card-box all'>
-
-				<a href="/diner/list"><p>전체보기</p></a>
-
-			</div>
-			<div class='card-box forone'>
-				<p>1인분 주문</p>
-			</div>
-			<div class='card-box franchise'>프랜차이즈</div>
+			<div class='card-box event'>event</div>
+			<div class='card-box all' onclick="clickCategory('all')">전체보기</div>
+			<div class='card-box forone' onclick="clickCategory('aa')">1인분 주문</div>
+			<div class='card-box franchise' onclick="clickCategory('ff')">프랜차이즈</div>
 		</div>
 		<div class="d-flex justify-content-center">
-			<div class='card-box chicken'>치킨</div>
-			<div class='card-box pizza'>피자/양식</div>
-			<div class='card-box chinese'>중국집</div>
-			<div class='card-box korean'>한식</div>
+			<div class='card-box chicken' onclick="clickCategory('hh')">치킨</div>
+			<div class='card-box pizza' onclick="clickCategory('pp')">피자/양식</div>
+			<div class='card-box chinese' onclick="clickCategory('cc')">중국집</div>
+			<div class='card-box korean' onclick="clickCategory('kk')">한식</div>
 		</div>
 		<div class="d-flex justify-content-center">
-			<div class='card-box japanese'>일식/돈까스</div>
-			<div class='card-box pork'>족발/보쌈</div>
-			<div class='card-box nightfood'>야식</div>
-			<div class='card-box kimbob'>분식</div>
+			<div class='card-box japanese' onclick="clickCategory('jj')">일식/돈까스</div>
+			<div class='card-box pork' onclick="clickCategory('mm')">족발/보쌈</div>
+			<div class='card-box nightfood' onclick="clickCategory('nn')">야식</div>
+			<div class='card-box kimbob' onclick="clickCategory('tt')">분식</div>
 		</div>
 		<div class="d-flex justify-content-center">
-			<div class='card-box dessert'>카페/디저트</div>
-			<div class='card-box mart'>편의점/마트</div>
+			<div class='card-box dessert' onclick="clickCategory('dd')">카페/디저트</div>
+			<div class='card-box mart' onclick="clickCategory('ss')">편의점/마트</div>
 		</div>
 	</main>
 
 	<div class="hidden-form">
 
 		<form id="addr-form" action="/diner/search" method="get">
-			<input type="text" id="jibunAddr" name="jibunAddr" value="" hidden>
-			<input type="text" id="x" name="lng" value="" hidden>
-			<input type="text" id="y" name="lat" value="" hidden>
-			<input type="text" name="category" value="all" hidden>
+			<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
+			<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
+			<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
+			<input type="text" id="category" name="category" value="all" hidden>
+			<input type="text" id="id" name="order" value="1" hidden>
 		</form>
 	</div>
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 	<script>
 
+	let exten = $(".search-extention");
+	
+	//카테고리 버튼 주소가 입력되었을 때만 활성화
+	function clickCategory(category){
+		console.log("click");
+		let input = exten.find(".jibunAddr")
+		if(input == ""){
+			alert("주소를 입력해주세요.");
+		}else{
+			$("#category").val(category);
+			$("#addr-form").submit();
+		}
+		
+	}
+	
 	//주소 검색
 	function searchAddress(keyword){
 		var places = new kakao.maps.services.Places();
@@ -116,9 +124,6 @@
 		};
 		geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
 	}
-	
-	
-	let exten = $(".search-extention");
 	
 	var options = {
 			size: 5

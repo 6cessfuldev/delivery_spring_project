@@ -2,12 +2,13 @@
     background-image: url(/resources/source/pizza.jpg);
     background-size : 3600px;
     background-position: -100px;
-    height: 300px;
-    padding-top:80px;
+    height: 200px;
+    padding-top:50px;
 	text-align: center;
 }
 
 .header-box h1 {
+	font-size:35px;
 	color : white;
 	font-weight: 700;
 }
@@ -109,7 +110,7 @@ main{
 }
 
 .event{
-	background-image: url("/resources/source/yuk.png"); 
+	background-image: url(""); 
 	background-size: 170px;
 	background-repeat: no-repeat;
 	background-position: 0px 35px;
@@ -120,10 +121,10 @@ main{
 }
 
 .all{
-	background-image: url("/resources/source/knife.png"); 
-	background-size: 100px;
+	background-image: url("/resources/source/foodicon.jpg"); 
+	background-size: 130px;
 	background-repeat: no-repeat;
-	background-position: 100px 60px;
+	background-position: 80px 80px;
 }
 
 .forone{

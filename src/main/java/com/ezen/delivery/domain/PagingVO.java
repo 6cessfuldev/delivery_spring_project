@@ -20,6 +20,7 @@ public class PagingVO {
 	private String lat;
 	private String category;
 	private int pageNum;
+	private int order;
 	
 	public int getStartNum() {
 		if(pageNum==0)return 0;
@@ -27,6 +28,3 @@ public class PagingVO {
 	}
 	
 }
-
-// 0 1 2 3 4 5
-//20 30 40 50

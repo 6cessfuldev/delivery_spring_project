@@ -3,7 +3,7 @@
 
 <jsp:include page="../include/header.jsp"></jsp:include>
 
-	<form action="/admin/diner/insert" id="dinerForm">
+	<form action="/admin/insert/diner" id="dinerForm">
 		음식점 코드 : 자동 입력<br>
 		음식점 파일 코드 : 1로 자동 입력<br>
 		음식점 이름 : <input type="text" name="diner_name"> <br>

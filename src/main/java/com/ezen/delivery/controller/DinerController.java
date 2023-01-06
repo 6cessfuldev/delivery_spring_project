@@ -43,7 +43,7 @@ public class DinerController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<DinerVO> list = dsv.getList();
+		List<DinerVO> list = dsv.getListFirst();
 		model.addAttribute("list",list);
 		return "/diner/list";
 	}
