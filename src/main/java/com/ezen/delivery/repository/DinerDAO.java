@@ -8,4 +8,6 @@ public interface DinerDAO {
 
 	List<DinerVO> selectDinerList();
 
+	DinerVO selectDiner(int diner_code);
+
 }

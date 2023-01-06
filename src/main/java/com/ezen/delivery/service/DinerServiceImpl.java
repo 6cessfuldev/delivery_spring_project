@@ -24,32 +24,30 @@ public class DinerServiceImpl implements DinerService {
 
 	@Inject
 	ReviewImgDAO ridao;
+	@Inject
+	ReviewDAO rdao;
 	
 	@Override
 	public List<DinerVO> getList() {
 		return ddao.selectDinerList();
 	}
 
+	//이미지파일(diner컨트롤러랑 연결)
+//	 @Override public int reviewFile(ReviewDTO rdto) { 
+//	 int isOk = rdao.insertReview(rdto.getRvo()); 
+//		 if(isOk > 0 && rdto.getFList().size() > 0){ 
+//			 int rcode = rdto.getRvo().getReview_code(); 
+//			 for(ReviewImgVO rivo : rdto.getFList()) { 
+//				 rivo.setReview_code(rcode); 
+//				 isOk *= ridao.insertImg(rivo);
+//			 } 
+//		 } return isOk;	 
+//	 }
+ 
+
 	@Override
-	public int reviewFile(ReviewDTO rdto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public DinerVO getDiner(int diner_code) {
+		return ddao.selectDiner(diner_code);
 	}
 
-//	@Override
-//	public int reviewFile(ReviewDTO rdto) {
-//		//파일 먼저 등록
-//		int isOk = ridao.insertReviewImgFile(rdto.getFList());
-//		//여러개를,,등록,,,,
-//		if(isOk>0 && rdto.getFList().size()>0) {
-//			//가장 큰 파일코드 가져오기!
-//			int  rimgfilecode = ridao.
-//			for(ReviewVO rvo : rdto.getFList()){
-//				rvo.setRFileCode(rFileCode);
-//				log.info("insert Review : "+rvo.toString());
-//				isOk += rdao.insertFile(rvo);
-//			}
-//		}  
-//		return 0;
-//	}
 }

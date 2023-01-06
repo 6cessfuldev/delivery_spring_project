@@ -98,7 +98,7 @@
 								<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
 							</div>
 							<div class="diner-body">
-								<a href="/detail"><h5 class="diner-title">${diner.diner_name}</h5></a>
+								<a href="/diner/detail?diner_code=${diner.diner_code}"><h5 class="diner-title">${diner.diner_name}</h5></a>
 								<p class="diner-text">
 								<span class="score">★3.8</span>
 								| 리뷰 1902 | 사장님댓글 791 
