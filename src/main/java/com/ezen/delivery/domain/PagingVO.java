@@ -13,10 +13,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DestVO {
+public class PagingVO {
 
 	private String jibunAddr;
 	private String lng;
 	private String lat;
+	private int category;
+	private int pageNum;
+	
+	public int getStartNum() {
+		if(pageNum==0)return 0;
+		return 20+(pageNum-1)*10;
+	}
 	
 }
+
+// 0 1 2 3 4 5
+//20 30 40 50

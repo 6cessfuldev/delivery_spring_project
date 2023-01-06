@@ -40,18 +40,18 @@ function searchAdrr(){
 		searchAdrr();
 	})
 	
-	function addSearchBox(jsonStr){	
-		if(jsonStr.results.juso==null) {
+	function addSearchBox(result){	
+		if(result==null) {
 			console.log("data null");
 			return;
 		}
 		
-		if(jsonStr.results.juso.length>0){
+		if(result.length>0){
 			exten.html("");
 			exten.show();
-			for(let i=0; i<jsonStr.results.juso.length; i++ ){
+			for(let i=0; i<result.length; i++ ){
 
-				let addr = jsonStr.results.juso[i];
+				let addr = result[i];
 				
 				let classname = "addr"+i;
 				
@@ -148,13 +148,16 @@ const onIntersect = (entries, observer) => {
 const observer = new IntersectionObserver(onIntersect, option);
 observer.observe(listEnd);
 
-let listCnt = 0;
+let listCnt = 1;
 function addList(){
 
     const list = document.querySelector(".registered");
 
     let add = "";
-    getListMoreFromServer().then(result => {
+
+	if(listCnt<0) return;
+	
+    getListMoreFromServer(listCnt).then(result => {
         console.log(result.length);
         if(result!=null && result.length>0){
             console.log("add case");
@@ -177,18 +180,18 @@ function addList(){
                     add+=`</div>`;
                 }
             }
-            console.log(list.innerHTML);
             list.innerHTML+=add;
-            console.log(list.innerHTML);
+			listCnt++;	
         }
+		listCnt=-1;
     })
 
 }
 
-async function getListMoreFromServer(){
+async function getListMoreFromServer(listCnt){
 
     try {
-        let resp = await fetch("/diner/moreList");
+        let resp = await fetch('/diner/moreList/'+listCnt);
         let result = resp.json();
         return result;
 

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
-import com.ezen.delivery.domain.DestVO;
+import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
@@ -45,40 +46,19 @@ public class DinerController {
 	}
 	
 	@GetMapping("/search")
-	public String search (DestVO dsvo, int category, HttpSession session, Model model) {
+	public String search (PagingVO pvo, HttpSession session, Model model) {
 		
-		log.info("category : "+category);
-		log.info("destination : " + dsvo.getJibunAddr());
-		
-		//세션에 카테고리 등록/수정하기
-		if(session.getAttribute("category") !=null) {
-			int sessionCate = (int) session.getAttribute("category");
-			if(category != sessionCate) {
-				session.setAttribute("category", category);
-				log.info("category change");
-			}
-		}else {
-			session.setAttribute("category", category);
-		}
+		log.info("destination : " + pvo.getJibunAddr());
 		
 		//세션에 위치정보 등록/수정하기
-		if(session.getAttribute("addr") !=null) {
-			DestVO sessionDvo = (DestVO)session.getAttribute("addr"); 
-			if(!dsvo.getJibunAddr().equals(sessionDvo.getJibunAddr())) {
-				session.setAttribute("addr", sessionDvo);
-				log.info("addr change");
-			}
-		}else {
-			session.setAttribute("addr", dsvo);
-		}
+		session.setAttribute("pvo", pvo);
+	
 		
-		log.info("Session : "+session.getAttribute("category")+session.getAttribute("addr"));
+		log.info("Session : "+session.getAttribute("pvo"));
 		
-		List<DinerVO> list = dsv.getFirstListByCategory(dsvo, category);
+		List<DinerVO> list = dsv.getList(pvo);
 		
-		log.info(list.size()+"");
-		log.info(list.get(0).getDiner_name());
-		
+		log.info(list.size()+"");		
 		
 //		if(list ==null || list.size()==0) {
 //			log.info("list is empty");
@@ -87,7 +67,7 @@ public class DinerController {
 //		}
 		
 		model.addAttribute("dList", list);
-		model.addAttribute("addr", dsvo);
+		model.addAttribute("pvo", pvo);
 		
 		return "/diner/list";
 	}
@@ -111,10 +91,14 @@ public class DinerController {
 		return "/diner/detail";	
 	}
 	
-	@GetMapping(value="/moreList", produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<DinerVO>> moreList(){
+	@GetMapping(value="/moreList/{listCnt}", produces= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<DinerVO>> moreList(@PathVariable("listCnt") int listCnt, HttpSession session){
 		
-		List<DinerVO> list = dsv.getList();
+		PagingVO pvo = (PagingVO)session.getAttribute("pvo");
+		if(pvo!=null) {
+			pvo.setPageNum(listCnt);
+		}
+		List<DinerVO> list = dsv.getList(pvo);
 		log.info(list.size()+"");
 		return new ResponseEntity<List<DinerVO>>(list, HttpStatus.OK);
 

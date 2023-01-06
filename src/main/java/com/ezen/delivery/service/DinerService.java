@@ -3,7 +3,7 @@ package com.ezen.delivery.service;
 import java.util.List;
 
 import com.ezen.delivery.domain.ReviewDTO;
-import com.ezen.delivery.domain.DestVO;
+import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.DinerVO;
 
 public interface DinerService {
@@ -12,9 +12,9 @@ public interface DinerService {
 
 	int reviewFile(ReviewDTO rdto);
 
-	List<DinerVO> getFirstListByCategory(DestVO dsvo, int category);
-
 	int register(DinerVO dvo);
+
+	List<DinerVO> getList(PagingVO pvo);
 
 
 

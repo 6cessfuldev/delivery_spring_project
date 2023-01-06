@@ -25,10 +25,10 @@
 	</div>
 </div>
 		<form id="addr-form" action="/diner/search" method="get">
-			<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.addr.jibunAddr}" hidden>
-			<input type="text" id="x" name="lng" value="${sessionScope.addr.lng}" hidden>
-			<input type="text" id="y" name="lat" value="${sessionScope.addr.lat}" hidden>
-			<input type="text" id="category" name="category" value="${sessionScope.category}" hidden>
+			<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
+			<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
+			<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
+			<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
 		</form>
 <main>
 	<div class="category">
@@ -135,7 +135,7 @@
 </main>
 <div id="endList"></div>
 <script>
-let category = '<c:out value="${sessionScope.category}" />';
+let category = '<c:out value="${sessionScope.pvo.category}" />';
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 <script src="/resources/js/list.js"></script>

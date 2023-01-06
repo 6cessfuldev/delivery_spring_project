@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.ezen.delivery.domain.DestVO;
+import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
@@ -28,7 +28,7 @@ public class DinerServiceImpl implements DinerService {
 	
 	@Override
 	public List<DinerVO> getList() {
-		return ddao.selectDinerList();
+		return ddao.selectListFirst();
 	}
 
 	@Override
@@ -38,15 +38,15 @@ public class DinerServiceImpl implements DinerService {
 	}
 
 	@Override
-	public List<DinerVO> getFirstListByCategory(DestVO dsvo, int category) {
-		
-		return ddao.selectTenDinerByCategory(dsvo, category);
-	}
-
-	@Override
 	public int register(DinerVO dvo) {
 		
 		return ddao.insert(dvo);
+	}
+
+	@Override
+	public List<DinerVO> getList(PagingVO pvo) {
+		
+		return ddao.selectList(pvo);
 	}
 
 
