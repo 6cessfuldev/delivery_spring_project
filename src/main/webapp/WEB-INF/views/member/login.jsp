@@ -15,9 +15,9 @@
         <div id="login_content">
             <img src="/resources/source/logo2.png" id="login_logo">
             <div id="login_box">
-        <form action="">
-            <input type="text" id="login_input1" placeholder="이메일 주소 입력(필수)"><br>
-            <input type="text" id="login_input2" placeholder="비밀번호 입력(필수)"><br><br>
+        <form action="/member/login" method="post">
+            <input type="text" id="login_input1" name="user_id" placeholder="아이디 입력(필수)"><br>
+            <input type="text" id="login_input2" name="user_pw" placeholder="비밀번호 입력(필수)"><br><br>
             <input type="checkbox" id="login_check">
             <label for="login_check" id="login_checkLabel"><span>자동 로그인</span></label>
             <div id="login_aBox">
@@ -26,7 +26,7 @@
             <a href="/member/signup" id="login_a">회원가입</a><br>
             </div>
             <br><br>
-            <button id="login_button">로그인</button>
+            <button type="submit" id="login_button">로그인</button>
         </form>
             </div>
             <br>
@@ -49,3 +49,5 @@
         </div>
     </div>
 <jsp:include page="../include/footer2.jsp"></jsp:include>
+
+<script src="/resources/js/login.js"></script>

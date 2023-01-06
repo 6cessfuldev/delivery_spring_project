@@ -52,3 +52,10 @@
     background-color: rgb(96, 145, 81);
     color: white;
 }
+
+#updateMsg{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgba(96, 145, 81);
+}
