@@ -272,6 +272,7 @@
 
 						<div class="review">
 					    <div class="review_box">
+                           <form action="/review/upload" method="post" enctype="multipart/form-data">
                                 <div class="review_spanBox">
                                     <span class="review_span">얼마나 만족하셨나요?</span><br>
                                     <span class="review_starT">맛&nbsp;&nbsp;&nbsp;</span> <span class="review_star">
@@ -283,21 +284,20 @@
                                 </div>
                                 <br>
                                 
-		                     <span id="revWriter">${ses.user_id}</span>
+		                     <%-- <span id="revWriter">${ses.user_id}</span> --%>
 		                    	<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
 		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
 		                          <div class="review_insertBox">
 		                          <!-- <button type="submit" id="regBtn" class="review_insert">완료</button> -->
 		                          </div>
                                 
-                                <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden>
-                                <input type="text" name="review_taste_score" value="0" hidden>
+                                <%-- <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden> --%>
+                              <!--   <input type="text" name="review_taste_score" value="0" hidden>
                                 <input type="text" name="review_amount_score" value="0" hidden>
-                                <input type="text" name="review_delivery_score" value="0" hidden>
+                                <input type="text" name="review_delivery_score" value="0" hidden> -->
                                 
                  
                                 <!-- 이미지파일 등록 -->
-                            <form action="/review/reviewfile" method="post" enctype="multipart/form-data">
                             <div class="review_multiplebox">
 				                 <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple>
 				                 <button type="button" id="trigger">사진</button>
@@ -543,10 +543,10 @@
 
 </main>
 
-   <script type="text/javascript">
+<!--    <script type="text/javascript">
    const diner_codeVal = '<c:out value="${diner.diner_code}" />';
    console.log(diner_codeVal);
-   </script>
+   </script> -->
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/reviewfile.js"></script> -->
 <!-- <script type="text/javascript" src="/resources/js/review.js"></script> -->
