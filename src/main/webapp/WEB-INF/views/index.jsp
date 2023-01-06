@@ -12,7 +12,7 @@
 	<div class="header-box">
 		<h1 >"어디로 배달해 드릴까요?"</h1> <br>
 		<div class="search-box">
-			<button type="button" class="gps-btn">
+			<button type="button" class="gps-btn" onclick="getLocation()">
 				<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
   					<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
 				</svg>
@@ -69,22 +69,62 @@
 			<input type="text" id="jibunAddr" name="jibunAddr" value="" hidden>
 			<input type="text" id="x" name="lng" value="" hidden>
 			<input type="text" id="y" name="lat" value="" hidden>
-			<input type="text" name="category" value="0" hidden>
+			<input type="text" name="category" value="all" hidden>
 		</form>
 	</div>
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 	<script>
+
+	//주소 검색
+	function searchAddress(keyword){
+		var places = new kakao.maps.services.Places();
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				return result;
+			}
+		};
+		places.keywordSearch(keyword, callback, options);
+		return null;
+	}
+	
+	/* HTML5 geolocation */
+	function getLocation() {
+	  if (navigator.geolocation) {
+	    navigator.geolocation.getCurrentPosition(showPosition);
+	  } else { 
+	    alert("Geolocation is not supported by this browser.");
+	  }
+	}
+	/* geolocation에서 가져온 좌표값으로 카카오맵api에서 주소 검색 후 가장 가까운 주소 5개를 검색해 검색창 확장 div에 뿌리기 */
+	function showPosition(position) {
+	  
+	  // 카카오맵에서 주소 검색
+		var geocoder = new kakao.maps.services.Geocoder();
+		var coord = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				console.log(result[0]);
+				
+				if(searchAddress(result[0].address.address_name)==null){
+					searchAddr(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
+				}else{
+					searchAddr(result[0].address.address_name);
+				}
+				$("#search-input").val(result[0].address.address_name);
+			}
+		};
+		geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+	}
+	
 	
 	let exten = $(".search-extention");
-	exten.hide();
 	
 	var options = {
 			size: 5
 	}
 
-	function searchAdrr(){
-		let keyword = $("#search-input").val();
+	function searchAddr(keyword){
 		
 		if(keyword=="") {
 			exten.hide();
@@ -104,6 +144,7 @@
 		var places = new kakao.maps.services.Places();
 		
 		var callback = function(result, status) {
+			console.log(result);
 			if (status === kakao.maps.services.Status.OK) {
 				addSearchBox(result);
 			}
@@ -112,16 +153,19 @@
 	}
 	
 	$("#search-btn").click(function(){
-		searchAdrr();
+		let keyword = $("#search-input").val();
+		searchAddr(keyword);
 	})
 
 	$("#search-input").on("click keyup", function(){
-		searchAdrr();
+		console.log("change");
+		let keyword = $("#search-input").val();
+		searchAddr(keyword);
 	})
 	
 	function addSearchBox(result){	
 		if(result==null) {
-			console.log("data null");
+			exten.hide();
 			return;
 		}
 		

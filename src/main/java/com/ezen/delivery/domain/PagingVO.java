@@ -18,7 +18,7 @@ public class PagingVO {
 	private String jibunAddr;
 	private String lng;
 	private String lat;
-	private int category;
+	private String category;
 	private int pageNum;
 	
 	public int getStartNum() {
