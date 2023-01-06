@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 	<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
-	<link type="text/css" rel="stylesheet" href="/resources/css/find_pw.css">
+	<link type="text/css" rel="stylesheet" href="/resources/css/update_pw.css">
 </head>
 
 <body>
@@ -79,21 +79,13 @@
 		}
 	</style>
 
-	<div class="pw-wrap">
-		<form action="/member/find_pw" class="form-field" method="post">
-			<div id="box">
-				<input type="text" class="email-input" name="user_email" id="user_email"
-					placeholder="먹어요에 가입한 이메일 주소 입력">
-			</div>
-			<ul>
-				<li class="pw-msg">
-					입력하신 이메일 주소로 인증번호 메일이 발송됩니다.
-				</li>
-				<li class="pw-msg">
-					소셜 계정 회원은 비밀번호 찾기가 불가능합니다.
-				</li>
-			</ul>
-			<button type="button" class="emailBtn" onclick="add_checkBox()">이메일 발송</button>
+	<div class="reset-wrap">
+		<form class="form-box">
+			<img src="/resources/source/logo2.png" class="logoImg"><br>
+			<input type="password" class="text-field" id="new_pw" placeholder="새로운 비밀번호 입력"><br><br>
+			<input type="password" class="text-field" id="new_pwCheck" placeholder="비밀번호 재확인"><br><br>
+			<button type="button" class="changeBtn">Update My Password</button>
+			<div id="updateMsg"></div>
 		</form>
 	</div>
 
@@ -122,103 +114,67 @@
 	</footer>
 
 	<script>
-		var code = "";
 
-		// 인증번호 이메일 전송
-		$(".emailBtn").click(function () {
-			console.log("click");
+		document.querySelector('.changeBtn').addEventListener('click', function () {
+			const new_pw = document.getElementById('new_pw').value;
+			const new_pwCheck = document.getElementById('new_pwCheck').value;
 
-			var email = $(".email-input").val(); // 입력한 이메일
+			if (new_pw == "" || new_pw == null) {
+				alert("비밀번호를 입력해주세요.");
+				return;
+			} else if (new_pwCheck == "" || new_pwCheck == null) {
+				alert("비밀번호 재확인을 입력해주세요.");
+				return;
+			} else if (new_pw != new_pwCheck) {
+				alert("비밀번호가 일치하지 않습니다.");
+				return;
+			} else {
+				var pw = new_pw;
+				var num = pw.search(/[0-9]/g);
+				var eng = pw.search(/[a-z]/ig);
+				var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+				if (pw.length < 8 || pw.length > 20) {
+					alert("8자리 ~ 20자리 이내로 입력해주세요.");
+					return;
+				} else if (pw.search(/\s/) != -1) {
+					alert("비밀번호는 공백 없이 입력해주세요.");
+					return;
+				} else if (num < 0 || eng < 0 || spe < 0) {
+					alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+					return;
+				}
+			}
+
+			// 이메일 정보 받아오기
+			var getEmail = localStorage.getItem('email');
+			console.log(getEmail);
 
 			$.ajax({
 
-				type: "GET",
-				url: "mailCheck?email=" + email,
-				success: function (data) {
+				url: '/member/update_pw',
+				type: 'post',
+				data: { "getEmail": getEmail, "new_pw": new_pw },
 
-					// console.log("data : " + data);
-
-					code = data;
-					console.log(code);
-				}
-
-			});
-
-		});
-
-
-		// 이메일 인증창
-		let once = 0;
-
-		const add_checkBox = () => {
-
-			const user_email = document.getElementById('user_email').value;
-			if (user_email == "" || user_email == null) {
-				alert("이메일을 입력해주세요.");
-				return;
-			}
-
-			once++;
-			if (once > 1) {
-				return;
-			}
-
-			const box = document.getElementById("box");
-			const newP = document.createElement('p');
-			newP.innerHTML = `<div class='mail_check_wrap'>`;
-			newP.innerHTML += `<div class='mail_check_input_box'>`;
-			newP.innerHTML += `<input type='text' class='checkNum mail_check_input' placeholder='이메일로 전송된 인증번호를 입력해주세요.'></div>`;
-			newP.innerHTML += `<div class='mail_check_button'>`;
-			newP.innerHTML += `<input type='button' class='cBtn' value='인증'></div>`;
-			newP.innerHTML += `<div class='clearfix'></div>`;
-			newP.innerHTML += `<span id="mail_check_input_box_warn"></span>`;
-			newP.innerHTML += `<div id='resetPw'></div></div>`;
-			box.appendChild(newP);
-
-			// 인증번호 비교
-			let res = 0;
-
-			$(".cBtn").click(function () {
-				console.log("click cBtn");
-				var inputCode = $(".mail_check_input").val();        // 입력코드    
-				console.log(inputCode);
-				var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
-
-				if (inputCode == code) {
-					checkResult.html("인증번호가 일치합니다.");
-					checkResult.attr("class", "correct");
-
-
-				} else {
-					checkResult.html("인증번호를 다시 확인해주세요.");
-					checkResult.attr("class", "incorrect");
-				}
-
-				const checkMsg = document.getElementById('mail_check_input_box_warn').innerHTML;
-				if (checkMsg == "인증번호가 일치합니다.") {
-
-					res++;
-					if (res > 1) {
-						return;
+				success: function (result) {
+					if (result > 0) {
+						$("#updateMsg").html('비밀번호가 변경되었습니다.');
+						$('#new_pw').hide();
+						$('#new_pwCheck').hide();
+						$('.changeBtn').hide();
 					}
-
-					const resetPw = document.getElementById("resetPw");
-					const insertP = document.createElement('p');
-
-					insertP.innerHTML = `<div class="reset_box">`;
-					insertP.innerHTML += `<button type='button' class='resetBtn' onclick="location.href='update_pw.html'">비밀번호 재설정</button>`;
-					insertP.innerHTML += `</div>`;
-					resetPw.appendChild(insertP);
-
+				},
+				error: function () {
+					alert("서버 요청 실패");
 				}
 
-			});
-
-		}
+			})
 
 
+		})
 
 	</script>
+
 </body>
 
 </html>

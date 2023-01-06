@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<title>먹어요</title>
 <jsp:include page="./include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/index.css">
 <style>

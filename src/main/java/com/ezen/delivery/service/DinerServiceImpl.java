@@ -11,8 +11,6 @@ import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.repository.DinerDAO;
-import com.ezen.delivery.repository.FileDAO;
-import com.ezen.delivery.repository.ReviewDAO;
 import com.ezen.delivery.repository.ReviewImgDAO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +21,7 @@ public class DinerServiceImpl implements DinerService {
 
 	@Inject
 	DinerDAO ddao;
+
 	@Inject
 	ReviewImgDAO ridao;
 	@Inject
@@ -48,9 +47,7 @@ public class DinerServiceImpl implements DinerService {
 
 	@Override
 	public DinerVO getDiner(int diner_code) {
-		
 		return ddao.selectDiner(diner_code);
 	}
-
 
 }

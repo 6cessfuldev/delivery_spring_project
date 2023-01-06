@@ -1,191 +1,299 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
-<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
-<link type="text/css" rel="stylesheet" href="/resources/css/signup.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+	<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+	<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+	<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+	<link type="text/css" rel="stylesheet" href="/resources/css/signup.css">
 
 </head>
+
 <body>
 	<header class="pt-2">
 		<a href="/" class="logo">
-		  <img src="/resources/source/logo2.png" alt="logo" id="logo_img" class="bi me-2" width="200" height="120">
+			<img src="/resources/source/logo2.png" alt="logo" id="logo_img" class="bi me-2" width="200" height="120">
 		</a>
-  
-		<ul class="nav nav-pills pt-1">
-		  <li class="nav-item"><div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div></li>
-		  <li class="nav-item"><div class="box2"><a href="#" class="nav-link">장바구니</a></div></li>
-		</ul>
-	  </header>
 
-	  <style>
-		footer{
-		 color : grey;
+		<ul class="nav nav-pills pt-1">
+			<li class="nav-item">
+				<div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div>
+			</li>
+			<li class="nav-item">
+				<div class="box2"><a href="#" class="nav-link">장바구니</a></div>
+			</li>
+		</ul>
+	</header>
+
+	<style>
+		footer {
+			color: grey;
 		}
-		
-		footer a{
-			color :grey;
+
+		footer a {
+			color: grey;
 			text-decoration: none;
 		}
-		
-		#div_not{
-			text-align : center;
-			padding-top : 15px;
-			border-bottom : 1px solid grey;
-			border-top : 1px solid grey;
+
+		#div_not {
+			text-align: center;
+			padding-top: 15px;
+			border-bottom: 1px solid grey;
+			border-top: 1px solid grey;
 		}
-		.container{
-			width:100%;
+
+		.container {
+			width: 100%;
 		}
-		
-		#notice{
+
+		#notice {
 			font-size: 12px;
 		}
-		
-		.footer-com{
+
+		.footer-com {
 			margin-top: 15px;
 		}
-		
-		.footer-com-name{
+
+		.footer-com-name {
 			font-size: 15px;
-			color : black;
+			color: black;
 			font-weight: 700;
 		}
-		
-		.callcenter{
-			font-size:20px;
+
+		.callcenter {
+			font-size: 20px;
 			font-weight: 800;
-			margin-right : 10px;
+			margin-right: 10px;
 		}
-		
-		#p-2{
+
+		#p-2 {
 			font-size: 10px;
 		}
-		
+
 		@media screen and (max-width: 1200px) {
-	
-		#img_a{
-			display:none;
+
+			#img_a {
+				display: none;
+			}
 		}
-	}
-	</style>  
+	</style>
 
 <div class="wrap-sign">
 	<div class="box-sign">
 		<form action="/member/signup" class="wrap-input" method="post">
 			<img src="/resources/source/logo2.png" class="logoImg"><br>
 			<div id="box">
-				<input type="email" class="input email_input" name="user_email" id="user_email" placeholder="Email"><br><br>
-				<button type="button" class="eBtn" onclick="add_textbox()">인증</button>
+				<input type="email" class="input email_input" name="user_email" id="user_email"
+					placeholder="Email"><br><br>
+				<button type="button" class="eBtn" onclick="add_checkBox()">전송</button>
+			</div>
+			<div id="id-box">
+				<input type="text" class="input" name="user_id" id="user_id" placeholder="ID"><br><br>
+				<div><font id="id_feedback" size="2"></font></div>
 			</div>
 			<input type="password" class="input" name="user_pw" id="user_pw" placeholder="Password"><br><br>
-			<input type="password" class="input" name="user_pwCheck" id="user_pwCheck" placeholder="Reconfirm Password"><br><br>
+			<input type="password" class="input" name="user_pwCheck" id="user_pwCheck"
+				placeholder="Reconfirm Password"><br><br>
 			<input type="text" class="input" name="user_name" id="user_name" placeholder="Name"><br><br>
-			<input type="text" class="input" name="user_birth" id="user_birth" placeholder="Birth"><br><br>
-			<input type="text" class="input" name="user_phone" id="user_phone" placeholder="Phone Number"><br><br>
-			<input type="text" class="input" name="user_nick" id="user_nick" placeholder="Nick Name"><br><br>
+			<input type="text" class="input" name="user_birth" id="user_birth" placeholder="Birth (yyMMdd)"><br><br>
+			<input type="text" class="input" name="user_phone" id="user_phone"
+				placeholder="Phone Number (-제외)"><br><br>
 			<input type="button" class="input signupBtn" value="Welcome!"><br>
 		</form>
 	</div>
 </div>
 
-<footer class="footer mt-auto py-3 bg-light">
-	<div id="div_not" ">
-		<p id="notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#" id="li_a">이용약관</a> &nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#" id="li_a">청소년보호정책</a> &nbsp;| &nbsp;<a href="#" id="li_a">고객센터</a></p>
-	</div>
-	<div class="container pt-3 d-flex">
-		<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo2.png" width="130px"></img></a>
-		<div class="footer-com">
-			<p class="footer-com-name">주식회사 장대한상상
-            <p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; | 대표이사 : KYK</p>		
-            <span class="callcenter">고객만족센터 0000-0000</span><span id="p-1">24시간, 연중무휴</span>
-            <br> <br>
-            <p id="p-2">주식회사 위대한상상은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 요기요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 위대한상상은 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. Copyright MUGAYO. All Rights Reserved.</p>
+	<footer class="footer mt-auto py-3 bg-light">
+		<div id="div_not" ">
+		<p id=" notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#" id="li_a">이용약관</a>
+			&nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#" id="li_a">청소년보호정책</a> &nbsp;|
+			&nbsp;<a href="#" id="li_a">고객센터</a></p>
 		</div>
-            
-
-  </div>
-</footer>
-
-<script>
-	
-	// 이메일 인증창
-	let once = 0;
-
-	const add_textbox = () => {
-		once++;
-		if(once > 1) {
-			sendEmailCheck();
-			return;
-		}
-
-		const box = document.getElementById("box");
-		const newP = document.createElement('p');
-		newP.innerHTML = 
-		"<div class='mail_check_wrap'><input type='text' class='checkNum' placeholder='이메일로 전송된 인증번호를 입력해주세요.'><input type='button' class='cBtn' value='check' onclick='emailConfirm(this)'></div>";
-		box.appendChild(newP);
-		sendEmailCheck();
-	}
-
-	// 인증번호 이메일 전송
-	$(".eBtn").click(function(){
-
-		var email = $(".email_input").val(); // 입력한 이메일
-
-		$.ajax({
-
-			type : "GET",
-			url : "mailCheck?email=" + email
-
-		});
-
-	});
+		<div class="container pt-3 d-flex">
+			<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo2.png"
+					width="130px"></img></a>
+			<div class="footer-com">
+				<p class="footer-com-name">주식회사 장대한상상
+				<p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; |
+					대표이사 : KYK</p>
+				<span class="callcenter">고객만족센터 0000-0000</span><span id="p-1">24시간, 연중무휴</span>
+				<br> <br>
+				<p id="p-2">주식회사 위대한상상은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 요기요에 등록된 판매자의 고의 또는 과실로 소비자에게
+					발생하는 손해에 대해 주식회사 위대한상상은 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. Copyright
+					MUGAYO. All Rights Reserved.</p>
+			</div>
 
 
+		</div>
+	</footer>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+
+var code = "";
+
+// 이메일 인증창
+let once = 0;
+
+const add_checkBox = () => {
+
+    const user_email = document.getElementById('user_email').value;
+    if (user_email == "" || user_email == null) {
+        alert("이메일을 입력해주세요.");
+        return;
+    }
+
+    alert("입력하신 이메일로 인증번호가 전송되었습니다.");
+
+    once++;
+    if (once > 1) {
+        return;
+    }
+
+    const box = document.getElementById("box");
+    const newP = document.createElement('p');
+    newP.innerHTML = `<div class='mail_check_wrap'>`;
+    newP.innerHTML += `<div class='mail_check_input_box'>`;
+    newP.innerHTML += `<input type='text' class='checkNum mail_check_input' placeholder='이메일로 전송된 인증번호를 입력해주세요.'></div>`;
+    newP.innerHTML += `<div class='mail_check_button'>`;
+    newP.innerHTML += `<input type='button' class='cBtn' value='인증'></div>`;
+    newP.innerHTML += `<div class='clearfix'></div>`;
+    newP.innerHTML += `<span id="mail_check_input_box_warn"></span></div>`;
+    box.appendChild(newP);
 
 
-	const emailConfirm = (obj) => {
-	
-	}
+    // 인증번호 비교
+    $(".cBtn").click(function () {
+        console.log("click cBtn");
+        var inputCode = $(".mail_check_input").val();        // 입력코드    
+        console.log(inputCode);
+        var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
 
-	// 내용 미입력 시 경고창
-	document.querySelector('.signupBtn').addEventListener('click', function(){
-		const user_email = document.getElementById('user_email').value;
-		const user_pw = document.getElementById('user_pw').value;
-		const user_pwCheck = document.getElementById('user_pwCheck').value;
-		const user_name = document.getElementById('user_name').value;
-		const user_birth = document.getElementById('user_birth').value;
-		const user_phone = document.getElementById('user_phone').value;
-		const user_nick = document.getElementById('user_nick').value;
+        if (inputCode == code) {
+            checkResult.html("인증번호가 일치합니다.");
+            checkResult.attr("class", "correct");
+        } else {
+            checkResult.html("인증번호를 다시 확인해주세요.");
+            checkResult.attr("class", "incorrect");
+        }
 
-		if(user_email == ""){
-			alert("이메일을 입력해주세요.");
-			return;
-		} else if(user_pw == ""){
-			alert("비밀번호를 입력해주세요.");
-			return;
-		} else if(user_pwCheck == ""){
-			alert("비밀번호 재확인을 입력해주세요.");
-			return;
-		} else if(user_name == ""){
-			alert("이름을 입력해주세요.");
-			return;
-		} else if(user_birth == ""){
-			alert("생년월일을 입력해주세요.");
-			return;
-		} else if(user_phone == ""){
-			alert("핸드폰번호를 입력해주세요.");
-			return;
-		} else if(user_nick == ""){
-			alert("닉네임을 입력해주세요.");
-			return;
-		}
-	})
+    });
 
-</script>
+}
+
+// 인증번호 이메일 전송
+$(".eBtn").click(function () {
+    console.log("click");
+
+    var email = $(".email_input").val(); // 입력한 이메일
+
+    $.ajax({
+
+        type: "GET",
+        url: "mailCheck?email=" + email,
+        success: function (data) {
+
+            // console.log("data : " + data);
+
+            code = data;
+            console.log(code);
+        }
+
+    });
+
+});
+
+// 아이디 중복 검사
+$('#user_id').keyup(function () {
+    let user_id = $('#user_id').val();
+    console.log(user_id);
+    $.ajax({
+        url: "/member/userIdCheck",
+        type: "post",
+        data: { "user_id": user_id },
+        dataType: 'json',
+        success: function (result) {
+            if (result == 1) {
+                $("#id_feedback").html('이미 사용중인 아이디입니다.');
+                $("#id_feedback").attr('color', '#dc3545');
+            } else {
+                $("#id_feedback").html('사용할 수 있는 아이디입니다.');
+                $("#id_feedback").attr('color', '#609151');
+            }
+        },
+        error: function () {
+            alert("서버요청실패");
+        }
+    })
+})
+
+// 유효성 검사
+document.querySelector('.signupBtn').addEventListener('click', function () {
+    const user_email = document.getElementById('user_email').value;
+    const user_id = document.getElementById('user_id').value;
+    const user_pw = document.getElementById('user_pw').value;
+    const user_pwCheck = document.getElementById('user_pwCheck').value;
+    const user_name = document.getElementById('user_name').value;
+    const user_birth = document.getElementById('user_birth').value;
+    const user_phone = document.getElementById('user_phone').value;
+
+    if (user_email == "" || user_email == null) {
+        alert("이메일을 입력해주세요.");
+        return;
+    } else if (user_id == "" || user_id == null) {
+        alert("아이디를 입력해주세요.");
+        return;
+    } else if (user_pw == "" || user_pw == null) {
+        alert("비밀번호를 입력해주세요.");
+        return;
+    } else if (user_pwCheck == "" || user_pwCheck == null) {
+        alert("비밀번호 재확인을 입력해주세요.");
+        return;
+    } else if (user_name == "" || user_name == null) {
+        alert("이름을 입력해주세요.");
+        return;
+    } else if (user_birth == "" || user_birth == null) {
+        alert("생년월일을 입력해주세요.");
+        return;
+    } else if (isNaN(user_birth) || user_birth.length != 6) {
+        alert("생년월일 형식에 맞게 입력해주세요.");
+        return;
+    }
+    else if (user_phone == "" || user_phone == null) {
+        alert("핸드폰 번호를 입력해주세요.");
+        return;
+    } else if (isNaN(user_phone) || user_phone.length != 11) {
+        alert("핸드폰 번호를 형식에 맞게 입력해주세요.");
+        return;
+    }
+    else if (user_pw != user_pwCheck) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+    } else {
+        var pw = user_pw;
+        var num = pw.search(/[0-9]/g);
+        var eng = pw.search(/[a-z]/ig);
+        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+        if (pw.length < 8 || pw.length > 20) {
+            alert("8자리 ~ 20자리 이내로 입력해주세요.");
+            return;
+        } else if (pw.search(/\s/) != -1) {
+            alert("비밀번호는 공백 없이 입력해주세요.");
+            return;
+        } else if (num < 0 || eng < 0 || spe < 0) {
+            alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+            return;
+        }
+    }
+
+    $(".wrap-input").submit();
+})
+
+	</script>
 </body>
+
 </html>

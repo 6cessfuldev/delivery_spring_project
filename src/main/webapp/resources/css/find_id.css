@@ -4,7 +4,7 @@
 }
 
 .join-wrap{
-    height: 220px;
+    height: 275px;
     display: flex;
     justify-content: center;
     background-color: #e3e7ea;
@@ -48,14 +48,27 @@
 }
 
 .cerBtn{
-    width: 40px;
+    width: 50px;
     height: 28px;
     position: absolute;
     right: 35.2%;
-    top: 10%;
+    top: 9.92%;
     font-size: 13px;
     background-color: white;
     border: 1px solid rgb(219, 216, 216);
+    border-radius: 10px;
+}
+
+.cBtn{
+    width: 50px;
+    height: 28px;
+    position: absolute;
+    right: 35.2%;
+    top: 134px;
+    font-size: 13px;
+    background-color: white;
+    border: 1px solid rgb(219, 216, 216);
+    border-radius: 10px;
 }
 
 .findBtn{
@@ -64,4 +77,22 @@
     border: 1px solid rgb(219, 216, 216);
     font-size: 13px;
     background-color: white;
+}
+
+span{
+    font-size: 12px;
+}
+
+.correct{
+    color: green;
+}
+
+.incorrect{
+    color: red;
+}
+
+.hintMsg{
+    text-align: center;
+    font-size: 15px;
+    color: rgb(107, 105, 105);
 }

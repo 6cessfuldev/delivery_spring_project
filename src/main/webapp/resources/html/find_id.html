@@ -1,107 +1,236 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
-<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
-<link type="text/css" rel="stylesheet" href="/resources/css/find_id.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+	<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+	<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+	<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+	<link type="text/css" rel="stylesheet" href="/resources/css/find_id.css">
 </head>
+
 <body>
 	<header class="pt-2">
 		<a href="/" class="logo">
-		  <img src="/resources/source/logo2.png" alt="logo" id="logo_img" class="bi me-2" width="200" height="120">
+			<img src="/resources/source/logo2.png" alt="logo" id="logo_img" class="bi me-2" width="200" height="120">
 		</a>
-  
+
 		<ul class="nav nav-pills pt-1">
-		  <li class="nav-item"><div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div></li>
-		  <li class="nav-item"><div class="box2"><a href="#" class="nav-link">장바구니</a></div></li>
+			<li class="nav-item">
+				<div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div>
+			</li>
+			<li class="nav-item">
+				<div class="box2"><a href="#" class="nav-link">장바구니</a></div>
+			</li>
 		</ul>
-	  </header>
-<style>
-	footer{
-	 color : grey;
-	}
-	
-	footer a{
-		color :grey;
-		text-decoration: none;
-	}
-	
-	#div_not{
-		text-align : center;
-		padding-top : 15px;
-		border-bottom : 1px solid grey;
-		border-top : 1px solid grey;
-	}
-	.container{
-		width:100%;
-	}
-	
-	#notice{
-		font-size: 12px;
-	}
-	
-	.footer-com{
-		margin-top: 15px;
-	}
-	
-	.footer-com-name{
-		font-size: 15px;
-		color : black;
-		font-weight: 700;
-	}
-	
-	.callcenter{
-		font-size:20px;
-		font-weight: 800;
-		margin-right : 10px;
-	}
-	
-	#p-2{
-		font-size: 10px;
-	}
-	
-	@media screen and (max-width: 1200px) {
+	</header>
+	<style>
+		footer {
+			color: grey;
+		}
 
-    #img_a{
-        display:none;
-    }
-}
-</style>
+		footer a {
+			color: grey;
+			text-decoration: none;
+		}
 
-    <div class="join-wrap">
-        <form action="">
-            <li class="text-wrap">
-                <input type="text" class="text-field t1" placeholder="(필수)휴대폰 전화번호 입력(-제외)">
-                <button type="button" class="cerBtn">인증</button>
-            </li>
-            <li class="text-wrap">
-                <input type="text" class="text-field" placeholder="인증번호 입력">
-            </li>
-            <p class="msg">인증번호가 도착하지 않았을 경우 '인증'버튼을 다시 눌러주세요.</p>
-            <button type="submit" class="findBtn">아이디 찾기</button>
-        </form>
-    </div>
+		#div_not {
+			text-align: center;
+			padding-top: 15px;
+			border-bottom: 1px solid grey;
+			border-top: 1px solid grey;
+		}
 
-    <footer class="footer mt-auto py-3 bg-light">
-        <div id="div_not" ">
-            <p id="notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#" id="li_a">이용약관</a> &nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#" id="li_a">청소년보호정책</a> &nbsp;| &nbsp;<a href="#" id="li_a">고객센터</a></p>
-        </div>
-        <div class="container pt-3 d-flex">
-            <a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo2.png" width="130px"></img></a>
-            <div class="footer-com">
-                <p class="footer-com-name">주식회사 장대한상상
-                <p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; | 대표이사 : KYK</p>		
-                <span class="callcenter">고객만족센터 0000-0000</span><span id="p-1">24시간, 연중무휴</span>
-                <br> <br>
-                <p id="p-2">주식회사 위대한상상은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 요기요에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 주식회사 위대한상상은 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. Copyright MUGAYO. All Rights Reserved.</p>
-            </div>
-                
-    
-      </div>
-    </footer>
-    </body>
-    </html>
+		.container {
+			width: 100%;
+		}
+
+		#notice {
+			font-size: 12px;
+		}
+
+		.footer-com {
+			margin-top: 15px;
+		}
+
+		.footer-com-name {
+			font-size: 15px;
+			color: black;
+			font-weight: 700;
+		}
+
+		.callcenter {
+			font-size: 20px;
+			font-weight: 800;
+			margin-right: 10px;
+		}
+
+		#p-2 {
+			font-size: 10px;
+		}
+
+		@media screen and (max-width: 1200px) {
+
+			#img_a {
+				display: none;
+			}
+		}
+	</style>
+
+	<div class="join-wrap">
+		<form action="/member/find_id" class="find_id" method="post">
+			<div id="box">
+				<li class="text-wrap">
+					<input type="text" class="text-field t1 email-input" id="user_email" placeholder="(필수)이메일 주소 입력">
+					<button type="button" class="cerBtn">전송</button>
+				</li>
+			</div>
+			<li class="text-wrap">
+				<input type="text" class="text-field t2 mail_check_input" placeholder="인증번호 입력">
+				<div class='mail_check_button'>
+					<input type='button' class='cBtn' value='인증'>
+				</div>
+				<div class='clearfix'></div>
+				<span id="mail_check_input_box_warn"></span>
+			</li>
+			<p class="msg">인증번호가 도착하지 않았을 경우 '인증'버튼을 다시 눌러주세요.</p>
+			<div id="id_hint"></div>
+			<button type="button" class="findBtn">아이디 찾기</button>
+		</form>
+	</div>
+
+	<footer class="footer mt-auto py-3 bg-light">
+		<div id="div_not" ">
+            <p id=" notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#"
+				id="li_a">이용약관</a> &nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#"
+				id="li_a">청소년보호정책</a> &nbsp;| &nbsp;<a href="#" id="li_a">고객센터</a></p>
+		</div>
+		<div class="container pt-3 d-flex">
+			<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo2.png"
+					width="130px"></img></a>
+			<div class="footer-com">
+				<p class="footer-com-name">주식회사 장대한상상
+				<p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; |
+					대표이사 : KYK</p>
+				<span class="callcenter">고객만족센터 0000-0000</span><span id="p-1">24시간, 연중무휴</span>
+				<br> <br>
+				<p id="p-2">주식회사 위대한상상은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 요기요에 등록된 판매자의 고의 또는 과실로 소비자에게
+					발생하는 손해에 대해 주식회사 위대한상상은 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. Copyright
+					MUGAYO. All Rights Reserved.</p>
+			</div>
+
+
+		</div>
+	</footer>
+
+	<script>
+
+		var code = "";
+
+		// 인증번호 이메일 전송
+		$(".cerBtn").click(function () {
+			console.log("click");
+
+			var email = $(".email-input").val(); // 입력한 이메일
+
+			if (email == "" || email == null) {
+				alert("이메일을 입력해주세요.");
+				return;
+			}
+
+			$.ajax({
+
+				type: "GET",
+				url: "mailCheck?email=" + email,
+				success: function (data) {
+
+					code = data;
+					console.log(code);
+				}
+
+			});
+
+			alert("입력하신 이메일로 인증번호가 전송되었습니다.");
+
+		});
+
+
+		// 인증번호 비교
+		$(".cBtn").click(function () {
+
+			var email = $(".email-input").val(); // 입력한 이메일
+
+			if (email == "" || email == null) {
+				alert("이메일을 입력해주세요.");
+				return;
+			}
+
+			console.log("click findBtn");
+			var inputCode = $(".mail_check_input").val();        // 입력코드    
+			console.log(inputCode);
+			var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
+
+			if (inputCode == code) {
+				checkResult.html("인증번호가 일치합니다.");
+				checkResult.attr("class", "correct");
+			} else {
+				checkResult.html("인증번호를 다시 확인해주세요.");
+				checkResult.attr("class", "incorrect");
+			}
+
+		});
+
+		// 아이디 찾기
+		let once = 0;
+
+		$(".findBtn").click(function () {
+			const checkMsg = document.getElementById('mail_check_input_box_warn').innerHTML;
+			if (checkMsg == "인증번호가 일치합니다.") {
+
+				once++;
+				if (once > 1) {
+					return;
+				}
+
+				let user_email = $('#user_email').val();
+				console.log(user_email);
+
+				$.ajax({
+
+					url: '/member/find_id',
+					type: 'post',
+					data: { "user_email": user_email },
+
+					success: function (result) {
+						if (result != null) {
+							console.log(result);
+							const id_hint = document.getElementById("id_hint");
+							const newP = document.createElement('p');
+
+							newP.innerHTML = `<div class="hint_box">`;
+							newP.innerHTML += `<p class='hintMsg'>회원님의 아이디는 <font id="getId" size="5" color="green"></font> 입니다.</p>`;
+							newP.innerHTML += `</div>`;
+
+							id_hint.appendChild(newP);
+
+							$("#getId").html(result);
+						}
+					},
+					error: function () {
+						alert("서버요청실패");
+					}
+				})
+
+
+			} else {
+				alert("이메일 인증을 해주세요.");
+			}
+
+		})
+	</script>
+
+</body>
+
+</html>
