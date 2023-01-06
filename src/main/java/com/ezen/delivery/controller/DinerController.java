@@ -18,11 +18,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
 import com.ezen.delivery.domain.DinerVO;
+import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.repository.UserDAO;
 import com.ezen.delivery.service.DinerService;
+import com.ezen.delivery.service.FoodService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +39,8 @@ public class DinerController {
 	private FileHandler fhd;
 	@Inject
 	private UserDAO userDao;
+	@Inject
+	private FoodService fsv;
 
 	
 	@GetMapping("/list")
@@ -47,23 +51,31 @@ public class DinerController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail() {}
-
-
-	@PostMapping("/detail")
-	public String detailReview(ReviewVO rvo, RedirectAttributes rttr, @RequestParam(name="files", required = false )MultipartFile[] files) {
-	List<ReviewImgVO> fList = null;
-		if(files[0].getSize()>0) {
-			fList = fhd.uploadFiles(files);
-		}else {
-			log.info("file null");
-		}
-		ReviewDTO ddto = new ReviewDTO(rvo, fList);
-		int isOk = dsv.reviewFile(new ReviewDTO(rvo, fList));
-		rttr.addAttribute("isOk", isOk>0 ? "1":"0");
-		log.info("reviewFile register >> "+ (isOk>0 ? "OK":"FAIL"));
-		return "/diner/detail";	
+	public void detail(@RequestParam(name="diner_code" )int diner_code, Model model) {
+		log.info(""+diner_code);
+		DinerVO diner = dsv.getDiner(diner_code);
+		log.info("diner_code : "+diner.getDiner_code());
+		log.info("diner_name : "+diner.getDiner_name());
+		log.info("diner_address : "+diner.getDiner_address());
+		List<FoodVO> foodList = fsv.getFoodByDinerCode(diner_code);
+		model.addAttribute("foodList",foodList);
+		model.addAttribute("diner",diner);
 	}
+	//이미지파일(dinerService랑 연결)
+//	@PostMapping("/detail")
+//	public String detailReview(ReviewVO rvo, RedirectAttributes rttr, @RequestParam(name="files", required = false )MultipartFile[] files) {
+//	List<ReviewImgVO> fList = null;
+//		if(files[0].getSize()>0) {
+//			fList = fhd.uploadFiles(files);
+//		}else {
+//			log.info("file null");
+//		}
+//		ReviewDTO ddto = new ReviewDTO(rvo, fList);
+//		int isOk = dsv.reviewFile(new ReviewDTO(rvo, fList));
+//		rttr.addAttribute("isOk", isOk>0 ? "1":"0");
+//		log.info("reviewFile register >> "+ (isOk>0 ? "OK":"FAIL"));
+//		return "/diner/detail";	
+//	}
 	
 	@GetMapping(value="/moreList", produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<DinerVO>> moreList(){

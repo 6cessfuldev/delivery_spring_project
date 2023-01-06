@@ -6,5 +6,7 @@
 <select id="selectDinerList" resultType="com.ezen.delivery.domain.DinerVO">
 	select * from diner
 </select>
-
+<select id="selectDiner" resultType="com.ezen.delivery.domain.DinerVO">
+	select * from diner where diner_code = #{diner_code}
+</select>
 </mapper>
