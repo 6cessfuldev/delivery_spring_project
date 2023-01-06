@@ -16,7 +16,7 @@ public class ReviewVO {
 	private int review_code;
 	private int review_order_code;
 	private int review_diner_code;
-	private String review_user_email;
+	private String review_user_id;
 	private String review_content;
 	private int review_taste_score;
 	private int review_amount_score;

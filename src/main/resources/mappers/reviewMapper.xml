@@ -5,9 +5,9 @@
 <mapper namespace="com.ezen.delivery.repository.ReviewDAO">
 <!-- diner 컨트롤러랑 연결(리뷰등록) -->
 <insert id="insertReview" parameterType="com.ezen.delivery.domain.ReviewVO">
-	insert into review (review_diner_code,review_user_email,review_content,
+	insert into review (review_diner_code,review_user_id,review_content,
 	review_taste_score,review_amount_score,review_delivery_score)
-	values (#{review_diner_code}, #{review_user_email}, #{review_content},
+	values (#{review_diner_code}, #{review_user_id}, #{review_content},
 	#{review_taste_score},#{review_amount_score},#{review_delivery_score})
 	<selectKey keyProperty="review_code" resultType="int" order="BEFORE">
       SELECT IFNULL(MAX(review_code+1),1) from review

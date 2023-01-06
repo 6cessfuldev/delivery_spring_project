@@ -12,6 +12,7 @@ import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.repository.DinerDAO;
+import com.ezen.delivery.repository.ReviewDAO;
 import com.ezen.delivery.repository.ReviewImgDAO;
 
 import lombok.extern.slf4j.Slf4j;

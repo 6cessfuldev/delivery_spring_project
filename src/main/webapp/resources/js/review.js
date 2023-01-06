@@ -1,4 +1,77 @@
-//이미지파일 비동기 추가
+document.getElementById('trigger').addEventListener('click', ()=> {
+    document.getElementById('review_multiple').click();
+});
+//확장자 체크
+// function fileSizeValidation(fileName, fileSize){
+//     if(regExp.test(fileName)){
+//         return 0;
+//     }else if(!regExpImg.test(fileName)){
+//         return 0;
+//     }else if(fileSize > maxSize){
+//         return 0;
+//     }else{
+//         return 1;
+//     }
+// }
+
+//로그인 중인 아이디 얻어오기
+function regist(){
+
+const user_id = '${sessionScope.login.userId}';
+let file = $('#review_multiple').val();
+
+const regExp = new RegExp("\.(exe|sh|bat|msi|dll|js)$");
+const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
+const maxSize = 1024*1024*20; //20MB
+
+if(user_id === ''){
+    alert('로그인이 필요한 서비스 입니다.');
+		return;
+}else{
+    // const revText = document.getElementById('review_con').value;
+   //ajax에서 formData를 넘겨줘야함
+    const formData = new FormData();
+	const data = $('#review_multiple');
+
+    console.log('폼 데이터 : ' + formData);
+	console.log('data : ' + data );
+	console.log(data[0]); 
+    console.log(data[0].files);
+	console.log(data[0].files[0]);
+
+    //
+    formData.append('file',data[0].files[0]);
+    formData.append('file',data[0].files[1]);
+    formData.append('file',data[0].files[2]);
+    formData.append('file',data[0].files[3]);
+    formData.append('file',data[0].files[4]);
+    
+
+    const revText = document.getElementById('review_con').value;
+    if(revText == null || revText == ''){
+        alert("리뷰를 입력해주세요.");
+        review_con.focus();
+        return false;
+    } else {
+        formData.append('revText', revText);
+        alert("리뷰를 등록했습니다");
+    }
+        document.addEventListener("change", (e)=>{
+    console.log("test");
+    if(e.target.id == "review_multiple"){
+        console.log("changed");
+        document.getElementById('regBtn').disabled = false;
+        const fileObject = document.getElementById('review_multiple').files;
+        console.log(fileObject);
+
+        let div = document.getElementById("image_container");
+
+        if(isOk == 0){
+           document.getElementById('regBtn').disabled = true;
+        }
+    }
+})
+        //이미지파일 비동기 추가
 	$.ajax({
 					url:'<c:url value="/delivery/upload" />',
 					type : 'post',
@@ -11,9 +84,9 @@
 					success: function(result){
 						// 서버와 통신을 성공했다면 서버가 다시 주는 데이터  
 						if (result === 'Success'){
-							$('#file').val('');
+							$('#review_multiple').val('');
 							// 파일 선택지 비우기							
-							$('#content').val('');
+							$('#review_con').val('');
 							// 글 영역 비우기 
 						}
 						else{
@@ -26,66 +99,17 @@
 					}
 				});// end ajax
 				
-
-async function postReviewToServer(revData){
-    try {
-        const url = '/review/post'
-
-        const config = {
-            method : 'post',
-            headers : {
-                'content-type' : 'application/json; charset=utf-8'
-            },
-            body : JSON.stringify(revData)
-        };
-        const resp = await fetch(url, config);
-        const result = await resp.text();
-        return result;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-document.getElementById('regBtn').addEventListener('click',()=>{
-    const revText = document.getElementById('review_con').value;
-    console.log(revText);
-    if(revText == null || revText == ''){
-        alert("리뷰를 입력해주세요.");
-        review_con.focus();
-        return false;
-    } else {
-        let revData = {
-            diner_code : diner_codeVal,
-            review_user_email : document.getElementById('revWriter').innerText,
-            review_content : revText
-        };
-        console.log(revData);
-        postReviewToServer(revData).then(result =>{
-            if(result > 0){
-                alert("리뷰를 등록했습니다");
             }
-            getReviewList(revData.diner_code);
-        });
-    }
+        }
+        
+function setThumbnail(event) {
+    var reader = new FileReader();
 
-});
-//화면 새로고침 하고 뿌려주는거
-async function spreadReviewFromServer(diner_code){
-    console.log(diner_code);
-    try {
-        const resp = await fetch('/review/'+diner_code); 
-        const result = await resp.json(); 
-        console.log("문자"+result);
-        return result;
-    } catch (error) {
-    	 console.log("콘솔 에러");
-        console.log(error);
-    }
+    reader.onload = function(event) {
+    	var img = document.createElement("img");
+     	img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container").appendChild(img);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
 }
-
-function getReviewList(diner_code){
-    spreadReviewFromServer(diner_code).then(result =>{ // bno 주고 result 받아옴
-        console.log("결과"+result);
-    })
-}
-

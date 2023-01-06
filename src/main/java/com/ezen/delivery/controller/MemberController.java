@@ -195,7 +195,7 @@ public class MemberController {
 		return (user > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
-	// 누가 썼어
+	// 누가 썼어 // 내가!
 	
 	@GetMapping("/order")
 	public void orderGet() {

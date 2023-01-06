@@ -25,6 +25,7 @@ import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
+import com.ezen.delivery.repository.UserDAO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
 
