@@ -9,8 +9,11 @@ import com.ezen.delivery.domain.DinerVO;
 public interface DinerService {
 
 	List<DinerVO> getList();
+	
+	//이미지파일(diner컨트롤러랑 연결)
+//	int reviewFile(ReviewDTO rdto); 
 
-	int reviewFile(ReviewDTO rdto);
+	DinerVO getDiner(int diner_code);
 
 	int register(DinerVO dvo);
 

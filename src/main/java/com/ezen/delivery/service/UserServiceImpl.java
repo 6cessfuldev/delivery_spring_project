@@ -1,5 +1,7 @@
 package com.ezen.delivery.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,11 +26,11 @@ public class UserServiceImpl implements UserService {
 	public boolean signUp(UserVO uvo) {
 		log.info(">>> signup check2");
 		
-		if(uvo.getUser_email() == null || uvo.getUser_email().length() == 0) {
+		if(uvo.getUser_id() == null || uvo.getUser_id().length() == 0) {
 			return false;
 		}
 
-		UserVO tmpUser = udao.getUser(uvo.getUser_email());
+		UserVO tmpUser = udao.getUser(uvo.getUser_id());
 
 		if(tmpUser != null) {
 			log.info("존재하는 이메일 입니다.");
@@ -44,8 +46,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO isUser(String user_email, String user_pw) {
-		UserVO uvo = udao.getUser(user_email);
+	public UserVO isUser(String user_id, String user_pw) {
+		UserVO uvo = udao.getUser(user_id);
 		
 		if(uvo == null) {return null;}
 		
@@ -55,5 +57,43 @@ public class UserServiceImpl implements UserService {
 			return null;			
 		}
 	}
+
+
+
+	@Override
+	public List<String> getAllId() {
+		
+		return udao.selectAllId();
+	}
+
+	@Override
+	public UserVO getUserByID(String user_id) {
+		
+		return udao.getUser(user_id);
+	}
+
+	@Override
+	public int isExist(String user_id) {
+	
+		return udao.selectId(user_id);
+	}
+
+	@Override
+	public UserVO getId(String user_email) {
+		
+		return udao.findIdByEmail(user_email);
+	}
+
+	@Override
+	public int updatePw(String getEmail, String new_pw) {
+		
+		String encodeNewPw = passwordEncoder.encode(new_pw);
+		new_pw = encodeNewPw;
+		
+		return udao.updatePw(getEmail, new_pw);
+	}
+
+	
+	
 
 }

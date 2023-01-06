@@ -25,17 +25,25 @@ public class DinerServiceImpl implements DinerService {
 
 	@Inject
 	ReviewImgDAO ridao;
+	@Inject
+	ReviewDAO rdao;
 	
 	@Override
 	public List<DinerVO> getList() {
 		return ddao.selectListFirst();
 	}
 
-	@Override
-	public int reviewFile(ReviewDTO rdto) {
-		
-		return 0;
-	}
+	//이미지파일(diner컨트롤러랑 연결)
+//	 @Override public int reviewFile(ReviewDTO rdto) { 
+//	 int isOk = rdao.insertReview(rdto.getRvo()); 
+//		 if(isOk > 0 && rdto.getFList().size() > 0){ 
+//			 int rcode = rdto.getRvo().getReview_code(); 
+//			 for(ReviewImgVO rivo : rdto.getFList()) { 
+//				 rivo.setReview_code(rcode); 
+//				 isOk *= ridao.insertImg(rivo);
+//			 } 
+//		 } return isOk;	 
+//	 }
 
 	@Override
 	public int register(DinerVO dvo) {
@@ -49,5 +57,8 @@ public class DinerServiceImpl implements DinerService {
 		return ddao.selectList(pvo);
 	}
 
+	public DinerVO getDiner(int diner_code) {
+		return ddao.selectDiner(diner_code);
+	}
 
 }
