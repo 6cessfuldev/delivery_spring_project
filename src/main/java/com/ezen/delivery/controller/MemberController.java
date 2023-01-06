@@ -9,6 +9,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.xmlbeans.impl.repackage.Repackager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.UserVO;
@@ -56,7 +58,7 @@ public class MemberController {
 		log.info("인증번호 : " + checkNum);
 
 		// 이메일 보내기
-		String setFrom = "myeonk@naver.com";
+		String setFrom = "aleod1007@naver.com";
 		String toMail = email;
 		String title = "회원가입 인증 이메일 입니다.";
 		String content = "<먹어요> 홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
@@ -88,8 +90,8 @@ public class MemberController {
 		String subject = "안녕하세요 test 메일 입니다 :-)";
 		String content = "메일 테스트 내용"
 				+ "<img src=\"https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg1.daumcdn.net%2Fthumb%2FR1280x0.fjpg%2F%3Ffname%3Dhttp%3A%2F%2Ft1.daumcdn.net%2Fbrunch%2Fservice%2Fuser%2F32E9%2Fimage%2FBA2Qyx3O2oTyEOsXe2ZtE8cRqGk.JPG&imgrefurl=https%3A%2F%2Fbrunch.co.kr%2F%40happying%2F66&tbnid=uBQ8cebvR-okYM&vet=12ahUKEwi1hJjYoav8AhWOOpQKHdX0BeoQMygNegUIARD3AQ..i&docid=0RhOIZ63_Xb9-M&w=960&h=640&q=%EA%B0%95%EC%95%84%EC%A7%80&ved=2ahUKEwi1hJjYoav8AhWOOpQKHdX0BeoQMygNegUIARD3AQ\">";
-		String from = "myeonk@naver.com";
-		String to = "myeonk@naver.com";
+		String from = "aleod1007@naver.com";
+		String to = "aleod1007@naver.com";
 
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
@@ -128,6 +130,32 @@ public class MemberController {
 		}
 	}
 	
+	// 이메일 중복 확인
+	
+	@PostMapping("/userEmailCheck")
+	public ResponseEntity<String> userEmailCheck(String user_email){
+		log.info(user_email);
+		
+		int emailExisted = usv.emailExist(user_email);
+		log.info("" + emailExisted);
+		
+		return (emailExisted > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.OK));
+	}
+	
+	
+	// 아이디 중복 확인
+	
+	@PostMapping("/userIdCheck")
+	public ResponseEntity<String> userIdCheck(String user_id){
+		log.info(user_id);
+		
+		int existed = usv.isExist(user_id);
+		log.info("" + existed);
+		
+		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.OK));
+							
+	}
+	
 	// 로그인
 	
 	@GetMapping("/login")
@@ -140,16 +168,40 @@ public class MemberController {
 
 		if (isUser != null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("ses", isUser);
+			session.setAttribute("user", isUser);
 
 			model.addAttribute("user", isUser);
 			model.addAttribute("msg", "1");
+			
 			return "redirect:/";
 		} else {
 			model.addAttribute("msg", "0");
 			return "/member/login";
 		}
 	}
+	
+	// 회원 정보
+	
+	@GetMapping({"/detail_userInfo", "/modify_userInfo" })
+	public void userInfo() {}
+	
+	@PostMapping("/modify_userInfo")
+	public ResponseEntity<String> modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session){
+		log.info(user_id);
+		log.info(new_pw);
+		log.info(new_phone);
+		
+		// 세션 변경
+		UserVO user = (UserVO)session.getAttribute("user");
+		user.setUser_phone(new_phone);
+		session.setAttribute("user", user);
+		
+		// DB 변경
+		int modUser = usv.modifyUserInfo(user_id, new_pw, new_phone);
+		log.info("" + modUser);
+		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+	}
+	
 	
 	// 로그아웃
 	
@@ -198,19 +250,8 @@ public class MemberController {
 	// 누가 썼어
 	
 	@GetMapping("/order")
-	public void orderGet() {
-	}
+	public void orderGet() {}
 
-	// 아이디 중복 확인
 	
-	@PostMapping("/userIdCheck")
-	public ResponseEntity<String> userIdCheck(String user_id){
-		log.info(user_id);
-		
-		int existed = usv.isExist(user_id);
-		log.info("" + existed);
-		
-		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.OK));
-							
-	}
+	
 }

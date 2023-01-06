@@ -9,13 +9,13 @@
         <div id="box">
             <li class="text-wrap">
                 <input type="text" class="text-field t1 email-input" id="user_email" placeholder="(필수)이메일 주소 입력">
-                <button type="button" class="cerBtn">전송</button>
+                <button type="button" class="sendBtn">전송</button>
             </li>
         </div>
         <li class="text-wrap">
             <input type="text" class="text-field t2 mail_check_input" placeholder="인증번호 입력">
             <div class='mail_check_button'>
-                <input type='button' class='cBtn' value='인증'>
+                <input type='button' class='cerBtn' value='인증'>
             </div>
             <div class='clearfix'></div>
             <span id="mail_check_input_box_warn"></span>

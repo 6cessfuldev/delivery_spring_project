@@ -1,35 +1,52 @@
 var code = "";
 
-// 인증번호 이메일 전송
-$(".cerBtn").click(function () {
+// 이메일 전송
+$(".sendBtn").click(function () {
     console.log("click");
 
     var email = $(".email-input").val(); // 입력한 이메일
 
     if (email == "" || email == null) {
+
         alert("이메일을 입력해주세요.");
+        return;
+
+    }
+
+    // 이메일 유효성 검사
+    const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (email.match(regExp) != null) {
+
+        $.ajax({
+
+            type: "GET",
+            url: "mailCheck?email=" + email,
+            success: function (data) {
+
+                code = data;
+                console.log(code);
+            }
+
+        });
+
+        alert("입력하신 이메일로 인증번호가 전송되었습니다.");
+
+    }
+
+    else {
+        alert("이메일을 확인해주세요.");
         return;
     }
 
-    $.ajax({
 
-        type: "GET",
-        url: "mailCheck?email=" + email,
-        success: function (data) {
 
-            code = data;
-            console.log(code);
-        }
-
-    });
-
-    alert("입력하신 이메일로 인증번호가 전송되었습니다.");
 
 });
 
 
 // 인증번호 비교
-$(".cBtn").click(function () {
+$(".cerBtn").click(function () {
 
     var email = $(".email-input").val(); // 입력한 이메일
 
@@ -72,8 +89,8 @@ $(".findBtn").click(function () {
 
             url: '/member/find_id',
             type: 'post',
-            data: { "user_email" : user_email },
-            
+            data: { "user_email": user_email },
+
             success: function (result) {
                 if (result != null) {
                     console.log(result);

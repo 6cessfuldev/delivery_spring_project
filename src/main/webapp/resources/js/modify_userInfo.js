@@ -1,6 +1,8 @@
-document.querySelector('.changeBtn').addEventListener('click', function () {
-    const new_pw = document.getElementById('new_pw').value;
-    const new_pwCheck = document.getElementById('new_pwCheck').value;
+document.querySelector('.modBtn').addEventListener('click', function () {
+    const user_id = document.getElementById('user_id').value;
+    const new_pw = document.getElementById('user_pw').value;
+    const new_pwCheck = document.getElementById('user_pwCheck').value;
+    const new_phone = document.getElementById('user_phone').value;
 
     if (new_pw == "" || new_pw == null) {
         alert("비밀번호를 입력해주세요.");
@@ -10,6 +12,12 @@ document.querySelector('.changeBtn').addEventListener('click', function () {
         return;
     } else if (new_pw != new_pwCheck) {
         alert("비밀번호가 일치하지 않습니다.");
+        return;
+    } else if (new_phone == "" || new_phone == null) {
+        alert("핸드폰번호를 입력해주세요.");
+        return;
+    } else if (isNaN(new_phone) || new_phone.length != 11) {
+        alert("핸드폰 번호를 형식에 맞게 입력해주세요.");
         return;
     } else {
         var pw = new_pw;
@@ -29,29 +37,23 @@ document.querySelector('.changeBtn').addEventListener('click', function () {
         }
     }
 
-    // 이메일 정보 받아오기
-    var getEmail = localStorage.getItem('email');
-    console.log(getEmail);
-
-    // 비밀번호 변경
+    // 회원 정보 변경
     $.ajax({
 
-        url : '/member/update_pw',
-        type : 'post',
-        data : {"getEmail" : getEmail , "new_pw" : new_pw },
+        url: '/member/modify_userInfo',
+        type: 'post',
+        data: { "user_id": user_id, "new_pw": new_pw, "new_phone": new_phone },
 
-        success: function(result){
-            if(result > 0){
-                $("#updateMsg").html('비밀번호가 변경되었습니다 :-)');
-                $('#new_pw').hide();
-                $('#new_pwCheck').hide();
-                $('.changeBtn').hide(); 
+        success: function (result) {
+            if (result > 0) {
+                alert("회원 정보가 수정되었습니다 :-)");
+                $(".wrap-input").submit();
             }
         },
-        error: function(){
+        error: function () {
             alert("서버 요청 실패");
         }
-
+        
     })
     
 
