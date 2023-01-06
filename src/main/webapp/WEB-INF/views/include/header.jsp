@@ -7,9 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
-<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
 </head>
 
 <body>

@@ -70,9 +70,5 @@
 
   </div>
 </footer>
-
-<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
-
 </body>
 </html>

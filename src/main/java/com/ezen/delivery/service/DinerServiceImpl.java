@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
@@ -29,7 +30,7 @@ public class DinerServiceImpl implements DinerService {
 	
 	@Override
 	public List<DinerVO> getList() {
-		return ddao.selectDinerList();
+		return ddao.selectListFirst();
 	}
 
 	//이미지파일(diner컨트롤러랑 연결)
@@ -43,9 +44,19 @@ public class DinerServiceImpl implements DinerService {
 //			 } 
 //		 } return isOk;	 
 //	 }
- 
 
 	@Override
+	public int register(DinerVO dvo) {
+		
+		return ddao.insert(dvo);
+	}
+
+	@Override
+	public List<DinerVO> getList(PagingVO pvo) {
+		
+		return ddao.selectList(pvo);
+	}
+
 	public DinerVO getDiner(int diner_code) {
 		return ddao.selectDiner(diner_code);
 	}

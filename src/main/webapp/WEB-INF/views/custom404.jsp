@@ -32,6 +32,7 @@ html, body{
 <body>
     <div class="container">
         <img src="/resources/source/error.png" alt="">
+        ${ex}
     </div>
 </body>
 </html>

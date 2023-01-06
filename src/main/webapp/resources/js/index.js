@@ -1,24 +1,4 @@
 $("#search-btn").click(function(){
-
-    .$ajax({
-        type : 'post',
-        url : '/https://business.juso.go.kr/addrlink/addrLinkApi.do',
-        headers : {
-            "Content-Type" : "appication/json",
-            "X-HTTP-Method-Override" : "POST"
-        },
-        dataType : 'text',
-        data : JSON.stringify({
-            "no" : no,
-            "name" : name,
-            "nick" : nick
-          }),
-
-    })
-
-})
-
-$("#search-btn").click(function(){
     console.log(this);
 })
 

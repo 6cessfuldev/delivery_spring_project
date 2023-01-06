@@ -20,4 +20,3 @@ const swiper = new Swiper('.swiper', {
     },
     width : 150
 });
-
