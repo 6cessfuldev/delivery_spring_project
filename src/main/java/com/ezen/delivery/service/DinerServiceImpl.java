@@ -6,11 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.DinerVO;
-import com.ezen.delivery.domain.ReviewDTO;
-import com.ezen.delivery.domain.ReviewImgVO;
-import com.ezen.delivery.domain.ReviewVO;
+import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.repository.DinerDAO;
 import com.ezen.delivery.repository.ReviewDAO;
 import com.ezen.delivery.repository.ReviewImgDAO;
@@ -34,18 +31,6 @@ public class DinerServiceImpl implements DinerService {
 		return ddao.selectListFirst();
 	}
 
-	//이미지파일(diner컨트롤러랑 연결)
-//	 @Override public int reviewFile(ReviewDTO rdto) { 
-//	 int isOk = rdao.insertReview(rdto.getRvo()); 
-//		 if(isOk > 0 && rdto.getFList().size() > 0){ 
-//			 int rcode = rdto.getRvo().getReview_code(); 
-//			 for(ReviewImgVO rivo : rdto.getFList()) { 
-//				 rivo.setReview_code(rcode); 
-//				 isOk *= ridao.insertImg(rivo);
-//			 } 
-//		 } return isOk;	 
-//	 }
-
 	@Override
 	public int register(DinerVO dvo) {
 		
@@ -55,7 +40,11 @@ public class DinerServiceImpl implements DinerService {
 	@Override
 	public List<DinerVO> getList(PagingVO pvo) {
 		
-		return ddao.selectList(pvo);
+		if(pvo.getCategory().equals("all")) {
+			return ddao.selectList(pvo);
+		}
+		
+		return ddao.selectListbyCate(pvo);
 	}
 
 	public DinerVO getDiner(int diner_code) {
