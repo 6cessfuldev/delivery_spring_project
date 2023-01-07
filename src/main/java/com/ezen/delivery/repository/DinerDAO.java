@@ -23,4 +23,8 @@ public interface DinerDAO {
 
 	List<DinerVO> selectListAll();
 
+	int update(DinerVO dvo);
+
+	int delete(int diner_code);
+
 }

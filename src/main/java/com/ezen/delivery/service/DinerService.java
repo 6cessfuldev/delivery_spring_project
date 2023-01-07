@@ -21,6 +21,10 @@ public interface DinerService {
 
 	List<DinerVO> getList();
 
+	int update(DinerVO dvo);
+
+	int remove(int diner_code);
+
 
 
 

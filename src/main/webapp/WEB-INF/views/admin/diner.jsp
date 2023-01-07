@@ -4,8 +4,6 @@
 
 <jsp:include page="./include/header.jsp"></jsp:include>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
 	<div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -19,14 +17,13 @@
          	<c:forEach items="${list}" var="diner">
             <tr>
               <td>${diner.diner_code}</td>
-              <td>${diner.diner_name}</td>
+              <td><a href="/admin/diner/detail?diner_code=${diner.diner_code}">${diner.diner_name}</a></td>
               <td>${diner.diner_address}</td>
             </tr>
             </c:forEach>
           </tbody>
        	</table>
      	</div>
-    </main>
-	
+
 
 <jsp:include page="./include/footer.jsp"></jsp:include>

@@ -58,6 +58,18 @@ public class DinerServiceImpl implements DinerService {
 		return ddao.selectDiner(diner_code);
 	}
 
+	@Override
+	public int update(DinerVO dvo) {
+		return ddao.update(dvo);
+		
+	}
+
+	@Override
+	public int remove(int diner_code) {
+		
+		return ddao.delete(diner_code);
+	}
+
 
 
 }

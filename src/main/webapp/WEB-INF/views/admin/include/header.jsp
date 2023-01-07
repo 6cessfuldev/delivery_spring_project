@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,8 @@
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 </head>
 
+<c:set var="URI" value="${requestScope['javax.servlet.forward.request_uri']}" />
+<c:set var="domain" value="${fn:split(URI, '/')[1]}" />
 <body>
 	<header class="pt-2">
 		<a href="/" class="logo">
@@ -41,12 +44,7 @@
               음식점
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file" class="align-text-bottom"></span>
-              음식
-            </a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
@@ -91,25 +89,31 @@
             <span data-feather="plus-circle" class="align-text-bottom"></span>
           </a>
         </h6>
+        <c:if test="${domain ne null}">
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/admin/${domain}/register">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              추가
+              ${domain} 추가
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              수정
+              ${domain} 수정
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              삭제
+              ${domain} 삭제
             </a>
           </li>
         </ul>
+        </c:if>
       </div>
     </nav>
+    
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    
+	<script type="text/javascript"></script>

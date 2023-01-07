@@ -52,7 +52,7 @@
     }
 }
 </style>
-
+	</main>
   </div>
 </div>
 

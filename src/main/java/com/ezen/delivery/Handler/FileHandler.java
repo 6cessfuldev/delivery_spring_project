@@ -10,6 +10,8 @@ import java.util.UUID;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.ReviewImgVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +23,7 @@ public class FileHandler {
 	
 	private final String UP_DIR = "D:\\delivery\\upload";
 	
-	public List<ReviewImgVO> uploadFiles(MultipartFile[] files){
+	public FileVO uploadFiles(MultipartFile file){
 		LocalDate date = LocalDate.now();
 		String today = date.toString();
 		today = today.replace("-", File.separator);
@@ -31,35 +33,34 @@ public class FileHandler {
 		if(!folders.exists()) {
 			folders.mkdir();
 		}
-		List<ReviewImgVO> fList = new ArrayList<ReviewImgVO>();
-		for(MultipartFile file : files) {
-			ReviewImgVO rivo = new ReviewImgVO();
-			rivo.setReview_img_save_dir(today);
-			rivo.setReview_img_size(file.getSize());
-			
-			String originalFileName = file.getOriginalFilename(); 
-			log.info("fileName : "+originalFileName);
-			 
-			String onlyFileName = originalFileName
-					.substring(originalFileName.lastIndexOf("\\")+1);
-			log.info("only fileName : "+onlyFileName);
-			rivo.setReview_img_name(onlyFileName);
-			
-			UUID uuid = UUID.randomUUID(); 
-			rivo.setReview_img_uuid(uuid.toString()); 
-			
-			String fullFileName = uuid.toString()+"_"+onlyFileName; 
-			File storeFile = new File(folders, fullFileName); 
+		
+		FileVO fvo = new FileVO();
+		
+		fvo.setFile_save_dir(today);
+		fvo.setFile_size(file.getSize());
+		
+		String originalFileName = file.getOriginalFilename(); 
+		log.info("fileName : "+originalFileName);
+		 
+		String onlyFileName = originalFileName
+				.substring(originalFileName.lastIndexOf("\\")+1);
+		log.info("only fileName : "+onlyFileName);
+		fvo.setFile_name(onlyFileName);
+		
+		UUID uuid = UUID.randomUUID(); 
+		fvo.setFile_uuid(uuid.toString()); 
+		
+		String fullFileName = uuid.toString()+"_"+onlyFileName; 
+		File storeFile = new File(folders, fullFileName); 
 
-			try {      
-				file.transferTo(storeFile); 
-			} catch (Exception e) {
-				log.info("File 생성 오류");
-				e.printStackTrace();
-			}
-			fList.add(rivo);
+		try {      
+			file.transferTo(storeFile); 
+		} catch (Exception e) {
+			log.info("File 생성 오류");
+			e.printStackTrace();
 		}
-		return fList; 
+		
+		return fvo; 
 	}
 
 	public int deleteFile(ReviewImgVO rivo) {
