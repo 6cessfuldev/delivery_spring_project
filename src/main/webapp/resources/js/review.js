@@ -14,6 +14,10 @@ document.getElementById('trigger').addEventListener('click', ()=> {
 //     }
 // }
 
+${"#regBtn"}.click(function(){
+    
+})
+
 //로그인 중인 아이디 얻어오기
 function regist(){
 

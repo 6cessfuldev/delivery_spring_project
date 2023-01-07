@@ -500,3 +500,7 @@ main{
 	font-weight: 700;
 
 }
+
+#image_container>img{
+	width:100px;
+}

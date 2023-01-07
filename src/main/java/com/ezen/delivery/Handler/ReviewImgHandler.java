@@ -16,22 +16,27 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class FileHandler {
+public class ReviewImgHandler {
 
 	
-	private final String UP_DIR = "D:\\delivery\\upload";
+	private final String UP_DIR ="D:\\delivery\\upload";
 	
 	public List<ReviewImgVO> uploadFiles(MultipartFile[] files){
 		LocalDate date = LocalDate.now();
+		log.info("date : "+date);
 		String today = date.toString();
+		log.info(today);
 		today = today.replace("-", File.separator);
 		
 		File folders = new File(UP_DIR, today);
-		
+		log.info(folders.toString());
+
 		if(!folders.exists()) {
-			folders.mkdir();
+			folders.mkdirs();
 		}
-		List<ReviewImgVO> fList = new ArrayList<ReviewImgVO>();
+		
+		
+		List<ReviewImgVO> riList = new ArrayList<ReviewImgVO>();
 		for(MultipartFile file : files) {
 			ReviewImgVO rivo = new ReviewImgVO();
 			rivo.setReview_img_save_dir(today);
@@ -44,22 +49,23 @@ public class FileHandler {
 					.substring(originalFileName.lastIndexOf("\\")+1);
 			log.info("only fileName : "+onlyFileName);
 			rivo.setReview_img_name(onlyFileName);
-			
+			 
 			UUID uuid = UUID.randomUUID(); 
 			rivo.setReview_img_uuid(uuid.toString()); 
+			log.info("uuid"+uuid);
 			
 			String fullFileName = uuid.toString()+"_"+onlyFileName; 
 			File storeFile = new File(folders, fullFileName); 
-
 			try {      
 				file.transferTo(storeFile); 
+				log.info("1");
 			} catch (Exception e) {
 				log.info("File 생성 오류");
 				e.printStackTrace();
 			}
-			fList.add(rivo);
+			riList.add(rivo);
 		}
-		return fList; 
+		return riList; 
 	}
 
 //	public int deleteFile(ReviewImgVO rivo) {

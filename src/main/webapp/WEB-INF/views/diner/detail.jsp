@@ -272,7 +272,8 @@
 
 						<div class="review">
 					    <div class="review_box">
-                           <form action="/review/upload" method="post" enctype="multipart/form-data">
+					   <!--  <form action="/review/upload.php" method="post" enctype="multipart/form-data"> -->
+                      <!--  <form action="/review/upload" method="post" enctype="multipart/form-data"> -->
                                 <div class="review_spanBox">
                                     <span class="review_span">얼마나 만족하셨나요?</span><br>
                                     <span class="review_starT">맛&nbsp;&nbsp;&nbsp;</span> <span class="review_star">
@@ -288,7 +289,6 @@
 		                    	<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
 		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
 		                          <div class="review_insertBox">
-		                          <!-- <button type="submit" id="regBtn" class="review_insert">완료</button> -->
 		                          </div>
                                 
                                 <%-- <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden> --%>
@@ -296,18 +296,19 @@
                                 <input type="text" name="review_amount_score" value="0" hidden>
                                 <input type="text" name="review_delivery_score" value="0" hidden> -->
                                 
-                 
+                 <!-- onchange="setThumbnail(event); -->
                                 <!-- 이미지파일 등록 -->
                             <div class="review_multiplebox">
-				                 <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple>
-				                 <button type="button" id="trigger">사진</button>
-				
+				                 <input type="file" id="review_multiple" name="files[]" accept="image/*" onchange="readFile2('files[]');" style="display: none" multiple="multiple">
+				                <!--  <button type="button" id="trigger">첫번째 사진</button>
+				                 <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple> -->
+								 <button type="button" id="trigger">사진</button>
 				                 <div id="image_container">		
-				                                                 
+									
 				                 </div>
 				         	</div>      
 									<button type="button" id="regBtn" class="review_insert">완료</button>
-                            </form>
+                            <!-- </form> --> 
                         </div>
                         
 							<div class="review-head">
@@ -542,14 +543,37 @@
 	</div>
 
 </main>
+<<script type="text/javascript">
+function readFile2(fileNames) {
+    const target = document.getElementsByName(fileNames);
+    const fileLength = target[0].files.length;
+      if (fileLength<1) return;
+      
+      $.each(target[0].files, function(index, file){
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              
+              var img = document.createElement("img");
+           	  img.setAttribute("src", e.target.result);
+           	
+              document.querySelector("div#image_container").appendChild(img);
+              //요 fileData로 파일 내 텍스트가 읽어드려진다.
+          }
+          reader.readAsDataURL(event.target.files[index]);
+      });
+ 
+}
 
+
+
+
+
+</script>
 <!--    <script type="text/javascript">
    const diner_codeVal = '<c:out value="${diner.diner_code}" />';
    console.log(diner_codeVal);
    </script> -->
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
-<!-- <script type="text/javascript" src="/resources/js/reviewfile.js"></script> -->
-<!-- <script type="text/javascript" src="/resources/js/review.js"></script> -->
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/detail.js"></script>
