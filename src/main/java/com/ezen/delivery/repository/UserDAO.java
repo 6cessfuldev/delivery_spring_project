@@ -26,4 +26,8 @@ public interface UserDAO {
 
 	int selectCntByEmail(String user_email);
 
+	UserVO getUserPw(String getEmail);
+
+	int deleteUser(String user_id);
+
 }

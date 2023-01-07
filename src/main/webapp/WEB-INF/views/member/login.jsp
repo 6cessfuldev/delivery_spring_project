@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <title>먹어요</title>
 
@@ -11,13 +12,14 @@
 
 
 <jsp:include page="../include/header.jsp"></jsp:include>
+
    <div id="login_wrapper">
         <div id="login_content">
             <img src="/resources/source/logo2.png" id="login_logo">
             <div id="login_box">
         <form action="/member/login" method="post">
             <input type="text" id="login_input1" name="user_id" placeholder="아이디 입력(필수)"><br>
-            <input type="text" id="login_input2" name="user_pw" placeholder="비밀번호 입력(필수)"><br><br>
+            <input type="password" id="login_input2" name="user_pw" placeholder="비밀번호 입력(필수)"><br><br>
             <input type="checkbox" id="login_check">
             <label for="login_check" id="login_checkLabel"><span>자동 로그인</span></label>
             <div id="login_aBox">
@@ -48,6 +50,13 @@
              <br><br><br><br>
         </div>
     </div>
+    
 <jsp:include page="../include/footer2.jsp"></jsp:include>
 
-<script src="/resources/js/login.js"></script>
+<script type="text/javascript">
+	const msg = '<c:out value="${msg}"/>';
+	console.log(msg);
+	if(msg === "0"){
+	    alert("아이디 또는 비밀번호를 확인해주세요.");
+	}
+</script>

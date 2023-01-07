@@ -86,20 +86,24 @@
 			<img src="/resources/source/logo2.png" class="logoImg"><br>
 			<div id="box">
 				<input type="email" class="input email_input" name="user_email" id="user_email"
-					value="${ses.user_email }" readonly="readonly"><br><br>
+					value="${user.user_email }" readonly="readonly"><br><br>
 			</div>
 			<div id="id-box">
-				<input type="text" class="input" name="user_id" id="user_id" value="${ses.user_id }" readonly="readonly"><br><br>
+				<input type="text" class="input" name="user_id" id="user_id" value="${user.user_id }" readonly="readonly"><br><br>
 			</div>
-			<input type="text" class="input" name="user_pw" id="user_pw" value="**********" ><br><br>
-			<input type="text" class="input" name="user_pwCheck" id="user_pwCheck"
+			<input type="password" class="input" name="user_pw" id="user_pw" value="**********" readonly="readonly"><br><br>
+			<input type="password" class="input" name="user_pwCheck" id="user_pwCheck"
 				value="**********" readonly="readonly"><br><br>
-			<input type="text" class="input" name="user_name" id="user_name" value="${ses.user_name }" readonly="readonly"><br><br>
-			<input type="text" class="input" name="user_birth" id="user_birth" value="${ses.user_birth }" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_name" id="user_name" value="${user.user_name }" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_birth" id="user_birth" value="${user.user_birth }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_phone" id="user_phone"
-				value="${ses.user_phone }" readonly="readonly"><br><br>
-			<input type="button" onclick="location.href='/member/modify_userInfo?user_id=${ses.user_id}'" class="input modBtn" value="수정"><br>
-			<!-- <input type="button" onclick="location.href='/member/remove_userInfo?user_id=${ses.user_id}'" class="input delBtn" value="탈퇴"><br> -->
+				value="${user.user_phone }" readonly="readonly"><br><br>
+			<div id="modBtn-box">
+				<input type="button" onclick="location.href='/member/modify_userInfo'" class="btn modBtn" value="정보수정"><br>
+			</div>
+			<div id="delBtn-box">
+				<input type="button" class="btn delBtn" value="회원탈퇴"><br>
+			</div>
 	</div>
 </div>
 

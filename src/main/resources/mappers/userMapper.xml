@@ -15,11 +15,13 @@
 	</insert>
 	
 	<select id="selectCntByEmail" resultType="int">
-		select count(*) from user where user_email = #{user_email}
+		select count(*) from user 
+		where user_email = #{user_email}
 	</select>
 	
 	<select id="selectCntById" resultType="int">
-		select count(*) from user where user_id = #{user_id}
+		select count(*) from user 
+		where user_id = #{user_id}
 	</select>
 	
 	<select id="selectAllId" resultType="java.lang.String">
@@ -31,13 +33,20 @@
 		where user_email = #{user_email} 
 	</select>
 	
+	<select id="getUserPw" resultType="com.ezen.delivery.domain.UserVO">
+		select * from user 
+		where user_email = #{getEmail}
+	</select>
+	
 	<update id="updatePw">
-		update user set user_pw = #{new_pw}, user_mod_date = now()
+		update user set 
+		user_pw = #{new_pw}, user_mod_date = now()
 		where user_email = #{getEmail}
 	</update>
 	
 	<select id="selectUserOne" resultType="com.ezen.delivery.domain.UserVO">
-		select * from user where user_id = #{user_id}
+		select * from user 
+		where user_id = #{user_id}
 	</select>
 	
 	<update id="updateUser">
@@ -45,5 +54,11 @@
 		user_pw = #{new_pw}, user_phone = #{new_phone}, user_mod_date = now()
 		where user_id = #{user_id}
 	</update>
+	
+	<delete id="deleteUser">
+		delete from user 
+		where user_id = #{user_id}
+	</delete>
+	
 	
 </mapper>

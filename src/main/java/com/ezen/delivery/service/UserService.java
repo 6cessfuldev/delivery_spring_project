@@ -26,5 +26,7 @@ public interface UserService {
 
 	int emailExist(String user_email);
 
+	int removeUserInfo(String user_id);
+
 
 }

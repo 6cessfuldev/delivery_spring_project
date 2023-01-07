@@ -46,12 +46,12 @@
 }
 
 .cBtn{
-    top: 236px;
+    top: 264px;
 }
 
-#id-box{
+/* #id-box{
     position: relative;
-}
+} */
 
 .dupBtn{
     position: absolute;
@@ -65,12 +65,21 @@
     font-size: 14px;
     box-sizing: border-box;
     text-indent: 10px;
+    margin-top: 9px;
+    margin-bottom: 16px;
 }
 
 .checkNum:focus{
     outline: 1px solid rgb(96, 145, 81);
 }
 
+/* #user_pw{
+    margin-top: 9px;
+} */
+
+.feedback{
+    margin-bottom: 20px;
+}
 
 .logoImg{
     width: 200px;

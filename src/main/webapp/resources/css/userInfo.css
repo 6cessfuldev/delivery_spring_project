@@ -52,7 +52,6 @@
     outline: 1px solid rgb(96, 145, 81);
 }
 
-
 .logoImg{
     width: 200px;
     height: 160px;
@@ -60,21 +59,47 @@
     margin-left: 22%;
 }
 
-.modBtn{
-    font-size: 20px;
-    font-weight: 700;
-    color: rgb(96, 145, 81);
-    background-color: white;
-    border: rgb(96, 145, 81);
-    outline: 2px solid rgb(153, 156, 152);
-    border-radius: 15px;
-    text-align: center;
+#modBtn-box, #delBtn-box{
+    width: 200px;
+    float: left;
     display: flex;
     justify-content: center;
+}
+
+.modBtn, .delBtn, .updateBtn{
+    font-size: 18px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
     margin-bottom: 10px;
 }
 
-.modBtn:hover{
+.modBtn, .delBtn{
+    width: 180px;
+    outline: 2px solid rgb(153, 156, 152);
+}
+
+.updateBtn{
+    width: 400px;
+    height: 50px;
+    border: 2px solid rgb(153, 156, 152);
+}
+
+.modBtn, .updateBtn{
+    color: rgb(96, 145, 81);
+}
+
+.modBtn:hover, .updateBtn:hover{
     background-color: rgb(96, 145, 81);
+    color: white;
+}
+
+.delBtn{
+    color: rgba(238, 34, 34, 0.918);
+}
+
+.delBtn:hover{
+    background-color: rgba(238, 34, 34, 0.918);
     color: white;
 }

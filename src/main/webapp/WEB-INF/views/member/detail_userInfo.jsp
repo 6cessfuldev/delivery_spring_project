@@ -21,8 +21,12 @@
 			<input type="text" class="input" name="user_birth" id="user_birth" value="${user.user_birth }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_phone" id="user_phone"
 				value="${user.user_phone }" readonly="readonly"><br><br>
-			<input type="button" onclick="location.href='/member/modify_userInfo'" class="input modBtn" value="정보수정"><br>
-			<input type="button" onclick="location.href='/member/remove_userInfo'" class="input delBtn" value="회원탈퇴"><br>
+			<div id="modBtn-box">
+				<input type="button" onclick="location.href='/member/modify_userInfo'" class="btn modBtn" value="정보수정"><br>
+			</div>
+			<div id="delBtn-box">
+				<input type="button" class="btn delBtn" value="회원탈퇴"><br>
+			</div>
 	</div>
 </div>
 

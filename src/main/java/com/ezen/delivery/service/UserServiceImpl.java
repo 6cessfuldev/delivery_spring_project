@@ -58,11 +58,9 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-
-
 	@Override
 	public List<String> getAllId() {
-		
+
 		return udao.selectAllId();
 	}
 
@@ -87,10 +85,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int updatePw(String getEmail, String new_pw) {
 		
+		// 비밀번호 암호화
 		String encodeNewPw = passwordEncoder.encode(new_pw);
 		new_pw = encodeNewPw;
 		
-		return udao.updatePw(getEmail, new_pw);
+		// 기존 비밀번호와 비교
+		UserVO uvo = udao.getUserPw(getEmail);
+		boolean equal = passwordEncoder.matches(new_pw, uvo.getUser_pw());
+		
+		if(!equal) {
+			return udao.updatePw(getEmail, new_pw);			
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -102,6 +109,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int modifyUserInfo(String user_id, String new_pw, String new_phone) {
 		
+		// 비밀번호 암호화
 		String encodeNewPw = passwordEncoder.encode(new_pw);
 		new_pw = encodeNewPw;
 		
@@ -112,6 +120,12 @@ public class UserServiceImpl implements UserService {
 	public int emailExist(String user_email) {
 		
 		return udao.selectCntByEmail(user_email);
+	}
+
+	@Override
+	public int removeUserInfo(String user_id) {
+		
+		return udao.deleteUser(user_id);
 	}
 
 	
