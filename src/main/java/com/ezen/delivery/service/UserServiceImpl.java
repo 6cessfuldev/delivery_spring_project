@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int isExist(String user_id) {
 	
-		return udao.selectId(user_id);
+		return udao.selectCntById(user_id);
 	}
 
 	@Override
@@ -91,6 +91,27 @@ public class UserServiceImpl implements UserService {
 		new_pw = encodeNewPw;
 		
 		return udao.updatePw(getEmail, new_pw);
+	}
+
+	@Override
+	public UserVO getUserDetail(String user_id) {
+		
+		return udao.selectUserOne(user_id);
+	}
+
+	@Override
+	public int modifyUserInfo(String user_id, String new_pw, String new_phone) {
+		
+		String encodeNewPw = passwordEncoder.encode(new_pw);
+		new_pw = encodeNewPw;
+		
+		return udao.updateUser(user_id, new_pw, new_phone);
+	}
+
+	@Override
+	public int emailExist(String user_email) {
+		
+		return udao.selectCntByEmail(user_email);
 	}
 
 	

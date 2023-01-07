@@ -39,8 +39,8 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="587" />
-		<property name="username" value="myeonk" />
-		<property name="password" value="Aldus6238!" />
+		<property name="username" value="aleod1007" />
+		<property name="password" value="rkdaldus798" />
 		<!-- 보안연결 SSL과 관련된 설정 -->
 		<property name="javaMailProperties">
 			<props>

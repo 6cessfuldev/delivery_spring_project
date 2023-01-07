@@ -12,11 +12,17 @@
 			<div id="box">
 				<input type="email" class="input email_input" name="user_email" id="user_email"
 					placeholder="Email"><br><br>
-				<button type="button" class="eBtn" onclick="add_checkBox()">전송</button>
+				<!-- <div><font id="email_feedback" size="2"></font></div> -->
+				<div class="email_button">
+					<button type="button" class="eBtn" onclick="add_checkBox()">전송</button>
+				</div>
+				<div class="clearfix"></div>
+				<span id="email_feedback"></span>
 			</div>
 			<div id="id-box">
 				<input type="text" class="input" name="user_id" id="user_id" placeholder="ID"><br><br>
-				<div><font id="id_feedback" size="2"></font></div>
+				<!-- <div><font id="id_feedback" size="2"></font></div> -->
+				<span id="id_feedback"></span>
 			</div>
 			<input type="password" class="input" name="user_pw" id="user_pw" placeholder="Password"><br><br>
 			<input type="password" class="input" name="user_pwCheck" id="user_pwCheck"

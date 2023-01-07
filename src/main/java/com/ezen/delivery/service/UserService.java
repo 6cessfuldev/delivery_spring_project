@@ -20,5 +20,11 @@ public interface UserService {
 
 	int updatePw(String getEmail, String new_pw);
 
+	UserVO getUserDetail(String user_id);
+
+	int modifyUserInfo(String user_id, String new_pw, String new_phone);
+
+	int emailExist(String user_email);
+
 
 }

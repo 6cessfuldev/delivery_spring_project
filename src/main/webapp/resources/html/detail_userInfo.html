@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+	<script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
+	<script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
+	<link type="text/css" rel="stylesheet" href="/resources/css/header.css">
+	<link type="text/css" rel="stylesheet" href="/resources/css/userInfo.css">
+
+</head>
+
+<body>
+	<header class="pt-2">
+		<a href="/" class="logo">
+			<img src="/resources/source/logo2.png" alt="logo" id="logo_img" class="bi me-2" width="200" height="120">
+		</a>
+
+		<ul class="nav nav-pills pt-1">
+			<li class="nav-item">
+				<div class="box"><a href="#" class="nav-link" aria-current="page">로그인</a></div>
+			</li>
+			<li class="nav-item">
+				<div class="box2"><a href="#" class="nav-link">장바구니</a></div>
+			</li>
+		</ul>
+	</header>
+
+	<style>
+		footer {
+			color: grey;
+		}
+
+		footer a {
+			color: grey;
+			text-decoration: none;
+		}
+
+		#div_not {
+			text-align: center;
+			padding-top: 15px;
+			border-bottom: 1px solid grey;
+			border-top: 1px solid grey;
+		}
+
+		.container {
+			width: 100%;
+		}
+
+		#notice {
+			font-size: 12px;
+		}
+
+		.footer-com {
+			margin-top: 15px;
+		}
+
+		.footer-com-name {
+			font-size: 15px;
+			color: black;
+			font-weight: 700;
+		}
+
+		.callcenter {
+			font-size: 20px;
+			font-weight: 800;
+			margin-right: 10px;
+		}
+
+		#p-2 {
+			font-size: 10px;
+		}
+
+		@media screen and (max-width: 1200px) {
+
+			#img_a {
+				display: none;
+			}
+		}
+	</style>
+
+<div class="wrap-sign">
+	<div class="box-sign">
+			<img src="/resources/source/logo2.png" class="logoImg"><br>
+			<div id="box">
+				<input type="email" class="input email_input" name="user_email" id="user_email"
+					value="${ses.user_email }" readonly="readonly"><br><br>
+			</div>
+			<div id="id-box">
+				<input type="text" class="input" name="user_id" id="user_id" value="${ses.user_id }" readonly="readonly"><br><br>
+			</div>
+			<input type="text" class="input" name="user_pw" id="user_pw" value="**********" ><br><br>
+			<input type="text" class="input" name="user_pwCheck" id="user_pwCheck"
+				value="**********" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_name" id="user_name" value="${ses.user_name }" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_birth" id="user_birth" value="${ses.user_birth }" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_phone" id="user_phone"
+				value="${ses.user_phone }" readonly="readonly"><br><br>
+			<input type="button" onclick="location.href='/member/modify_userInfo?user_id=${ses.user_id}'" class="input modBtn" value="수정"><br>
+			<!-- <input type="button" onclick="location.href='/member/remove_userInfo?user_id=${ses.user_id}'" class="input delBtn" value="탈퇴"><br> -->
+	</div>
+</div>
+
+	<footer class="footer mt-auto py-3 bg-light">
+		<div id="div_not" ">
+		<p id=" notice">공지사항 &nbsp;|&nbsp; <a href="#" id="li_a">인재채용</a> &nbsp;|&nbsp; <a href="#" id="li_a">이용약관</a>
+			&nbsp;|&nbsp; <a href="#" id="li_a">개인정보처리방침</a> &nbsp;|&nbsp; <a href="#" id="li_a">청소년보호정책</a> &nbsp;|
+			&nbsp;<a href="#" id="li_a">고객센터</a></p>
+		</div>
+		<div class="container pt-3 d-flex">
+			<a href="#" id="img_a" class="mx-4"><img id="logo" src="/resources/source/logo2.png"
+					width="130px"></img></a>
+			<div class="footer-com">
+				<p class="footer-com-name">주식회사 장대한상상
+				<p>사업자등록번호 : 123-12345-1234&nbsp; | 이메일 : KYK@ezen.com &nbsp;| 주소 : 인천 남동구 인주대로 593 엔타스빌딩 12층&nbsp; |
+					대표이사 : KYK</p>
+				<span class="callcenter">고객만족센터 0000-0000</span><span id="p-1">24시간, 연중무휴</span>
+				<br> <br>
+				<p id="p-2">주식회사 위대한상상은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품/ 거래정보 및 거래와 관련하여 요기요에 등록된 판매자의 고의 또는 과실로 소비자에게
+					발생하는 손해에 대해 주식회사 위대한상상은 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. Copyright
+					MUGAYO. All Rights Reserved.</p>
+			</div>
+
+
+		</div>
+	</footer>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+</body>
+
+</html>

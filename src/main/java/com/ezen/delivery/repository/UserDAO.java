@@ -12,14 +12,18 @@ public interface UserDAO {
 
 	int insertUser(UserVO uvo);
 
-//	UserVO selectCntById(String user_id);
-
-	int selectId(String user_id);
+	int selectCntById(String user_id);
 
 	List<String> selectAllId();
 
 	UserVO findIdByEmail(String user_email);
 
 	int updatePw(@Param("getEmail") String getEmail, @Param("new_pw") String new_pw);
+
+	UserVO selectUserOne(String user_id);
+
+	int updateUser(@Param("user_id") String user_id, @Param("new_pw") String new_pw, @Param("new_phone") String new_phone);
+
+	int selectCntByEmail(String user_email);
 
 }
