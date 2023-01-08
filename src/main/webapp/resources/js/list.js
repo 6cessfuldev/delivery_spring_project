@@ -169,7 +169,15 @@ $(".category").children('ul').children('li').click(function(){
     $("#addr-form").submit();
 })
 
+//셀렉 태그 값 변경 시 졍렬 순서 기준에 따라 새로 리스트 가져오기
+$("#search-option").on("change", ()=>{
+	let index = $("#search-option option").index($("#search-option option:selected"));
+	console.log(index);
+	$("#order").val(index);
+	$("#addr-form").submit();
+})
 
+//infinte scolling
 const listEnd = document.querySelector("#endList");
 const option = {
     root: null,

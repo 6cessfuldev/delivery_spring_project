@@ -1,7 +1,5 @@
 package com.ezen.delivery.domain;
 
-import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,5 +27,4 @@ public class DinerVO {
 	private String diner_category;
 	private String diner_addr_lng;
 	private String diner_addr_lat;
-
 }

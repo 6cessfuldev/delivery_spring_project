@@ -23,11 +23,18 @@ public class DinerServiceImpl implements DinerService {
 
 	@Inject
 	ReviewImgDAO ridao;
+	
 	@Inject
 	ReviewDAO rdao;
-	
+
 	@Override
 	public List<DinerVO> getList() {
+		
+		return ddao.selectListAll();
+	}
+	
+	@Override
+	public List<DinerVO> getListFirst() {
 		return ddao.selectListFirst();
 	}
 
@@ -50,5 +57,19 @@ public class DinerServiceImpl implements DinerService {
 	public DinerVO getDiner(int diner_code) {
 		return ddao.selectDiner(diner_code);
 	}
+
+	@Override
+	public int update(DinerVO dvo) {
+		return ddao.update(dvo);
+		
+	}
+
+	@Override
+	public int remove(int diner_code) {
+		
+		return ddao.delete(diner_code);
+	}
+
+
 
 }

@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.delivery.repository.DinerDAO">
+
+<select id="selectListAll" resultType="com.ezen.delivery.domain.DinerVO">
+	select * from diner
+</select>
+
 <select id="selectListFirst" resultType="com.ezen.delivery.domain.DinerVO">
 	select * from diner limit 0, 20
 </select>
@@ -23,6 +28,17 @@ insert into diner(diner_file_code, diner_name, diner_address, diner_min_pay, din
 </insert>
 
 <select id="selectDiner" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner where diner_code = #{diner_code}
+	select diner_code, diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
+			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point), ST_Y(diner_addr_point) from diner where diner_code = #{diner_code}
 </select>
+
+<update id="update">
+	update diner set diner_file_code=#{diner_file_code}, diner_name=#{diner_name}, diner_address=#{diner_address}, diner_min_pay=#{diner_min_pay}, diner_notice=#{diner_notice}, 
+			diner_open_time=#{diner_open_time}, diner_close_time=#{diner_close_time}, diner_method_pay=#{diner_method_pay}, diner_business_name=#{diner_business_name}, 
+			diner_company_num=#{diner_company_num}, diner_category=#{diner_category}, diner_addr_point=POINT(#{diner_addr_lng}, #{diner_addr_lat}) where diner_code=#{diner_code}
+</update>
+
+<delete id="delete">
+	delete from diner where diner_code = #{diner_code}
+</delete>
 </mapper>

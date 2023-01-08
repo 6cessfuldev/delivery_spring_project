@@ -43,7 +43,7 @@ public class DinerController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<DinerVO> list = dsv.getList();
+		List<DinerVO> list = dsv.getListFirst();
 		model.addAttribute("list",list);
 		return "/diner/list";
 	}
@@ -76,7 +76,7 @@ public class DinerController {
 		log.info("diner_code : "+diner.getDiner_code());
 		log.info("diner_name : "+diner.getDiner_name());
 		log.info("diner_address : "+diner.getDiner_address());
-		List<FoodVO> foodList = fsv.getFoodByDinerCode(diner_code);
+		List<FoodVO> foodList = fsv.getListByDinerCode(diner_code);
 		model.addAttribute("foodList",foodList);
 		model.addAttribute("diner",diner);
 	}
