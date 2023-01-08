@@ -156,10 +156,3 @@ function setThumbnail(event) {
    
 }
 
-function fileDelete(fileNum){
-    var no = fileNum.replace(/[^0-9]/g, "");
-    content_files[no].is_delete = true;
-	$('#' + fileNum).remove();
-	fileCount --;
-    console.log(content_files);
-}

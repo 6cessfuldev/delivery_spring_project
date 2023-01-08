@@ -300,12 +300,17 @@
                                 <!-- 이미지파일 등록 -->
                             <div class="review_multiplebox">
 				                 <input type="file" id="review_multiple" name="files[]" accept="image/*" onchange="readFile2('files[]');" style="display: none" multiple="multiple">
-				                <!--  <button type="button" id="trigger">첫번째 사진</button>
-				                 <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple> -->
+				                
+				                 <!-- <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple> -->
 								 <button type="button" id="trigger">사진</button>
+								 <!-- <button type="button" id="delBtn">X</button> -->
 				                 <div id="image_container">		
-									
+									<!-- <button type="button" id="delBtn">X</button> -->
 				                 </div>
+				                  <div id="fileDelet">
+								      <!-- <a href="#" class="preview-edit">수정</a> -->
+								      <a href="#" id="delBtn">X</a>
+								    </div>
 				         	</div>      
 									<button type="button" id="regBtn" class="review_insert">완료</button>
                             <!-- </form> --> 
@@ -543,30 +548,34 @@
 	</div>
 
 </main>
-<<script type="text/javascript">
-function readFile2(fileNames) {
+<script type="text/javascript">
+
+
+  function readFile2(fileNames) {
     const target = document.getElementsByName(fileNames);
     const fileLength = target[0].files.length;
+ 	console.log(fileLength);
       if (fileLength<1) return;
-      
+
       $.each(target[0].files, function(index, file){
           const reader = new FileReader();
           reader.onload = function(e) {
               
               var img = document.createElement("img");
            	  img.setAttribute("src", e.target.result);
-           	
+				console.log("index"+index);
               document.querySelector("div#image_container").appendChild(img);
-              //요 fileData로 파일 내 텍스트가 읽어드려진다.
-          }
+              
+           }
           reader.readAsDataURL(event.target.files[index]);
-      });
- 
-}
-
-
-
-
+      }); 
+ } 
+$('#review_multiple').change(readFile2);
+$('#fileDelet').on('click', '#delBtn', function () {
+   $("#image_container").empty()
+    $("#review_multiple").val("");
+});
+//그 다음 리뷰 등록하면 나오는 창 만들고 별평점해야함
 
 </script>
 <!--    <script type="text/javascript">
