@@ -139,7 +139,8 @@ public class MemberController {
 		int emailExisted = usv.emailExist(user_email);
 		log.info("" + emailExisted);
 		
-		return (emailExisted > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.OK));
+		return (emailExisted > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
 	
 	
@@ -152,7 +153,8 @@ public class MemberController {
 		int existed = usv.isExist(user_id);
 		log.info("" + existed);
 		
-		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.OK));
+		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.OK));
 							
 	}
 	
@@ -185,6 +187,8 @@ public class MemberController {
 	@GetMapping({"/detail_userInfo", "/modify_userInfo" })
 	public void userInfo() {}
 	
+	// 회원 정보 수정
+
 	@PostMapping("/modify_userInfo")
 	public ResponseEntity<String> modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session){
 		log.info(user_id);
@@ -199,15 +203,31 @@ public class MemberController {
 		// DB 변경
 		int modUser = usv.modifyUserInfo(user_id, new_pw, new_phone);
 		log.info("" + modUser);
-		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 	
+	// 회원 탈퇴
+	
+	@PostMapping("/remove_userInfo")
+	public ResponseEntity<String> removeUserInfo(String user_id, HttpServletRequest req){
+		log.info(user_id);
+		
+		req.getSession().removeAttribute("user");
+		req.getSession().invalidate();
+		
+		int delUser = usv.removeUserInfo(user_id);
+		log.info("" + delUser);
+		
+		return ( delUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)); 
+	}
 	
 	// 로그아웃
 	
 	@GetMapping("/logout")
-	public String logoutGet(Model model, HttpServletRequest req) {
-		req.getSession().removeAttribute("ses");
+	public String logoutGet(HttpServletRequest req) {
+		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
 		return "redirect:/";
 	}
@@ -224,7 +244,8 @@ public class MemberController {
 		UserVO user = usv.getId(user_email);
 		log.info("" + user);
 		
-		return (user.getUser_id() != null ? new ResponseEntity<String>(user.getUser_id(), HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+		return (user.getUser_id() != null ? new ResponseEntity<String>(user.getUser_id(), HttpStatus.OK) 
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
 	// 비밀번호 찾기
@@ -242,15 +263,11 @@ public class MemberController {
 		log.info(getEmail);
 		log.info(new_pw);
 			
-		int user = usv.updatePw(getEmail, new_pw);
-		log.info("" + user);
-		return (user > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+		int isEqual = usv.updatePw(getEmail, new_pw);
+		log.info("" + isEqual);
+		return ( isEqual > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
-
-	// 누가 썼어
-	
-	@GetMapping("/order")
-	public void orderGet() {}
 
 	
 	

@@ -21,8 +21,8 @@
 			<input type="text" class="input" name="user_name" id="user_name" value="${user.user_name }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_birth" id="user_birth" value="${user.user_birth }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_phone" id="user_phone"
-				value="${user.user_phone }" placeholder="Phone Number (-제외)"><br><br>
-			<input type="button" class="input modBtn" value="Update My Information"><br>
+				value="${user.user_phone }" placeholder="Phone Number (-포함)"><br><br>
+			<input type="button" class="updateBtn" value="Update My Information"><br>
         </form>
 	</div>
 </div>
