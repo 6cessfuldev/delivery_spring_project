@@ -182,6 +182,11 @@ public class MemberController {
 		}
 	}
 	
+	// 네이버 로그인
+	
+	@GetMapping("/callback")
+	public void callback() {}
+	
 	// 회원 정보
 	
 	@GetMapping({"/detail_userInfo", "/modify_userInfo" })

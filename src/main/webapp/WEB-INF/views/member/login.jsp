@@ -32,7 +32,7 @@
         </form>
             </div>
             <br>
-            <%
+    <%
     String clientId = "BwPXQd2HaNZ5eWMSnF7z";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http://localhost:8089/member/callback", "UTF-8");
     SecureRandom random = new SecureRandom();
@@ -42,8 +42,9 @@
          + "&redirect_uri=" + redirectURI
          + "&state=" + state;
     session.setAttribute("state", state);
- %>
-  <a href="<%=apiURL%>"><img  width="250" height="55" src="/resources/source/btnW.png"/></a>
+    %>
+  <a href="<%=apiURL%>"><img width="250" height="55" src="/resources/source/btnW.png"/></a>
+  
 	       
             <br><br><br>
             <img src="/resources/source/event.gif" id="login_img">
@@ -52,6 +53,7 @@
     </div>
     
 <jsp:include page="../include/footer2.jsp"></jsp:include>
+
 
 <script type="text/javascript">
 	const msg = '<c:out value="${msg}"/>';
