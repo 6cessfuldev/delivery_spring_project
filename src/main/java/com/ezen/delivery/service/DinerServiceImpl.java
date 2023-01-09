@@ -6,9 +6,15 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
+import com.ezen.delivery.domain.FileVO;
+import com.ezen.delivery.domain.FoodDTO;
+import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.repository.DinerDAO;
+import com.ezen.delivery.repository.FileDAO;
 import com.ezen.delivery.repository.ReviewDAO;
 import com.ezen.delivery.repository.ReviewImgDAO;
 
@@ -26,6 +32,15 @@ public class DinerServiceImpl implements DinerService {
 	
 	@Inject
 	ReviewDAO rdao;
+	
+	@Inject
+	FileDAO fidao;
+	
+	@Inject
+	FoodService fsv;
+	
+	@Inject
+	FileHandler fhd;
 
 	@Override
 	public List<DinerVO> getList() {
@@ -39,9 +54,18 @@ public class DinerServiceImpl implements DinerService {
 	}
 
 	@Override
-	public int register(DinerVO dvo) {
+	public int register(DinerDTO ddto) {
 		
-		return ddao.insert(dvo);
+		int isOk = 1;
+		
+		if(ddto.getFivo() != null) {
+			isOk *= fidao.insert(ddto.getFivo());
+			ddto.getDvo().setDiner_file_code(ddto.getFivo().getFile_code());
+		}
+		
+		isOk *= ddao.insert(ddto.getDvo()); 
+		
+		return isOk;
 	}
 
 	@Override
@@ -54,20 +78,44 @@ public class DinerServiceImpl implements DinerService {
 		return ddao.selectListbyCate(pvo);
 	}
 
-	public DinerVO getDiner(int diner_code) {
-		return ddao.selectDiner(diner_code);
+	public DinerDTO getDiner(int diner_code) {
+		
+		DinerVO dvo = ddao.selectDiner(diner_code);
+		FileVO fivo = fidao.selectByFileCode(dvo.getDiner_file_code());
+		
+		return new DinerDTO(dvo, fivo);
 	}
 
 	@Override
-	public int update(DinerVO dvo) {
-		return ddao.update(dvo);
+	public int update(DinerDTO ddto) {
+		
+		int isUp = 1;
+		
+		if(ddto.getFivo() != null) {
+			isUp *= fidao.update(ddto.getFivo());
+		}
+		
+		isUp *= ddao.update(ddto.getDvo());
+		
+		return isUp;
 		
 	}
 
 	@Override
 	public int remove(int diner_code) {
 		
-		return ddao.delete(diner_code);
+		int isDel = 1;
+		isDel *= fidao.delete(ddao.selectDiner(diner_code).getDiner_file_code());
+		isDel *= ddao.delete(diner_code);
+		
+		List<FoodDTO> fList = fsv.getListByDinerCode(diner_code);
+		
+		for (FoodDTO foodDTO : fList) {
+			isDel *= fhd.deleteFile(foodDTO.getFilevo());
+			isDel *= fsv.remove(foodDTO.getFoodvo().getFood_code());
+		}
+		
+		return isDel;
 	}
 
 

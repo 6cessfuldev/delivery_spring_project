@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div class="diner-notice">
-					<p>사장님 알림 <span>9월 7일부터 신규오픈 "인천상륙 덮글이" 인천 상륙 덮글이 우리나라 월드컵 16강 기원 리...</span></p>
+					<p>사장님 알림 <span>${diner.diner_notice}</span></p>
 				</div>
 			</div>
 
@@ -129,30 +129,26 @@
 							<div class="accordion-item">
 								<h2 class="accordion-header" id="flush-headingOne">
 									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-									인기메뉴
+									전체메뉴
 									</button>
 								</h2>
 								<div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 									<div class="accordion-body">
+									
+									<c:forEach items="${foodList}" var="food">
+														
 										<div class="diner-menu-card d-flex align-items-center justify-content-between">
 											<div class="diner-menu-table">
-												<p class="diner-menu-title">삼겹짜글이장교</p>
-												<p class="diner-menu-price">10,900원</p>
+												<p class="diner-menu-title">${food.foodvo.food_name}</p>
+												<p class="diner-menu-price">${food.foodvo.food_price }</p>
 											</div>
 											<div class="diner-menu-img">
-												<img src="/resources/source/forone.png" alt="" width="100px" height="100px">
+												<img src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}" alt="" width="100px" height="100px">
 											</div>
 										</div>
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
-											<div class="diner-menu-table">
-												<p class="diner-menu-title">삼겹짜글이장교</p>
-												<p class="diner-menu-combo">차돌+삼겹+햄+후라이2개+볶음김치+알단무지+날치알+후리가케밥+김가루</p>
-												<p class="diner-menu-price">10,900원</p>
-											</div>
-											<div class="diner-menu-img">
-												<img src="/resources/source/forone.png" alt="" width="100px" height="100px">
-											</div>
-										</div>
+					
+									</c:forEach>
+						
 									</div>
 								</div>
 							</div>

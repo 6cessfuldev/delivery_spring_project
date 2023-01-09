@@ -4,6 +4,12 @@ import com.ezen.delivery.domain.FileVO;
 
 public interface FileDAO {
 
-	void insert(FileVO filevo);
+	int insert(FileVO filevo);
+
+	FileVO selectByFileCode(int food_file_code);
+
+	int update(FileVO fivo);
+
+	int delete(int diner_file_code);
 
 }

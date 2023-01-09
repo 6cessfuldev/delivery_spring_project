@@ -7,12 +7,14 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
@@ -51,8 +53,10 @@ public class AdminController {
 	@GetMapping("/diner/register")
 	public void dinerRegister() {}
 
-	@GetMapping("/diner/insert")
-	public String dinerInsert(DinerVO dvo, @RequestParam List<String> category) {
+	@PostMapping("/diner/insert")
+	public String dinerInsert(DinerVO dvo, @RequestParam List<String> category, @RequestParam(value="file", required=false) MultipartFile file ) {
+		
+		DinerDTO ddto = new DinerDTO();
 		
 		String diner_category = "";
 		
@@ -61,7 +65,16 @@ public class AdminController {
 		}
 		dvo.setDiner_category(diner_category);
 		
-		int isOk = dsv.register(dvo);
+		ddto.setDvo(dvo);
+		
+		if(file!=null) {
+			FileVO fvo = fhd.uploadFiles(file);
+			ddto.setFivo(fvo);
+		}else {
+			log.info("file is null");
+		}
+		
+		int isOk = dsv.register(ddto);
 		log.info(dvo.toString());
 		
 		return "admin/diner/register";
@@ -70,10 +83,15 @@ public class AdminController {
 	@GetMapping("/diner/detail")
 	public String dinerDetail(int diner_code, Model model) {
 		log.info("diner detail "+diner_code);
-		DinerVO dvo = dsv.getDiner(diner_code);
-		model.addAttribute("diner", dvo);
+		DinerDTO ddto = dsv.getDiner(diner_code);
 		
-		List<FoodVO> list = fsv.getListByDinerCode(diner_code);
+		DinerVO dvo = ddto.getDvo();
+		FileVO fivo = ddto.getFivo();
+		
+		model.addAttribute("diner", dvo);
+		model.addAttribute("file", fivo);
+		
+		List<FoodDTO> list = fsv.getListByDinerCode(diner_code);
 		model.addAttribute("foodList", list);
 	
 		return "/admin/diner/detail";
@@ -81,22 +99,41 @@ public class AdminController {
 	
 	@GetMapping("/diner/modify")
 	public void dinerModify(int diner_code, Model model) {
-		DinerVO dvo = dsv.getDiner(diner_code);
-		log.info(dvo.toString());
-		model.addAttribute("diner", dvo);
+		DinerDTO ddto = dsv.getDiner(diner_code);
+		log.info(ddto.getDvo().toString());
+		model.addAttribute("diner", ddto.getDvo());
+		model.addAttribute("file", ddto.getFivo());
 	}
 	
 	@GetMapping("/diner/update")
-	public String dinerUpdate(DinerVO dvo, @RequestParam List<String> category, Model model) {
+	public String dinerUpdate(DinerVO dvo, @RequestParam List<String> category, @RequestParam(value="file", required=false) MultipartFile file, Model model) {
+		
+		int isUp = 1;
+		
+		DinerDTO ddto = new DinerDTO();
+		
+		if(file != null) {
+				
+			FileVO fivo = dsv.getDiner(dvo.getDiner_code()).getFivo();
+			
+			//이전 이미지파일 삭제
+			isUp *= fhd.deleteFile(fivo);
+					
+			//입력받은 이미지 파일 등록			
+			fivo = fhd.uploadFiles(file);
+			ddto.setFivo(fivo);
+		}
 		
 		String diner_category = "";
-		
 		for (String string : category) {
 			diner_category+=string;
 		}
 		dvo.setDiner_category(diner_category);
 		
-		int isOk = dsv.update(dvo);
+		ddto.setDvo(dvo);
+		
+		isUp *=  dsv.update(ddto);
+		
 		log.info(dvo.toString());
 		
 		model.addAttribute("diner", dsv.getDiner(dvo.getDiner_code()));
@@ -113,18 +150,26 @@ public class AdminController {
 	
 	@GetMapping("/food/register")
 	public String foodRegister(int diner_code, Model model) {
-		DinerVO dvo = dsv.getDiner(diner_code);
+		DinerVO dvo = dsv.getDiner(diner_code).getDvo();
 		model.addAttribute("diner", dvo);
 		
 		return "admin/food/register";
 	}
 	
-	@GetMapping("food/insert")
-	public String foodInsert(FoodVO fvo, @RequestParam(name="file" ,required =false)MultipartFile file, Model model) {
+	@PostMapping("food/insert")
+	public String foodInsert(FoodVO fvo, @RequestParam(value="file" ,required =false)MultipartFile file, Model model) {
+
+		FoodDTO fdto = new FoodDTO();
 		
-		FileVO fivo = fhd.uploadFiles(file); 
+		if(file != null) {
+			
+			FileVO fivo = fhd.uploadFiles(file); 
+			fdto.setFilevo(fivo);
+		}else {
+			log.info("file is Null");
+		}
 		
-		FoodDTO fdto = new FoodDTO(fvo, fivo);
+		fdto.setFoodvo(fvo);
 		
 		int isOk = fsv.register(fdto);
 		log.info("insert food "+(isOk>0?"success":"fail"));
@@ -135,8 +180,10 @@ public class AdminController {
 	@GetMapping("food/detail")
 	public String foodDetail(int food_code, Model model) {
 		
-		FoodVO fvo = fsv.getFood(food_code);
-		model.addAttribute("food", fvo);
+		FoodDTO fdto = fsv.getDetail(food_code);
+		
+		model.addAttribute("file", fdto.getFilevo());
+		model.addAttribute("food", fdto.getFoodvo());
 		
 		return "/admin/food/detail";
 	}

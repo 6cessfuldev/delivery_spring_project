@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
-import com.ezen.delivery.domain.FoodVO;
+import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.repository.UserDAO;
 import com.ezen.delivery.service.DinerService;
@@ -72,11 +73,14 @@ public class DinerController {
 	@GetMapping("/detail")
 	public void detail(@RequestParam(name="diner_code" )int diner_code, Model model) {
 		log.info(""+diner_code);
-		DinerVO diner = dsv.getDiner(diner_code);
+		
+		DinerDTO ddto = dsv.getDiner(diner_code);
+		
+		DinerVO diner = ddto.getDvo();
 		log.info("diner_code : "+diner.getDiner_code());
 		log.info("diner_name : "+diner.getDiner_name());
 		log.info("diner_address : "+diner.getDiner_address());
-		List<FoodVO> foodList = fsv.getListByDinerCode(diner_code);
+		List<FoodDTO> foodList = fsv.getListByDinerCode(diner_code);
 		model.addAttribute("foodList",foodList);
 		model.addAttribute("diner",diner);
 	}

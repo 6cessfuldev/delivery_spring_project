@@ -1,11 +1,13 @@
 package com.ezen.delivery.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.repository.FileDAO;
@@ -20,13 +22,21 @@ public class FoodServiceImpl implements FoodService {
 	FoodDAO fdao;
 	
 	@Inject
-	FileDAO fido;
+	FileDAO fidao;
 	
 	
 	@Override
-	public List<FoodVO> getListByDinerCode(int diner_code) {
+	public List<FoodDTO> getListByDinerCode(int diner_code) {
 		
-		return fdao.selectList(diner_code);
+		List<FoodDTO> fodtoList = new ArrayList<FoodDTO>();
+		List<FoodVO> fovoList = fdao.selectList(diner_code);
+		
+		for (FoodVO fovo : fovoList) {
+			FileVO fivo = fidao.selectByFileCode(fovo.getFood_file_code());
+			fodtoList.add(new FoodDTO(fovo, fivo));
+		}
+		
+		return fodtoList;
 	}
 
 	@Override
@@ -35,9 +45,9 @@ public class FoodServiceImpl implements FoodService {
 		int isOk = 1;
 		
 		if(fdto.getFilevo() != null) {
-			fido.insert(fdto.getFilevo());			
+			isOk *= fidao.insert(fdto.getFilevo());			
 		}
-		
+		fdto.getFoodvo().setFood_file_code(fdto.getFilevo().getFile_code());
 		isOk *= fdao.insert(fdto.getFoodvo());
 		
 		return isOk; 
@@ -59,6 +69,15 @@ public class FoodServiceImpl implements FoodService {
 	public int remove(int food_code) {
 
 		return fdao.delete(food_code);
+	}
+
+	@Override
+	public FoodDTO getDetail(int food_code) {
+
+		FoodVO fvo = fdao.selectByFoodCode(food_code);
+		FileVO fivo = fidao.selectByFileCode(fvo.getFood_file_code());
+		
+		return new FoodDTO(fvo, fivo);
 	}
 
 
