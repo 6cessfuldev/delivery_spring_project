@@ -141,18 +141,18 @@ function regist(){
     }
 // }
         
-function setThumbnail(event) {
-    var reader = new FileReader();
+// function setThumbnail(event) {
+//     var reader = new FileReader();
 
-    reader.onload = function(event) {
-    	var img = document.createElement("img");
-     	img.setAttribute("src", event.target.result);
-        console.log(event.target.result[0]);
-        console.log(event.target.result[1]);
-        document.querySelector("div#image_container").appendChild(img);
-    };
+//     reader.onload = function(event) {
+//     	var img = document.createElement("img");
+//      	img.setAttribute("src", event.target.result);
+//         console.log(event.target.result[0]);
+//         console.log(event.target.result[1]);
+//         document.querySelector("div#image_container").appendChild(img);
+//     };
 
-    reader.readAsDataURL(event.target.files[0]);
+//     reader.readAsDataURL(event.target.files[0]);
    
-}
+// }
 
