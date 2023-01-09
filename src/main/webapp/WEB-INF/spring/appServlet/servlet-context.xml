@@ -23,6 +23,25 @@
 	
 	<context:component-scan base-package="com.ezen.delivery" />
 	
+	<!-- 네이버 아이디로 로그인 -->
+	<!-- <beans:bean id="naverClientID" class="java.lang.String">
+        <beans:constructor-arg value="BwPXQd2HaNZ5eWMSnF7z" />
+	</beans:bean>
+	<beans:bean id="naverClientSecret" class="java.lang.String">
+        <beans:constructor-arg value="DiPkQjdmfi" />
+	</beans:bean>
+	<beans:bean id="naverRedirectUrl" class="java.lang.String">
+        <beans:constructor-arg value="http://localhost:8089/member/callback" />
+	</beans:bean>
+    
+	<beans:bean id="naverSns" class="com.ezen.delivery.auth.SNS">
+        <beans:constructor-arg value="naver" />
+        <beans:constructor-arg ref="naverClientID" />
+        <beans:constructor-arg ref="naverClientSecret" />
+        <beans:constructor-arg ref="naverRedirectUrl" />
+	</beans:bean> -->
+	
+	
 	
 	
 </beans:beans>
