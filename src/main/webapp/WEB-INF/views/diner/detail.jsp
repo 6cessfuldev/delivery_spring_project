@@ -270,20 +270,25 @@
 							<p>리뷰 472개 / 사장님댓글 452개</p>
 						</div>
 
-						<div class="review">
+						
 					    <div class="review_box">
-					   <!--  <form action="/review/upload.php" method="post" enctype="multipart/form-data"> -->
-                      <!--  <form action="/review/upload" method="post" enctype="multipart/form-data"> -->
-                                <div class="review_spanBox">
-                                    <span class="review_span">얼마나 만족하셨나요?</span><br>
-                                    <span class="review_starT">맛&nbsp;&nbsp;&nbsp;</span> <span class="review_star">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></span> 
-                                    <span class="review_starT">양&nbsp;&nbsp;&nbsp;</span> <span class="review_star">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></span> 
-                                    <span class="review_starT">배달&nbsp;&nbsp;&nbsp;</span> <span class="review_star">
-                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></span> 
-                                </div>
-                                <br>
+                              <div class="review_rating">
+                                 <div class="review_star">얼마나 만족하셨나요?</div>
+                                 <div class="rating">
+                                 	<input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+					                <label for="rating1"></label>
+					                <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
+					                <label for="rating2"></label>
+					                <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
+					                <label for="rating3"></label>
+					                <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
+					                <label for="rating4"></label>
+					                <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+					                <label for="rating5"></label>
+                                 </div>
+                              </div>
+                                
+                                
                                 
 		                     <%-- <span id="revWriter">${ses.user_id}</span> --%>
 		                    	<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
@@ -296,26 +301,39 @@
                                 <input type="text" name="review_amount_score" value="0" hidden>
                                 <input type="text" name="review_delivery_score" value="0" hidden> -->
                                 
-                 <!-- onchange="setThumbnail(event); -->
                                 <!-- 이미지파일 등록 -->
                             <div class="review_multiplebox">
 				                 <input type="file" id="review_multiple" name="files[]" accept="image/*" onchange="readFile2('files[]');" style="display: none" multiple="multiple">
-				                
-				                 <!-- <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple> -->
+				            
 								 <button type="button" id="trigger">사진</button>
-								 <!-- <button type="button" id="delBtn">X</button> -->
 				                 <div id="image_container">		
-									<!-- <button type="button" id="delBtn">X</button> -->
 				                 </div>
-				                  <div id="fileDelet">
-								      <!-- <a href="#" class="preview-edit">수정</a> -->
+				         <!--          <div id="fileDelet">
 								      <a href="#" id="delBtn">X</a>
-								    </div>
+								    </div> -->
 				         	</div>      
 									<button type="button" id="regBtn" class="review_insert">완료</button>
                             <!-- </form> --> 
+                            	
                         </div>
+                            
+                            	<!-- 등록 후 출력 화면 -->
+                         <div class="review">
+                      
+                            <div id="review-head">
+                      
+	                            	<span class="reviewer-id"></span><span class="review-time-ago"></span><a href="#">신고</a>
+	                            	<div class="review-point"></div>
+									<div class="review-img"></div>
+									<div class="review-menu"></div>
+									<div class="review-content"></div>
+									
+							</div>
+						
+                            </div>	
                         
+                        
+                        <div class="review">
 							<div class="review-head">
 								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
 							</div>
@@ -331,37 +349,6 @@
 							</div>
 						</div>
 
-						<div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div>
-
-						<div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div>
 
 						<div class="review">
 							<div class="review-head">
@@ -551,37 +538,33 @@
 <script type="text/javascript">
 
 
-  function readFile2(fileNames) {
+function readFile2(fileNames) {
     const target = document.getElementsByName(fileNames);
     const fileLength = target[0].files.length;
- 	console.log(fileLength);
+    console.log(fileLength);
       if (fileLength<1) return;
 
       $.each(target[0].files, function(index, file){
           const reader = new FileReader();
           reader.onload = function(e) {
-              
-              var img = document.createElement("img");
-           	  img.setAttribute("src", e.target.result);
-				console.log("index"+index);
-              document.querySelector("div#image_container").appendChild(img);
+             var div = document.createElement("div");
+              var xBtn = document.createElement("button");
+              xBtn.innerText="X";
+              xBtn.addEventListener("click", function(){
+                 div.remove();
+              }) 
+              var img = document.createElement("img"); 
+                img.setAttribute("src", e.target.result);               
+               div.appendChild(xBtn);
+               div.appendChild(img);
+           console.log("index"+index);
+              document.querySelector("div#image_container").appendChild(div);
               
            }
           reader.readAsDataURL(event.target.files[index]);
       }); 
  } 
-$('#review_multiple').change(readFile2);
-$('#fileDelet').on('click', '#delBtn', function () {
-   $("#image_container").empty()
-    $("#review_multiple").val("");
-});
-//그 다음 리뷰 등록하면 나오는 창 만들고 별평점해야함
-
 </script>
-<!--    <script type="text/javascript">
-   const diner_codeVal = '<c:out value="${diner.diner_code}" />';
-   console.log(diner_codeVal);
-   </script> -->
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
