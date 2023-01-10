@@ -1,7 +1,12 @@
 package com.ezen.delivery.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.util.List;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -9,7 +14,8 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.xmlbeans.impl.repackage.Repackager;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
@@ -20,15 +26,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ezen.delivery.Handler.ApiMemberProfile;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.UserService;
-import com.google.common.net.MediaType;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -186,6 +190,27 @@ public class MemberController {
 	
 	@GetMapping("/callback")
 	public void callback() {}
+	
+	
+	// 확인용
+	
+	@PostMapping("/test")
+	public void naverTest(String accessToken, Model model, HttpServletRequest req) {
+		
+		UserVO naverUvo = ApiMemberProfile.getProfile(accessToken);
+		
+		UserVO uvo = usv.getUserByID(naverUvo.getUser_id());
+		
+		if(uvo == null) {
+			usv.signUp(naverUvo);
+		} else {
+			HttpSession session = req.getSession();
+			session.setAttribute("naverUser", uvo);
+		}
+		
+		log.info(naverUvo.toString());
+		
+	}
 	
 	// 회원 정보
 	

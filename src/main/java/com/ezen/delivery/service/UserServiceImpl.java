@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 		UserVO tmpUser = udao.getUser(uvo.getUser_id());
 
 		if(tmpUser != null) {
-			log.info("존재하는 이메일 입니다.");
+			log.info("존재하는 아이디 입니다.");
 			return false;
 		}
 		
