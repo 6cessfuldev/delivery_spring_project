@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/userInfo.css">
@@ -22,7 +23,9 @@
 			<input type="text" class="input" name="user_phone" id="user_phone"
 				value="${user.user_phone }" readonly="readonly"><br><br>
 			<div id="modBtn-box">
+			<c:if test="${user.user_pw != null }">
 				<input type="button" onclick="location.href='/member/modify_userInfo'" class="btn modBtn" value="정보수정"><br>
+			</c:if>
 			</div>
 			<div id="delBtn-box">
 				<input type="button" class="btn delBtn" value="회원탈퇴"><br>

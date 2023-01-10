@@ -26,9 +26,11 @@
 			<c:if test="${user.user_id != null }">
 			  <li class="nav-item"><div class="box"><a href="/member/logout" class="nav-link" aria-current="page">로그아웃</a></div></li>
 			</c:if>
+			<c:if test="${user.user_id != null }">
 			  <li class="nav-item"><div class="box2"><a href="" class="nav-link">장바구니</a></div></li>
-			 <c:if test="${user.user_id != null }">
+			</c:if>
+			<c:if test="${user.user_id != null }">
 			  <li class="nav-item"><div class="box2"><a href="/member/detail_userInfo" class="nav-link">회원정보</a></div></li>
-			 </c:if>
+			</c:if>
 		</ul>
 	  </header>

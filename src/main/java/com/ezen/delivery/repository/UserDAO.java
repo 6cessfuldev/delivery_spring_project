@@ -10,8 +10,10 @@ public interface UserDAO {
 
 	UserVO getUser(String user_id);
 
-	int insertUser(UserVO uvo);
+	boolean insertUser(UserVO uvo);
 
+	boolean insertNaverUser(UserVO naverUser);
+	
 	int selectCntById(String user_id);
 
 	List<String> selectAllId();
@@ -29,5 +31,6 @@ public interface UserDAO {
 	UserVO getUserPw(String getEmail);
 
 	int deleteUser(String user_id);
+
 
 }

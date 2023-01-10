@@ -40,9 +40,14 @@ public class UserServiceImpl implements UserService {
 		String pw = uvo.getUser_pw();
 		String encodePw = passwordEncoder.encode(pw);
 		uvo.setUser_pw(encodePw);
-		
-		int isOk = udao.insertUser(uvo);
-		return true;
+	
+		return udao.insertUser(uvo);
+	}
+	
+	@Override
+	public boolean naverSignUp(UserVO naverUser) {
+		log.info(">>> naverSignUp check2");
+		return udao.insertNaverUser(naverUser);
 	}
 
 	@Override
@@ -127,6 +132,8 @@ public class UserServiceImpl implements UserService {
 		
 		return udao.deleteUser(user_id);
 	}
+
+
 
 	
 	

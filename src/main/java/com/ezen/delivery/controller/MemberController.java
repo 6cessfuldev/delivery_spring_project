@@ -1,12 +1,6 @@
 package com.ezen.delivery.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -14,8 +8,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
@@ -191,24 +183,31 @@ public class MemberController {
 	@GetMapping("/callback")
 	public void callback() {}
 	
-	
-	// 확인용
-	
-	@PostMapping("/test")
-	public void naverTest(String accessToken, Model model, HttpServletRequest req) {
+	@PostMapping("/naverLogin")
+	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
 		
-		UserVO naverUvo = ApiMemberProfile.getProfile(accessToken);
+		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
+		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
 		
-		UserVO uvo = usv.getUserByID(naverUvo.getUser_id());
+		log.info(naverUser.toString());
 		
-		if(uvo == null) {
-			usv.signUp(naverUvo);
-		} else {
+		if(getUser == null) { // 미가입 회원인 경우
+			
+			boolean isUp = usv.naverSignUp(naverUser);
+			
+			if (isUp) {
+				HttpSession session = req.getSession();
+				session.setAttribute("user", naverUser);
+				model.addAttribute("user", naverUser);
+			} 
+			
+		} else { // 이미 가입한 회원인 경우
 			HttpSession session = req.getSession();
-			session.setAttribute("naverUser", uvo);
+			session.setAttribute("user", getUser);
+			model.addAttribute("user", getUser);
 		}
 		
-		log.info(naverUvo.toString());
+		return "/member/naverLogin";
 		
 	}
 	

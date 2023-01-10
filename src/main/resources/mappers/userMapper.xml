@@ -14,6 +14,11 @@
 		values (#{user_id}, #{user_email}, #{user_pw}, #{user_name}, #{user_phone}, #{user_birth})
 	</insert>
 	
+	<insert id="insertNaverUser">
+		insert into user (user_id, user_email, user_name, user_phone, user_birth, user_naver_id)
+		values (#{user_id}, #{user_email}, #{user_name}, #{user_phone}, #{user_birth}, #{user_naver_id})
+	</insert>
+	
 	<select id="selectCntByEmail" resultType="int">
 		select count(*) from user 
 		where user_email = #{user_email}
