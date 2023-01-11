@@ -30,8 +30,7 @@ public class ChoiceController {
 	public ResponseEntity<List<ChoiceDTO>> getChoice(@PathVariable("food_code")int food_code){
 		List<ChoiceDTO> list = csv.getList(food_code);
 		return  new ResponseEntity<List<ChoiceDTO>>(list, HttpStatus.OK);
-				
-
+		
 	}
 	
 }

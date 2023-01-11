@@ -42,5 +42,69 @@
 </table>
 <br>
 <br>
+
+<button type="button" class="addChoiceBtn">옵션추가</button>
+<br>
+<br>
+
+<div id="addChoiceBox"></div>
+
+
+<script>
+    $('.addChoiceBtn').click(function(){
+        const box = document.getElementById('addChoiceBox');
+        const newP = document.createElement('p');
+        newP.innerHTML = `<table>`;
+        newP.innerHTML += `<tr>`;
+        newP.innerHTML += `<th colspan="3">choice_title</th>`;
+        newP.innerHTML += `</tr>`;
+        newP.innerHTML += `<tr>`;
+        newP.innerHTML += `<td><input type="text" id="choice_title" placeholder="옵션 제목"></td>`;
+        newP.innerHTML += `<td><input type="number" placeholder="옵션 개수 입력"></td>`;
+        newP.innerHTML += `<td><input type="button" class="addSubBtn" value="생성"></td>`;
+        newP.innerHTML += `</tr>`;
+        newP.innerHTML += `</table>`;
+
+
+        newP.innerHTML += `<table>`;
+        newP.innerHTML += `<tr>`;
+        newP.innerHTML += `<th hidden>choice_code</th>`;
+        newP.innerHTML += `<th>subchoice_content</th>`;
+        newP.innerHTML += `<th>subchoice_price</th>`;
+        newP.innerHTML += `</tr>`;
+        newP.innerHTML += `<tr>`;
+        newP.innerHTML += `<td hidden><input type="text"></td>`;
+        newP.innerHTML += `<td><input type="text" placeholder="옵션 내용"></td>`;
+        newP.innerHTML += `<td><input type="text" placeholder="옵션 가격"></td>`;
+        newP.innerHTML += `</tr>`;
+        newP.innerHTML += `</table>`;
+
+
+
+    
+     
+        box.appendChild(newP);
+    })
+
+    
+
+</script>
+
+
+
+	
+		
+		
+		
+	
+	
+		
+		
+		
+	
+
+<form action="">
+
+</form>
 	
 <jsp:include page="../include/footer.jsp"></jsp:include>
