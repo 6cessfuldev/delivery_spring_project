@@ -40,7 +40,10 @@ $("#search-option").on("change", ()=>{
 	$("#addr-form").submit();
 })
 
+let modalAmount = 1;
+
 function openModal(food_code){
+  modalAmount=1;
   $("#modalTrigger").click();
   $.ajax({
     url: '/food/option/'+food_code,
@@ -55,5 +58,24 @@ function openModal(food_code){
       console.log(error);
     }
   })
-
 }
+
+function count(p){
+  console.log("click");
+  if(p == 'plus' && modalAmount<99){
+  	modalAmount++;
+  }else if(p == 'minus' && modalAmount>1){
+    modalAmount--;
+  }
+  $(".modal-amount").text(modalAmount);
+}
+
+$(".add-basket").click(function(){
+	console.log("add basket");
+	$(".btn-close").click();
+})
+
+$(".modal-order").click(function(){
+	console.log("order");
+	$(".btn-close").click();
+})

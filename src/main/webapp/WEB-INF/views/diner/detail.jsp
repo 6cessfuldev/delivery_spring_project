@@ -524,7 +524,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-6" id="exampleModalLabel">메뉴상세</h1>
@@ -543,18 +543,18 @@
        	  
        	  <div class="item-list-wrap p-3">
        	  	<div class="item-list-title">
-	  		<strong>치킨선택</strong>
-	  		<span>(필수 선택)</span>
+		  		<strong>치킨선택</strong>
+		  		<span>(필수 선택)</span>
        	  	</div>
        	  	<div class="item-list">
        	  		<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
 				  <label class="form-check-label" for="flexRadioDefault1">
 				    뼈
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
 				  <label class="form-check-label" for="flexRadioDefault2">
 				    순살
 				  </label>
@@ -563,7 +563,7 @@
        	  </div>
        	  
        	  <div class="item-list-wrap p-3">
-       	  	<div class="item-list-title py-3">
+       	  	<div class="item-list-title py-1">
 	  		<strong>치킨선택</strong>
 	  		<span>(필수 선택)</span>
        	  	</div>
@@ -589,12 +589,29 @@
        	  	</div>
        	  </div>
        	  
-       	  
+       	  <div class="modal-food-price d-flex justify-content-between py-2 px-3"> 
+		  	<strong class="pt-1">수량</strong>
+		  	
+		  	<div class="modal-amount-wrap d-flex">	  	
+			  	<a href="#" onClick='count("minus")'> ─ </a>
+			  	<div class="modal-amount">1</div> 
+			  	<a href="#" onClick='count("plus")'> ┼ </a> 
+		  	</div>
+		  </div>
+		  
+		  <div class="modal-total-price-wrap d-flex justify-content-between py-2 px-3"> 
+       	  	<strong>총 주문금액</strong>
+       	  	<div class="modal-total-price">
+       	  		<strong>29,800원</strong>
+       	  		<span>15,900원 이상 주문 시 할인</span>
+       	  		<span>(최소 주문 금액 ${diner.diner_min_pay}원)</span>
+       	  	</div>
+       	  </div>
        	  	
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="modal-footer d-flex">
+        <div class="add-basket py-3">장바구니에 넣기</div>
+        <div class="modal-order py-3">주문하기</div>
       </div>
     </div>
   </div>
