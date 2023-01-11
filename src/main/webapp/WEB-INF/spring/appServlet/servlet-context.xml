@@ -35,14 +35,25 @@
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 
-	<interceptors>
+
+	<!-- 개발 단계에는 번거로우니 주석 처리 -->
+	<!-- 지우지 말 것!!!!!!!!!!!!!!!!!! -->
+	<!-- <interceptors>
+		<interceptor>
+            <mapping path="/member/login"></mapping>
+            <beans:bean id="LoginInterceptor" class="com.ezen.delivery.interceptor.LoginInterceptor"></beans:bean>
+        </interceptor>
+        <interceptor>
+            <mapping path="/admin/**"></mapping>
+            <beans:bean id="AdminIntreceptor" class="com.ezen.delivery.interceptor.AdminInterceptor"></beans:bean>
+        </interceptor>
 		<interceptor>
 			<mapping path="/basket/**" />
 			<exclude-mapping path="/basket/add"/>
 			<beans:bean id="BasketInterceptor"
 				class="com.ezen.delivery.interceptor.BasketInterceptor" />
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 
 
 
