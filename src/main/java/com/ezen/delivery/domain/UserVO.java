@@ -20,7 +20,7 @@ public class UserVO {
 	private String user_phone;
 	private String user_birth;
 	private String user_naver_id;
-	private String user_reg_date;
-	private String user_mod_date;
+	private String user_register_date;
+	private String user_modify_date;
 
 }
