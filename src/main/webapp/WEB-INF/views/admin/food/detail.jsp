@@ -52,41 +52,46 @@
 
 <script>
     $('.addChoiceBtn').click(function(){
+    	
         const box = document.getElementById('addChoiceBox');
         const newP = document.createElement('p');
+        
         newP.innerHTML = `<table>`;
         newP.innerHTML += `<tr>`;
-        newP.innerHTML += `<th colspan="3">choice_title</th>`;
-        newP.innerHTML += `</tr>`;
-        newP.innerHTML += `<tr>`;
         newP.innerHTML += `<td><input type="text" id="choice_title" placeholder="옵션 제목"></td>`;
-        newP.innerHTML += `<td><input type="number" placeholder="옵션 개수 입력"></td>`;
+        newP.innerHTML += `<td><input type="number" id="inputCnt" placeholder="옵션 개수 입력"></td>`;
+        newP.innerHTML += `<td></td>`;
         newP.innerHTML += `<td><input type="button" class="addSubBtn" value="생성"></td>`;
         newP.innerHTML += `</tr>`;
-        newP.innerHTML += `</table>`;
-
-
-        newP.innerHTML += `<table>`;
-        newP.innerHTML += `<tr>`;
-        newP.innerHTML += `<th hidden>choice_code</th>`;
-        newP.innerHTML += `<th>subchoice_content</th>`;
-        newP.innerHTML += `<th>subchoice_price</th>`;
-        newP.innerHTML += `</tr>`;
-        newP.innerHTML += `<tr>`;
-        newP.innerHTML += `<td hidden><input type="text"></td>`;
-        newP.innerHTML += `<td><input type="text" placeholder="옵션 내용"></td>`;
-        newP.innerHTML += `<td><input type="text" placeholder="옵션 가격"></td>`;
-        newP.innerHTML += `</tr>`;
-        newP.innerHTML += `</table>`;
-
-
-
-    
-     
+        newP.innerHTML += `</table><br>`;
+        newP.innerHTML += `<div id="addSubBox"></div>`;
+        
         box.appendChild(newP);
-    })
+        
+        $('.addSubBtn').click(function(){
 
+            const cnt = $('#inputCnt').val();
+            
+            for(let i=0; i<cnt; i++){
+                const subBox = document.getElementById('addSubBox');
+                const newSubP = document.createElement('p');
     
+                newSubP.innerHTML += `<table>`;
+                newSubP.innerHTML += `<tr>`;
+                newSubP.innerHTML += `<td><input type="text" hidden></td>`;
+                newSubP.innerHTML += `<td><input type="text" placeholder="옵션 내용"></td>`;
+                newSubP.innerHTML += `<td><input type="text" placeholder="옵션 가격"></td>`;
+                newSubP.innerHTML += `</tr>`;
+                newSubP.innerHTML += `</table>`;
+    
+                subBox.appendChild(newSubP);
+            }
+
+        });
+    });
+    
+    
+   
 
 </script>
 

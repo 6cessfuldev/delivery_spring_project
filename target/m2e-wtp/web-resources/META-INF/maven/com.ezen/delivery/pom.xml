@@ -131,6 +131,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+
 
 		<!-- DB -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -241,19 +248,6 @@
 			<artifactId>jackson-dataformat-xml</artifactId>
 			<version>2.13.0</version>
 		</dependency>
-
-		<!-- 네이버 아이디로 로그인 관련 -->
-		<!-- <dependency>
-			<groupId>com.github.scribejava</groupId>
-			<artifactId>scribejava-apis</artifactId>
-			<version>5.6.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.scribejava</groupId>
-			<artifactId>scribejava-core</artifactId>
-			<version>5.6.0</version>
-		</dependency> -->
 
 	</dependencies>
 	<build>
