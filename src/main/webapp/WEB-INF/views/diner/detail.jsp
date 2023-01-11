@@ -133,7 +133,7 @@
 									
 									<c:forEach items="${foodList}" var="food">
 														
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
+										<div class="diner-menu-card d-flex align-items-center justify-content-between" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
 											<div class="diner-menu-table">
 												<p class="diner-menu-title">${food.foodvo.food_name}</p>
 												<p class="diner-menu-price">${food.foodvo.food_price }</p>
@@ -156,7 +156,7 @@
 								</h2>
 								<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
 									<div class="accordion-body">
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
+										<div class="diner-menu-card d-flex align-items-center justify-content-between" >
 											<div class="diner-menu-table">
 												<p class="diner-menu-title">삼겹짜글이장교</p>
 												<p class="diner-menu-price">10,900원</p>

@@ -23,7 +23,7 @@ public class BasketController {
 	@Inject
 	private BasketService bsv;
 	
-	@PostMapping("/basket/add") 
+	@PostMapping("/add") 
 	@ResponseBody
 	public String addBasketPOST(BasketDTO basket, HttpServletRequest request) {
 		
