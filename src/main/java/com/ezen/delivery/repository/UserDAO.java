@@ -8,7 +8,7 @@ import com.ezen.delivery.domain.UserVO;
 
 public interface UserDAO {
 
-	UserVO getUser(String user_email);
+	UserVO getUser(String user_id);
 
 	int insertUser(UserVO uvo);
 
