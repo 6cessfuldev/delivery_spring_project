@@ -21,13 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/option/*")
 public class OptionController {
 
-	@Inject
-	private OptionService opsv;
+//	@Inject
+//	private OptionService opsv;
 	
-	@GetMapping(value="/{food_code}", produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<OptionDTO>> getOption(@PathVariable("food_code")int food_code){
-		
-		
-	}
+//	@GetMapping(value="/{food_code}", produces= {MediaType.APPLICATION_JSON_VALUE})
+//	public ResponseEntity<List<OptionDTO>> getOption(@PathVariable("food_code")int food_code){
+//		
+//		
+//	}
 	
 }
