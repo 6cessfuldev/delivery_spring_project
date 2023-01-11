@@ -45,7 +45,7 @@
 	
 	<update id="updatePw">
 		update user set 
-		user_pw = #{new_pw}, user_mod_date = now()
+		user_pw = #{new_pw}, user_modify_date = now()
 		where user_email = #{getEmail}
 	</update>
 	
@@ -56,7 +56,7 @@
 	
 	<update id="updateUser">
 		update user set 
-		user_pw = #{new_pw}, user_phone = #{new_phone}, user_mod_date = now()
+		user_pw = #{new_pw}, user_phone = #{new_phone}, user_modify_date = now()
 		where user_id = #{user_id}
 	</update>
 	
