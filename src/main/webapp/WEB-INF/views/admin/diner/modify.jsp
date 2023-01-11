@@ -9,9 +9,9 @@
 	}
 </style>
 	
-		<form action="/admin/diner/update" id="dinerForm">
+		<form action="/admin/diner/update" method="post" id="dinerForm" enctype="multipart/form-data">
 			음식점 코드 : <input type="text" name="diner_code" value="${diner.diner_code}" readonly><br>
-			음식점 파일 코드 : <input type="text" name="diner_code" value="${diner.diner_file_code}" readonly><br>
+			음식점 이미지 : <input type="file" name="file"><input type="text" name="${diner.diner_file_code}" value="${diner.diner_file_code}" hidden> <br>
 			음식점 이름 : <input type="text" name="diner_name" value="${diner.diner_name}"> <br>
 			음식점 주소 : <input type="text" id ="addr" name="diner_address" value="${diner.diner_address}"><br>
 			최소 결제 금액 : <input type="text" name="diner_min_pay" value="${diner.diner_min_pay}"><br>

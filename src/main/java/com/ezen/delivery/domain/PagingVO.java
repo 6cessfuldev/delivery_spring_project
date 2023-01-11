@@ -1,7 +1,5 @@
 package com.ezen.delivery.domain;
 
-import org.apache.poi.hpsf.Decimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

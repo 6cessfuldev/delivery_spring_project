@@ -5,7 +5,7 @@
 <mapper namespace="com.ezen.delivery.repository.DinerDAO">
 
 <select id="selectListAll" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner
+	select * from diner order by diner_code desc;
 </select>
 
 <select id="selectListFirst" resultType="com.ezen.delivery.domain.DinerVO">
@@ -13,11 +13,15 @@
 </select>
 
 <select id="selectList" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+	select diner_code, diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
+			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner 
+			order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <select id="selectListbyCate" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+	select diner_code, diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
+			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner 
+			where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <insert id="insert">
@@ -29,7 +33,7 @@ insert into diner(diner_file_code, diner_name, diner_address, diner_min_pay, din
 
 <select id="selectDiner" resultType="com.ezen.delivery.domain.DinerVO">
 	select diner_code, diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
-			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point), ST_Y(diner_addr_point) from diner where diner_code = #{diner_code}
+			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner where diner_code = #{diner_code}
 </select>
 
 <update id="update">

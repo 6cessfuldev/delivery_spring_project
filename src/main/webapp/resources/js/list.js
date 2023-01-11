@@ -199,24 +199,22 @@ observer.observe(listEnd);
 
 let listCnt = 1;
 function addList(){
+	 
 
     const list = document.querySelector(".registered");
 
     let add = "";
-
 	if(listCnt<0) return;
 
     getListMoreFromServer(listCnt).then(result => {
         console.log(result.length);
         if(result!=null && result.length>0){
-            console.log("add case");
             for(let i=0; i<result.length; i++){
-                console.log(i);
                 if(i%2==0){
                     add+=`<div class="one-row justify-content-center">`;
                 }
 
-                add+=`<div class="diner-card bg-white" id="diner-card">`;
+                add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].diner_code}"'>`;
                 add+=`<div class="diner-img">`;
                 add+=`<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px"></div>`;
                 add+=`<div class="diner-body"><h5 class="diner-title">${result[i].diner_name}</h5>`;

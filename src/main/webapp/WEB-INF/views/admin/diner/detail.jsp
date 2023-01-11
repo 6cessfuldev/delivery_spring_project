@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <jsp:include page="../include/header.jsp"></jsp:include>
 음식점 >>> 
@@ -8,6 +9,7 @@
 <a href="/admin/diner/remove?diner_code=${diner.diner_code}">삭제</a>
 <br><br>
     <caption>음식점 상세정보</caption>
+    <img src="/upload/${fn:replace(file.file_save_dir, '\\','/')}/${file.file_uuid}_${file.file_name}" width="100px">
 <table>
     <tr>
         <th>음식점 코드</th>
@@ -51,7 +53,20 @@
     </tr>
     <tr>
         <th>카테고리</th>
-        <td>${diner.diner_category}</td>
+        <td>
+        <c:if test="${fn:contains(diner.diner_category, 'aa')}">1인분 주문 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'ff')}">프랜차이즈 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'hh')}">치킨 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'pp')}">피자/양식 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'cc')}">중국집 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'kk')}">한식 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'jj')}">일식/돈까스 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'mm')}">족발/보쌈 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'nn')}">야식 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'tt')}">분식 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'dd')}">카페/디저트 </c:if> 
+        <c:if test="${fn:contains(diner.diner_category, 'ss')}">편의점/마트 </c:if> 
+    	</td>
     </tr>
     <tr>
         <th>음식점 좌표</th>
@@ -72,11 +87,11 @@
             </tr>
           </thead>
           <tbody>
-         	<c:forEach items="${foodList}" var="food">
+         	<c:forEach items="${foodList}" var="list">
             <tr>
-              <td>${food.food_code}</td>
-              <td><a href="/admin/food/detail?food_code=${food.food_code}">${food.food_name}</a></td>
-              <td>${food.food_price}</td>
+              <td>${list.foodvo.food_code}</td>
+              <td><a href="/admin/food/detail?food_code=${list.foodvo.food_code}">${list.foodvo.food_name}</a></td>
+              <td>${list.foodvo.food_price}</td>
             </tr>
             </c:forEach>
           </tbody>

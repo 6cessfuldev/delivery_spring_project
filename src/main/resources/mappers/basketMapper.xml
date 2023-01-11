@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.delivery.repository.BasketDAO">
+
+<insert id="insert">
+	insert into basket(basket_user_id, basket_food_code, basket_order_count)
+		values(#{basket_user_id}, #{basket_food_code}, #{basket_order_count})
+</insert>
+
+<delete id="delete">
+	delete from basket where basket_code = #{basket_code}
+</delete>
+
+<update id="updateCount">
+	update basket set basket_order_count = #{basket_order_count} where basket_code = #{basket_code}
+</update>
+
+<select id="selectList" resultType="com.ezen.delivery.domain.BasketDTO">
+	select a.basket_code, a.basket_user_id, a.basket_food_code, b.food_name, b.food_price
+	from basket a left outer join food b on a.basket_food_code = b.food_code
+	where basket_user_id = #{basket_user_id}
+</select>
+
+<select id="checkBasket" resultType="com.ezen.delivery.domain.BasketDTO">
+	select * from basket where basket_user_id = #{basket_user_id} and basket_food_code=#{basket_food_code}
+</select>
+
+</mapper>
+

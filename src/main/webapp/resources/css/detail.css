@@ -198,10 +198,15 @@ main{
 }
 
 .swiper-slide{
-	background-image: url("/resources/source/chicken.png");
-	background-position: cover;
+	margin:0;
+	padding:0;
 	background-size: 130px 130px;
 	background-repeat: no-repeat;
+}
+
+.swiper-slide>img{
+	width:140px;
+	height:140px;
 }
 
 

@@ -3,9 +3,9 @@
 
 <jsp:include page="../include/header.jsp"></jsp:include>
 	
-		<form action="/admin/diner/insert" id="dinerForm">
+		<form action="/admin/diner/insert" method="post" id="dinerForm" enctype="multipart/form-data">
 			음식점 코드 : 자동 입력<br>
-			음식점 파일 코드 : 1로 자동 입력<br>
+			음식점 파일 코드 : <input type="file" name="file"><br>
 			음식점 이름 : <input type="text" name="diner_name"> <br>
 			음식점 주소 : <input type="text" id ="addr" name="diner_address"><br>
 			최소 결제 금액 : <input type="text" name="diner_min_pay" value="1000"><br>

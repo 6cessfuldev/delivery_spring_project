@@ -74,8 +74,8 @@
 	//카테고리 버튼 주소가 입력되었을 때만 활성화
 	function clickCategory(category){
 		console.log("click");
-		let input = exten.find(".jibunAddr")
-		if(input == ""){
+		let input = exten.find("#jibunAddr")
+		if(input.val() == "" || input.val()==null){
 			alert("주소를 입력해주세요.");
 		}else{
 			$("#category").val(category);

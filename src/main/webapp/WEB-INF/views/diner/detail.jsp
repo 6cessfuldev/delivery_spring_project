@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div class="diner-notice">
-					<p>사장님 알림 <span>9월 7일부터 신규오픈 "인천상륙 덮글이" 인천 상륙 덮글이 우리나라 월드컵 16강 기원 리...</span></p>
+					<p>사장님 알림 <span>${diner.diner_notice}</span></p>
 				</div>
 			</div>
 
@@ -102,18 +102,14 @@
 							<!-- Additional required wrapper -->
 							<div class="swiper-wrapper">
 							<!-- Slides -->
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
+							
+							<c:forEach items="${foodList}" var="food">
+								<div class="swiper-slide" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
+									<img alt="food" src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}">
+								</div>							
+							</c:forEach>
+							
+							
 							</div>
 							<!-- If we need pagination -->
 							<div class="swiper-pagination"></div>
@@ -129,30 +125,26 @@
 							<div class="accordion-item">
 								<h2 class="accordion-header" id="flush-headingOne">
 									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-									인기메뉴
+									전체메뉴
 									</button>
 								</h2>
 								<div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 									<div class="accordion-body">
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
+									
+									<c:forEach items="${foodList}" var="food">
+														
+										<div class="diner-menu-card d-flex align-items-center justify-content-between" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
 											<div class="diner-menu-table">
-												<p class="diner-menu-title">삼겹짜글이장교</p>
-												<p class="diner-menu-price">10,900원</p>
+												<p class="diner-menu-title">${food.foodvo.food_name}</p>
+												<p class="diner-menu-price">${food.foodvo.food_price }</p>
 											</div>
 											<div class="diner-menu-img">
-												<img src="/resources/source/forone.png" alt="" width="100px" height="100px">
+												<img src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}" alt="" width="100px" height="100px">
 											</div>
 										</div>
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
-											<div class="diner-menu-table">
-												<p class="diner-menu-title">삼겹짜글이장교</p>
-												<p class="diner-menu-combo">차돌+삼겹+햄+후라이2개+볶음김치+알단무지+날치알+후리가케밥+김가루</p>
-												<p class="diner-menu-price">10,900원</p>
-											</div>
-											<div class="diner-menu-img">
-												<img src="/resources/source/forone.png" alt="" width="100px" height="100px">
-											</div>
-										</div>
+					
+									</c:forEach>
+						
 									</div>
 								</div>
 							</div>
@@ -164,7 +156,7 @@
 								</h2>
 								<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
 									<div class="accordion-body">
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
+										<div class="diner-menu-card d-flex align-items-center justify-content-between" >
 											<div class="diner-menu-table">
 												<p class="diner-menu-title">삼겹짜글이장교</p>
 												<p class="diner-menu-price">10,900원</p>
@@ -416,7 +408,7 @@
 								<div class="info-text">
 									<span class="info-list-title">영업시간</span> <span>${diner.diner_open_time} - ${diner.diner_close_time}</span> <br>
 									<span class="info-list-title">전화번호</span> <span>050712921952</span> <br>
-									<span class="info-list-title">주소</span> <span>10:30 - 23:45</span>
+									<span class="info-list-title">주소</span> <span>${diner.diner_address}</span>
 								</div>
 							</div>
 
@@ -442,7 +434,7 @@
 								</div>
 								<div class="info-text">
 									<span class="info-list-title">상호명</span> <span>${diner.diner_business_name}</span><br>
-									<span class="info-list-title">사업자등록번호</span> <span>diner_company_num</span>
+									<span class="info-list-title">사업자등록번호</span> <span>${diner_company_num}	</span>
 								</div>
 							</div>
 
@@ -517,19 +509,46 @@
 			<div class="basket-total-price">
 				<span>합계:</span> <span>21,200원</span>
 			</div>
-		
-		
+			
+			
+
 		</div>
 
 	</div>
 
 </main>
 
+<!-- Button trigger modal -->
+<button type="button" id="modalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+	
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 	console.log(diner_codeVal);
 	console.log(category);
+		
 </script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>

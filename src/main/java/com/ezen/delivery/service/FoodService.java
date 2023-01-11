@@ -8,9 +8,7 @@ import com.ezen.delivery.domain.FoodVO;
 
 public interface FoodService {
 
-
-
-	List<FoodVO> getListByDinerCode(int diner_code);
+	List<FoodDTO> getListByDinerCode(int diner_code);
 
 	int register(FoodDTO fdto);
 
@@ -19,6 +17,8 @@ public interface FoodService {
 	int update(FoodVO fvo);
 
 	int remove(int food_code);
+
+	FoodDTO getDetail(int food_code);
 
 	//List<FoodVO> getFoodDinerCode(int diner_code);
 

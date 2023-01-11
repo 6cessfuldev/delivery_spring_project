@@ -31,7 +31,7 @@ public class FileHandler {
 		File folders = new File(UP_DIR, today);
 		
 		if(!folders.exists()) {
-			folders.mkdir();
+			folders.mkdirs();
 		}
 		
 		FileVO fvo = new FileVO();
@@ -63,9 +63,9 @@ public class FileHandler {
 		return fvo; 
 	}
 
-	public int deleteFile(ReviewImgVO rivo) {
+	public int deleteFile(FileVO fivo) {
 		try {
-			File file = new File(UP_DIR+File.separator+rivo.getReview_img_save_dir()+File.separator+rivo.getReview_img_uuid()+"_"+rivo.getReview_img_name());
+			File file = new File(UP_DIR+File.separator+fivo.getFile_save_dir()+File.separator+fivo.getFile_uuid()+"_"+fivo.getFile_name());
 			log.info(file.toString());
 			
 			if(file.exists()) { //파일여부
@@ -77,18 +77,19 @@ public class FileHandler {
 			}else { //파일여부
 				log.info("파일이 존재하지 않습니다.");
 			}
-			File tFile = new File(UP_DIR+File.separator+rivo.getReview_img_save_dir()+File.separator+rivo.getReview_img_uuid()+"_th_"+rivo.getReview_img_name());
-			log.info(tFile.toString());
 			
-			if(tFile.exists()) {
-				if(tFile.delete()) {
-					log.info("파일 삭제 성공");
-				}else {
-					log.info("파일 삭제 실패");
-				}
-			}else {
-				log.info("파일이 존재하지 않습니다.");
-			}
+//			File tFile = new File(UP_DIR+File.separator+fivo.getReview_img_save_dir()+File.separator+fivo.getReview_img_uuid()+"_th_"+fivo.getReview_img_name());
+//			log.info(tFile.toString());
+//			
+//			if(tFile.exists()) {
+//				if(tFile.delete()) {
+//					log.info("파일 삭제 성공");
+//				}else {
+//					log.info("파일 삭제 실패");
+//				}
+//			}else {
+//				log.info("파일이 존재하지 않습니다.");
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
