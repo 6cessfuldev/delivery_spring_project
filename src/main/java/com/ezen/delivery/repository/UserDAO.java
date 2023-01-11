@@ -32,5 +32,7 @@ public interface UserDAO {
 
 	int deleteUser(String user_id);
 
+	List<UserVO> selectList();
+
 
 }

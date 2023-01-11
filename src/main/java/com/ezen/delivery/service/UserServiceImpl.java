@@ -133,6 +133,11 @@ public class UserServiceImpl implements UserService {
 		return udao.deleteUser(user_id);
 	}
 
+	@Override
+	public List<UserVO> getUserList() {
+		return udao.selectList();
+	}
+
 
 
 	

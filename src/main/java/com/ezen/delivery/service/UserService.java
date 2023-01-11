@@ -30,6 +30,8 @@ public interface UserService {
 
 	boolean naverSignUp(UserVO naverUser);
 
+	List<UserVO> getUserList();
+
 
 
 

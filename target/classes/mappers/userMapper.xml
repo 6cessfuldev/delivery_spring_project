@@ -65,5 +65,9 @@
 		where user_id = #{user_id}
 	</delete>
 	
+	<select id="selectList" resultType="com.ezen.delivery.domain.UserVO">
+		select * from user
+	</select>
+	
 	
 </mapper>
