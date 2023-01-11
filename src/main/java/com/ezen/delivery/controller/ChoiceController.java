@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/choice/*")
 public class ChoiceController {
 
+
 	@Inject
 	private ChoiceService csv;
 	
@@ -30,6 +31,7 @@ public class ChoiceController {
 		List<ChoiceDTO> list = csv.getList(food_code);
 		return  new ResponseEntity<List<ChoiceDTO>>(list, HttpStatus.OK);
 				
+
 	}
 	
 }
