@@ -15,24 +15,24 @@
 			<div id="id-box">
 				<input type="text" class="input" name="user_id" id="user_id" value="${user.user_id }" readonly="readonly"><br><br>
 			</div>
-			<input type="password" class="input" name="user_pw" id="user_pw" value="**********" readonly="readonly"><br><br>
-			<input type="password" class="input" name="user_pwCheck" id="user_pwCheck"
-				value="**********" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_pw" id="user_pw" value="${user.user_pw }" readonly="readonly"><br><br>
+			<input type="text" class="input" name="user_pwCheck" id="user_pwCheck"
+				value="${user.user_pw }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_name" id="user_name" value="${user.user_name }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_birth" id="user_birth" value="${user.user_birth }" readonly="readonly"><br><br>
 			<input type="text" class="input" name="user_phone" id="user_phone"
 				value="${user.user_phone }" readonly="readonly"><br><br>
-			<div id="modBtn-box">
+		<%-- 	<div id="modBtn-box">
 			<c:if test="${user.user_pw != null }">
 				<input type="button" onclick="location.href='/member/modify_userInfo'" class="btn modBtn" value="정보수정"><br>
 			</c:if>
 			</div>
 			<div id="delBtn-box">
 				<input type="button" class="btn delBtn" value="회원탈퇴"><br>
-			</div>
+			</div> --%>
 	</div>
 </div>
 
-<jsp:include page="../include/footer2.jsp"></jsp:include>
+<jsp:include page="../include/footer.jsp"></jsp:include>
 
 <script src="/resources/js/detail_userInfo.js"></script>

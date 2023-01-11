@@ -10,68 +10,25 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+// 네이버 캡차 API 예제 - 키발급, 키 비교
+public class ApiExamCaptchaNkeyResult {
 
-import com.ezen.delivery.domain.UserVO;
+    public static void main(String[] args) {
+        String clientId = "BwPXQd2HaNZ5eWMSnF7z";//애플리케이션 클라이언트 아이디값";
+        String clientSecret = "DiPkQjdmfi";//애플리케이션 클라이언트 시크릿값";
 
-
-public class ApiMemberProfile {
-
-
-    public static UserVO getProfile(String accessToken) {
-        String token = accessToken; // 네이버 로그인 접근 토큰;
-        String header = "Bearer " + token; // Bearer 다음에 공백 추가
-
-
-        String apiURL = "https://openapi.naver.com/v1/nid/me";
-
+        String code = "1"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
+        String key = "YOUR_CAPTCHA_KEY"; // 캡차 키 발급시 받은 키값
+        String value = "YOUR_INPUT"; // 사용자가 입력한 캡차 이미지 글자값
+        String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
 
         Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("Authorization", header);
-        String responseBody = get(apiURL,requestHeaders);
+        requestHeaders.put("X-Naver-Client-Id", clientId);
+        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        String responseBody = get(apiURL, requestHeaders);
 
-        UserVO uvo = new UserVO();
-
-		try {
-			
-			JSONParser parser = new JSONParser();
-	        Object obj = parser.parse( responseBody );
-	        
-			JSONObject jsonObj = (JSONObject) obj;
-			jsonObj =  (JSONObject) jsonObj.get("response");
-
-			String email = (String) jsonObj.get("email");
-			uvo.setUser_email(email);
-
-			String id = email.substring(0, email.indexOf("@"));
-			uvo.setUser_id(id);
-			
-			String name = (String) jsonObj.get("name");
-			uvo.setUser_name(name);
-
-			String birthday = (String) jsonObj.get("birthday");
-			String birthyear =(String) jsonObj.get("birthyear");
-
-			birthyear = birthyear.substring(2);
-			birthday = birthday.replace("-","");
-			String birth = birthyear+birthday;
-			uvo.setUser_birth(birth);
-			
-			String mobile = (String) jsonObj.get("mobile");
-			uvo.setUser_phone(mobile);		
-			
-			String naver_id = (String) jsonObj.get("id");
-			uvo.setUser_naver_id(naver_id);
-			
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-
-		return uvo;
+        System.out.println(responseBody);
     }
-
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
@@ -80,7 +37,6 @@ public class ApiMemberProfile {
             for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
                 con.setRequestProperty(header.getKey(), header.getValue());
             }
-
 
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
@@ -95,7 +51,6 @@ public class ApiMemberProfile {
         }
     }
 
-
     private static HttpURLConnection connect(String apiUrl){
         try {
             URL url = new URL(apiUrl);
@@ -107,20 +62,16 @@ public class ApiMemberProfile {
         }
     }
 
-
     private static String readBody(InputStream body){
         InputStreamReader streamReader = new InputStreamReader(body);
 
-
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();
-
 
             String line;
             while ((line = lineReader.readLine()) != null) {
                 responseBody.append(line);
             }
-
 
             return responseBody.toString();
         } catch (IOException e) {
@@ -128,4 +79,3 @@ public class ApiMemberProfile {
         }
     }
 }
-

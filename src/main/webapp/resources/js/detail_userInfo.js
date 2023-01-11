@@ -1,3 +1,5 @@
+
+
 document.querySelector('.delBtn').addEventListener('click', function () {
 
     const user_id = $('#user_id').val();

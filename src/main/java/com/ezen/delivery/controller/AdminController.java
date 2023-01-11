@@ -19,8 +19,10 @@ import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
+import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
+import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,10 +40,39 @@ public class AdminController {
 	@Inject
 	private FileHandler fhd;
 	
+	@Inject
+	private UserService usv;
+	
+	
 	@GetMapping("/")
 	public String main() {
 		return "admin/main";
 	}
+	
+	@GetMapping("/user")
+	public void getUser(Model model) {
+		List<UserVO> list = usv.getUserList();
+		model.addAttribute("list", list);
+	}
+	
+	@GetMapping("/user/detail")
+	public String userRegister(String user_id, Model model) {
+		UserVO uvo = usv.getUserByID(user_id);
+		model.addAttribute("user", uvo);
+		return "/admin/user/detail";
+	}
+	
+	@GetMapping("/user/register")
+	public void userRegister() {}
+	
+//	@PostMapping("/user/insert")
+//	public String userInsert(UserVO uvo) {
+//		
+//	}
+	
+	
+	
+	
 	
 	@GetMapping("/diner")
 	public void diner(Model model) {
@@ -229,6 +260,7 @@ public class AdminController {
 		
 		return "redirect:/admin/diner/detail";
 	}
+	
 	
 	
 }

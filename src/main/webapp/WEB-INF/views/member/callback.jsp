@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<form id="form" action="/member/test" method="post">
-<input id="accessToken" type="text" name="accessToken" value="">
+<form id="form" action="/member/naverLogin" method="post">
+<input id="accessToken" type="text" name="accessToken" value="" hidden>
 </form>
 
 <script type="text/javascript">

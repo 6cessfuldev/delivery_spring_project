@@ -4,15 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NaverTest</title>
+<title>naverLogin</title>
 </head>
 <body>
 
-<h1>${accessToken}</h1>
-<h1>${refreshToken}</h1>
+<!-- <%-- <h1>${accessToken}</h1>
+<h1>${refreshToken}</h1> --%> -->
+
+<!-- <h1>${user }</h1> -->
+
+
 <script type="text/javascript">
-   window.opener.gotoMain();
-   window.close();
+	
+	window.opener.parent.location.reload();
+	window.opener.gotoMain();
+	window.close();
 </script>
 </body>
 </html>

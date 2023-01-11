@@ -28,5 +28,11 @@ public interface UserService {
 
 	int removeUserInfo(String user_id);
 
+	boolean naverSignUp(UserVO naverUser);
+
+	List<UserVO> getUserList();
+
+
+
 
 }
