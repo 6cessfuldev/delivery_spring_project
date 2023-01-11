@@ -1,7 +1,6 @@
 package com.ezen.delivery.controller;
 
 import java.io.File;
-import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -19,14 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ezen.delivery.Handler.ApiMemberProfile;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.UserService;
-import com.google.common.net.MediaType;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,7 +54,7 @@ public class MemberController {
 		log.info("인증번호 : " + checkNum);
 
 		// 이메일 보내기
-		String setFrom = "myeonk@naver.com";
+		String setFrom = "aleod1007@naver.com";
 		String toMail = email;
 		String title = "회원가입 인증 이메일 입니다.";
 		String content = "<먹어요> 홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
@@ -88,8 +86,8 @@ public class MemberController {
 		String subject = "안녕하세요 test 메일 입니다 :-)";
 		String content = "메일 테스트 내용"
 				+ "<img src=\"https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg1.daumcdn.net%2Fthumb%2FR1280x0.fjpg%2F%3Ffname%3Dhttp%3A%2F%2Ft1.daumcdn.net%2Fbrunch%2Fservice%2Fuser%2F32E9%2Fimage%2FBA2Qyx3O2oTyEOsXe2ZtE8cRqGk.JPG&imgrefurl=https%3A%2F%2Fbrunch.co.kr%2F%40happying%2F66&tbnid=uBQ8cebvR-okYM&vet=12ahUKEwi1hJjYoav8AhWOOpQKHdX0BeoQMygNegUIARD3AQ..i&docid=0RhOIZ63_Xb9-M&w=960&h=640&q=%EA%B0%95%EC%95%84%EC%A7%80&ved=2ahUKEwi1hJjYoav8AhWOOpQKHdX0BeoQMygNegUIARD3AQ\">";
-		String from = "myeonk@naver.com";
-		String to = "myeonk@naver.com";
+		String from = "aleod1007@naver.com";
+		String to = "aleod1007@naver.com";
 
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
@@ -128,6 +126,34 @@ public class MemberController {
 		}
 	}
 	
+	// 이메일 중복 확인
+	
+	@PostMapping("/userEmailCheck")
+	public ResponseEntity<String> userEmailCheck(String user_email){
+		log.info(user_email);
+		
+		int emailExisted = usv.emailExist(user_email);
+		log.info("" + emailExisted);
+		
+		return (emailExisted > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.OK));
+	}
+	
+	
+	// 아이디 중복 확인
+	
+	@PostMapping("/userIdCheck")
+	public ResponseEntity<String> userIdCheck(String user_id){
+		log.info(user_id);
+		
+		int existed = usv.isExist(user_id);
+		log.info("" + existed);
+		
+		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.OK));
+							
+	}
+	
 	// 로그인
 	
 	@GetMapping("/login")
@@ -140,10 +166,11 @@ public class MemberController {
 
 		if (isUser != null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("ses", isUser);
+			session.setAttribute("user", isUser);
 
 			model.addAttribute("user", isUser);
 			model.addAttribute("msg", "1");
+			
 			return "redirect:/";
 		} else {
 			model.addAttribute("msg", "0");
@@ -151,11 +178,85 @@ public class MemberController {
 		}
 	}
 	
+	// 네이버 로그인
+	
+	@GetMapping("/callback")
+	public void callback() {}
+	
+	@PostMapping("/naverLogin")
+	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
+		
+		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
+		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
+		
+		log.info(naverUser.toString());
+		
+		if(getUser == null) { // 미가입 회원인 경우
+			
+			boolean isUp = usv.naverSignUp(naverUser);
+			
+			if (isUp) {
+				HttpSession session = req.getSession();
+				session.setAttribute("user", naverUser);
+				model.addAttribute("user", naverUser);
+			} 
+			
+		} else { // 이미 가입한 회원인 경우
+			HttpSession session = req.getSession();
+			session.setAttribute("user", getUser);
+			model.addAttribute("user", getUser);
+		}
+		
+		return "/member/naverLogin";
+		
+	}
+	
+	// 회원 정보
+	
+	@GetMapping({"/detail_userInfo", "/modify_userInfo" })
+	public void userInfo() {}
+	
+	// 회원 정보 수정
+
+	@PostMapping("/modify_userInfo")
+	public ResponseEntity<String> modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session){
+		log.info(user_id);
+		log.info(new_pw);
+		log.info(new_phone);
+		
+		// 세션 변경
+		UserVO user = (UserVO)session.getAttribute("user");
+		user.setUser_phone(new_phone);
+		session.setAttribute("user", user);
+		
+		// DB 변경
+		int modUser = usv.modifyUserInfo(user_id, new_pw, new_phone);
+		log.info("" + modUser);
+		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+	}
+	
+	// 회원 탈퇴
+	
+	@PostMapping("/remove_userInfo")
+	public ResponseEntity<String> removeUserInfo(String user_id, HttpServletRequest req){
+		log.info(user_id);
+		
+		req.getSession().removeAttribute("user");
+		req.getSession().invalidate();
+		
+		int delUser = usv.removeUserInfo(user_id);
+		log.info("" + delUser);
+		
+		return ( delUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)); 
+	}
+	
 	// 로그아웃
 	
 	@GetMapping("/logout")
-	public String logoutGet(Model model, HttpServletRequest req) {
-		req.getSession().removeAttribute("ses");
+	public String logoutGet(HttpServletRequest req) {
+		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
 		return "redirect:/";
 	}
@@ -172,7 +273,8 @@ public class MemberController {
 		UserVO user = usv.getId(user_email);
 		log.info("" + user);
 		
-		return (user.getUser_id() != null ? new ResponseEntity<String>(user.getUser_id(), HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+		return (user.getUser_id() != null ? new ResponseEntity<String>(user.getUser_id(), HttpStatus.OK) 
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
 	// 비밀번호 찾기
@@ -190,27 +292,12 @@ public class MemberController {
 		log.info(getEmail);
 		log.info(new_pw);
 			
-		int user = usv.updatePw(getEmail, new_pw);
-		log.info("" + user);
-		return (user > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
+		int isEqual = usv.updatePw(getEmail, new_pw);
+		log.info("" + isEqual);
+		return ( isEqual > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
 
-	// 누가 썼어 // 내가!
 	
-	@GetMapping("/order")
-	public void orderGet() {
-	}
-
-	// 아이디 중복 확인
 	
-	@PostMapping("/userIdCheck")
-	public ResponseEntity<String> userIdCheck(String user_id){
-		log.info(user_id);
-		
-		int existed = usv.isExist(user_id);
-		log.info("" + existed);
-		
-		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>("0", HttpStatus.OK));
-							
-	}
 }

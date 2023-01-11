@@ -21,7 +21,6 @@ import com.ezen.delivery.Handler.ReviewImgHandler;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
-import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.ReviewService;
 
@@ -45,31 +44,33 @@ public class ReviewController {
 	@ResponseBody
 //	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
 	public String upload(@RequestParam("file") MultipartFile[] files, 
-			 @RequestParam("revText") String review_content, HttpSession session) {
-	
-		
-		ReviewDTO ridto = new ReviewDTO();
-		
+			 ReviewVO rvo, HttpSession session) {
+		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
 			List<ReviewImgVO> list = rihd.uploadFiles(files);
 			ridto.setFList(list);
-		}
-		
+		}		
 //		UserVO uvo = (UserVO)session.getAttribute("user");
-		ReviewVO rvo = new ReviewVO();
-		rvo.setReview_user_id("user_id");
-		rvo.setReview_content(review_content);
+//		ReviewVO rvo = new ReviewVO();
+//		rvo.setReview_diner_code(review_diner_code);
+//		rvo.setReview_user_id("user_id");
+//		rvo.setReview_content(review_content);
 		ridto.setRvo(rvo);		
 		int isOk = rsv.insert(ridto);	
+		log.info("fList : "+ridto.getFList());
+		log.info("rvo : "+ridto.getRvo());
 		return "Success";
 	}
 
 	
-	@GetMapping(value="/{review_diner_code}",produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<ReviewVO>> spread(@PathVariable("review_diner_code")int review_diner_code){
-		log.info("Review List review_diner_code : "+review_diner_code);
-		List<ReviewVO> list = rsv.getList(review_diner_code);
-		return new ResponseEntity<List<ReviewVO>>(list,HttpStatus.OK);
+	@GetMapping(value ="/list/{diner_code}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<ReviewDTO>> spread(@PathVariable("diner_code")int diner_code){
+		log.info("diner_code : "+diner_code);
+		List<ReviewDTO> list = rsv.getList(diner_code);
+		return new ResponseEntity<List<ReviewDTO>>(list,HttpStatus.OK);
 	}
-
+	
+	
+	
+	
 }

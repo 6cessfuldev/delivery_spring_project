@@ -27,5 +27,4 @@ public class DinerVO {
 	private String diner_category;
 	private String diner_addr_lng;
 	private String diner_addr_lat;
-
 }

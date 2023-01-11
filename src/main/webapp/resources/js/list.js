@@ -169,7 +169,15 @@ $(".category").children('ul').children('li').click(function(){
     $("#addr-form").submit();
 })
 
+//셀렉 태그 값 변경 시 졍렬 순서 기준에 따라 새로 리스트 가져오기
+$("#search-option").on("change", ()=>{
+	let index = $("#search-option option").index($("#search-option option:selected"));
+	console.log(index);
+	$("#order").val(index);
+	$("#addr-form").submit();
+})
 
+//infinte scolling
 const listEnd = document.querySelector("#endList");
 const option = {
     root: null,
@@ -191,24 +199,22 @@ observer.observe(listEnd);
 
 let listCnt = 1;
 function addList(){
+	 
 
     const list = document.querySelector(".registered");
 
     let add = "";
-
 	if(listCnt<0) return;
 
     getListMoreFromServer(listCnt).then(result => {
         console.log(result.length);
         if(result!=null && result.length>0){
-            console.log("add case");
             for(let i=0; i<result.length; i++){
-                console.log(i);
                 if(i%2==0){
                     add+=`<div class="one-row justify-content-center">`;
                 }
 
-                add+=`<div class="diner-card bg-white" id="diner-card">`;
+                add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].diner_code}"'>`;
                 add+=`<div class="diner-img">`;
                 add+=`<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px"></div>`;
                 add+=`<div class="diner-body"><h5 class="diner-title">${result[i].diner_name}</h5>`;

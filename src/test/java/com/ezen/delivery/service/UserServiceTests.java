@@ -35,6 +35,10 @@ public class UserServiceTests {
 		user.setUser_email("test@test.test");
 		user.setUser_birth("19930513");
 		user.setUser_name("test");
+<<<<<<< HEAD
+=======
+		user.setUser_id("666");
+>>>>>>> 11e020258ebd9d0a757537addf7e05408ba85598
 		user.setUser_phone("01012341234");
 		user.setUser_pw("testtest");
 		

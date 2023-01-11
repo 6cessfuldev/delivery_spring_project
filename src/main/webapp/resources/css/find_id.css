@@ -47,7 +47,7 @@
     color: rgb(139, 136, 136);
 }
 
-.cerBtn{
+.sendBtn{
     width: 50px;
     height: 28px;
     position: absolute;
@@ -59,7 +59,7 @@
     border-radius: 10px;
 }
 
-.cBtn{
+.cerBtn{
     width: 50px;
     height: 28px;
     position: absolute;

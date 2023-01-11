@@ -4,4 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.delivery.repository.FileDAO">
 
+<insert id="insert">
+	<selectKey keyProperty="file_code" resultType="int" order="BEFORE">
+      SELECT IFNULL(MAX(file_code+1),1) from file
+   </selectKey>
+	insert into file(file_code, file_uuid, file_save_dir, file_size, file_name, file_type)
+		values(#{file_code}, #{file_uuid}, #{file_save_dir}, #{file_size}, #{file_name}, #{file_type})
+</insert>
+
+<select id="selectByFileCode" resultType="com.ezen.delivery.domain.FileVO">
+	select * from file where file_code = #{file_code}
+</select>
+
+<update id="update">
+	update file set file_uuid=#{file_uuid}, file_save_dir=#{file_save_dir}, file_size = #{file_size}, file_name=#{file_name}, file_type=#{file_type}
+	where file_code = #{file_code}
+</update>
+
+<delete id="delete">
+	delete from file where file_code = #{file_code};
+</delete>
+
 </mapper>

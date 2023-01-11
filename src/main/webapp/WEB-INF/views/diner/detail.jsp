@@ -17,7 +17,7 @@
 			</li>
 			<li class="nav-item">
 				<div class="category-btn">프랜차이즈</div>
-			</li>
+			</li> 
 			<li class="nav-item">
 				<div class="category-btn">치킨</div>
 			</li>

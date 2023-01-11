@@ -33,16 +33,21 @@ public class UserServiceImpl implements UserService {
 		UserVO tmpUser = udao.getUser(uvo.getUser_id());
 
 		if(tmpUser != null) {
-			log.info("존재하는 이메일 입니다.");
+			log.info("존재하는 아이디 입니다.");
 			return false;
 		}
 		
 		String pw = uvo.getUser_pw();
 		String encodePw = passwordEncoder.encode(pw);
 		uvo.setUser_pw(encodePw);
-		
-		int isOk = udao.insertUser(uvo);
-		return true;
+	
+		return udao.insertUser(uvo);
+	}
+	
+	@Override
+	public boolean naverSignUp(UserVO naverUser) {
+		log.info(">>> naverSignUp check2");
+		return udao.insertNaverUser(naverUser);
 	}
 
 	@Override
@@ -58,11 +63,9 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-
-
 	@Override
 	public List<String> getAllId() {
-		
+
 		return udao.selectAllId();
 	}
 
@@ -75,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int isExist(String user_id) {
 	
-		return udao.selectId(user_id);
+		return udao.selectCntById(user_id);
 	}
 
 	@Override
@@ -87,11 +90,55 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int updatePw(String getEmail, String new_pw) {
 		
+		// 비밀번호 암호화
 		String encodeNewPw = passwordEncoder.encode(new_pw);
 		new_pw = encodeNewPw;
 		
-		return udao.updatePw(getEmail, new_pw);
+		// 기존 비밀번호와 비교
+		UserVO uvo = udao.getUserPw(getEmail);
+		boolean equal = passwordEncoder.matches(new_pw, uvo.getUser_pw());
+		
+		if(!equal) {
+			return udao.updatePw(getEmail, new_pw);			
+		} else {
+			return 0;
+		}
 	}
+
+	@Override
+	public UserVO getUserDetail(String user_id) {
+		
+		return udao.selectUserOne(user_id);
+	}
+
+	@Override
+	public int modifyUserInfo(String user_id, String new_pw, String new_phone) {
+		
+		// 비밀번호 암호화
+		String encodeNewPw = passwordEncoder.encode(new_pw);
+		new_pw = encodeNewPw;
+		
+		return udao.updateUser(user_id, new_pw, new_phone);
+	}
+
+	@Override
+	public int emailExist(String user_email) {
+		
+		return udao.selectCntByEmail(user_email);
+	}
+
+	@Override
+	public int removeUserInfo(String user_id) {
+		
+		return udao.deleteUser(user_id);
+	}
+
+	@Override
+	public List<UserVO> getUserList() {
+		return udao.selectList();
+	}
+
+
 
 	
 	

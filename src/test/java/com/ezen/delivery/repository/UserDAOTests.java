@@ -26,12 +26,13 @@ public class UserDAOTests {
 	public void testInsertUser() {
 		UserVO user = new UserVO();
 		user.setUser_email("test@test.test");
+		user.setUser_id("yuk");
 		user.setUser_birth("19930513");
 		user.setUser_name("test");
 		user.setUser_phone("01012341234");
 		user.setUser_pw("testtest");
 		
-		int isOk = udao.insertUser(user);
+		boolean isOk = udao.insertUser(user);
 		
 		log.info(isOk+"");
 	}

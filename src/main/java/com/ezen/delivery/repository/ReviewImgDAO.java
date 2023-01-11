@@ -10,4 +10,6 @@ public interface ReviewImgDAO {
 	////이미지파일(diner컨트롤러랑 연결)
 //	int insertImg(ReviewImgVO rivo);
 
+	List<ReviewImgVO> selectFlist(int reviewCode);
+
 }

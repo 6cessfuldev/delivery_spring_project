@@ -2,7 +2,7 @@ package com.ezen.delivery.repository;
 
 import java.util.List;
 
-
+import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewVO;
 
 public interface ReviewDAO {
@@ -14,6 +14,8 @@ public interface ReviewDAO {
 //	int insertReview(ReviewVO rvo);
 
 	int insertReview(ReviewVO rvo);
+
+
 
 
 }

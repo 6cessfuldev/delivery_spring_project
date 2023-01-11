@@ -24,31 +24,24 @@ const swiper = new Swiper('.swiper', {
 document.getElementById('trigger').addEventListener('click', ()=> {
     document.getElementById('review_multiple').click();
 });
-//확장자 체크
-// function fileSizeValidation(fileName, fileSize){
-//     if(regExp.test(fileName)){
-//         return 0;
-//     }else if(!regExpImg.test(fileName)){
-//         return 0;
-//     }else if(fileSize > maxSize){
-//         return 0;
-//     }else{
-//         return 1;
-//     }
-// }
 
 
-$("#regBtn").click(function(){
-    regist();
-})
+$("#regBtn").click(function(){ 
+    if(rating.rate == 0){
+        alert("별점을 입력해주세요.");
+        return;
+    }else{
+        regist();
+        // getReviewList(diner_code);
+    }
+});
 
 //로그인 중인 아이디 얻어오기
 function regist(){
-
     // const user_id = '${sessionScope.login.userId}';
     const user_id = "test";
     let file = $('#review_multiple').val();
-	console.log("파일:"+file);
+   console.log("파일:"+file);
     const regExp = new RegExp("\.(exe|sh|bat|msi|dll|js)$");
     const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
     const maxSize = 1024*1024*20; //20MB
@@ -62,7 +55,7 @@ function regist(){
         const formData = new FormData();
 
         const data = $('#review_multiple');
-
+        const revText = document.getElementById('review_con').value;
         console.log('폼 데이터 : ' + formData);
         console.log('data : ' + data );
         console.log(data[0]); 
@@ -75,43 +68,28 @@ function regist(){
                 for(let j = 0; j < data[i].files.length; j++){
                     console.log(data[i].files[j]);
 
-                    formData.append('file',$(review_multiple)[i].files[j]);
+                    formData.append('file',data[i].files[j]);
+                    // formData.append('file',$(review_multiple)[i].files[j]);
+
                 }
-            }
+                if(revText == null || revText == ''){
+                    alert("리뷰를 입력해주세요.");
+                    review_con.focus();
+                    return false;
+                } else {        
+                    formData.append('review_diner_code', diner_code);
+                    formData.append('review_content', revText);
+                }
+                
+            } 
         }
 
-        const revText = document.getElementById('review_con').value;
-        if(revText == null || revText == ''){
-            alert("리뷰를 입력해주세요.");
-            review_con.focus();
-            return false;
-        } else {
-            formData.append('revText', revText);
-            alert("리뷰를 등록했습니다");
-        }
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+          }
 
-        console.log(revText);
-
-        // document.addEventListener("change", (e)=>{
-        //     console.log("test");
-        //     if(e.target.id == "review_multiple"){
-        //         console.log("changed");
-        //         document.getElementById('regBtn').disabled = false;
-        //         const fileObject = document.getElementById('review_multiple').files;
-        //         console.log(fileObject);
-
-        //         let div = document.getElementById("image_container");
-
-        //         if(isOk == 0){
-        //         document.getElementById('regBtn').disabled = true;
-        //         }
-        //     }
-        // })
-
-        //이미지파일 비동기 추가
         $.ajax({
             url:'/review/upload',
-            // url: '/review/upload',
             type : 'post',
             data : formData,
             contentType:false,
@@ -122,13 +100,16 @@ function regist(){
             
             success: function(result){
                 // 서버와 통신을 성공했다면 서버가 다시 주는 데이터  
-                if (result === 'Success'){
+                if (result === 'Success'){ //=== 타입 변환X
                     $('#review_multiple').val('');
-                    // 파일 선택지 비우기							
+                    // 파일 선택지 비우기                     
+                    document.querySelector("div#image_container").innerHTML='';
                     $('#review_con').val('');
                     // 글 영역 비우기 
-                }
-                else{
+                    console.log(result);
+                    alert("리뷰를 등록했습니다.");
+                    getReviewList(diner_code);
+                }else{
                     alert("업로드에 실패했습니다.");
                 }
             },
@@ -137,22 +118,89 @@ function regist(){
                 
             }
         });// end ajax
-                    
-    }
-// }
+        //}if문
         
-// function setThumbnail(event) {
-//     var reader = new FileReader();
+    }
+    
+    function Rating(){};
+    Rating.prototype.rate = 0;
+    Rating.prototype.setRate = function(newrate){
+        this.rate = newrate;
+        let items = document.querySelectorAll('.rate_radio');
+        items.forEach(function(item, idx){
+            if(idx < newrate){
+                item.checked = true;
+            }else{
+                item.checked = false;
+            }
+        });
+    }
+    let rating = new Rating();
+     
+    document.addEventListener('DOMContentLoaded', function(){
+        //별점선택 이벤트 리스너
+        document.querySelector('.rating').addEventListener('click',function(e){
+            let elem = e.target;
+            if(elem.classList.contains('rate_radio')){
+                rating.setRate(parseInt(elem.value));
+            }
+        })
+    });
 
-//     reader.onload = function(event) {
-//     	var img = document.createElement("img");
-//      	img.setAttribute("src", event.target.result);
-//         console.log(event.target.result[0]);
-//         console.log(event.target.result[1]);
-//         document.querySelector("div#image_container").appendChild(img);
-//     };
 
-//     reader.readAsDataURL(event.target.files[0]);
-   
-// }
+async function spreadReviewServer(diner_code){
+    console.log(diner_code);
+    try {
+        const resp = await fetch('/review/list/'+diner_code);
+        const result = await resp.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
+function getReviewList(diner_code){
+    spreadReviewServer(diner_code).then(result =>{ 
+        console.log(result);
+        const review = document.getElementById('review-head');
+        review.innerHTML = ""; 
+        if(result.length > 0){ 
+                let count = 0;
+            for(let reviewDTO of result){ 
+
+                let div = `<div>`;
+                div += `<div>${reviewDTO.rvo.review_user_id}`;
+                div += `<span class="review-time-ago"></span><a href="#">신고</a>`;
+                div += `<div class="review-point"></div>`;
+                console.log(reviewDTO.flist);
+
+				
+                div += `<div class="review-menu"></div>`;
+		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
+		        div += `</div>`;
+		        review.innerHTML += div;
+                
+                if(reviewDTO.flist.length > 0){      
+               	 for(let img of reviewDTO.flist){
+               		 console.log(img);
+               		 let save_dir = img.review_img_save_dir.split('\\');
+               		 let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
+               		 console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
+               		 let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+            
+		             let imgTag = document.createElement("img");
+                     imgTag.id = 'review_img';
+                     imgTag.src = real;
+                     review.childNodes[count].append(imgTag);
+	                }
+                    count++;
+                }
+            }
+        } else {
+            let div = `<div>Review Empty</div>`;
+            review.innerHTML += div;
+        }
+        
+    })
+}

@@ -14,8 +14,8 @@ import lombok.ToString;
 public class FileVO {
 
 	private int file_code;
-	private String uuid;
-	private String save_dir;
+	private String file_uuid;
+	private String file_save_dir;
 	private long file_size;
 	private String file_name;
 	private int file_type;

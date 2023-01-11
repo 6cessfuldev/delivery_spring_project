@@ -500,7 +500,38 @@ main{
 	font-weight: 700;
 
 }
-
-#image_container>img{
+#image_container>div>img{
 	width:100px;
+} 
+.rating .rate_radio {
+    position: relative;
+    display: inline-block;
+    z-index: 20;
+    opacity: 0.001;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: top;
+    display: none;
+}
+.rating .rate_radio + label {
+    position: relative;
+    display: inline-block;
+    margin-left: -4px;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    background-image: url('../source/starrate.png');
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+.rating .rate_radio:checked + label {
+    background-color: #ff8;
+}
+
+#review_img{
+	 width: 200px;
 }

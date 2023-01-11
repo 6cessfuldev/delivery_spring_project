@@ -1,6 +1,7 @@
 document.querySelector('.changeBtn').addEventListener('click', function () {
-    const new_pw = document.getElementById('new_pw').value;
-    const new_pwCheck = document.getElementById('new_pwCheck').value;
+
+    const new_pw = $('#new_pw').val();
+    const new_pwCheck = $('#new_pwCheck').val();
 
     if (new_pw == "" || new_pw == null) {
         alert("비밀번호를 입력해주세요.");
@@ -33,6 +34,7 @@ document.querySelector('.changeBtn').addEventListener('click', function () {
     var getEmail = localStorage.getItem('email');
     console.log(getEmail);
 
+    // 비밀번호 변경
     $.ajax({
 
         url : '/member/update_pw',
@@ -45,6 +47,8 @@ document.querySelector('.changeBtn').addEventListener('click', function () {
                 $('#new_pw').hide();
                 $('#new_pwCheck').hide();
                 $('.changeBtn').hide(); 
+            } else {
+                alert("기존 비밀번호와 동일합니다.");
             }
         },
         error: function(){
