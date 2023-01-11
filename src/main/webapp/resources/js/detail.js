@@ -69,7 +69,6 @@ function regist(){
                     console.log(data[i].files[j]);
 
                     formData.append('file',data[i].files[j]);
-                    // formData.append('file',$(review_multiple)[i].files[j]);
 
                 }
                 if(revText == null || revText == ''){
@@ -79,6 +78,7 @@ function regist(){
                 } else {        
                     formData.append('review_diner_code', diner_code);
                     formData.append('review_content', revText);
+                    // formData.append('review_user_id', user_id);
                 }
                 
             } 
@@ -122,30 +122,30 @@ function regist(){
         
     }
     
-    function Rating(){};
-    Rating.prototype.rate = 0;
-    Rating.prototype.setRate = function(newrate){
-        this.rate = newrate;
-        let items = document.querySelectorAll('.rate_radio');
-        items.forEach(function(item, idx){
-            if(idx < newrate){
-                item.checked = true;
-            }else{
-                item.checked = false;
-            }
-        });
-    }
-    let rating = new Rating();
+    // function Rating(){};
+    // Rating.prototype.rate = 0;
+    // Rating.prototype.setRate = function(newrate){
+    //     this.rate = newrate;
+    //     let items = document.querySelectorAll('.rate_radio');
+    //     items.forEach(function(item, idx){
+    //         if(idx < newrate){
+    //             item.checked = true;
+    //         }else{
+    //             item.checked = false;
+    //         }
+    //     });
+    // }
+    // let rating = new Rating();
      
-    document.addEventListener('DOMContentLoaded', function(){
-        //별점선택 이벤트 리스너
-        document.querySelector('.rating').addEventListener('click',function(e){
-            let elem = e.target;
-            if(elem.classList.contains('rate_radio')){
-                rating.setRate(parseInt(elem.value));
-            }
-        })
-    });
+    // document.addEventListener('DOMContentLoaded', function(){
+    //     //별점선택 이벤트 리스너
+    //     document.querySelector('.rating').addEventListener('click',function(e){
+    //         let elem = e.target;
+    //         if(elem.classList.contains('rate_radio')){
+    //             rating.setRate(parseInt(elem.value));
+    //         }
+    //     })
+    // });
 
 
 async function spreadReviewServer(diner_code){
@@ -170,12 +170,10 @@ function getReviewList(diner_code){
             for(let reviewDTO of result){ 
 
                 let div = `<div>`;
-                div += `<div>${reviewDTO.rvo.review_user_id}`;
+                div += `<div class="reviewer-id>`;
                 div += `<span class="review-time-ago"></span><a href="#">신고</a>`;
                 div += `<div class="review-point"></div>`;
-                console.log(reviewDTO.flist);
-
-				
+                //console.log(reviewDTO.flist);
                 div += `<div class="review-menu"></div>`;
 		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
 		        div += `</div>`;
@@ -198,7 +196,7 @@ function getReviewList(diner_code){
                 }
             }
         } else {
-            let div = `<div>Review Empty</div>`;
+            let div = `<div>첫번째 리뷰를 작성해주세요!</div>`;
             review.innerHTML += div;
         }
         

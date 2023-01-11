@@ -503,35 +503,33 @@ main{
 #image_container>div>img{
 	width:100px;
 } 
-.rating .rate_radio {
-    position: relative;
-    display: inline-block;
-    z-index: 20;
-    opacity: 0.001;
-    width: 30px;
-    height: 30px;
-    background-color: #fff;
-    cursor: pointer;
-    vertical-align: top;
-    display: none;
-}
-.rating .rate_radio + label {
-    position: relative;
-    display: inline-block;
-    margin-left: -4px;
-    z-index: 10;
-    width: 30px;
-    height: 30px;
-    background-image: url('../source/starrate.png');
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-}
-.rating .rate_radio:checked + label {
-    background-color: #ff8;
-}
-
 #review_img{
 	 width: 200px;
+}
+
+/* 별점css */
+#starform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#starform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#starform label{
+    font-size: 1.5em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#starform label:hover{
+    text-shadow: 0 0 0 #ffff00; /* 마우스 호버 */
+}
+#starform label:hover ~ label{
+    text-shadow: 0 0 0 #ffff00; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#starform fieldset legend{
+    text-align: center;
+}
+#starform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #ffff00; /* 마우스 클릭 체크 */
 }

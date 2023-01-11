@@ -270,36 +270,25 @@
 							<p>리뷰 472개 / 사장님댓글 452개</p>
 						</div>
 
-						
-					    <div class="review_box">
-                              <div class="review_rating">
-                                 <div class="review_star">얼마나 만족하셨나요?</div>
-                                 <div class="rating">
-                                 	<input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
-					                <label for="rating1"></label>
-					                <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
-					                <label for="rating2"></label>
-					                <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
-					                <label for="rating3"></label>
-					                <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
-					                <label for="rating4"></label>
-					                <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-					                <label for="rating5"></label>
-                                 </div>
-                              </div>
-                                
-                                
-                                
-		                     <%-- <span id="revWriter">${ses.user_id}</span> --%>
+						<!-- 별점 -->
+						<form name="starform" id="starform" method="post" action="./save">
+						  <div>
+						    <fieldset>
+						        <legend>별을 채워주세요!</legend>
+						         	<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+							        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+							        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+							        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+						    </fieldset>
+						  </div>
+						</form>
+                               
 		                    	<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
 		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
 		                          <div class="review_insertBox">
 		                          </div>
                                 
-                               <%-- <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden> --%>
-                              <!--   <input type="text" name="review_taste_score" value="0" hidden>
-                                <input type="text" name="review_amount_score" value="0" hidden>
-                                <input type="text" name="review_delivery_score" value="0" hidden> -->
                                 
                                 <!-- 이미지파일 등록 -->
                             <div class="review_multiplebox">
@@ -308,31 +297,15 @@
 								 <button type="button" id="trigger">사진</button>
 				                 <div id="image_container">		
 				                 </div>
-				         <!--          <div id="fileDelet">
-								      <a href="#" id="delBtn">X</a>
-								    </div> -->
 				         	</div>      
 									<button type="button" id="regBtn" class="review_insert">완료</button>
-                            <!-- </form> --> 
                             	
-                        </div>
                             
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
-                      
-                            <div id="review-head">
-                      
-	                            	<span class="reviewer-id"></span><span class="review-time-ago"></span><a href="#">신고</a>
-	                            	<div class="review-point"></div>
-									<div class="review-img"></div>
-									<div class="review-menu"></div>
-									<div class="review-content"></div>
-									
-							</div>
-						
-                            </div>	
-                        
-                        
+                            <div id="review-head"></div>
+                         </div>	
+
                         <!-- <div class="review">
 							<div class="review-head">
 								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
@@ -347,32 +320,17 @@
 							<div class="review-content">
 								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
 							</div>
-						</div>
-
-
-						<div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
 						</div> -->
+
+
 						<div class="add-review d-flex justify-content-center align-items-center">
 							더보기&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
 								<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
 							  </svg>
 						</div>
-
-
 					</div>
+
+				
 					<!-- tab-pane -->
 					<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 						<div class="info-list">
@@ -529,10 +487,10 @@
 				<span>합계:</span> <span>21,200원</span>
 			</div>
 		
-		
 		</div>
-
 	</div>
+
+
 
 </main>
 <script type="text/javascript">

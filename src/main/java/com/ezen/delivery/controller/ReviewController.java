@@ -21,6 +21,7 @@ import com.ezen.delivery.Handler.ReviewImgHandler;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
+import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.ReviewService;
 
@@ -43,18 +44,13 @@ public class ReviewController {
 	@PostMapping(value="/upload")
 	@ResponseBody
 //	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
-	public String upload(@RequestParam("file") MultipartFile[] files, 
-			 ReviewVO rvo, HttpSession session) {
+	public String upload(@RequestParam("file") MultipartFile[] files, ReviewVO rvo, HttpSession session) {
 		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
 			List<ReviewImgVO> list = rihd.uploadFiles(files);
 			ridto.setFList(list);
 		}		
 //		UserVO uvo = (UserVO)session.getAttribute("user");
-//		ReviewVO rvo = new ReviewVO();
-//		rvo.setReview_diner_code(review_diner_code);
-//		rvo.setReview_user_id("user_id");
-//		rvo.setReview_content(review_content);
 		ridto.setRvo(rvo);		
 		int isOk = rsv.insert(ridto);	
 		log.info("fList : "+ridto.getFList());
