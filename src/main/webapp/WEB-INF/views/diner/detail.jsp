@@ -296,7 +296,7 @@
 		                          <div class="review_insertBox">
 		                          </div>
                                 
-                                <%-- <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden> --%>
+                               <%-- <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden> --%>
                               <!--   <input type="text" name="review_taste_score" value="0" hidden>
                                 <input type="text" name="review_amount_score" value="0" hidden>
                                 <input type="text" name="review_delivery_score" value="0" hidden> -->
@@ -333,7 +333,7 @@
                             </div>	
                         
                         
-                        <div class="review">
+                        <!-- <div class="review">
 							<div class="review-head">
 								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
 							</div>
@@ -364,7 +364,7 @@
 							<div class="review-content">
 								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
 							</div>
-						</div>
+						</div> -->
 						<div class="add-review d-flex justify-content-center align-items-center">
 							더보기&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
 								<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
@@ -536,6 +536,8 @@
 
 </main>
 <script type="text/javascript">
+let diner_code = "<c:out value='${diner.diner_code}' />";
+let user_id = "<c:out value='${sessionScope.user.user_id}' />";
 
 
 function readFile2(fileNames) {
@@ -569,5 +571,7 @@ function readFile2(fileNames) {
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/detail.js"></script>
-
+<script>
+getReviewList(diner_code);
+</script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>
