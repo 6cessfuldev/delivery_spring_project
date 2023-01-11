@@ -505,6 +505,11 @@ main{
 	font-weight: 700;
 }
 
+#exampleModal{
+	height:800px;
+	margin-top : 80px;
+}
+
 .modal_img{
 	width:100%;
 	height:200px;
@@ -522,6 +527,7 @@ main{
 .modal-food-price{
 	border-top:1px solid #cfcfcf;
 	font-size:14px;
+	height:50px;
 }
 
 .item-list-wrap{
@@ -535,4 +541,83 @@ main{
 
 .form-check{
 	margin-top:10px;
+}
+
+.modal-amount-wrap{
+	border: 1px solid grey;
+	
+	
+}
+
+.modal-amount-wrap>a{
+	line-height: 1;
+	padding-top : 6px;
+	padding-bottom : 2px;
+	padding-left : 6px;
+	padding-right : 6px;
+	display:inline-block;
+	text-decoration: none;
+	color:grey;
+}
+
+.modal-amount{
+	padding-top : 3px;
+	font-weight:700;
+	font-size:15px;
+	text-align:center;
+	width: 50px;
+	border-left:1px solid grey;	
+	border-right:1px solid grey;	
+}
+
+.modal-total-price-wrap{
+	background-color : rgb(209, 203, 203);
+	border-top: 1px solid rgb(209, 203, 203);
+}
+
+.modal-total-price-wrap>strong:nth-child(1){
+	margin-top:5px;
+}
+
+.modal-total-price{
+	padding:0;
+	text-align: right;
+}
+
+.modal-total-price>strong{
+	padding:0;
+	font-size:22px;
+	color:#ff0000;
+	display:block;
+}
+.modal-total-price>span:nth-child(2){
+	display:block;
+	color:#ff0000;
+	font-size:13px;
+}
+.modal-total-price>span:nth-child(3){
+	display:block;
+	font-size:13px;
+}
+
+.modal-footer{
+	font-weight:600;
+	color:white;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+
+.modal-footer>div{
+	margin:0;
+	width:50%;
+	hegiht: 300px;
+}
+
+.modal-order{
+	background-color:red;
+}
+
+.add-basket{
+	background-color:green;
 }

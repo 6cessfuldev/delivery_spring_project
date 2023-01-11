@@ -65,14 +65,6 @@ public class AdminController {
 	@GetMapping("/user/register")
 	public void userRegister() {}
 	
-//	@PostMapping("/user/insert")
-//	public String userInsert(UserVO uvo) {
-//		
-//	}
-	
-	
-	
-	
 	
 	@GetMapping("/diner")
 	public void diner(Model model) {
