@@ -102,18 +102,14 @@
 							<!-- Additional required wrapper -->
 							<div class="swiper-wrapper">
 							<!-- Slides -->
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
+							
+							<c:forEach items="${foodList}" var="food">
+								<div class="swiper-slide" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
+									<img alt="food" src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}">
+								</div>							
+							</c:forEach>
+							
+							
 							</div>
 							<!-- If we need pagination -->
 							<div class="swiper-pagination"></div>
@@ -412,7 +408,7 @@
 								<div class="info-text">
 									<span class="info-list-title">영업시간</span> <span>${diner.diner_open_time} - ${diner.diner_close_time}</span> <br>
 									<span class="info-list-title">전화번호</span> <span>050712921952</span> <br>
-									<span class="info-list-title">주소</span> <span>10:30 - 23:45</span>
+									<span class="info-list-title">주소</span> <span>${diner.diner_address}</span>
 								</div>
 							</div>
 
@@ -438,7 +434,7 @@
 								</div>
 								<div class="info-text">
 									<span class="info-list-title">상호명</span> <span>${diner.diner_business_name}</span><br>
-									<span class="info-list-title">사업자등록번호</span> <span>diner_company_num</span>
+									<span class="info-list-title">사업자등록번호</span> <span>${diner_company_num}	</span>
 								</div>
 							</div>
 
@@ -513,19 +509,46 @@
 			<div class="basket-total-price">
 				<span>합계:</span> <span>21,200원</span>
 			</div>
-		
-		
+			
+			
+
 		</div>
 
 	</div>
 
 </main>
 
+<!-- Button trigger modal -->
+<button type="button" id="modalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+	
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 	console.log(diner_codeVal);
 	console.log(category);
+		
 </script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>

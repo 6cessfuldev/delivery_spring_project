@@ -39,3 +39,21 @@ $("#search-option").on("change", ()=>{
 	$("#order").val(index);
 	$("#addr-form").submit();
 })
+
+function openModal(food_code){
+  $("#modalTrigger").click();
+  $.ajax({
+    url: '/food/option/'+food_code,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data, status, xhr){
+      console.log(data);
+      console.log(status);
+      
+    },
+    error: function(xhr, status, error){
+      console.log(error);
+    }
+  })
+
+}

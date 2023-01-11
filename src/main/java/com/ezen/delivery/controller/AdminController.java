@@ -105,22 +105,31 @@ public class AdminController {
 		model.addAttribute("file", ddto.getFivo());
 	}
 	
-	@GetMapping("/diner/update")
+	@PostMapping("/diner/update")
 	public String dinerUpdate(DinerVO dvo, @RequestParam List<String> category, @RequestParam(value="file", required=false) MultipartFile file, Model model) {
 		
 		int isUp = 1;
 		
 		DinerDTO ddto = new DinerDTO();
 		
+		//입력된 파일이 있는 경우
 		if(file != null) {
 				
+			//DB에 있는 기존 파일 정보
 			FileVO fivo = dsv.getDiner(dvo.getDiner_code()).getFivo();
 			
-			//이전 이미지파일 삭제
-			isUp *= fhd.deleteFile(fivo);
-					
-			//입력받은 이미지 파일 등록			
+			//DB에 이미 정보가 있다면 저장소에서 이미지 파일 삭제
+			if(fivo != null) {
+				isUp *= fhd.deleteFile(fivo);
+				
+			}
+			//새로 입력받은 이미지 파일을 저장소에 등록			
 			fivo = fhd.uploadFiles(file);
+			//기존에 사용하던 파일 코드가 있다면 재사용
+			if(dvo.getDiner_file_code() != 0) {
+				fivo.setFile_code(dvo.getDiner_file_code());				
+			}
+			
 			ddto.setFivo(fivo);
 		}
 		
@@ -132,11 +141,13 @@ public class AdminController {
 		
 		ddto.setDvo(dvo);
 		
+		//db 수정
 		isUp *=  dsv.update(ddto);
 		
 		log.info(dvo.toString());
 		
-		model.addAttribute("diner", dsv.getDiner(dvo.getDiner_code()));
+		model.addAttribute("diner", dsv.getDiner(dvo.getDiner_code()).getDvo());
+		model.addAttribute("file", dsv.getDiner(dvo.getDiner_code()).getFivo());
 		
 		return "admin/diner/detail";	
 	}

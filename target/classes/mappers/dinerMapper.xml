@@ -13,11 +13,15 @@
 </select>
 
 <select id="selectList" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+	select diner_code, diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
+			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner 
+			order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <select id="selectListbyCate" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select * from diner where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+	select diner_code, diner_file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
+			diner_business_name, diner_company_num, diner_category, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner 
+			where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <insert id="insert">
@@ -35,7 +39,7 @@ insert into diner(diner_file_code, diner_name, diner_address, diner_min_pay, din
 <update id="update">
 	update diner set diner_file_code=#{diner_file_code}, diner_name=#{diner_name}, diner_address=#{diner_address}, diner_min_pay=#{diner_min_pay}, diner_notice=#{diner_notice}, 
 			diner_open_time=#{diner_open_time}, diner_close_time=#{diner_close_time}, diner_method_pay=#{diner_method_pay}, diner_business_name=#{diner_business_name}, 
-			diner_company_num=#{diner_company_num}, diner_category=#{diner_category}, diner_addr_point=POINT(#{diner_addr_lat}, #{diner_addr_lng}) where diner_code=#{diner_code}
+			diner_company_num=#{diner_company_num}, diner_category=#{diner_category}, diner_addr_point=POINT(#{diner_addr_lng}, #{diner_addr_lat}) where diner_code=#{diner_code}
 </update>
 
 <delete id="delete">

@@ -92,7 +92,12 @@ public class DinerServiceImpl implements DinerService {
 		int isUp = 1;
 		
 		if(ddto.getFivo() != null) {
-			isUp *= fidao.update(ddto.getFivo());
+			if(ddto.getFivo().getFile_code() !=0) {
+				isUp *= fidao.update(ddto.getFivo());				
+			}else {
+				isUp *= fidao.insert(ddto.getFivo());
+				ddto.getDvo().setDiner_file_code(ddto.getFivo().getFile_code());
+			}
 		}
 		
 		isUp *= ddao.update(ddto.getDvo());
