@@ -527,13 +527,70 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-6" id="exampleModalLabel">메뉴상세</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-
-	
-       
+      <div class="modal-body p-0">
+		  <div class="modal_img"></div>
+		  <div class="modal-text p-3 text-center">
+		  	<div class="food-title fs-5">후라이드치킨</div>
+		  	<div class="food-description fs-8">얇게 튀겨 더욱 바삭하고 속은 촉촉한, 진짜 후라이드!</div>
+		  </div>
+		  <div class="modal-food-price d-flex justify-content-between py-3 px-3"> 
+		  	<strong>가격</strong>
+		  	<strong>16,900원</strong>	
+		  </div>
+       	  
+       	  <div class="item-list-wrap p-3">
+       	  	<div class="item-list-title">
+	  		<strong>치킨선택</strong>
+	  		<span>(필수 선택)</span>
+       	  	</div>
+       	  	<div class="item-list">
+       	  		<div class="form-check">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				  <label class="form-check-label" for="flexRadioDefault1">
+				    뼈
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  <label class="form-check-label" for="flexRadioDefault2">
+				    순살
+				  </label>
+				</div>
+       	  	</div>
+       	  </div>
+       	  
+       	  <div class="item-list-wrap p-3">
+       	  	<div class="item-list-title py-3">
+	  		<strong>치킨선택</strong>
+	  		<span>(필수 선택)</span>
+       	  	</div>
+       	  	<div calss="item-list">
+       	  		<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+				  <label class="form-check-label" for="flexCheckDefault">
+				    스푼떡볶이
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    치즈볼
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    케이준후라이
+				  </label>
+				</div>
+       	  	</div>
+       	  </div>
+       	  
+       	  
+       	  	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
