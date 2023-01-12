@@ -582,6 +582,7 @@
 <script type="text/javascript">
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+	let user_id = '<c:out value="${sessionScope.user.user_id}" />';
 	console.log(diner_codeVal);
 	console.log(category);
 		
