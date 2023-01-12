@@ -138,6 +138,20 @@ public class UserServiceImpl implements UserService {
 		return udao.selectList();
 	}
 
+	@Override
+	public int modifyUserInfo(UserVO uvo) {
+		
+		String encodeNewPw = passwordEncoder.encode(uvo.getUser_pw());
+		uvo.setUser_pw(encodeNewPw);
+		
+		return udao.updateUser(uvo);
+	}
+
+//	@Override
+//	public int updateUser(UserVO uvo) {
+//		return udao.selectUserOne(uvo);
+//	}
+
 
 
 	

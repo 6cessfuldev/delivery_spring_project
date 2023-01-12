@@ -13,4 +13,20 @@
   		insert into choice (food_code, choice_content, choice_price)
   		values (#{food_code}, #{choice_content}, #{choice_price})
   	</insert>
+  	
+  	<select id="selectOne" resultType="com.ezen.delivery.domain.ChoiceVO">
+  		select * from choice
+  		where choice_code = #{choice_code}
+  	</select>
+  	
+  	<update id="updateChoice">
+  		update choice set
+  		choice_content = #{choice_content}, choice_price = #{choice_price}
+  		where choice_code = #{choice_code}
+  	</update>
+  	
+  	<delete id="deleteChoice">
+  		delete from choice
+  		where choice_code = #{choice_code}
+  	</delete>
   </mapper>

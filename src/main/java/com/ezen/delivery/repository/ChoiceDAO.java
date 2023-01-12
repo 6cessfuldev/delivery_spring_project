@@ -10,4 +10,10 @@ public interface ChoiceDAO {
 
 	int insertChoice(ChoiceVO cvo);
 
+	ChoiceVO selectOne(int choice_code);
+
+	int deleteChoice(int choice_code);
+
+	int updateChoice(ChoiceVO cvo);
+
 }
