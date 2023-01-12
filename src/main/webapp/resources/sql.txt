@@ -23,6 +23,25 @@ user_register_date datetime default now(),
 user_modify_date datetime default now(),
 primary key(user_id));
 
+## diner(음식점)
+
+create table diner(
+diner_code int auto_increment,
+file_code int,
+diner_name varchar(50) not null,
+diner_min_pay int,
+diner_address varchar(200) not null,
+diner_notice text,
+diner_open_time time,
+diner_close_time time,
+diner_method_pay varchar(20),
+diner_business_name varchar(50),
+diner_company_num varchar(12),
+diner_category varchar(15),
+diner_addr_point point,
+primary key(diner_code));
+
+
 ## choice(옵션)
 
 CREATE TABLE `deliverydb`.`choice` (
