@@ -15,7 +15,7 @@ public interface ReviewDAO {
 
 	int insertReview(ReviewVO rvo);
 
-
+	double selectAvgStar(int diner_code);
 
 
 }

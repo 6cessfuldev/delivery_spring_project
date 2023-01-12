@@ -27,16 +27,9 @@ document.getElementById('trigger').addEventListener('click', ()=> {
 
 
 $("#regBtn").click(function(){ 
-    if(rating.rate == 0){
-        alert("별점을 입력해주세요.");
-        return;
-    }else{
         regist();
-        // getReviewList(diner_code);
-    }
 });
 
-//로그인 중인 아이디 얻어오기
 function regist(){
     // const user_id = '${sessionScope.login.userId}';
     const user_id = "test";
@@ -51,11 +44,11 @@ function regist(){
     //         return;
     // }else{
         // const revText = document.getElementById('review_con').value;
-        //ajax에서 formData를 넘겨줘야함
         const formData = new FormData();
-
         const data = $('#review_multiple');
         const revText = document.getElementById('review_con').value;
+        const star = document.querySelector('input[name="rating"]:checked').value;
+        
         console.log('폼 데이터 : ' + formData);
         console.log('data : ' + data );
         console.log(data[0]); 
@@ -78,6 +71,11 @@ function regist(){
                 } else {        
                     formData.append('review_diner_code', diner_code);
                     formData.append('review_content', revText);
+                    formData.append('review_score', star);
+                    formData.append('review_reg_date', data);
+
+
+                    // 여기에서 review_score_avg를 ,,, append,, 해줘야하나,,? 근데 평균을 계산해서,,
                     // formData.append('review_user_id', user_id);
                 }
                 
@@ -99,13 +97,10 @@ function regist(){
             enctype : 'multipart/form-data',
             
             success: function(result){
-                // 서버와 통신을 성공했다면 서버가 다시 주는 데이터  
                 if (result === 'Success'){ //=== 타입 변환X
-                    $('#review_multiple').val('');
-                    // 파일 선택지 비우기                     
+                    $('#review_multiple').val('');                   
                     document.querySelector("div#image_container").innerHTML='';
                     $('#review_con').val('');
-                    // 글 영역 비우기 
                     console.log(result);
                     alert("리뷰를 등록했습니다.");
                     getReviewList(diner_code);
@@ -122,30 +117,7 @@ function regist(){
         
     }
     
-    // function Rating(){};
-    // Rating.prototype.rate = 0;
-    // Rating.prototype.setRate = function(newrate){
-    //     this.rate = newrate;
-    //     let items = document.querySelectorAll('.rate_radio');
-    //     items.forEach(function(item, idx){
-    //         if(idx < newrate){
-    //             item.checked = true;
-    //         }else{
-    //             item.checked = false;
-    //         }
-    //     });
-    // }
-    // let rating = new Rating();
-     
-    // document.addEventListener('DOMContentLoaded', function(){
-    //     //별점선택 이벤트 리스너
-    //     document.querySelector('.rating').addEventListener('click',function(e){
-    //         let elem = e.target;
-    //         if(elem.classList.contains('rate_radio')){
-    //             rating.setRate(parseInt(elem.value));
-    //         }
-    //     })
-    // });
+
 
 
 async function spreadReviewServer(diner_code){
@@ -160,37 +132,65 @@ async function spreadReviewServer(diner_code){
     }
 }
 
+
 function getReviewList(diner_code){
     spreadReviewServer(diner_code).then(result =>{ 
         console.log(result);
         const review = document.getElementById('review-head');
+        const star1 = '★☆☆☆☆';
+        const star2 = '★★☆☆☆';
+        const star3 = '★★★☆☆';
+        const star4 = '★★★★☆';
+        const star5 = '★★★★★';
         review.innerHTML = ""; 
         if(result.length > 0){ 
                 let count = 0;
             for(let reviewDTO of result){ 
+                 const star = reviewDTO.rvo.review_score;
+                 console.log(star);
+
+                 let star0='';
+                 for(let i=0; i<reviewDTO.rvo.review_score; i++){
+                    star0 += star1;
+                 }
+
+                 switch(reviewDTO.rvo.review_score){
+                    case 1 : 
+                        star0 = star1;
+                        break;
+                    case 2 :
+                        star0 = star2;
+                        break;
+                    case 3 :
+                        star0 = star3;
+                        break;
+                    case 4 :
+                        star0 = star4;
+                        break;
+                    case 5 :
+                        star0 = star5;
+                        break;
+                 }
 
                 let div = `<div>`;
                 div += `<div class="reviewer-id>`;
-                div += `<span class="review-time-ago"></span><a href="#">신고</a>`;
-                div += `<div class="review-point"></div>`;
-                //console.log(reviewDTO.flist);
+                div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}</span><a href="#">신고</a>`;
+                div += `<div class="review-point">${star0} ${reviewDTO.rvo.review_score}</div>`;
                 div += `<div class="review-menu"></div>`;
 		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
 		        div += `</div>`;
 		        review.innerHTML += div;
-                
                 if(reviewDTO.flist.length > 0){      
-               	 for(let img of reviewDTO.flist){
-               		 console.log(img);
+                    for(let img of reviewDTO.flist){
+                        console.log(img);
                		 let save_dir = img.review_img_save_dir.split('\\');
                		 let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
                		 console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
                		 let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
-            
-		             let imgTag = document.createElement("img");
-                     imgTag.id = 'review_img';
-                     imgTag.src = real;
-                     review.childNodes[count].append(imgTag);
+                        let imgTag = document.createElement("img");
+                        imgTag.id = 'review_img';
+                        imgTag.src = real;
+                        review.childNodes[count].append(imgTag);
 	                }
                     count++;
                 }
@@ -202,3 +202,4 @@ function getReviewList(diner_code){
         
     })
 }
+

@@ -81,6 +81,9 @@ public class DinerServiceImpl implements DinerService {
 	public DinerDTO getDiner(int diner_code) {
 		
 		DinerVO dvo = ddao.selectDiner(diner_code);
+		double avg = rdao.selectAvgStar(diner_code);
+		dvo.setDiner_score_avg(avg);
+		
 		FileVO fivo = fidao.selectByFileCode(dvo.getDiner_file_code());
 		
 		return new DinerDTO(dvo, fivo);

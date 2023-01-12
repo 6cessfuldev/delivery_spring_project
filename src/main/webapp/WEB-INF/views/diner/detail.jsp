@@ -274,7 +274,7 @@
 						<form name="starform" id="starform" method="post" action="./save">
 						  <div>
 						    <fieldset>
-						        <legend>별을 채워주세요!</legend>
+						        <legend>별을 채워주세요</legend>
 						         	<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
 							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
 							        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>

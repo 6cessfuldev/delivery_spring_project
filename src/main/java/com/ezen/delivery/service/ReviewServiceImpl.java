@@ -41,6 +41,8 @@ public class ReviewServiceImpl implements ReviewService {
 			rdto.setFList(flist);
 			
 			rdtoList.add(rdto);
+			
+			
 		}
 		
 		return rdtoList;
@@ -57,6 +59,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 
+
+	
 
 
 }

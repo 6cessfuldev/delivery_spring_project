@@ -92,6 +92,7 @@ public class DinerController {
 		return new ResponseEntity<List<DinerVO>>(list, HttpStatus.OK);
 
 	}
+
 }
 	
 	
