@@ -532,7 +532,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0">
-		  <div class="modal_img"></div>
+		  
 		  <div class="modal-text p-3 text-center">
 		  	<div class="food-title fs-5">후라이드치킨</div>
 		  	<div class="food-description fs-8">얇게 튀겨 더욱 바삭하고 속은 촉촉한, 진짜 후라이드!</div>
@@ -554,19 +554,13 @@
 				    뼈
 				  </label>
 				</div>
-				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-				  <label class="form-check-label" for="flexRadioDefault2">
-				    순살
-				  </label>
-				</div>
        	  	</div>
        	  </div> -->
        	  
        	  <div class="item-list-wrap p-3">
        	  	<div class="item-list-title py-1">
-	  		<strong>치킨선택</strong>
-	  		<span>(필수 선택)</span>
+		  		<strong>치킨선택</strong>
+		  		<span>(필수 선택)</span>
        	  	</div>
        	  	
        	  	<div class="item-list">

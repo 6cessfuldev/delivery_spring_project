@@ -614,6 +614,10 @@ main{
 	hegiht: 300px;
 }
 
+.choice-price{
+	float:right;
+}
+
 .modal-order{
 	background-color:red;
 }

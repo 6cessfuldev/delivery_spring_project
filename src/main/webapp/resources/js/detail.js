@@ -50,7 +50,7 @@ function openModal(food_code){
     type: 'GET',
     dataType: 'json',
     success: function(data, status, xhr){
-
+      console.log(data);
       spreadChoice(data);
       
     },
@@ -64,22 +64,29 @@ function openModal(food_code){
   
 }
 
-function spreadChoice(data){
+function spreadChoice(fdto){
 
-	console.log(data);
+
+	console.log(fdto);
+
+	$(".food-title").text(fdto.foodvo.food_name);
+	$(".food-descrpition").text(fdto.foodvo.food_intro);
+	$(".modal-food-price").children("string eq:(1)").text(fdto.foodvo.food_price);
+	img.css("background-image", "url(" + imageUrl + ")");
+	
     const box = $('.item-list');
 
-    for(let cvo of data){
-      console.log(cvo.choice_code);
-      const newDiv = $("<div>");
-      const input = $('<input class="form-check-input" type="checkbox" value="'+ cvo.choice_code +'" id="flexCheckDefault">');
+    for(let fdto of data){
+      
+      const newDiv = $('<div class="form-check">');
+      const input = $('<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">');
       const label = $('<label class="form-check-label" for="flexCheckDefault">');
       // const input = $('<input>');
       // const label = $('<label>');
       input.val(cvo.choice_code);
       label.text(cvo.choice_content);
-      const div = $("<div>");
-      div.text(cvo.choice_price);
+      const div = $('<div class="choice-price">');
+      div.text((cvo.choice_price>0?"+"+cvo.choice_price:cvo.choice_price));
       
       newDiv.append(input);
       newDiv.append(label);
