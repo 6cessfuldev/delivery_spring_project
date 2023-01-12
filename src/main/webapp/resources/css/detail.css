@@ -510,7 +510,7 @@ main{
 	margin-top : 30px;
 }
 
-.modal_img{
+.modal-img{
 	width:100%;
 	height:200px;
 	background-image: url("/resources/source/chicken.png");

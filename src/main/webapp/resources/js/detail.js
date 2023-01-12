@@ -57,32 +57,54 @@ function openModal(food_code){
     error: function(xhr, status, error){
       console.log(error);
     }
-
-
-
   })
   
 }
 
-function spreadChoice(fdto){
+//총 주문 계산을 변수
+let modalFoodPrice = 0; 
+let	modalOptionPrice = 0;
 
 
-	console.log(fdto);
+function spreadChoice(data){
 
-	$(".food-title").text(fdto.foodvo.food_name);
-	$(".food-descrpition").text(fdto.foodvo.food_intro);
-	$(".modal-food-price").children("string eq:(1)").text(fdto.foodvo.food_price);
-	img.css("background-image", "url(" + imageUrl + ")");
+	console.log(data);
+
+	let save_dir = data.filevo.file_save_dir;
+	let splitArr = save_dir.split(`\\`);
+    console.log(splitArr);
+	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
+	console.log(src);
+
+	$(".modal-img").css("background-image", "url(" + src + ")");
+
+	$(".food-title").text(data.foodvo.food_name);
+	$(".food-description").text(data.foodvo.food_intro);
+	$("#modal-price").text(data.foodvo.food_price+"원");
+	modalFoodPrice = data.foodvo.food_price;
 	
     const box = $('.item-list');
-
-    for(let fdto of data){
+	
+	let choiceCnt = 0;
+    for(let cvo of data.clist){
       
       const newDiv = $('<div class="form-check">');
-      const input = $('<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">');
-      const label = $('<label class="form-check-label" for="flexCheckDefault">');
-      // const input = $('<input>');
-      // const label = $('<label>');
+      const input = $('<input class="form-check-input" type="checkbox" value="">');
+      const label = $('<label class="form-check-label" >');
+      label.click(()=>{
+      	input.click();
+      })
+      input.click( ()=>{
+      	if(input.is(':checked')){
+      		modalOptionPrice+=cvo.choice_price;
+      		calculate();
+      	}else{
+      		modalOptionPrice -=cvo.choice_price;
+      		calculate();
+      	}
+      })
+     
       input.val(cvo.choice_code);
       label.text(cvo.choice_content);
       const div = $('<div class="choice-price">');
@@ -94,10 +116,9 @@ function spreadChoice(fdto){
   
       box.append(newDiv);
     }
-
-    console.log(box.children('div:eq(0)'));
+	
+	calculate();
 }
-
 
 function count(p){
   console.log("click");
@@ -107,6 +128,7 @@ function count(p){
     modalAmount--;
   }
   $(".modal-amount").text(modalAmount);
+  calculate();
 }
 
 $(".add-basket").click(function(){
@@ -119,5 +141,11 @@ $(".modal-order").click(function(){
 	$(".btn-close").click();
 })
 
+function calculate(){
+	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
+	console.log(modalTotal);
+	
+	$("#modal-total").text(modalTotal+"원");
+}
 
 

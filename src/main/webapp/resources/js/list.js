@@ -219,18 +219,25 @@ function addList(){
 	if(listCnt<0) return;
 
     getListMoreFromServer(listCnt).then(result => {
-        console.log(result.length);
+        console.log(result);
         if(result!=null && result.length>0){
             for(let i=0; i<result.length; i++){
                 if(i%2==0){
                     add+=`<div class="one-row justify-content-center">`;
                 }
+                
+                //일단 이미지 없으면 띄우지 않기
+                if(result[i].fivo == null) continue;
+                
                 let save_dir = result[i].fivo.file_save_dir;
-                console.log(save_dir);
-
+				let splitArr = save_dir.split(`\\`);
+                console.log(splitArr);
+				save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+				let src = "/upload/"+save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
+				
                 add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].dvo.diner_code}"'>`;
                 add+=`<div class="diner-img">`;
-                add+=`<img src="/upload/"+save_dir+"/${result[i].fivo.file_uuid}_${result[i].fivo.file_name}" alt="" width="80px" height="80px"></div>`;
+                add+=`<img src="${src}"	 alt="" width="80px" height="80px"></div>`;
                 add+=`<div class="diner-body"><h5 class="diner-title">${result[i].dvo.diner_name}</h5>`;
                 add+=`<p class="diner-text"><span class="score">★3.8</span> | 리뷰 1902 | 사장님댓글 791 </p>`;
                 add+=`<p class="diner-text"><span class="del-option">${result[i].dvo.diner_method_pay}</span> |`;
