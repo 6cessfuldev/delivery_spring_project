@@ -169,6 +169,18 @@ $(".category").children('ul').children('li').click(function(){
     $("#addr-form").submit();
 })
 
+console.log($("#category-option"));
+$("#category-option option[value="+category+"]").attr('selected', true); 
+
+//좁은 화면에서 나타나는 카테고리 셀렉 태그
+//선택 시 해당 카테고리 값으로 리스트 재요청
+$("#category-option").on("change", ()=>{
+
+	let optionVal = $("#category-option").val();
+	$("#category").val(optionVal);
+	$("#addr-form").submit();
+})
+
 //셀렉 태그 값 변경 시 졍렬 순서 기준에 따라 새로 리스트 가져오기
 $("#search-option").on("change", ()=>{
 	let index = $("#search-option option").index($("#search-option option:selected"));
@@ -213,14 +225,16 @@ function addList(){
                 if(i%2==0){
                     add+=`<div class="one-row justify-content-center">`;
                 }
+                let save_dir = result[i].fivo.file_save_dir;
+                console.log(save_dir);
 
-                add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].diner_code}"'>`;
+                add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].dvo.diner_code}"'>`;
                 add+=`<div class="diner-img">`;
-                add+=`<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px"></div>`;
-                add+=`<div class="diner-body"><h5 class="diner-title">${result[i].diner_name}</h5>`;
+                add+=`<img src="/upload/"+save_dir+"/${result[i].fivo.file_uuid}_${result[i].fivo.file_name}" alt="" width="80px" height="80px"></div>`;
+                add+=`<div class="diner-body"><h5 class="diner-title">${result[i].dvo.diner_name}</h5>`;
                 add+=`<p class="diner-text"><span class="score">★3.8</span> | 리뷰 1902 | 사장님댓글 791 </p>`;
-                add+=`<p class="diner-text"><span class="del-option">${result[i].diner_method_pay}</span> |`;
-                add+=`<span>${result[i].diner_min_pay}원 이상 배달</span></p>`;
+                add+=`<p class="diner-text"><span class="del-option">${result[i].dvo.diner_method_pay}</span> |`;
+                add+=`<span>${result[i].dvo.diner_min_pay}원 이상 배달</span></p>`;
                 add+=`<p class="delivery-time"> 22분 </p></div></div>`;
 
                 if(i%2==1 || i+1 == result.length){

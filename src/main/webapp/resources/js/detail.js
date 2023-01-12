@@ -39,6 +39,7 @@ function regist(){
     const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
     const maxSize = 1024*1024*20; //20MB
 
+
     // if(user_id === ''){
     //     alert('로그인이 필요한 서비스 입니다.');
     //         return;
@@ -202,4 +203,78 @@ function getReviewList(diner_code){
         
     })
 }
+
+
+let modalAmount = 1;
+
+function openModal(food_code){
+  modalAmount=1;
+  $("#modalTrigger").click();
+  $.ajax({
+    url: '/choice/list/'+food_code,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data, status, xhr){
+
+      spreadChoice(data);
+      
+    },
+    error: function(xhr, status, error){
+      console.log(error);
+    }
+
+
+
+  })
+  
+}
+
+function spreadChoice(data){
+
+	console.log(data);
+    const box = $('.item-list');
+
+    for(let cvo of data){
+      console.log(cvo.choice_code);
+      const newDiv = $("<div>");
+      const input = $('<input class="form-check-input" type="checkbox" value="'+ cvo.choice_code +'" id="flexCheckDefault">');
+      const label = $('<label class="form-check-label" for="flexCheckDefault">');
+      // const input = $('<input>');
+      // const label = $('<label>');
+      input.val(cvo.choice_code);
+      label.text(cvo.choice_content);
+      const div = $("<div>");
+      div.text(cvo.choice_price);
+      
+      newDiv.append(input);
+      newDiv.append(label);
+      newDiv.append(div);
+  
+      box.append(newDiv);
+    }
+
+    console.log(box.children('div:eq(0)'));
+}
+
+
+function count(p){
+  console.log("click");
+  if(p == 'plus' && modalAmount<99){
+  	modalAmount++;
+  }else if(p == 'minus' && modalAmount>1){
+    modalAmount--;
+  }
+  $(".modal-amount").text(modalAmount);
+}
+
+$(".add-basket").click(function(){
+	console.log("add basket");
+	$(".btn-close").click();
+})
+
+$(".modal-order").click(function(){
+	console.log("order");
+	$(".btn-close").click();
+})
+
 

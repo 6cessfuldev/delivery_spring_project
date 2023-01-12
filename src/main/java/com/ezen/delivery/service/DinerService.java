@@ -18,7 +18,7 @@ public interface DinerService {
 
 	int register(DinerDTO ddto);
 
-	List<DinerVO> getList(PagingVO pvo);
+	List<DinerDTO> getList(PagingVO pvo);
 
 	List<DinerVO> getList();
 

@@ -1,5 +1,7 @@
 package com.ezen.delivery.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -69,13 +71,24 @@ public class DinerServiceImpl implements DinerService {
 	}
 
 	@Override
-	public List<DinerVO> getList(PagingVO pvo) {
+	public List<DinerDTO> getList(PagingVO pvo) {
+		
+		List<DinerDTO> ddtoList = new ArrayList<DinerDTO>();
+		List<DinerVO> dvoList = null;
 		
 		if(pvo.getCategory().equals("all")) {
-			return ddao.selectList(pvo);
+			
+			dvoList = ddao.selectList(pvo);
+		}else {
+			dvoList = ddao.selectListbyCate(pvo);
 		}
 		
-		return ddao.selectListbyCate(pvo);
+		for (DinerVO dvo : dvoList) {
+			FileVO fvo = fidao.selectByFileCode(dvo.getDiner_file_code());
+			ddtoList.add(new DinerDTO(dvo,fvo));
+		}
+		
+		return ddtoList;
 	}
 
 	public DinerDTO getDiner(int diner_code) {

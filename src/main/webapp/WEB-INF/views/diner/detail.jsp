@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
@@ -60,7 +61,7 @@
 				</div>
 				<div class="diner-info">
 					<div class="diner-img">
-						<img src="/resources/source/kakao.jpg" alt="" width="70" height="70">
+						<img src="/upload/${fn:replace(fivo.file_save_dir, '\\','/')}/${fivo.file_uuid}_${fivo.file_name}" alt="" width="70" height="70">
 					</div>
 					<div class="diner-infos">
 						<p class="score">★★★★☆</p>
@@ -493,6 +494,112 @@
 
 
 </main>
+
+
+<!-- Button trigger modal -->
+<button type="button" id="modalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-6" id="exampleModalLabel">메뉴상세</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+		  <div class="modal_img"></div>
+		  <div class="modal-text p-3 text-center">
+		  	<div class="food-title fs-5">후라이드치킨</div>
+		  	<div class="food-description fs-8">얇게 튀겨 더욱 바삭하고 속은 촉촉한, 진짜 후라이드!</div>
+		  </div>
+		  <div class="modal-food-price d-flex justify-content-between py-3 px-3"> 
+		  	<strong>가격</strong>
+		  	<strong>16,900원</strong>	
+		  </div>
+       	  
+       	<!--   <div class="item-list-wrap p-3">
+       	  	<div class="item-list-title">
+		  		<strong>치킨선택</strong>
+		  		<span>(필수 선택)</span>
+       	  	</div>
+       	  	<div class="item-list">
+       	  		<div class="form-check">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+				  <label class="form-check-label" for="flexRadioDefault1">
+				    뼈
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+				  <label class="form-check-label" for="flexRadioDefault2">
+				    순살
+				  </label>
+				</div>
+       	  	</div>
+       	  </div> -->
+       	  
+       	  <div class="item-list-wrap p-3">
+       	  	<div class="item-list-title py-1">
+	  		<strong>치킨선택</strong>
+	  		<span>(필수 선택)</span>
+       	  	</div>
+       	  	
+       	  	<div class="item-list">
+       	
+       	  	 	<%-- <div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+				  <label class="form-check-label" for="flexCheckDefault">
+				    ${choiceList.get(i).choice_content }
+				  </label>
+				  <div>${choiceList.get(i).choice_price }</div>
+				</div>
+    
+			 	<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    치즈볼
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    케이준후라이
+				  </label>
+				</div> --%>
+       	  	</div>
+       	  </div>
+       	  
+       	  <div class="modal-food-price d-flex justify-content-between py-2 px-3"> 
+		  	<strong class="pt-1">수량</strong>
+		  	
+		  	<div class="modal-amount-wrap d-flex">	  	
+			  	<a href="#" onClick='count("minus")'> ─ </a>
+			  	<div class="modal-amount">1</div> 
+			  	<a href="#" onClick='count("plus")'> ┼ </a> 
+		  	</div>
+		  </div>
+		  
+		  <div class="modal-total-price-wrap d-flex justify-content-between py-2 px-3"> 
+       	  	<strong>총 주문금액</strong>
+       	  	<div class="modal-total-price">
+       	  		<strong>29,800원</strong>
+       	  		<span>15,900원 이상 주문 시 할인</span>
+       	  		<span>(최소 주문 금액 ${diner.diner_min_pay}원)</span>
+       	  	</div>
+       	  </div>
+       	  	
+      </div>
+      <div class="modal-footer d-flex">
+        <div class="add-basket py-3">장바구니에 넣기</div>
+        <div class="modal-order py-3">주문하기</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript">
 let diner_code = "<c:out value='${diner.diner_code}' />";
 let user_id = "<c:out value='${sessionScope.user.user_id}' />";
