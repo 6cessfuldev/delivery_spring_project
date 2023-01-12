@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/list.css">
 
@@ -83,10 +84,19 @@
 			<div class="row justify-content-end">
 				<div class="col-6 ">
 					<select name="" id="category-option">
-						<option value="">기본 정렬순</option>
-						<option value="">거리순</option>
-						<option value="">별점순</option>
-						<option value="">리뷰 많은 순</option>
+						<option value="all">전체보기</option>
+						<option value="aa">1인분 주문</option>
+						<option value="ff">프랜차이즈</option>
+						<option value="hh">치킨</option>
+						<option value="pp">피자/양식</option>
+						<option value="cc">중국집</option>
+						<option value="kk">한식</option>
+						<option value="jj">일식/돈까스</option>
+						<option value="mm">족발/보쌈</option>
+						<option value="nn">야식</option>
+						<option value="tt">분식</option>
+						<option value="dd">카페/디저트</option>
+						<option value="ss">편의점/마트</option>
 					</select>
 				</div>
 				<div class="col-6">
@@ -100,32 +110,31 @@
 			</div>
 		</div>
 		<div class="registered py-5 bg-light">
-				<c:forEach items="${dList}" var="diner" varStatus="status" >
+				<c:forEach items="${dList}" var="ddto" varStatus="status" >
 					<c:if test="${status.index%2==0}">
 						<div class="one-row justify-content-center"> 
 					</c:if>
 					<!--  -->
 					<%-- <c:if test="${status.index%2!=0 || status.index+1!=fn:length(dList)}"> --%>
-						<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${diner.diner_code}"'>
+						<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${ddto.dvo.diner_code}"'>
 							<div class="diner-img">
-								<img src="/resources/source/dinerimg.PNG" alt="" width="80px" height="80px">
+								<img src="/upload/${fn:replace(ddto.fivo.file_save_dir, '\\','/')}/${ddto.fivo.file_uuid}_${ddto.fivo.file_name}" alt="" width="80px" height="80px">
 							</div>
 							<div class="diner-body">
-								<h5 class="diner-title">${diner.diner_name}</h5>
+								<h5 class="diner-title">${ddto.dvo.diner_name}</h5>
 								<p class="diner-text">
 								<span class="score">★3.8<!-- ★${diner.diner_score_avg} --></span>
 								| 리뷰 1902 | 사장님댓글 791 
 								</p>
 								<p class="diner-text">
-								<span class="del-option">${diner.diner_method_pay}</span> |
-								<span>${diner.diner_min_pay}원 이상 배달</span>
+								<span class="del-option">${ddto.dvo.diner_method_pay}</span> |
+								<span>${ddto.dvo.diner_min_pay}원 이상 배달</span>
 								</p>
 								<p class="delivery-time">
 								22분
 								</p>
 							</div>
 						</div>
-					<%-- </c:if> --%>
 					<c:if test="${status.index%2==1 || status.index+1 == fn:length(list)}"> 
 						</div>
 					</c:if>

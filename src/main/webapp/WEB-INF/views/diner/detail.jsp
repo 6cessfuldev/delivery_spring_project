@@ -2,75 +2,84 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
 <main>
-	<div class="category">
+<div class="category">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
-				<div class="category-btn">전체보기</div>
+				<div class="category-btn" id="cate-all" >전체보기</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">1인분 주문</div>
+				<div class="category-btn" id="cate-aa">1인분 주문</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">프랜차이즈</div>
-			</li> 
-			<li class="nav-item">
-				<div class="category-btn">치킨</div>
+				<div class="category-btn" id="cate-ff">프랜차이즈</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">피자/양식</div>
+				<div class="category-btn" id="cate-hh">치킨</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">중국집</div>
+				<div class="category-btn" id="cate-pp">피자/양식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">한식</div>
+				<div class="category-btn" id="cate-cc">중국집</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">일식/돈까스</div>
+				<div class="category-btn" id="cate-kk">한식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">족발/보쌈</div>
+				<div class="category-btn" id="cate-jj">일식/돈까스</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">야식</div>
+				<div class="category-btn" id="cate-mm">족발/보쌈</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">분식</div>
+				<div class="category-btn" id="cate-nn">야식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">카페/디저트</div>
+				<div class="category-btn" id="cate-tt">분식</div>
 			</li>
 			<li class="nav-item">
-				<div class="category-btn">편의점/마트</div>
+				<div class="category-btn" id="cate-dd">카페/디저트</div>
+			</li>
+			<li class="nav-item">
+				<div class="category-btn" id="cate-ss">편의점/마트</div>
 			</li>
 		</ul>
 	</div>
+
+	<form id="addr-form" action="/diner/search" method="get">
+		<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
+		<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
+		<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
+		<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
+		<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+	</form>
 
 	<div class=" col-sm-8 contents bg-light d-flex justify-content-center pt-3">
 		
 		<div class="diner-detail">
 			<div class=diner-header>
 				<div class="diner-name">
-					인천상륙덮글이
+					${diner.diner_name}
 				</div>
 				<div class="diner-info">
 					<div class="diner-img">
-						<img src="/resources/source/kakao.jpg" alt="" width="70" height="70">
+						<img src="/upload/${fn:replace(fivo.file_save_dir, '\\','/')}/${fivo.file_uuid}_${fivo.file_name}" alt="" width="70" height="70">
 					</div>
 					<div class="diner-infos">
 						<p class="score">★★★★☆</p>
-						<p>최소주문금액 9,000원</p>
-						<p>결제 <span>신용카드, 현금, 요기서결제</span></p>
+						<p>최소주문금액 ${diner.diner_min_pay}원</p>
+						<p>결제 <span>${diner.diner_method_pay}</span></p>
 						<p>배달시간 <span>38분~48분</span></p>
 					</div>
 				</div>
 				<div class="diner-notice">
-					<p>사장님 알림 <span>9월 7일부터 신규오픈 "인천상륙 덮글이" 인천 상륙 덮글이 우리나라 월드컵 16강 기원 리...</span></p>
+					<p>사장님 알림 <span>${diner.diner_notice}</span></p>
 				</div>
 			</div>
 
@@ -94,18 +103,14 @@
 							<!-- Additional required wrapper -->
 							<div class="swiper-wrapper">
 							<!-- Slides -->
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
-							<div class="swiper-slide"></div>
+							
+							<c:forEach items="${foodList}" var="food">
+								<div class="swiper-slide" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
+									<img alt="food" src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}">
+								</div>							
+							</c:forEach>
+							
+							
 							</div>
 							<!-- If we need pagination -->
 							<div class="swiper-pagination"></div>
@@ -121,30 +126,26 @@
 							<div class="accordion-item">
 								<h2 class="accordion-header" id="flush-headingOne">
 									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-									인기메뉴
+									전체메뉴
 									</button>
 								</h2>
 								<div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 									<div class="accordion-body">
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
+									
+									<c:forEach items="${foodList}" var="food">
+														
+										<div class="diner-menu-card d-flex align-items-center justify-content-between" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
 											<div class="diner-menu-table">
-												<p class="diner-menu-title">삼겹짜글이장교</p>
-												<p class="diner-menu-price">10,900원</p>
+												<p class="diner-menu-title">${food.foodvo.food_name}</p>
+												<p class="diner-menu-price">${food.foodvo.food_price }</p>
 											</div>
 											<div class="diner-menu-img">
-												<img src="/resources/source/forone.png" alt="" width="100px" height="100px">
+												<img src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}" alt="" width="100px" height="100px">
 											</div>
 										</div>
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
-											<div class="diner-menu-table">
-												<p class="diner-menu-title">삼겹짜글이장교</p>
-												<p class="diner-menu-combo">차돌+삼겹+햄+후라이2개+볶음김치+알단무지+날치알+후리가케밥+김가루</p>
-												<p class="diner-menu-price">10,900원</p>
-											</div>
-											<div class="diner-menu-img">
-												<img src="/resources/source/forone.png" alt="" width="100px" height="100px">
-											</div>
-										</div>
+					
+									</c:forEach>
+						
 									</div>
 								</div>
 							</div>
@@ -156,7 +157,7 @@
 								</h2>
 								<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
 									<div class="accordion-body">
-										<div class="diner-menu-card d-flex align-items-center justify-content-between">
+										<div class="diner-menu-card d-flex align-items-center justify-content-between" >
 											<div class="diner-menu-table">
 												<p class="diner-menu-title">삼겹짜글이장교</p>
 												<p class="diner-menu-price">10,900원</p>
@@ -270,43 +271,44 @@
 							<p>리뷰 472개 / 사장님댓글 452개</p>
 						</div>
 
-						<!-- 별점 -->
-						<form name="starform" id="starform" method="post" action="./save">
-						  <div>
-						    <fieldset>
-						        <legend>별을 채워주세요</legend>
-						         	<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-							        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-							        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-							        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-						    </fieldset>
-						  </div>
-						</form>
-                               
+						<div class="review">
+					    <div class="review_box">
+                             <!--   <form action="/review/reviewfile" method="post" enctype="multipart/form-data"> -->
+                                <div class="review_spanBox">
+                                    <span class="review_span">얼마나 만족하셨나요?</span><br>
+                                    <span class="review_starT">맛&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
+                                    <span class="review_starT">양&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
+                                    <span class="review_starT">배달&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
+                                </div>
+                                <br>
+                                
+		                     <span id="revWriter">${review.review_user_email}</span>
 		                    	<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
 		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
 		                          <div class="review_insertBox">
+		                          <!-- <button type="submit" id="regBtn" class="review_insert">완료</button> -->
 		                          </div>
                                 
+                                <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden>
+                                <input type="text" name="review_taste_score" value="review_taste_score" hidden>
+                                <input type="text" name="review_amount_score" value="review_amount_score" hidden>
+                                <input type="text" name="review_delivery_score" value="review_delivery_score" hidden>
                                 
+                 
                                 <!-- 이미지파일 등록 -->
+                            <form action="/review/reviewfile" method="post" enctype="multipart/form-data">
                             <div class="review_multiplebox">
-				                 <input type="file" id="review_multiple" name="files[]" accept="image/*" onchange="readFile2('files[]');" style="display: none" multiple="multiple">
-				            
-								 <button type="button" id="trigger">사진</button>
+				                 <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple>
+				                 <button type="button" id="trigger">사진</button>
+				
 				                 <div id="image_container">		
+				                                                 
 				                 </div>
 				         	</div>      
-									<button type="button" id="regBtn" class="review_insert">완료</button>
-                            	
-                            
-                            	<!-- 등록 후 출력 화면 -->
-                         <div class="review">
-                            <div id="review-head"></div>
-                         </div>	
-
-                        <!-- <div class="review">
+									<button type="submit" id="regBtn" class="review_insert">완료</button>
+                            </form>
+                        </div>
+                        
 							<div class="review-head">
 								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
 							</div>
@@ -320,17 +322,63 @@
 							<div class="review-content">
 								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
 							</div>
-						</div> -->
+						</div>
 
+						<div class="review">
+							<div class="review-head">
+								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
+							</div>
+							<div class="review-point">
+								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
+							</div>
+							<div class="review-img"></div>
+							<div class="review-menu">
+								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
+							</div>
+							<div class="review-content">
+								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
+							</div>
+						</div>
 
+						<div class="review">
+							<div class="review-head">
+								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
+							</div>
+							<div class="review-point">
+								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
+							</div>
+							<div class="review-img"></div>
+							<div class="review-menu">
+								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
+							</div>
+							<div class="review-content">
+								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
+							</div>
+						</div>
+
+						<div class="review">
+							<div class="review-head">
+								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
+							</div>
+							<div class="review-point">
+								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
+							</div>
+							<div class="review-img"></div>
+							<div class="review-menu">
+								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
+							</div>
+							<div class="review-content">
+								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
+							</div>
+						</div>
 						<div class="add-review d-flex justify-content-center align-items-center">
 							더보기&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
 								<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
 							  </svg>
 						</div>
-					</div>
 
-				
+
+					</div>
 					<!-- tab-pane -->
 					<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 						<div class="info-list">
@@ -346,31 +394,7 @@
 								</div>
 								<div class="info-text-narrow">
 									<span>
-										🔥9월7일부터 신규오픈 ''인천상륙 덮글이"🔥<br>
-										🎉인천 상륙 덮글이 우리나라월드컵 16강 기원 리뷰이벤트🎉<br>
-										<br>
-										😍맛있고 푸짐한 한끼 식사가 되기 위해 열심히 하겠습니다<br>
-										남겨 주시는 소중한 리뷰는 매장운영에 있어 큰 힘과 큰 도움이 됩니다😍<br>
-										💯요청사항에 닉네임 꼭 남겨주세요 닉네임 없을경우 누락될수있어요 ㅠㅠ💯<br>
-										<br>
-										🎈🍳리뷰 이벤트 품목🍳🎈<br>
-										1.비법양념 김말이 2P<br>
-										2.고구마치즈스틱 2P<br>
-										3.피카츄1P<br>
-										4.스팸후라이<br>
-										5.시즈닝 감자튀김<br>
-										6.탄산음료 (선택) 1개<br>
-										<br>
-										🧡찜 꼭꼭!! 눌러 주시고 별점 5점 부탁드립니다!! 🧡<br>
-										사진이 없어도 괜찮아요 😊 고객님들 께서 남겨주시는 리뷰는 항상 큰 힘이 됩니다 😆<br>
-										💥개선할 점이나 아쉬운 부분이 있으셨다면 😂리뷰보다는 가게로 전화주시면 즉각 조치 하겠습니다 💥<br>
-										<br>
-										후식 겸 간식으로 리뷰이벤트 다양한 음식을 준비했습니다 🍨<br>
-										만족하는 한끼를 위해 열심히 노력 하겠습니다.🍖<br>
-										<br>
-										💖인천상륙 덮글이는💖 고객님들 께서 주문해주시는 한끼 한끼 제 입으로 들어간다 생각하고 깨끗한 식재료와 위생 상태, 올바른 조리방법으로 정직하고 정성껏 조리 할 것을 약속 드립니다😄🤙<br>
-										<br>
-										※❤한끼 식사 든든하고 맛있게 드시고 오늘 하루도 행복한 하루되시길 진심으로 바랍니다❤<br>
+										${diner.diner_notice}
 									</span>	
 								</div>
 							</div>
@@ -383,9 +407,9 @@
 									<span>업체정보</span>
 								</div>
 								<div class="info-text">
-									<span class="info-list-title">영업시간</span> <span>10:30 - 23:45</span> <br>
+									<span class="info-list-title">영업시간</span> <span>${diner.diner_open_time} - ${diner.diner_close_time}</span> <br>
 									<span class="info-list-title">전화번호</span> <span>050712921952</span> <br>
-									<span class="info-list-title">주소</span> <span>10:30 - 23:45</span>
+									<span class="info-list-title">주소</span> <span>${diner.diner_address}</span>
 								</div>
 							</div>
 
@@ -398,7 +422,7 @@
 								</div>
 								<div class="info-text">
 									<span class="info-list-title">최소주문금액</span> <span>11,000원</span> <br>
-									<span class="info-list-title">결제수단</span> <span>신용가크, 현금, 요기서결제</span>
+									<span class="info-list-title">결제수단</span> <span>${diner.diner_method_pay}</span>
 								</div>
 							</div>
 
@@ -410,8 +434,8 @@
 									<span>사업자정보</span>
 								</div>
 								<div class="info-text">
-									<span class="info-list-title">상호명</span> <span>주식회사케이에프씨코리아</span><br>
-									<span class="info-list-title">사업자등록번호</span> <span>201-81-89723</span>
+									<span class="info-list-title">상호명</span> <span>${diner.diner_business_name}</span><br>
+									<span class="info-list-title">사업자등록번호</span> <span>${diner_company_num}	</span>
 								</div>
 							</div>
 
@@ -486,50 +510,128 @@
 			<div class="basket-total-price">
 				<span>합계:</span> <span>21,200원</span>
 			</div>
-		
+			
+			
+
 		</div>
+
 	</div>
 
-
-
 </main>
+
+<!-- Button trigger modal -->
+<button type="button" id="modalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-6" id="exampleModalLabel">메뉴상세</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+		  <div class="modal_img"></div>
+		  <div class="modal-text p-3 text-center">
+		  	<div class="food-title fs-5">후라이드치킨</div>
+		  	<div class="food-description fs-8">얇게 튀겨 더욱 바삭하고 속은 촉촉한, 진짜 후라이드!</div>
+		  </div>
+		  <div class="modal-food-price d-flex justify-content-between py-3 px-3"> 
+		  	<strong>가격</strong>
+		  	<strong>16,900원</strong>	
+		  </div>
+       	  
+       	<!--   <div class="item-list-wrap p-3">
+       	  	<div class="item-list-title">
+		  		<strong>치킨선택</strong>
+		  		<span>(필수 선택)</span>
+       	  	</div>
+       	  	<div class="item-list">
+       	  		<div class="form-check">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+				  <label class="form-check-label" for="flexRadioDefault1">
+				    뼈
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+				  <label class="form-check-label" for="flexRadioDefault2">
+				    순살
+				  </label>
+				</div>
+       	  	</div>
+       	  </div> -->
+       	  
+       	  <div class="item-list-wrap p-3">
+       	  	<div class="item-list-title py-1">
+	  		<strong>치킨선택</strong>
+	  		<span>(필수 선택)</span>
+       	  	</div>
+       	  	
+       	  	<div class="item-list">
+       	
+       	  	 	<%-- <div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+				  <label class="form-check-label" for="flexCheckDefault">
+				    ${choiceList.get(i).choice_content }
+				  </label>
+				  <div>${choiceList.get(i).choice_price }</div>
+				</div>
+    
+			 	<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    치즈볼
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+				  <label class="form-check-label" for="flexCheckChecked">
+				    케이준후라이
+				  </label>
+				</div> --%>
+       	  	</div>
+       	  </div>
+       	  
+       	  <div class="modal-food-price d-flex justify-content-between py-2 px-3"> 
+		  	<strong class="pt-1">수량</strong>
+		  	
+		  	<div class="modal-amount-wrap d-flex">	  	
+			  	<a href="#" onClick='count("minus")'> ─ </a>
+			  	<div class="modal-amount">1</div> 
+			  	<a href="#" onClick='count("plus")'> ┼ </a> 
+		  	</div>
+		  </div>
+		  
+		  <div class="modal-total-price-wrap d-flex justify-content-between py-2 px-3"> 
+       	  	<strong>총 주문금액</strong>
+       	  	<div class="modal-total-price">
+       	  		<strong>29,800원</strong>
+       	  		<span>15,900원 이상 주문 시 할인</span>
+       	  		<span>(최소 주문 금액 ${diner.diner_min_pay}원)</span>
+       	  	</div>
+       	  </div>
+       	  	
+      </div>
+      <div class="modal-footer d-flex">
+        <div class="add-basket py-3">장바구니에 넣기</div>
+        <div class="modal-order py-3">주문하기</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
-let diner_code = "<c:out value='${diner.diner_code}' />";
-let user_id = "<c:out value='${sessionScope.user.user_id}' />";
-
-
-function readFile2(fileNames) {
-    const target = document.getElementsByName(fileNames);
-    const fileLength = target[0].files.length;
-    console.log(fileLength);
-      if (fileLength<1) return;
-
-      $.each(target[0].files, function(index, file){
-          const reader = new FileReader();
-          reader.onload = function(e) {
-             var div = document.createElement("div");
-              var xBtn = document.createElement("button");
-              xBtn.innerText="X";
-              xBtn.addEventListener("click", function(){
-                 div.remove();
-              }) 
-              var img = document.createElement("img"); 
-                img.setAttribute("src", e.target.result);               
-               div.appendChild(xBtn);
-               div.appendChild(img);
-           console.log("index"+index);
-              document.querySelector("div#image_container").appendChild(div);
-              
-           }
-          reader.readAsDataURL(event.target.files[index]);
-      }); 
- } 
+	let category = '<c:out value="${sessionScope.pvo.category}" />';
+	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+	console.log(diner_codeVal);
+	console.log(category);
+		
 </script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/detail.js"></script>
-<script>
-getReviewList(diner_code);
-</script>
+
 <jsp:include page="../include/footer2.jsp"></jsp:include>

@@ -498,7 +498,9 @@ main{
 .basket-total-price>span{
 	color:rgb(226, 69, 69);
 	font-weight: 700;
+}
 
+<<<<<<< HEAD
 }
 #image_container>div>img{
 	width:100px;
@@ -532,4 +534,121 @@ main{
 }
 #starform input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 #ffff00; /* 마우스 클릭 체크 */
+=======
+#exampleModal{
+	height:600px;
+	margin-top : 30px;
+}
+
+.modal_img{
+	width:100%;
+	height:200px;
+	background-image: url("/resources/source/chicken.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.food-description{
+	font-size:12px;
+	color:grey;
+}
+
+.modal-food-price{
+	border-top:1px solid #cfcfcf;
+	font-size:14px;
+	height:50px;
+}
+
+.item-list-wrap{
+	border-top: 1px solid rgb(209, 203, 203);
+}
+
+.item-list-title>span{
+	font-size:14px;
+	color:#ed8512;
+}
+
+.form-check{
+	margin-top:10px;
+}
+
+.modal-amount-wrap{
+	border: 1px solid grey;
+	
+	
+}
+
+.modal-amount-wrap>a{
+	line-height: 1;
+	padding-top : 6px;
+	padding-bottom : 2px;
+	padding-left : 6px;
+	padding-right : 6px;
+	display:inline-block;
+	text-decoration: none;
+	color:grey;
+}
+
+.modal-amount{
+	padding-top : 3px;
+	font-weight:700;
+	font-size:15px;
+	text-align:center;
+	width: 50px;
+	border-left:1px solid grey;	
+	border-right:1px solid grey;	
+}
+
+.modal-total-price-wrap{
+	background-color : rgb(209, 203, 203);
+	border-top: 1px solid rgb(209, 203, 203);
+}
+
+.modal-total-price-wrap>strong:nth-child(1){
+	margin-top:5px;
+}
+
+.modal-total-price{
+	padding:0;
+	text-align: right;
+}
+
+.modal-total-price>strong{
+	padding:0;
+	font-size:22px;
+	color:#ff0000;
+	display:block;
+}
+.modal-total-price>span:nth-child(2){
+	display:block;
+	color:#ff0000;
+	font-size:13px;
+}
+.modal-total-price>span:nth-child(3){
+	display:block;
+	font-size:13px;
+}
+
+.modal-footer{
+	font-weight:600;
+	color:white;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+
+.modal-footer>div{
+	margin:0;
+	width:50%;
+	hegiht: 300px;
+}
+
+.modal-order{
+	background-color:red;
+}
+
+.add-basket{
+	background-color:green;
+>>>>>>> cee804369e631e8dee7e4fa4fa3e4e51b6f254a4
 }
