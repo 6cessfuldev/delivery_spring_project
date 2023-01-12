@@ -58,17 +58,18 @@
         
         newP.innerHTML = `<table>`;
         newP.innerHTML += `<tr>`;
-        newP.innerHTML += `<td><input type="text" id="choice_title" placeholder="옵션 제목"></td>`;
-        newP.innerHTML += `<td><input type="number" id="inputCnt" placeholder="옵션 개수 입력"></td>`;
+    /*     newP.innerHTML += `<td><input type="text" id="choice_title" placeholder="옵션 제목"></td>`; */
+        newP.innerHTML += `<td><input type="text" id="subchoice_content_" placeholder="옵션 내용"></td>`;
+        newP.innerHTML += `<td><input type="number" id="subchoice_price" placeholder="옵션 가격"></td>`;
         newP.innerHTML += `<td></td>`;
-        newP.innerHTML += `<td><input type="button" class="addSubBtn" value="생성"></td>`;
+        newP.innerHTML += `<td><input type="button" class="addSubBtn" value="추가"></td>`;
         newP.innerHTML += `</tr>`;
         newP.innerHTML += `</table><br>`;
-        newP.innerHTML += `<div id="addSubBox"></div>`;
+    /*     newP.innerHTML += `<div id="addSubBox"></div>`; */
         
         box.appendChild(newP);
         
-        $('.addSubBtn').click(function(){
+      /*   $('.addSubBtn').click(function(){
 
             const cnt = $('#inputCnt').val();
             
@@ -87,7 +88,7 @@
                 subBox.appendChild(newSubP);
             }
 
-        });
+        }); */
     });
     
     

@@ -39,6 +39,7 @@ public class DinerController {
 
 	@Inject
 	private UserDAO userDao;
+	
 	@Inject
 	private FoodService fsv;
 	

@@ -1,0 +1,33 @@
+create database deliverydb;
+use mysql;
+
+-- 유저생성구문
+create user 'springUser'@'localhost' identified by 'mysql';
+
+-- 권한생성구문
+grant all privileges on deliverydb.* to 'springUser'@'localhost' identified by 'mysql';
+
+-- 변경내용 메모리에 반영(적용완료)
+flush privileges;
+  
+## user(회원)
+
+create table user(
+user_id varchar(40) not null,
+user_email varchar(40) not null,
+user_pw varchar(500),
+user_name varchar(40) not null,
+user_phone varchar(40) not null,
+user_birth date not null,
+user_register_date datetime default now(),
+user_modify_date datetime default now(),
+primary key(user_id));
+
+## choice(옵션)
+
+CREATE TABLE `deliverydb`.`choice` (
+  `choice_code` INT NOT NULL AUTO_INCREMENT,
+  `food_code` INT NOT NULL,
+  `choice_content` VARCHAR(45) NOT NULL,
+  `choice_price` INT NOT NULL,
+  PRIMARY KEY (`choice_code`));
