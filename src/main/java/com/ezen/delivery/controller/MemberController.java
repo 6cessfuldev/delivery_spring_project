@@ -187,6 +187,11 @@ public class MemberController {
 	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
 		
 		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
+		
+//		if(naverUser == null) {
+//			return "/
+//		}
+		
 		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
 		
 		log.info(naverUser.toString());

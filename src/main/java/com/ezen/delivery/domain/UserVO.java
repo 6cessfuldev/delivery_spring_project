@@ -22,5 +22,6 @@ public class UserVO {
 	private String user_naver_id;
 	private String user_register_date;
 	private String user_modify_date;
+	private int user_isAdmin;
 
 }

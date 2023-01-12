@@ -45,19 +45,19 @@ let modalAmount = 1;
 function openModal(food_code){
   modalAmount=1;
   $("#modalTrigger").click();
-  $.ajax({
-    url: '/food/option/'+food_code,
-    type: 'GET',
-    dataType: 'json',
-    success: function(data, status, xhr){
-      console.log(data);
-      console.log(status);
+  // $.ajax({
+  //   url: '/food/option/'+food_code,
+  //   type: 'GET',
+  //   dataType: 'json',
+  //   success: function(data, status, xhr){
+  //     console.log(data);
+  //     console.log(status);
       
-    },
-    error: function(xhr, status, error){
-      console.log(error);
-    }
-  })
+  //   },
+  //   error: function(xhr, status, error){
+  //     console.log(error);
+  //   }
+  // })
 }
 
 function count(p){

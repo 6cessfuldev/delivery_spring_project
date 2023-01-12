@@ -68,7 +68,7 @@
 				</div>
 				<div class="diner-info">
 					<div class="diner-img">
-						<img src="/resources/source/kakao.jpg" alt="" width="70" height="70">
+						<img src="/upload/${fn:replace(fivo.file_save_dir, '\\','/')}/${fivo.file_uuid}_${fivo.file_name}" alt="" width="70" height="70">
 					</div>
 					<div class="diner-infos">
 						<p class="score">★★★★☆</p>

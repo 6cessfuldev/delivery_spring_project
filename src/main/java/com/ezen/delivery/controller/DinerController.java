@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ezen.delivery.Handler.FileHandler;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
+import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.repository.UserDAO;
@@ -61,7 +62,7 @@ public class DinerController {
 		
 		log.info("Session : "+session.getAttribute("pvo"));
 		
-		List<DinerVO> list = dsv.getList(pvo);
+		List<DinerDTO> list = dsv.getList(pvo);
 		
 		log.info(list.size()+"");		
 		
@@ -78,24 +79,27 @@ public class DinerController {
 		DinerDTO ddto = dsv.getDiner(diner_code);
 		
 		DinerVO diner = ddto.getDvo();
+		FileVO fivo = ddto.getFivo();
 		log.info("diner_code : "+diner.getDiner_code());
 		log.info("diner_name : "+diner.getDiner_name());
 		log.info("diner_address : "+diner.getDiner_address());
 		List<FoodDTO> foodList = fsv.getListByDinerCode(diner_code);
+		
+		model.addAttribute("fivo", fivo);
 		model.addAttribute("foodList",foodList);
 		model.addAttribute("diner",diner);
 	}
 	
 	@GetMapping(value="/moreList/{listCnt}", produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<DinerVO>> moreList(@PathVariable("listCnt") int listCnt, HttpSession session){
+	public ResponseEntity<List<DinerDTO>> moreList(@PathVariable("listCnt") int listCnt, HttpSession session){
 		
 		PagingVO pvo = (PagingVO)session.getAttribute("pvo");
 		if(pvo!=null) {
 			pvo.setPageNum(listCnt);
 		}
-		List<DinerVO> list = dsv.getList(pvo);
+		List<DinerDTO> list = dsv.getList(pvo);
 		log.info(list.size()+"");
-		return new ResponseEntity<List<DinerVO>>(list, HttpStatus.OK);
+		return new ResponseEntity<List<DinerDTO>>(list, HttpStatus.OK);
 
 	}
 }
