@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,8 +33,8 @@ public class ChoiceController {
 //	}
 	
 	@ResponseBody
-	@GetMapping("/choice")
-	public List<ChoiceVO> getChoiceList(int food_code, Model model){
+	@GetMapping(value="/list/{food_code}", produces= {MediaType.APPLICATION_JSON_VALUE})
+	public List<ChoiceVO> getChoiceList(@PathVariable("food_code") int food_code, Model model){
 		List<ChoiceVO> choiceList = csv.getList(food_code);
 		model.addAttribute("choiceList", choiceList);
 		return choiceList;

@@ -45,20 +45,52 @@ let modalAmount = 1;
 function openModal(food_code){
   modalAmount=1;
   $("#modalTrigger").click();
-  // $.ajax({
-  //   url: '/food/option/'+food_code,
-  //   type: 'GET',
-  //   dataType: 'json',
-  //   success: function(data, status, xhr){
-  //     console.log(data);
-  //     console.log(status);
+  $.ajax({
+    url: '/choice/list/'+food_code,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data, status, xhr){
+
+      spreadChoice(data);
       
-  //   },
-  //   error: function(xhr, status, error){
-  //     console.log(error);
-  //   }
-  // })
+    },
+    error: function(xhr, status, error){
+      console.log(error);
+    }
+
+
+
+  })
+  
 }
+
+function spreadChoice(data){
+
+	console.log(data);
+    const box = $('.item-list');
+
+    for(let cvo of data){
+      console.log(cvo.choice_code);
+      const newDiv = $("<div>");
+      const input = $('<input class="form-check-input" type="checkbox" value="'+ cvo.choice_code +'" id="flexCheckDefault">');
+      const label = $('<label class="form-check-label" for="flexCheckDefault">');
+      // const input = $('<input>');
+      // const label = $('<label>');
+      input.val(cvo.choice_code);
+      label.text(cvo.choice_content);
+      const div = $("<div>");
+      div.text(cvo.choice_price);
+      
+      newDiv.append(input);
+      newDiv.append(label);
+      newDiv.append(div);
+  
+      box.append(newDiv);
+    }
+
+    console.log(box.children('div:eq(0)'));
+}
+
 
 function count(p){
   console.log("click");
@@ -79,3 +111,6 @@ $(".modal-order").click(function(){
 	console.log("order");
 	$(".btn-close").click();
 })
+
+
+
