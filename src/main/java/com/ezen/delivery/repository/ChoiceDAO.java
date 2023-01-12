@@ -8,4 +8,6 @@ public interface ChoiceDAO {
 
 	List<ChoiceVO> selectList(int food_code);
 
+	int insertChoice(ChoiceVO cvo);
+
 }

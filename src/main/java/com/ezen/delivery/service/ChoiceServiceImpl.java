@@ -20,4 +20,9 @@ public class ChoiceServiceImpl implements ChoiceService {
 		return cdao.selectList(food_code);
 	}
 
+	@Override
+	public int register(ChoiceVO cvo) {
+		return cdao.insertChoice(cvo);
+	}
+
 }

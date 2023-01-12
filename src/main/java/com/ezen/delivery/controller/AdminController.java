@@ -14,12 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.ChoiceVO;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.service.ChoiceService;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.UserService;
@@ -43,6 +45,9 @@ public class AdminController {
    @Inject
    private UserService usv;
    
+   @Inject
+   private ChoiceService csv;
+   
    
    @GetMapping("/")
    public String main() {
@@ -61,10 +66,6 @@ public class AdminController {
       model.addAttribute("user", uvo);
       return "/admin/user/detail";
    }
-   
-   @GetMapping("/user/register")
-   public void userRegister() {}
-   
    
    @GetMapping("/diner")
    public void diner(Model model) {
@@ -219,8 +220,28 @@ public class AdminController {
       model.addAttribute("file", fdto.getFilevo());
       model.addAttribute("food", fdto.getFoodvo());
       
+      List<ChoiceVO> list = csv.getList(food_code);
+      
+      model.addAttribute("choiceList", list);
+      
       return "/admin/food/detail";
    }
+   
+   @GetMapping("/choice/register")
+   public String choiceRegister(int food_code, Model model) {
+	   FoodVO fvo = fsv.getFood(food_code);
+	   model.addAttribute("food", fvo);
+	   
+	   return "admin/choice/register";
+   }
+   
+   @PostMapping("/choice/insert")
+   public String choiceInsert(ChoiceVO cvo) {
+	   int isOk = csv.register(cvo);
+	   log.info(">>> choice insert " + (isOk > 0 ? "Ok" : "Fail"));
+	   return "admin/choice/register";
+   }
+  
 
    @GetMapping("/food/modify")
    public void foodModify(int food_code, Model model) {

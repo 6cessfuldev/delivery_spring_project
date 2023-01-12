@@ -74,8 +74,6 @@ function spreadChoice(data){
       const newDiv = $("<div>");
       const input = $('<input class="form-check-input" type="checkbox" value="'+ cvo.choice_code +'" id="flexCheckDefault">');
       const label = $('<label class="form-check-label" for="flexCheckDefault">');
-      // const input = $('<input>');
-      // const label = $('<label>');
       input.val(cvo.choice_code);
       label.text(cvo.choice_content);
       const div = $("<div>");
@@ -88,7 +86,6 @@ function spreadChoice(data){
       box.append(newDiv);
     }
 
-    console.log(box.children('div:eq(0)'));
 }
 
 
