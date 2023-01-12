@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
@@ -541,7 +542,7 @@
 		  	<strong>16,900원</strong>	
 		  </div>
        	  
-       	  <div class="item-list-wrap p-3">
+       	<!--   <div class="item-list-wrap p-3">
        	  	<div class="item-list-title">
 		  		<strong>치킨선택</strong>
 		  		<span>(필수 선택)</span>
@@ -560,21 +561,25 @@
 				  </label>
 				</div>
        	  	</div>
-       	  </div>
+       	  </div> -->
        	  
        	  <div class="item-list-wrap p-3">
        	  	<div class="item-list-title py-1">
 	  		<strong>치킨선택</strong>
 	  		<span>(필수 선택)</span>
        	  	</div>
-       	  	<div calss="item-list">
-       	  		<div class="form-check">
+       	  	
+       	  	<div class="item-list">
+       	
+       	  	 	<%-- <div class="form-check">
 				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
 				  <label class="form-check-label" for="flexCheckDefault">
-				    스푼떡볶이
+				    ${choiceList.get(i).choice_content }
 				  </label>
+				  <div>${choiceList.get(i).choice_price }</div>
 				</div>
-				<div class="form-check">
+    
+			 	<div class="form-check">
 				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
 				  <label class="form-check-label" for="flexCheckChecked">
 				    치즈볼
@@ -585,7 +590,7 @@
 				  <label class="form-check-label" for="flexCheckChecked">
 				    케이준후라이
 				  </label>
-				</div>
+				</div> --%>
        	  	</div>
        	  </div>
        	  
