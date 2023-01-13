@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 네이버 캡차 API 예제 - 키발급
-public class ApiExamCaptchaNkey {
+public class ApiCaptchaNkey {
 
     public static void main(String[] args) {
         String clientId = "BwPXQd2HaNZ5eWMSnF7z"; //애플리케이션 클라이언트 아이디값";

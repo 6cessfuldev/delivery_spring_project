@@ -295,8 +295,18 @@ public class AdminController {
       model.addAttribute("userList", userList);
    }
    
+   @GetMapping("/user/register")
+   public void userRegiseter() {}
+   
+   @GetMapping("/user/insert")
+   public String userInsert(UserVO uvo) {
+	   boolean isOk = usv.signUp(uvo);
+	   log.info(">>> admin user insert " + (isOk ? "Ok" : "Fail"));
+	   return "redirect:/admin/user";
+   }
+   
    @GetMapping("/user/detail")
-   public String userRegister(String user_id, Model model) {
+   public String userDetail(String user_id, Model model) {
       UserVO uvo = usv.getUserByID(user_id);
       model.addAttribute("user", uvo);
       

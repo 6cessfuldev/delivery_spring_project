@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.Handler.ApiMemberProfile;
+import com.ezen.delivery.domain.LoginVO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.UserService;
 
@@ -174,6 +175,7 @@ public class MemberController {
 			return "redirect:/";
 		} else {
 			model.addAttribute("msg", "0");
+			
 			return "/member/login";
 		}
 	}
@@ -187,7 +189,6 @@ public class MemberController {
 	public String naverLoginPost(String accessToken, String state, Model model, HttpServletRequest req) {
 		
 		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
-		
 		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
 		
 		log.info(naverUser.toString());
@@ -298,7 +299,6 @@ public class MemberController {
 		return ( isEqual > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
 				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
-
 	
 	
 }
