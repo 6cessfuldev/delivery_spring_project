@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.delivery.repository.ReviewDAO">
 <select id="selectReview" resultType="com.ezen.delivery.domain.ReviewVO">
-	select * from review where review_diner_code=#{diner_code}
+	select * from review where review_diner_code=#{diner_code} order by review_code desc;
 </select>
 
 <insert id="insertReview" parameterType="com.ezen.delivery.domain.ReviewVO">

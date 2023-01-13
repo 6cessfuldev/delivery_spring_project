@@ -24,5 +24,6 @@ public class ReviewVO {
 //	private int review_delivery_score;
 	private String review_reg_date;
 	private String review_mod_date;
-
+// 	private String review_boss_comment;
+//  private int review_count;
 }

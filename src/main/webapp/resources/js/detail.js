@@ -64,7 +64,6 @@ function regist(){
     //     alert('로그인이 필요한 서비스 입니다.');
     //         return;
     // }else{
-        // const revText = document.getElementById('review_con').value;
         const formData = new FormData();
         const data = $('#review_multiple');
         const revText = document.getElementById('review_con').value;
@@ -94,9 +93,6 @@ function regist(){
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
                     formData.append('review_reg_date', data);
-
-                    // 여기에서 review_score_avg를 ,,, append,, 해줘야하나,,? 근데 평균을 계산해서,,
-                    // formData.append('review_user_id', user_id);
                 }
                 
             } 
@@ -190,9 +186,9 @@ function getReviewList(diner_code){
                  }
 
                 let div = `<div>`;
-                div += `<div class="reviewer-id>`;
-                div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}</span><a href="#">신고</a>`;
-                div += `<div class="review-point">${star0} ${reviewDTO.rvo.review_score}</div>`;
+                div += `<div class="reviewer-id>"</div>`;
+                div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}<a class="review-a" href="#">신고</a></span>`;
+                div += `<div class="review-point">${star0}<span class="starScore">${reviewDTO.rvo.review_score}</span></div>`;
                 div += `<div class="review-menu"></div>`;
 		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
 		        div += `</div>`;
