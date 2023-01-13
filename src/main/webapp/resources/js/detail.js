@@ -163,7 +163,6 @@ function regist(){
                     formData.append('review_diner_code', diner_code);
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
-                   // formData.append('review_reg_date', data);
 
                 }
                 
@@ -266,6 +265,7 @@ function getReviewList(diner_code){
                 div += `<div class="review-point">${star0} ${reviewDTO.rvo.review_score}</div>`;
                 div += `<div class="review-menu"></div>`;
 		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
+                // div += `<button class="btn btn-outline-danger del" type="button">X</button>`;
 		        div += `</div>`;
 		        review.innerHTML += div;
                 if(reviewDTO.flist.length > 0){      
@@ -290,3 +290,50 @@ function getReviewList(diner_code){
         
     })
 }
+
+
+// async function removeReviewServer(review_code){
+//     try {
+//         const url ='/review/review/'+review_code;
+//         const config = {
+//             method : 'delete'
+//         };
+//         const resp = await fetch(url, config);
+//         const result = await resp.text();
+//         return result;
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+// async function removeImgReviewServer(review_img_uuid){
+//     try {
+//         const url ='/review/file/'+review_img_uuid;
+//         const config = {
+//             method : 'delete'
+//         };
+//         const resp = await fetch(url, config);
+//         const result = await resp.text();
+//         return result;
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+
+// document.addEventListener('click', (e)=>{
+//   if(e.target.classList.contains('del')){
+//          let  = e.target.closest('div');
+//          removeReviewServer(review_codeVal).then(result => {
+//             if(result>0){
+//                 // removeReviewImgServer(review_img_uuid);
+//                 alert("리뷰를 삭제했어요!");
+//             }
+//             getReviewList(diner_code);
+//          })  
+//     }
+
+// })
+

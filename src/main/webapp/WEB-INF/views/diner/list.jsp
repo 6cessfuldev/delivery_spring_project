@@ -123,7 +123,7 @@
 							<div class="diner-body">
 								<h5 class="diner-title">${ddto.dvo.diner_name}</h5>
 								<p class="diner-text">
-								<span class="score">★3.8</span>
+								<span class="score">★${ddto.dvo.diner_score_avg}</span>
 								| 리뷰 1902 | 사장님댓글 791 
 								</p>
 								<p class="diner-text">

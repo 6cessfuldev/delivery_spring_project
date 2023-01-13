@@ -249,21 +249,8 @@
 						<div class="diner-score d-flex justify-content-center">
 							<div class="diner-score-total">
 								<p class="total-score">${diner.diner_score_avg}</p>
-								<p class="total-star">★★★★☆</p>
-							</div>
-							<!-- <div class="diner-score-each">
-								<ul>
-									<li>
-										<span>맛&nbsp;&nbsp;&nbsp;</span> <span>★★★★☆</span> <span>4.9</span>
-									</li>
-									<li>
-										<span>양&nbsp;&nbsp;&nbsp;</span> <span>★★★★☆</span> <span>4.9</span>
-									</li>
-									<li>
-										<span>배달</span> <span>★★★★☆</span> <span>4.9</span>
-									</li>
-								</ul>
-							</div> -->
+								<p class="total-star">★★★★☆</p><!-- 평균 맞춰서 색 채워야함 -->
+							</div>					
 						</div>
 						<!-- diner-score -->
 
@@ -304,6 +291,7 @@
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
                             <div id="review-head"></div>
+                                
                          </div>	
 					<!-- <div class="review">
 							<div class="review-head">
@@ -605,6 +593,7 @@ function readFile2(fileNames) {
 <script type="text/javascript">
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+	/* const review_codeVal = '<c:out value="${review.review_code}" />'; */
 	console.log(diner_codeVal);
 	console.log(category);
 </script>

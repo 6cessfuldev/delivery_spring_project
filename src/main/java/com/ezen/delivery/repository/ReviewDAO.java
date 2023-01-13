@@ -14,5 +14,7 @@ public interface ReviewDAO {
 
 	double selectAvgStar(int diner_code);
 
+	int delete(int review_code);
+
 
 }
