@@ -8,4 +8,8 @@
   		select * from choice
   		where food_code = #{food_code}
   	</select>
+  	
+  	<select id="selectOne" resultType="com.ezen.delivery.domain.ChoiceVO">
+  		select * from choice where choice_code=#{choice_code}
+  	</select>
   </mapper>

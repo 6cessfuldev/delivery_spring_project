@@ -51,3 +51,10 @@ CREATE TABLE `deliverydb`.`choice` (
   `choice_content` VARCHAR(45) NOT NULL,
   `choice_price` INT NOT NULL,
   PRIMARY KEY (`choice_code`));
+
+
+##basket_detail(장바구니 상세)  
+CREATE TABLE basket_detail (
+basket_code int not null fk,
+choice_code int not null fk
+)

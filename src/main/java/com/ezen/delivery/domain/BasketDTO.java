@@ -21,9 +21,21 @@ public class BasketDTO {
 	private String food_name;
 	private int food_price;
 
-	private int totalPrice;
+	private String basket_content="";
+	private int total_price;
 	
-	public void initSaleTotal() {
-		this.totalPrice = this.food_price*this.basket_order_count;
+	public void initBasket_content() {
+		this.basket_content += food_name+" : ";
+		for (ChoiceVO cvo : choiceList) {
+			this.basket_content += cvo.getChoice_content()+" ";
+		}
+	}
+	
+	public void initSalePerOne() {
+		int optionTotal = 0;
+		for (ChoiceVO choiceVO : choiceList) {
+			optionTotal+=choiceVO.getChoice_price();
+		}
+		this.total_price = optionTotal+food_price;			
 	}
 }
