@@ -68,37 +68,27 @@ public class ReviewImgHandler {
 		return riList; 
 	}
 
-//	public int deleteFile(ReviewImgVO rivo) {
-//		try {
-//			File file = new File(UP_DIR+File.separator+rivo.getReview_img_save_dir()+File.separator+rivo.getReview_img_uuid()+"_"+rivo.getReview_img_name());
-//			log.info(file.toString());
-//			
-//			if(file.exists()) { //파일여부
-//				if(file.delete()) { // 있으면 삭제
-//					log.info("파일 삭제 성공");
-//				}else {
-//					log.info("파일 삭제 실패");
-//				}
-//			}else { //파일여부
-//				log.info("파일이 존재하지 않습니다.");
-//			}
-//			File tFile = new File(UP_DIR+File.separator+rivo.getReview_img_save_dir()+File.separator+rivo.getReview_img_uuid()+"_th_"+rivo.getReview_img_name());
-//			log.info(tFile.toString());
-//			
-//			if(tFile.exists()) {
-//				if(tFile.delete()) {
-//					log.info("파일 삭제 성공");
-//				}else {
-//					log.info("파일 삭제 실패");
-//				}
-//			}else {
-//				log.info("파일이 존재하지 않습니다.");
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return 1;
-//	}
+
+	public int deleteFile(ReviewImgVO rivo) {
+		try {
+			File file = new File(UP_DIR+File.separator+rivo.getReview_img_save_dir()+File.separator+rivo.getReview_img_uuid()+"_"+rivo.getReview_img_name());
+			log.info(file.toString());
+			
+			if(file.exists()) { //파일여부
+				if(file.delete()) { // 있으면 삭제
+					log.info("파일 삭제 성공");
+				}else {
+					log.info("파일 삭제 실패");
+				}
+			}else { //파일여부
+				log.info("파일이 존재하지 않습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
+
 		
 	
 	private boolean isImageFile(File storeFile) throws IOException {

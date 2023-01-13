@@ -12,4 +12,9 @@ public interface ReviewImgDAO {
 
 	List<ReviewImgVO> selectFlist(int reviewCode);
 
+//	ReviewImgVO selectFile(String review_img_uuid);
+//
+//	int deleteFile(String review_img_uuid);
+
 }
+

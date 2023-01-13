@@ -24,7 +24,6 @@ public class ReviewServiceImpl implements ReviewService {
 	@Inject
 	ReviewImgDAO ridao;
 
-
 	@Override
 	public List<ReviewDTO> getList(int review_diner_code) {
 		List<ReviewVO> list = rdao.selectReview(review_diner_code);
@@ -57,10 +56,22 @@ public class ReviewServiceImpl implements ReviewService {
 		return 0;
 		
 	}
+//	@Override
+//	public int remove(int review_code) {
+//		
+//		return rdao.delete(review_code);
+//	}
+//	@Override
+//	public ReviewImgVO selectFile(String review_img_uuid) {
+//		
+//		return ridao.selectFile(review_img_uuid);
+//	}
+//	@Override
+//	public int deleteFile(String review_img_uuid) {
+//	
+//		return ridao.deleteFile(review_img_uuid);
+//	}
 
-
-
-	
 
 
 }

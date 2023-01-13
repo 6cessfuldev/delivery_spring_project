@@ -499,16 +499,12 @@ main{
 	color:rgb(226, 69, 69);
 	font-weight: 700;
 }
-
-<<<<<<< HEAD
-}
 #image_container>div>img{
 	width:100px;
 } 
 #review_img{
 	 width: 200px;
 }
-
 /* 별점css */
 #starform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
@@ -534,7 +530,7 @@ main{
 }
 #starform input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 #ffff00; /* 마우스 클릭 체크 */
-=======
+}
 #exampleModal{
 	height:600px;
 	margin-top : 30px;
@@ -650,5 +646,4 @@ main{
 
 .add-basket{
 	background-color:green;
->>>>>>> cee804369e631e8dee7e4fa4fa3e4e51b6f254a4
 }
