@@ -23,7 +23,7 @@
 			<input type="button" onclick="location.href='/admin/user/modify?user_id=${user.user_id}'" class="btn modBtn" value="정보수정"><br>
 			</div>
 			<div id="delBtn-box">
-				<input type="button" src="" class="btn delBtn" value="회원추방"><br>
+				<input type="button" onclick="location.href='/admin/user/remove?user=id=${user.user_id}'" class="btn delBtn" value="회원추방"><br>
 			</div>
 	</div>
 </div>

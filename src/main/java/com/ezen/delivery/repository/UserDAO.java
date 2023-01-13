@@ -23,12 +23,10 @@ public interface UserDAO {
 	int updatePw(@Param("getEmail") String getEmail, @Param("new_pw") String new_pw);
 
 	UserVO selectUserOne(String user_id);
-	
-//	int selectUserOne(UserVO uvo);
 
 	int updateUser(@Param("user_id") String user_id, @Param("new_pw") String new_pw, @Param("new_phone") String new_phone);
 
-	int updateUser(UserVO uvo);
+	int updateUserFromAdmin(UserVO uvo);
 	
 	int selectCntByEmail(String user_email);
 

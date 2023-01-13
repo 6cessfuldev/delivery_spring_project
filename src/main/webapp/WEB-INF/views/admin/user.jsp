@@ -35,7 +35,7 @@
                 <td>${user.user_register_date}</td>
                 <td>0</td>
                 <td>0</td>
-                <td>drop</td>
+                <td>완료</td>
             </tr>
         </c:forEach>
     </tbody>

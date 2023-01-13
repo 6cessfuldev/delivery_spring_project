@@ -32,8 +32,6 @@ public interface UserService {
 
 	List<UserVO> getUserList();
 
-//	int updateUser(UserVO uvo);
-
 	int modifyUserInfo(UserVO uvo);
 
 

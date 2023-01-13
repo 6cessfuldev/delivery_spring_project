@@ -311,13 +311,19 @@ public class AdminController {
    
    @GetMapping("/user/update")
    public String userUpdate(UserVO uvo, RedirectAttributes reAttr) {
-//	   int isOk = usv.updateUser(uvo);
 	   int isOk = usv.modifyUserInfo(uvo);
 	   log.info(">>> user update " + (isOk > 0 ? "Ok" : "Fail"));
 	   reAttr.addAttribute("user_id", uvo.getUser_id());
 	   
 	   return "redirect:/admin/user/detail";
+   }
+   
+   @GetMapping("/user/remove")
+   public String userRemove(String user_id) {
+	   int isOk = usv.removeUserInfo(user_id);
+	   log.info(">>> user remove " + (isOk > 0 ? "Ok" : "Fail"));
 	   
+	   return "redirect:/admin/user";
    }
    
 }

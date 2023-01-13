@@ -60,7 +60,7 @@
 		where user_id = #{user_id}
 	</update>
 	
-	<update id="updateUser">
+	<update id="updateUserFromAdmin">
 		update user set
 		user_email = #{user_email}, user_pw = #{user_pw}, 
 		user_name = #{user_name}, user_phone = #{user_phone}, 
