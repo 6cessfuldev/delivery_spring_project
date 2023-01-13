@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +21,6 @@ import com.ezen.delivery.Handler.ReviewImgHandler;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
-import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.ReviewService;
 
@@ -67,7 +65,7 @@ public class ReviewController {
 		return new ResponseEntity<List<ReviewDTO>>(list,HttpStatus.OK);
 	}
 	
-	
+}
 
 //	삭제
 	

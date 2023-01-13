@@ -525,12 +525,25 @@ main{
 #starform label:hover ~ label{
     text-shadow: 0 0 0 #ffff00; /* 마우스 호버 뒤에오는 이모지들 */
 }
-#starform fieldset legend{
+/* #starform fieldset legend{
     text-align: center;
-}
+} */
 #starform input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 #ffff00; /* 마우스 클릭 체크 */
 }
+
+
+/* 별점 css */
+#star{
+	border: 1px solid black;
+}
+#starInfo{
+	text-align: center;
+	color:grey;
+	font-size: 15px;
+	margin-left: 100px;
+}
+
 #exampleModal{
 	height:600px;
 	margin-top : 30px;

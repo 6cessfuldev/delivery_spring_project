@@ -98,8 +98,6 @@ public class DinerServiceImpl implements DinerService {
 		dvo.setDiner_score_avg(avg);
 		
 		FileVO fivo = fidao.selectByFileCode(dvo.getDiner_file_code());
-		double avg = rdao.selectAvgStar(diner_code);
-		dvo.setDiner_score_avg(avg);
 		
 		return new DinerDTO(dvo, fivo);
 	}
