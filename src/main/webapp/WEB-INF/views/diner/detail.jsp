@@ -469,66 +469,23 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0">
-		  <div class="modal_img"></div>
+		  <div class="modal-img"></div>
 		  <div class="modal-text p-3 text-center">
 		  	<div class="food-title fs-5">후라이드치킨</div>
 		  	<div class="food-description fs-8">얇게 튀겨 더욱 바삭하고 속은 촉촉한, 진짜 후라이드!</div>
 		  </div>
 		  <div class="modal-food-price d-flex justify-content-between py-3 px-3"> 
 		  	<strong>가격</strong>
-		  	<strong>16,900원</strong>	
+		  	<strong id="modal-price">----원</strong>	
 		  </div>
-       	  
-       	<!--   <div class="item-list-wrap p-3">
-       	  	<div class="item-list-title">
-		  		<strong>치킨선택</strong>
-		  		<span>(필수 선택)</span>
-       	  	</div>
-       	  	<div class="item-list">
-       	  		<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-				  <label class="form-check-label" for="flexRadioDefault1">
-				    뼈
-				  </label>
-				</div>
-				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-				  <label class="form-check-label" for="flexRadioDefault2">
-				    순살
-				  </label>
-				</div>
-       	  	</div>
-       	  </div> -->
        	  
        	  <div class="item-list-wrap p-3">
        	  	<div class="item-list-title py-1">
-	  		<strong>치킨선택</strong>
-	  		<span>(필수 선택)</span>
+		  		<strong>옵션 선택</strong>
+		  		<span>(필수 선택)</span>
        	  	</div>
        	  	
-       	  	<div class="item-list">
-       	
-       	  	 	<%-- <div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-				  <label class="form-check-label" for="flexCheckDefault">
-				    ${choiceList.get(i).choice_content }
-				  </label>
-				  <div>${choiceList.get(i).choice_price }</div>
-				</div>
-    
-			 	<div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-				  <label class="form-check-label" for="flexCheckChecked">
-				    치즈볼
-				  </label>
-				</div>
-				<div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-				  <label class="form-check-label" for="flexCheckChecked">
-				    케이준후라이
-				  </label>
-				</div> --%>
-       	  	</div>
+       	  	<div class="item-list"></div>
        	  </div>
        	  
        	  <div class="modal-food-price d-flex justify-content-between py-2 px-3"> 
@@ -544,7 +501,7 @@
 		  <div class="modal-total-price-wrap d-flex justify-content-between py-2 px-3"> 
        	  	<strong>총 주문금액</strong>
        	  	<div class="modal-total-price">
-       	  		<strong>29,800원</strong>
+       	  		<strong id="modal-total">29,800원</strong>
        	  		<span>15,900원 이상 주문 시 할인</span>
        	  		<span>(최소 주문 금액 ${diner.diner_min_pay}원)</span>
        	  	</div>
@@ -593,7 +550,11 @@ function readFile2(fileNames) {
 <script type="text/javascript">
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+
+	let user_id = '<c:out value="${sessionScope.user.user_id}" />';
+
 	/* const review_codeVal = '<c:out value="${review.review_code}" />'; */
+
 	console.log(diner_codeVal);
 	console.log(category);
 </script>

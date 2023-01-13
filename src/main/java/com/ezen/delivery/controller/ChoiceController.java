@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.ChoiceVO;
+import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.service.ChoiceService;
+import com.ezen.delivery.service.FoodService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/choice/*")
 public class ChoiceController {
 
+	@Inject
+	private FoodService fsv;
 
 	@Inject
 	private ChoiceService csv;
@@ -34,10 +38,14 @@ public class ChoiceController {
 	
 	@ResponseBody
 	@GetMapping(value="/list/{food_code}", produces= {MediaType.APPLICATION_JSON_VALUE})
-	public List<ChoiceVO> getChoiceList(@PathVariable("food_code") int food_code, Model model){
+	public FoodDTO getChoiceList(@PathVariable("food_code") int food_code){
+		log.info(""+food_code);
 		List<ChoiceVO> choiceList = csv.getList(food_code);
-		model.addAttribute("choiceList", choiceList);
-		return choiceList;
+		FoodDTO fdto = fsv.getDetail(food_code);
+		fdto.setCList(choiceList);
+		
+		log.info(choiceList.toString());
+		return fdto;
 	}
 	
 }
