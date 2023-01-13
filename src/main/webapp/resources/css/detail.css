@@ -198,13 +198,16 @@ main{
 }
 
 .swiper-slide{
-	background-image: url("/resources/source/chicken.png");
-	background-position: cover;
+	margin:0;
+	padding:0;
 	background-size: 130px 130px;
 	background-repeat: no-repeat;
 }
 
-
+.swiper-slide>img{
+	width:140px;
+	height:140px;
+}
 
 .accordion-body{
 	padding:0;
@@ -536,7 +539,7 @@ main{
 	margin-top : 30px;
 }
 
-.modal_img{
+.modal-img{
 	width:100%;
 	height:200px;
 	background-image: url("/resources/source/chicken.png");
@@ -638,6 +641,10 @@ main{
 	margin:0;
 	width:50%;
 	hegiht: 300px;
+}
+
+.choice-price{
+	float:right;
 }
 
 .modal-order{
