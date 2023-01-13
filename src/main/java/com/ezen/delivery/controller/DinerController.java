@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ezen.delivery.Handler.FileHandler;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
@@ -34,10 +33,6 @@ public class DinerController {
 
 	@Inject
 	private DinerService dsv;
-	
-	@Inject
-	private FileHandler fhd;
-
 	@Inject
 	private UserDAO userDao;
 	
@@ -102,6 +97,7 @@ public class DinerController {
 		return new ResponseEntity<List<DinerDTO>>(list, HttpStatus.OK);
 
 	}
+
 }
 	
 	
