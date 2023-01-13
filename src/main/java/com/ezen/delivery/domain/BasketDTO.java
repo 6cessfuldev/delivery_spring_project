@@ -1,5 +1,7 @@
 package com.ezen.delivery.domain;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,9 +12,11 @@ import lombok.ToString;
 public class BasketDTO {
 	
 	private int basket_code;
-	private String basket_user_id;
-	private int basket_food_code;
+	private String user_id;
+	private int food_code;
 	private int basket_order_count;
+	
+	private List<ChoiceVO> choiceList;
 	
 	private String food_name;
 	private int food_price;
