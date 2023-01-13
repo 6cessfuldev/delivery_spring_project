@@ -11,8 +11,8 @@
 	<selectKey keyProperty="review_code" resultType="int" order="BEFORE">
 	      SELECT IFNULL(MAX(review_code+1),1) from review
 	</selectKey>
-	insert into review (review_code, review_diner_code,review_user_id,review_content,review_score)
-	values (#{review_code},#{review_diner_code},#{review_user_id}, #{review_content}, #{review_score})
+	insert into review (review_code, review_diner_code,review_content,review_score)
+	values (#{review_code},#{review_diner_code}, #{review_content}, #{review_score})
 </insert>
 
 <select id="selectAvgStar" resultType="double">

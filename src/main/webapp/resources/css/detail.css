@@ -252,7 +252,7 @@ main{
 	width: 120px;
 	padding: 10px;
 	height: 60px;
-	border-right: 1px solid rgb(192, 185, 185);
+	/* border-right: 1px solid rgb(192, 185, 185); */
 }
 
 .total-score{
@@ -296,6 +296,7 @@ main{
 .review-count{
 	font-size: 13px;
 	padding: 14px;
+	color:grey;
 	border-top: 1px solid rgb(209, 203, 203);
 	height: 50px;
 }
@@ -305,7 +306,8 @@ main{
 	border-top: 1px solid rgb(209, 203, 203);
 }
 
-.reviewer-id{
+/* .reviewer-id{
+	border: 1px solid black;
 	font-weight: 800;
 }
 
@@ -335,8 +337,6 @@ main{
 	margin-top: 10px;
 	margin-bottom: 10px;
 	height: 350px;
-	background-image: url("/resources/source/reivew.jpg");
-	background-size: cover;
 }
 
 .review-menu{
@@ -347,7 +347,7 @@ main{
 
 .review-content{
 	font-size: 15px;
-}
+} */
 
 .add-review{
 	cursor: pointer;
@@ -374,6 +374,10 @@ main{
     margin-right: 20px;
 }
 .review_content{
+	border-left : none;
+	border-right: none;
+	border-top: 1px solid rgb(209, 203, 203);
+	border-bottom: 1px solid rgb(209, 203, 203);
     font-size: 13px;
 }
 .review_multiplebox{
@@ -520,7 +524,7 @@ main{
 #starform label{
     font-size: 1.5em; /* 이모지 크기 */
     color: transparent; /* 기존 이모지 컬러 제거 */
-    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+    text-shadow: 0 0 0 grey; /* 새 이모지 색상 부여 */
 }
 #starform label:hover{
     text-shadow: 0 0 0 #ffff00; /* 마우스 호버 */
@@ -537,15 +541,80 @@ main{
 
 
 /* 별점 css */
-#star{
-	border: 1px solid black;
-}
 #starInfo{
 	text-align: center;
 	color:grey;
 	font-size: 15px;
-	margin-left: 100px;
+	margin-left: 125px;
 }
+#starRadio{
+	margin-left: 245px;
+}
+#trigger{
+	width: 50px;
+	height: 35px;
+	border: 1px solid gray;
+	background-color: white;
+	font-size: 15px;
+	color: gray;
+}
+/* 리뷰창 css */
+
+#review-head>div{
+	border: 1px solid black;
+}
+#review-head>div>div>a{
+	float: right;
+	text-decoration: none;
+	color: gray;
+	font-size: 15px;
+}
+.review-id>span{
+	/* margin-left: 200px; */
+	text-align: right;
+	font-size: 30px;
+}
+
+.review-head>a{
+	float: right;
+}
+
+#review-time-ago{
+	border: 1px solid black;
+	color:grey;
+	font-size: 13px;
+}
+
+.review-point{
+	font-size: 100px;
+	color : grey;
+}
+
+.review-star-point{
+	color : rgb(221, 221, 20);
+}
+
+.star{
+	color : rgb(221, 221, 20);
+}
+
+.review-img{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 350px;
+}
+
+.review-menu{
+	font-size: 13px;
+	color: rgb(82, 184, 150);
+	margin-bottom: 6px;
+}
+
+.review-content{
+	font-size: 15px;
+} */
+
+
 
 #exampleModal{
 	height:600px;
