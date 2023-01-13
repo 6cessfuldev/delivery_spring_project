@@ -316,8 +316,7 @@ function addBasketEvent(data){
 	    console.log(basketData);
 	    
 	    postBasketToServer(basketData);
-	    $(".btn-close").click();
-	    
+	    $(".btn-close").click();	    
 	})
 }
 
@@ -356,8 +355,8 @@ function spreadChoice(data){
 
 	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
-
-	$(".modal-img").css("background-image", "url(" + src + ")");
+	
+	$(".modal-img").css("background-image", "url('" + src + "')");
 
 	$(".food-title").text(data.foodvo.food_name);
 	$(".food-description").text(data.foodvo.food_intro);
@@ -443,6 +442,7 @@ function basketReload(){
 
 function refreshBasket(data){
 	let basket = $("#basket-menu-list");
+	basket.html(" ");
 	for(let bdto of data){
 		let basketItem = $('<div class="basket-item">');
 		
@@ -469,9 +469,12 @@ function refreshBasket(data){
 		minusBtn.text(' ─ ');
 		minusBtn.click(()=>{
 			if(Number(amount.text())>1){
+				if(changeAmount(bdto.basket_code,Number(amount.text())-1, basketItem)!=1) {
+					console.log("1");
+					return;
+				} 
 				amount.text(Number(amount.text())-1);
 				basketPrice.text(bdto.total_price*Number(amount.text())+"원");
-				changeAmount(bdto.basket_code,Number(amount.text()));
 			}
 		});
 		div2.append(minusBtn);
@@ -482,9 +485,12 @@ function refreshBasket(data){
 		plusBtn.text(' ┼ ');
 		plusBtn.click(()=>{
 			if(Number(amount.text())<99){
+				if(changeAmount(bdto.basket_code,Number(amount.text())+1, basketItem)!=1) {
+					return; 
+				}
 				amount.text(Number(amount.text())+1);
 				basketPrice.text(bdto.total_price*Number(amount.text())+"원");
-				changeAmount(bdto.basket_code,Number(amount.text()));
+				
 			}
 		});
 		div2.append(plusBtn);
@@ -494,21 +500,22 @@ function refreshBasket(data){
 	}
 }
 
-function changeAmount(basket_code, amount){
-
+function changeAmount(basket_code, amount, basketItem){
+	let result = 0;
 	$.ajax({
-	    url: '/basket/amount?basket_code='+basket_code+"basket_order_count="+amount,
+	    url: '/basket/amount?basket_code='+basket_code+"&basket_order_count="+amount,
 	    type: 'PUT',
 	    dataType: 'json',
+	    async:false, //동기식 처리
 	    success: function(data, status, xhr){
 	    	console.log(data);
-	    	basketItem.remove();
-	    	basketReload();    
+	    	result = 1; 
 	    },
 	    error: function(xhr, status, error){
 	    	alert("서버 오류");
 	    }
 	})	
+	return result;
 
 }
 
@@ -517,6 +524,7 @@ function removeBasket(basket_code, basketItem){
         url: '/basket/'+basket_code,
         type: 'delete',
         dataType: 'json',
+        async: false,
         success: function(data, status, xhr){
         	console.log(data);
         	basketItem.remove();

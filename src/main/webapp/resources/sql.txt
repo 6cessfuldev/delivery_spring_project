@@ -53,6 +53,14 @@ CREATE TABLE `deliverydb`.`choice` (
   PRIMARY KEY (`choice_code`));
 
 
+## basket(장바구니)
+CREATE TABLE basket(
+basket_code int not null auto_increment,
+user_id varchar(40),
+food_code int not null,
+basket_order_count int not null,
+PRIMARY KEY (basket_code));
+
 ##basket_detail(장바구니 상세)  
 CREATE TABLE basket_detail (
 basket_code int not null fk,

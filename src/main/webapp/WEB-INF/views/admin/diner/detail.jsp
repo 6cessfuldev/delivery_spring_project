@@ -16,8 +16,8 @@
         <td>${diner.diner_code}</td>
     </tr>
     <tr>
-        <th>음식점 이미지</th>
-        <td>${diner.diner_file_code}</td>
+        <th>음식점 파일 코드</th>
+        <td>${diner.file_code}</td>
     </tr>
     <tr>
         <th>음식점 이름</th>
