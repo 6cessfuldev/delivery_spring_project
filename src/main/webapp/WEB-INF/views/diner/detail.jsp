@@ -260,54 +260,45 @@
 				
 						<!-- 별점 -->
 						<form name="starform" id="starform" method="post" action="./save">
-						  <div>
+						  <div id="star">
 						    <fieldset>
-						        <legend>별을 채워주세요</legend>
+						        <legend id="starInfo">별을 클릭해서 채워주세요</legend>
+						        	<div id="starRadio">
 						         	<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
 							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
 							        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
 							        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
 							        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+							        </div>
 						    </fieldset>
 						  </div>
 						</form>
 						
-							<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
-		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
+							<textarea name="content" class="review_content" rows="7" cols="103" id="review_con"
+		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea ><br>
 		                    <div class="review_insertBox"></div>
                                
 									
 						  <!-- 이미지파일 등록 -->
                             <div class="review_multiplebox">
 				                 <input type="file" id="review_multiple" name="files[]" accept="image/*" onchange="readFile2('files[]');" style="display: none" multiple="multiple">
-				            
+				            		<br>
 								 <button type="button" id="trigger">사진</button>
 				                 <div id="image_container">		
 				                 </div>
 				         	</div>      
+				         	<div class="review_insertBox">
+				         		<br>
 									<button type="button" id="regBtn" class="review_insert">완료</button>
-                            	
+								<br>
+                            </div>
                             
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
                             <div id="review-head"></div>
                                 
                          </div>	
-					<!-- <div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div> -->
+					
 				
 						<div class="add-review d-flex justify-content-center align-items-center">
 							더보기&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
@@ -520,8 +511,7 @@
 	let user_id = "<c:out value='${sessionScope.user.user_id}' />";
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
-	
-	
+		
 	function readFile2(fileNames) {
 	    const target = document.getElementsByName(fileNames);
 	    const fileLength = target[0].files.length;
@@ -548,6 +538,7 @@
 	          reader.readAsDataURL(event.target.files[index]);
 	      }); 
 	 } 
+
 </script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
