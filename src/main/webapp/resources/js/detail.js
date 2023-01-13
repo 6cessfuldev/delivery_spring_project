@@ -41,152 +41,15 @@ $("#search-option").on("change", ()=>{
 	$("#addr-form").submit();
 })
 
-//모달창 총 주문 계산을 위한 변수
-let modalAmount = 1;
-let modalFoodPrice = 0; 
-let	modalOptionPrice = 0;
-
-function openModal(food_code){
-  modalAmount=1;
-  $("#modalTrigger").click();
-  $.ajax({
-    url: '/choice/list/'+food_code,
-    type: 'GET',
-    dataType: 'json',
-    success: function(data, status, xhr){
-      console.log(data);
-      spreadChoice(data);
-
-      //모달창 장바구니 추가하기 버튼 클릭 이벤트
-      $(".add-basket").click(()=> {
-
-        let options = $(".form-check-input");
-        console.log(options);
-        let optionList = "";
-        for(let option of options){
-        	optionList += option.value+" ";
-        }
-	
-		console.log(sessionStorage.getItem("user"));
-        const basketData = {
-          user_id : sessionStorage.getItem("user").user_id,
-          food_code : data.foodvo.food_code,
-          optionList : optionList,
-          basket_order_count : modalAmount
-        }
-        console.log(basketData);
-
-      })
-      
-    },
-    error: function(xhr, status, error){
-      console.log(error);
-    }
-  })
-}
-
-function spreadChoice(data){
-
-	let save_dir = data.filevo.file_save_dir;
-	let splitArr = save_dir.split(`\\`);
-
-	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
-	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
-
-	$(".modal-img").css("background-image", "url(" + src + ")");
-
-	$(".food-title").text(data.foodvo.food_name);
-	$(".food-description").text(data.foodvo.food_intro);
-	$("#modal-price").text(data.foodvo.food_price+"원");
-	modalFoodPrice = data.foodvo.food_price;
-	
-    const box = $('.item-list');
-    box.html(" ");
-	
-	let choiceCnt = 0;
-    for(let cvo of data.clist){
-      
-      const newDiv = $('<div class="form-check">');
-      const input = $('<input class="form-check-input" type="checkbox" value="">');
-      const label = $('<label class="form-check-label" >');
-      label.click(()=>{
-      	input.click();
-      })
-      input.click( ()=>{
-      	if(input.is(':checked')){
-      		modalOptionPrice+=cvo.choice_price;
-      		calculate();
-      	}else{
-      		modalOptionPrice -=cvo.choice_price;
-      		calculate();
-      	}
-      })
-     
-      input.val(cvo.choice_code);
-      label.text(cvo.choice_content);
-      const div = $('<div class="choice-price">');
-      div.text((cvo.choice_price>0?"+"+cvo.choice_price:cvo.choice_price));
-      
-      newDiv.append(input);
-      newDiv.append(label);
-      newDiv.append(div);
-  
-      box.append(newDiv);
-    }
-	
-	calculate();
-}
-
-function count(p){
-
-  if(p == 'plus' && modalAmount<99){
-  	modalAmount++;
-  }else if(p == 'minus' && modalAmount>1){
-    modalAmount--;
-  }
-  $(".modal-amount").text(modalAmount);
-  calculate();
-}
-
-$(".add-basket").click(function(){
-
-	$(".btn-close").click();
-})
-
-$(".modal-order").click(function(){
-
-	$(".btn-close").click();
-})
-
-// 모달창 총 금액 계산
-function calculate(){
-	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
-
-	
-	$("#modal-total").text(modalTotal+"원");
-}
-
-
-
-// 장바구니에 등록할 데이터
-function postBasketToServer(data){
-
-}
-
-
-
-
-
-
+//사진 업로드 버튼
 document.getElementById('trigger').addEventListener('click', ()=> {
     document.getElementById('review_multiple').click();
 });
 
-
+//리뷰 regist 메소드 클릭 이벤트
 $("#regBtn").click(function(){ 
         regist();
 });
-
 function regist(){
     // const user_id = '${sessionScope.login.userId}';
     const user_id = "test";
@@ -195,6 +58,7 @@ function regist(){
     const regExp = new RegExp("\.(exe|sh|bat|msi|dll|js)$");
     const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
     const maxSize = 1024*1024*20; //20MB
+
 
     // if(user_id === ''){
     //     alert('로그인이 필요한 서비스 입니다.');
@@ -229,7 +93,10 @@ function regist(){
                     formData.append('review_diner_code', diner_code);
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
+                    formData.append('review_reg_date', data);
 
+                    // 여기에서 review_score_avg를 ,,, append,, 해줘야하나,,? 근데 평균을 계산해서,,
+                    // formData.append('review_user_id', user_id);
                 }
                 
             } 
@@ -269,10 +136,8 @@ function regist(){
         //}if문
         
     }
-    
 
-
-
+//리뷰 뿌리기
 async function spreadReviewServer(diner_code){
     console.log(diner_code);
     try {
@@ -284,7 +149,6 @@ async function spreadReviewServer(diner_code){
         console.log(error);
     }
 }
-
 
 function getReviewList(diner_code){
     spreadReviewServer(diner_code).then(result =>{ 
@@ -356,7 +220,6 @@ function getReviewList(diner_code){
     })
 }
 
-
 // async function removeReviewServer(review_code){
 //     try {
 //         const url ='/review/review/'+review_code;
@@ -399,12 +262,158 @@ function getReviewList(diner_code){
 //             getReviewList(diner_code);
 //          })  
 //     }
-
 // })
 
 
+//모달창 총 주문 계산을 위한 변수
+let modalAmount = 1;
+let modalFoodPrice = 0; 
+let	modalOptionPrice = 0;
+
+function openModal(food_code){
+  modalAmount=1;
+  $(".modal-amount").text(modalAmount);
+  $("#modalTrigger").click();
+  $.ajax({
+    url: '/choice/list/'+food_code,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data, status, xhr){
+      console.log(data);
+      spreadChoice(data);
+      addBasketEvent(data);     
+    },
+    error: function(xhr, status, error){
+      console.log(error);
+    }
+  })
+}
+
+//모달창 오픈 시 장바구니 추가하기 버튼 이벤트 
+function addBasketEvent(data){	
+	$(".add-basket").off("click");
+	//모달창 장바구니 추가하기 버튼 클릭 이벤트
+	$(".add-basket").on("click",()=> {
+		
+		let options = $(".form-check-input");
+	    console.log(options);
+	    let optionArr = [];
+	    for(let option of options){
+	    	if(option.checked){
+	    		optionArr.push(option.value);
+			}        	
+	    }
+	    
+	    const basketData = {
+	      basket : {
+	      	user_id : user_id,
+	      	food_code : data.foodvo.food_code,
+	      	basket_order_count : modalAmount
+	      },
+	      choiceList : optionArr,
+	    }
+	    console.log(basketData);
+	    
+	    postBasketToServer(basketData);
+	    $(".btn-close").click();
+	})
+}
+
+// 장바구니에 등록할 데이터
+function postBasketToServer(data){
+	
+	$.ajax({
+    url: '/basket/add/',
+    type: 'POST',
+    dataType: 'json',
+    contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+    success: function(data, status, xhr){
+      console.log(data);
+      
+    },
+    error: function(xhr, status, error){
+      console.log(error);
+    }
+  })	
+}
+//모달창 주문하기 버튼 클릭 이벤트
+$(".modal-order").click(function(){
+
+	$(".btn-close").click();
+})
+
+// 모달창 내용 채우기
+function spreadChoice(data){
+
+	let save_dir = data.filevo.file_save_dir;
+	let splitArr = save_dir.split(`\\`);
+
+	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
+
+	$(".modal-img").css("background-image", "url(" + src + ")");
+
+	$(".food-title").text(data.foodvo.food_name);
+	$(".food-description").text(data.foodvo.food_intro);
+	$("#modal-price").text(data.foodvo.food_price+"원");
+	modalFoodPrice = data.foodvo.food_price;
+	
+    const box = $('.item-list');
+    box.html(" ");
+	
+	let choiceCnt = 0;
+    for(let cvo of data.clist){
+      
+      const newDiv = $('<div class="form-check">');
+      const input = $('<input class="form-check-input" type="checkbox" value="">');
+      const label = $('<label class="form-check-label" >');
+      label.click(()=>{
+      	input.click();
+      })
+      input.click( ()=>{
+      	if(input.is(':checked')){
+      		modalOptionPrice+=cvo.choice_price;
+      		calculate();
+      	}else{
+      		modalOptionPrice -=cvo.choice_price;
+      		calculate();
+      	}
+      })
+     
+      input.val(cvo.choice_code);
+      label.text(cvo.choice_content);
+      const div = $('<div class="choice-price">');
+      div.text((cvo.choice_price>0?"+"+cvo.choice_price:cvo.choice_price));
+      
+      newDiv.append(input);
+      newDiv.append(label);
+      newDiv.append(div);
+  
+      box.append(newDiv);
+    }
+	
+	calculate();
+}
+
+function count(p){
+
+  if(p == 'plus' && modalAmount<99){
+  	modalAmount++;
+  }else if(p == 'minus' && modalAmount>1){
+    modalAmount--;
+  }
+  $(".modal-amount").text(modalAmount);
+  calculate();
+}
 
 
+// 모달창 총 금액 계산
+function calculate(){
+	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
+
+	
+	$("#modal-total").text(modalTotal+"원");
+}
 
 
 

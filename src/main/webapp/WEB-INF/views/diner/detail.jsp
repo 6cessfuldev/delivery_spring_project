@@ -507,44 +507,38 @@
   </div>
 </div>
 <script type="text/javascript">
-let diner_code = "<c:out value='${diner.diner_code}' />";
-let user_id = "<c:out value='${sessionScope.user.user_id}' />";
-
-
-function readFile2(fileNames) {
-    const target = document.getElementsByName(fileNames);
-    const fileLength = target[0].files.length;
-    console.log(fileLength);
-      if (fileLength<1) return;
-
-      $.each(target[0].files, function(index, file){
-          const reader = new FileReader();
-          reader.onload = function(e) {
-             var div = document.createElement("div");
-              var xBtn = document.createElement("button");
-              xBtn.innerText="X";
-              xBtn.addEventListener("click", function(){
-                 div.remove();
-              }) 
-              var img = document.createElement("img"); 
-                img.setAttribute("src", e.target.result);               
-               div.appendChild(xBtn);
-               div.appendChild(img);
-           console.log("index"+index);
-              document.querySelector("div#image_container").appendChild(div);
-              
-           }
-          reader.readAsDataURL(event.target.files[index]);
-      }); 
- } 
-</script>
-<script type="text/javascript">
+	let diner_code = "<c:out value='${diner.diner_code}' />";
+	let user_id = "<c:out value='${sessionScope.user.user_id}' />";
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+		
+	function readFile2(fileNames) {
+	    const target = document.getElementsByName(fileNames);
+	    const fileLength = target[0].files.length;
+	    console.log(fileLength);
+	      if (fileLength<1) return;
+	
+	      $.each(target[0].files, function(index, file){
+	          const reader = new FileReader();
+	          reader.onload = function(e) {
+	             var div = document.createElement("div");
+	              var xBtn = document.createElement("button");
+	              xBtn.innerText="X";
+	              xBtn.addEventListener("click", function(){
+	                 div.remove();
+	              }) 
+	              var img = document.createElement("img"); 
+	                img.setAttribute("src", e.target.result);               
+	               div.appendChild(xBtn);
+	               div.appendChild(img);
+	           console.log("index"+index);
+	              document.querySelector("div#image_container").appendChild(div);
+	              
+	           }
+	          reader.readAsDataURL(event.target.files[index]);
+	      }); 
+	 } 
 
-
-	console.log(diner_codeVal);
-	console.log(category);
 </script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
