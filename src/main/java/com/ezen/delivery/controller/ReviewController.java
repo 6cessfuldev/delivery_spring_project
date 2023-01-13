@@ -67,7 +67,7 @@ public class ReviewController {
 		return new ResponseEntity<List<ReviewDTO>>(list,HttpStatus.OK);
 	}
 	
-	
+}
 
 //	삭제
 	

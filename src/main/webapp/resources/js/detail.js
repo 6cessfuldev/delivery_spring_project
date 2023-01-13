@@ -95,7 +95,6 @@ function regist(){
                     formData.append('review_score', star);
                     formData.append('review_reg_date', data);
 
-
                     // 여기에서 review_score_avg를 ,,, append,, 해줘야하나,,? 근데 평균을 계산해서,,
                     // formData.append('review_user_id', user_id);
                 }
@@ -232,6 +231,7 @@ let	modalOptionPrice = 0;
 
 function openModal(food_code){
   modalAmount=1;
+  $(".modal-amount").text(modalAmount);
   $("#modalTrigger").click();
   $.ajax({
     url: '/choice/list/'+food_code,
@@ -240,34 +240,68 @@ function openModal(food_code){
     success: function(data, status, xhr){
       console.log(data);
       spreadChoice(data);
-
-      //모달창 장바구니 추가하기 버튼 클릭 이벤트
-      $(".add-basket").click(()=> {
-
-        let options = $(".form-check-input");
-        console.log(options);
-        let optionList = "";
-        for(let option of options){
-        	optionList += option.value+" ";
-        }
-	
-		console.log(sessionStorage.getItem("user"));
-        const basketData = {
-          user_id : sessionStorage.getItem("user").user_id,
-          food_code : data.foodvo.food_code,
-          optionList : optionList,
-          basket_order_count : modalAmount
-        }
-        console.log(basketData);
-
-      })
-      
+      addBasketEvent(data);     
     },
     error: function(xhr, status, error){
       console.log(error);
     }
   })
 }
+
+function addBasketEvent(data){
+	
+	$(".add-basket").off("click");
+	//모달창 장바구니 추가하기 버튼 클릭 이벤트
+	$(".add-basket").on("click",()=> {
+		
+		let options = $(".form-check-input");
+	    console.log(options);
+	    let optionArr = [];
+	    for(let option of options){
+	    	if(option.checked){
+	    		optionArr.push(option.value);
+			}        	
+	    }
+	    
+	    const basketData = {
+	      basket : {
+	      	user_id : user_id,
+	      	food_code : data.foodvo.food_code,
+	      	basket_order_count : modalAmount
+	      },
+	      choiceList : optionArr,
+	    }
+	    console.log(basketData);
+	    
+	    postBasketToServer(basketData);
+	    $(".btn-close").click();
+	})
+}
+
+// 장바구니에 등록할 데이터
+function postBasketToServer(data){
+	
+	$.ajax({
+    url: '/basket/add/',
+    type: 'POST',
+    dataType: 'json',
+    contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+    success: function(data, status, xhr){
+      console.log(data);
+      
+    },
+    error: function(xhr, status, error){
+      console.log(error);
+    }
+  })	
+}
+
+$(".modal-order").click(function(){
+
+	$(".btn-close").click();
+})
+
+
 
 function spreadChoice(data){
 
@@ -332,15 +366,6 @@ function count(p){
   calculate();
 }
 
-$(".add-basket").click(function(){
-
-	$(".btn-close").click();
-})
-
-$(".modal-order").click(function(){
-
-	$(".btn-close").click();
-})
 
 // 모달창 총 금액 계산
 function calculate(){
@@ -352,10 +377,10 @@ function calculate(){
 
 
 
-// 장바구니에 등록할 데이터
-function postBasketToServer(data){
 
-}
+
+
+
 
 document.getElementById('trigger').addEventListener('click', ()=> {
     document.getElementById('review_multiple').click();
@@ -581,4 +606,3 @@ function getReviewList(diner_code){
 //     }
 
 // })
->>>>>>> 0942c1b03b30543242c61f28e098a4ef63ed03bc
