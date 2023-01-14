@@ -84,7 +84,7 @@ public class MemberController {
 	@RequestMapping(value = "/sendMail", method = RequestMethod.GET)
 	public void sendMailTest() throws Exception {
 
-		String subject = "안녕하세요 test 메일 입니다 :-)";
+		String subject = "안녕하세요 <먹어요> test 메일 입니다.";
 		String content = "메일 테스트 내용"
 				+ "<img src=\"https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg1.daumcdn.net%2Fthumb%2FR1280x0.fjpg%2F%3Ffname%3Dhttp%3A%2F%2Ft1.daumcdn.net%2Fbrunch%2Fservice%2Fuser%2F32E9%2Fimage%2FBA2Qyx3O2oTyEOsXe2ZtE8cRqGk.JPG&imgrefurl=https%3A%2F%2Fbrunch.co.kr%2F%40happying%2F66&tbnid=uBQ8cebvR-okYM&vet=12ahUKEwi1hJjYoav8AhWOOpQKHdX0BeoQMygNegUIARD3AQ..i&docid=0RhOIZ63_Xb9-M&w=960&h=640&q=%EA%B0%95%EC%95%84%EC%A7%80&ved=2ahUKEwi1hJjYoav8AhWOOpQKHdX0BeoQMygNegUIARD3AQ\">";
 		String from = "aleod1007@naver.com";
@@ -163,18 +163,22 @@ public class MemberController {
 	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
 		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);
 		UserVO isUser = usv.isUser(user_id, user_pw);
-
-		if (isUser != null) {
+		
+		if (isUser != null) { // 로그인 성공
 			HttpSession session = req.getSession();
 			session.setAttribute("user", isUser);
+			int isOk = usv.loginDate(user_id);
+			log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
 
 			model.addAttribute("user", isUser);
-			model.addAttribute("msg", "1");
+//			model.addAttribute("msg", "1");
 			
 			return "redirect:/";
-		} else {
+		
+		} else { // 로그인 실패
 			model.addAttribute("msg", "0");
-			
+			int isOk = usv.loginFailCnt(user_id);
+			log.info(">>> add fail Count " + (isOk > 0 ? "Ok" : "Fail"));
 			return "/member/login";
 		}
 	}
@@ -189,8 +193,6 @@ public class MemberController {
 		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
 		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
 		
-		log.info(naverUser.toString());
-		
 		if(getUser == null) { // 미가입 회원인 경우
 			
 			boolean isUp = usv.naverSignUp(naverUser);
@@ -199,12 +201,16 @@ public class MemberController {
 				HttpSession session = req.getSession();
 				session.setAttribute("user", naverUser);
 				model.addAttribute("user", naverUser);
+				int isOk = usv.loginDate(naverUser.getUser_id());
+				log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
 			} 
 			
 		} else { // 이미 가입한 회원인 경우
 			HttpSession session = req.getSession();
 			session.setAttribute("user", getUser);
 			model.addAttribute("user", getUser);
+			int isOk = usv.loginDate(getUser.getUser_id());
+			log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
 		}
 		
 		return "/member/naverLogin";
@@ -255,9 +261,15 @@ public class MemberController {
 	// 로그아웃
 	
 	@GetMapping("/logout")
-	public String logoutGet(HttpServletRequest req) {
+	public String logoutGet(HttpServletRequest req, HttpSession session) {
+		
+		UserVO uvo = (UserVO)session.getAttribute("user");
+		int isOk = usv.logoutDate(uvo.getUser_id());
+		log.info(">>> update logout date " + (isOk > 0 ? "Ok" : "Fail"));
+		
 		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
+		
 		return "redirect:/";
 	}
 

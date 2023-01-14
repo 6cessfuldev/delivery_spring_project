@@ -34,6 +34,13 @@ public interface UserService {
 
 	int modifyUserInfo(UserVO uvo);
 
+	int loginDate(String user_id);
+	
+	int loginFailCnt(String user_id);
+
+	int logoutDate(String user_id);
+
+
 
 
 
