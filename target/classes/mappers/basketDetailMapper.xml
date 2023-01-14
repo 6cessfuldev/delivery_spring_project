@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.delivery.repository.BasketDetailDAO">
+
+<insert id="insert">
+	insert into basket_detail(basket_code, choice_code)
+		values(#{basket_code}, #{choice_code})
+</insert>
+
+<select id="selectList" resultType="com.ezen.delivery.domain.BasketDetailVO">
+	select * from basket_detail where basket_code = #{basket_code}
+</select>
+
+<delete id="deleteByBasketCode">
+	delete from basket_detail where basket_code = #{basket_code}
+</delete>
+
+</mapper>
+

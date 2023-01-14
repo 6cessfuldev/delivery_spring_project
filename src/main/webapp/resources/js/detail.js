@@ -297,48 +297,53 @@ function addBasketEvent(data){
 		
 		let options = $(".form-check-input");
 	    console.log(options);
-	    let optionArr = [];
+	    let optionList = [];
 	    for(let option of options){
 	    	if(option.checked){
-	    		optionArr.push(option.value);
+                let choiceObj = {
+                    choice_code : option.value
+                }
+	    		optionList.push(choiceObj);
 			}        	
 	    }
 	    
 	    const basketData = {
-	      basket : {
-	      	user_id : user_id,
+	    	user_id : user_id,
 	      	food_code : data.foodvo.food_code,
-	      	basket_order_count : modalAmount
-	      },
-	      choiceList : optionArr,
-	    }
+	      	basket_order_count : modalAmount,
+	      	choiceList : optionList
+	    };
 	    console.log(basketData);
 	    
 	    postBasketToServer(basketData);
-	    $(".btn-close").click();
+	    $(".btn-close").click();	    
 	})
 }
 
 // 장바구니에 등록할 데이터
-function postBasketToServer(data){
+function postBasketToServer(basketData){
 	
 	$.ajax({
-    url: '/basket/add/',
-    type: 'POST',
-    dataType: 'json',
-    contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-    success: function(data, status, xhr){
-      console.log(data);
-      
-    },
-    error: function(xhr, status, error){
-      console.log(error);
-    }
-  })	
+        url: '/basket/add/',
+        type: 'POST',
+        traditional: true,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(basketData),
+        success: function(data, status, xhr){
+        console.log(data);
+        basketReload();
+        
+        },
+        error: function(xhr, status, error){
+        console.log(error);
+        }
+    })	
 }
 //모달창 주문하기 버튼 클릭 이벤트
 $(".modal-order").click(function(){
-
+	
+	basketReload();
 	$(".btn-close").click();
 })
 
@@ -350,8 +355,8 @@ function spreadChoice(data){
 
 	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
-
-	$(".modal-img").css("background-image", "url(" + src + ")");
+	
+	$(".modal-img").css("background-image", "url('" + src + "')");
 
 	$(".food-title").text(data.foodvo.food_name);
 	$(".food-description").text(data.foodvo.food_intro);
@@ -411,9 +416,127 @@ function count(p){
 function calculate(){
 	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
 
-	
 	$("#modal-total").text(modalTotal+"원");
 }
 
+//장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
+function basketReload(){
+	console.log("Reload");
+	if(user_id == null || user_id == "") return;
 
+    $.ajax({
+        url: '/basket/list/'+user_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data, status, xhr){
+        	console.log(data);
+        	
+			refreshBasket(data);
+        
+        },
+        error: function(xhr, status, error){
+        console.log(error);
+        }
+    })	
+}
 
+function refreshBasket(data){
+	let basket = $("#basket-menu-list");
+	basket.html(" ");
+	for(let bdto of data){
+		let basketItem = $('<div class="basket-item">');
+		
+		let basketMenu = $('<div class="basket-menu">');
+		basketMenu.text(bdto.basket_content);
+		basketItem.append(basketMenu);
+		
+		let basketMenuPrice = $('<div class="basket-menu-price">');
+		let div1 = $('<div class="col-xs-6">');
+		let xBtn = $('<a>');
+		xBtn.css("cursor", "pointer");
+		xBtn.click(()=>{
+			let basket_code = bdto.basket_code;
+			removeBasket(basket_code, basketItem);
+		});
+		xBtn.text('X');
+		let basketPrice = $('<span class="px-2 fs-7">');
+		basketPrice.text(bdto.total_price*bdto.basket_order_count+"원");
+		div1.append(xBtn);
+		div1.append(basketPrice);
+		basketMenuPrice.append(div1);
+		let div2 = $('<div class="col-xs-6">');
+		let minusBtn = $('<a>');
+		minusBtn.text(' ─ ');
+		minusBtn.click(()=>{
+			if(Number(amount.text())>1){
+				if(changeAmount(bdto.basket_code,Number(amount.text())-1, basketItem)!=1) {
+					console.log("1");
+					return;
+				} 
+				amount.text(Number(amount.text())-1);
+				basketPrice.text(bdto.total_price*Number(amount.text())+"원");
+			}
+		});
+		div2.append(minusBtn);
+		let amount = $('<span class="px-2 fs-7">');
+		amount.text(bdto.basket_order_count);
+		div2.append(amount);
+		let plusBtn = $('<a>');
+		plusBtn.text(' ┼ ');
+		plusBtn.click(()=>{
+			if(Number(amount.text())<99){
+				if(changeAmount(bdto.basket_code,Number(amount.text())+1, basketItem)!=1) {
+					return; 
+				}
+				amount.text(Number(amount.text())+1);
+				basketPrice.text(bdto.total_price*Number(amount.text())+"원");
+				
+			}
+		});
+		div2.append(plusBtn);
+		basketMenuPrice.append(div2);
+		basketItem.append(basketMenuPrice);
+		basket.append(basketItem);
+	}
+}
+
+function changeAmount(basket_code, amount, basketItem){
+	let result = 0;
+	$.ajax({
+	    url: '/basket/amount?basket_code='+basket_code+"&basket_order_count="+amount,
+	    type: 'PUT',
+	    dataType: 'json',
+	    async:false, //동기식 처리
+	    success: function(data, status, xhr){
+	    	console.log(data);
+	    	result = 1; 
+	    },
+	    error: function(xhr, status, error){
+	    	alert("서버 오류");
+	    }
+	})	
+	return result;
+
+}
+
+function removeBasket(basket_code, basketItem){
+	 $.ajax({
+        url: '/basket/'+basket_code,
+        type: 'delete',
+        dataType: 'json',
+        async: false,
+        success: function(data, status, xhr){
+        	console.log(data);
+        	basketItem.remove();
+        	basketReload();    
+        },
+        error: function(xhr, status, error){
+        	alert("서버 오류");
+        }
+    })	
+}
+
+//장바구니 총 금액 구하기
+//1. 장바구니 생성 시 총 합계 계산
+//2. 장바구니 수량 변경 시 총 합계 계산
+//3. 장바구니 삭제 시 총 합계 계산

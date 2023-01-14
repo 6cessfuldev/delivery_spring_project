@@ -127,7 +127,6 @@ public class MemberController {
 	}
 	
 	// 이메일 중복 확인
-	
 	@PostMapping("/userEmailCheck")
 	public ResponseEntity<String> userEmailCheck(String user_email){
 		log.info(user_email);
@@ -179,7 +178,6 @@ public class MemberController {
 	}
 	
 	// 네이버 로그인
-	
 	@GetMapping("/callback")
 	public void callback() {}
 	
