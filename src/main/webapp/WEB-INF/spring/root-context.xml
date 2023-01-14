@@ -64,7 +64,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-<!-- 	<tx:advice id="transactionAdvice">
+	<tx:advice id="transactionAdvice">
         <tx:attributes>
             <tx:method name="get*" read-only="true"/>
             <tx:method name="*" />
@@ -73,7 +73,7 @@
 
 	<aop:config>
         <aop:advisor advice-ref="transactionAdvice" pointcut="bean(*Service)"/>
-    </aop:config> -->
+    </aop:config>
     
-    <tx:annotation-driven/>
+<tx:annotation-driven/>
 </beans>

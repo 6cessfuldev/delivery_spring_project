@@ -399,46 +399,15 @@
 					<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 				  </svg></span>
 			</div>
-			<div class="basket-item">
-				<div class="basket-menu">핫크리스치킨 8조각</div>
-				<div class="basket-menu-price">
-					<div class="col-xs-6">
-						<a href="">X</a> <span>21,200원</span>
-					</div>
-					<div class="col-xs-6">
-						<a href="">-</a>&nbsp; <span>1 </span>&nbsp;<a href="">+</a>
-					</div>
-				</div>
-			</div>
-			<div class="basket-item">
-				<div class="basket-menu">핫크리스치킨 8조각</div>
-				<div class="basket-menu-price">
-					<div class="col-xs-6">
-						<a href="">X</a> <span>21,200원</span>
-					</div>
-					<div class="col-xs-6">
-						<a href="">-</a> &nbsp;<span>1 </span>&nbsp;<a href="">+</a>
-					</div>
-				</div>
-			</div>
-			<div class="basket-item">
-				<div class="basket-menu">핫크리스치킨 8조각</div>
-				<div class="basket-menu-price">
-					<div class="col-xs-6">
-						<a href="">X</a> <span>21,200원</span>
-					</div>
-					<div class="col-xs-6">
-						<a href="">-</a> &nbsp;<span>1 </span>&nbsp;<a href="">+</a>
-					</div>
-				</div>
-			</div>
-			<div class="basket-deli-price">
-				<span>배달요금</span> <span>2,000원</span> <span>별도</span>
-			</div>
-			<div class="basket-total-price">
-				<span>합계:</span> <span>21,200원</span>
-			</div>
 			
+			<div id="basket-menu-list"></div>
+				
+				<div class="basket-deli-price">
+					<span>배달요금</span> <span>2,000원</span> <span>별도</span>
+				</div>
+				<div class="basket-total-price">
+					<span>합계:</span> <span id="total">21,200원</span>
+				</div>
 			
 
 		</div>
@@ -546,5 +515,6 @@
 <script type="text/javascript" src="/resources/js/detail.js"></script>
 <script>
 getReviewList(diner_code);
+basketReload();
 </script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>

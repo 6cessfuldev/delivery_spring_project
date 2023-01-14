@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,30 +8,27 @@
 <script type="text/javascript" src="/resources/js/naveridlogin_js_sdk_2.0.2.js"></script>
 </head>
 <body>
-
 <form id="form" action="/member/naverLogin" method="post">
-<input id="accessToken" type="text" name="accessToken" value="" >
-<input id="state" type="text" name="state" value="" >
+<input id="accessToken" type="text" name="accessToken" value="" hidden="">
 </form>
 
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("BwPXQd2HaNZ5eWMSnF7z", "http://localhost:8089/member/callback");
- 
-  // ë¤ì´ë² ì¬ì©ì íë¡í ì¡°í
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // ë¤ì´ë² ì¬ì©ì íë¡í ì¡°í ì´í íë¡í ì ë³´ë¥¼ ì²ë¦¬í  callback function
-  function naverSignInCallback() {
-	// ì ê·¼ í í° ê°
+
+	var naver_id_login = new naver_id_login("BwPXQd2HaNZ5eWMSnF7z", "http://localhost:8089/member/callback");
+	//네이버 사용자 프로필 조회
+	naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+	function naverSignInCallback() {
+	// 접근 토큰 값
+
     var accessToken = document.getElementById('accessToken');
-    var state = document.getElementById('state');
     
     accessToken.value = naver_id_login.oauthParams.access_token;
-    state.value = naver_id_login.oauthParams.state;
     document.getElementById("form").submit();  
   
-  }
+ 	}
   
-
+  
 </script>
 </body>
 </html>

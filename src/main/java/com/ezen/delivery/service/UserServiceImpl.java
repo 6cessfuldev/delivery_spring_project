@@ -138,6 +138,32 @@ public class UserServiceImpl implements UserService {
 		return udao.selectList();
 	}
 
+	// 관리자페이지 회원 정보 수정
+	@Override
+	public int modifyUserInfo(UserVO uvo) {
+		
+		String encodeNewPw = passwordEncoder.encode(uvo.getUser_pw());
+		uvo.setUser_pw(encodeNewPw);
+		
+		return udao.updateUserFromAdmin(uvo);
+	}
+
+	@Override
+	public int loginDate(String user_id) {
+		return udao.updateLoginDate(user_id);
+	}
+	
+	@Override
+	public int loginFailCnt(String user_id) {
+		return udao.updateLoginFailCnt(user_id);
+	}
+
+	@Override
+	public int logoutDate(String user_id) {
+		return udao.updateLogoutDate(user_id);
+	}
+
+
 
 
 	

@@ -14,7 +14,7 @@ import lombok.ToString;
 public class DinerVO {
 
 	private int diner_code;
-	private int diner_file_code;
+	private int file_code;
 	private String diner_name;
 	private int diner_min_pay;
 	private String diner_address;

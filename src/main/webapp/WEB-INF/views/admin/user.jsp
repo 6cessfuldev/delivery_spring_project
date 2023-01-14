@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${list}" var="user">
+        <c:forEach items="${userList}" var="user">
             <tr>
                 <td><a href="/admin/user/detail?user_id=${user.user_id}">${user.user_id}</a></td>
                 <td>${user.user_name}</td>
@@ -32,10 +32,10 @@
                 <c:if test="${user.user_naver_id ne null}">
                 <td>Y</td>
                 </c:if>
-                <td>${user.user_reg_date}</td>
+                <td>${user.user_register_date}</td>
                 <td>0</td>
                 <td>0</td>
-                <td>drop</td>
+                <td>완료</td>
             </tr>
         </c:forEach>
     </tbody>

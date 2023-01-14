@@ -26,6 +26,8 @@ public interface UserDAO {
 
 	int updateUser(@Param("user_id") String user_id, @Param("new_pw") String new_pw, @Param("new_phone") String new_phone);
 
+	int updateUserFromAdmin(UserVO uvo);
+	
 	int selectCntByEmail(String user_email);
 
 	UserVO getUserPw(String getEmail);
@@ -33,6 +35,16 @@ public interface UserDAO {
 	int deleteUser(String user_id);
 
 	List<UserVO> selectList();
+
+	int updateLoginDate(String user_id);
+	
+	int updateLoginFailCnt(String user_id);
+
+	int updateLogoutDate(String user_id);
+
+
+
+
 
 
 }
