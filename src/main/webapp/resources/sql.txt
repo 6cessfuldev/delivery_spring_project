@@ -43,7 +43,6 @@ diner_category varchar(15),
 diner_addr_point point,
 primary key(diner_code));
 
-
 ## choice(옵션)
 
 CREATE TABLE `deliverydb`.`choice` (
@@ -53,8 +52,8 @@ CREATE TABLE `deliverydb`.`choice` (
   `choice_price` INT NOT NULL,
   PRIMARY KEY (`choice_code`));
 
-
 ## basket(장바구니)
+
 CREATE TABLE basket(
 basket_code int not null auto_increment,
 user_id varchar(40),
@@ -62,8 +61,19 @@ food_code int not null,
 basket_order_count int not null,
 PRIMARY KEY (basket_code));
 
-##basket_detail(장바구니 상세)  
+## basket_detail(장바구니 상세)  
+
 CREATE TABLE basket_detail (
 basket_code int not null fk,
 choice_code int not null fk
 )
+
+## login(로그인기록)
+
+create table login(
+log_code int not null auto_increment,
+user_id varchar(40) not null,
+log_date datetime,
+log_out_date datetime,
+log_fail_count tinyint(1) not null default 0,
+primary key(log_code));
