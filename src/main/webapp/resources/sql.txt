@@ -41,6 +41,7 @@ diner_business_name varchar(50),
 diner_company_num varchar(12),
 diner_category varchar(15),
 diner_addr_point point,
+diner_score_avg bouble,
 primary key(diner_code));
 
 ## choice(옵션)
@@ -77,3 +78,11 @@ log_date datetime,
 log_out_date datetime,
 log_fail_count tinyint(1) not null default 0,
 primary key(log_code));
+
+
+## review (리뷰)
+review_taste_score 삭제
+review_amount_score 삭제
+review_delivery_score 삭제
+
+review_score int 추가

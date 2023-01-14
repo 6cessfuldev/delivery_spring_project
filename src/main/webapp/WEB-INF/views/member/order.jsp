@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="/resources/css/order.css">
-<!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script type="text/javascript" src="/resources/js/order.js"></script>
 </head>
 <body>
