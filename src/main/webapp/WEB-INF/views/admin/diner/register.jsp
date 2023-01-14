@@ -8,12 +8,13 @@
 			음식점 파일 코드 : <input type="file" name="file"><br>
 			음식점 이름 : <input type="text" name="diner_name"> <br>
 			음식점 주소 : <input type="text" id ="addr" name="diner_address"><br>
-			최소 결제 금액 : <input type="text" name="diner_min_pay" value="1000"><br>
+			최소 결제 금액 : <input type="number" name="diner_min_pay" value="1000"><br>
 			공지사항 : <textarea rows="3" cols="30" name="diner_notice"></textarea><br>
 			오픈 시간 : <input type="text" name="diner_open_time"><br>
 			닫는 시간 : <input type="text" name="diner_close_time"><br>
 			결제 수단 : <input type="text" name="diner_method_pay"><br>
 			상호명 : <input type="text" name="diner_business_name"><br>
+			배달비 : <input type="number" name="diner_delivery_fee"><br>
 			사업자등록번호 : <input type="text" name="diner_company_num"><br>
 			카테고리 : 
 			<input type="checkbox" name="category" value="aa">1인분주문

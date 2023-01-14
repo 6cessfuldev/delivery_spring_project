@@ -25,6 +25,7 @@ public class DinerVO {
 	private String diner_business_name;
 	private String diner_company_num;
 	private String diner_category;
+	private int diner_delivery_fee;
 	private String diner_addr_lng;
 	private String diner_addr_lat;
 	private double diner_score_avg;
