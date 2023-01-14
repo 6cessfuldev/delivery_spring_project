@@ -68,10 +68,9 @@ primary key(basket_code));
 
 ## basket_detail(장바구니 상세)  
 
-create table basket_detail (
-basket_code int not null fk,
-choice_code int not null fk
-)
+create table basket_detail(
+basket_code int not null,
+choice_code int not null);
 
 
 ## login(로그인기록)
