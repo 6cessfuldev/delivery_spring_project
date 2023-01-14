@@ -450,6 +450,7 @@ function calculate(){
 //장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
 function basketReload(){
 	console.log("Reload");
+	$(".order-btn").hide();
 	if(user_id == null || user_id == "") return;
 
     $.ajax({
@@ -471,7 +472,16 @@ function basketReload(){
 function refreshBasket(data){
 	let basket = $("#basket-menu-list");
 	basket.html(" ");
+	console.log(data.length);
+	//장바구니 값이 없을 경우 주문 버튼 사라짐
+	if(data.length<1 || data == null){
+		$(".order-btn").hide();
+	}else{
+		$(".order-btn").show();
+	}
+
 	let form = $("#order-form");
+	
 	for(let bdto of data){
 	
 		let basketItem = $('<div class="basket-item">');

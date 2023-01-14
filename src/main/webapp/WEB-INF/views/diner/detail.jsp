@@ -403,10 +403,10 @@
 			<div id="basket-menu-list"></div>
 				
 				<div class="basket-deli-price">
-					<span>배달요금</span> <span>2,000원</span> <span>별도</span>
+					<span>배달요금</span> <span>${diner.diner_delivery_fee}원</span> <span>별도</span>
 				</div>
 				<div class="basket-total-price">
-					<span>합계:</span> <span id="total">21,200원</span>
+					<span>합계:</span> <span id="total">0원</span>
 				</div>
 
 				<div class="order-btn" onclick="location.href='/order/${sessionScope.user.user_id}';">주문하기</div>

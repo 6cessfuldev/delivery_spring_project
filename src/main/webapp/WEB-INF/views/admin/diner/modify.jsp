@@ -11,15 +11,16 @@
 	
 		<form action="/admin/diner/update" method="post" id="dinerForm" enctype="multipart/form-data">
 			음식점 코드 : <input type="text" name="diner_code" value="${diner.diner_code}" readonly><br>
-			음식점 이미지 : <input type="file" name="file"><input type="text" name="${diner.diner_file_code}" value="${diner.diner_file_code}" hidden> <br>
+			음식점 이미지 : <input type="file" name="file"><input type="text" name="file_code" value="${diner.file_code}" hidden> <br>
 			음식점 이름 : <input type="text" name="diner_name" value="${diner.diner_name}"> <br>
 			음식점 주소 : <input type="text" id ="addr" name="diner_address" value="${diner.diner_address}"><br>
-			최소 결제 금액 : <input type="text" name="diner_min_pay" value="${diner.diner_min_pay}"><br>
+			최소 결제 금액 : <input type="number" name="diner_min_pay" value="${diner.diner_min_pay}"><br>
 			공지사항 : <textarea rows="3" cols="30" name="diner_notice" value="${diner.diner_notice}"></textarea><br>
 			오픈 시간 : <input type="text" name="diner_open_time" value="${diner.diner_open_time}"><br>
 			닫는 시간 : <input type="text" name="diner_close_time" value="${diner.diner_close_time}"><br>
 			결제 수단 : <input type="text" name="diner_method_pay" value="${diner.diner_method_pay}"><br>
 			상호명 : <input type="text" name="diner_business_name" value="${diner.diner_business_name}"><br>
+			배달비 : <input type="number" name="diner_delivery_fee"><br>
 			사업자등록번호 : <input type="text" name="diner_company_num" value="${diner.diner_company_num}"><br>
 			카테고리 : 
 			<input type="checkbox" name="category" value="aa">1인분주문

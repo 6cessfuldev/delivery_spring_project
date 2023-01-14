@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <th>음식점 파일 코드</th>
-        <td>${diner.file_code}</td>
+        <td>${file_code}</td>
     </tr>
     <tr>
         <th>음식점 이름</th>
@@ -47,9 +47,13 @@
         <th>상호명</th>
         <td>${diner.diner_business_name}</td>
     </tr>
-        <tr>
+    <tr>
         <th>사업자등록번호</th>
         <td>${diner.diner_company_num}</td>
+    </tr>
+    <tr>
+    	<th>배달비</th>
+    	<td>${diner.diner_delivery_fee}</td>	
     </tr>
     <tr>
         <th>카테고리</th>
