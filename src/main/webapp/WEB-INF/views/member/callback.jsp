@@ -9,7 +9,6 @@
 </head>
 <body>
 <form id="form" action="/member/naverLogin" method="post">
-
 <input id="accessToken" type="text" name="accessToken" value="" hidden="">
 </form>
 
@@ -21,12 +20,14 @@
 	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 	function naverSignInCallback() {
 	// 접근 토큰 값
+
     var accessToken = document.getElementById('accessToken');
     
     accessToken.value = naver_id_login.oauthParams.access_token;
     document.getElementById("form").submit();  
   
  	}
+  
   
 </script>
 </body>

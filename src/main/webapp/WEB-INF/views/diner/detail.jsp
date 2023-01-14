@@ -406,7 +406,7 @@
 					<span>배달요금</span> <span>2,000원</span> <span>별도</span>
 				</div>
 				<div class="basket-total-price">
-					<span>합계:</span> <span>21,200원</span>
+					<span>합계:</span> <span id="total">21,200원</span>
 				</div>
 			
 

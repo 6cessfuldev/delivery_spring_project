@@ -184,7 +184,7 @@ public class MemberController {
 	public void callback() {}
 	
 	@PostMapping("/naverLogin")
-	public String naverLoginPost(String accessToken, String state, Model model, HttpServletRequest req) {
+	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
 		
 		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
 		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
