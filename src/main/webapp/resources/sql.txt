@@ -21,6 +21,7 @@ user_phone varchar(40) not null,
 user_birth date not null,
 user_register_date datetime default now(),
 user_modify_date datetime default now(),
+user_isAdmin tinyint(1) default 0,
 user_naver_id varchar(40) not null,
 primary key(user_id));
 

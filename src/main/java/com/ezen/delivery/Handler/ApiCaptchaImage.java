@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 네이버 캡차 API 예제 - 캡차 이미지 수신
-public class ApiExamCaptchaImage {
+public class ApiCaptchaImage {
 
     public static void main(String[] args) {
         String clientId = "BwPXQd2HaNZ5eWMSnF7z"; //애플리케이션 클라이언트 아이디값";

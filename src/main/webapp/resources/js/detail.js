@@ -356,6 +356,7 @@ function spreadChoice(data){
 	let save_dir = data.filevo.file_save_dir;
 	let splitArr = save_dir.split(`\\`);
 
+
 	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
 	
@@ -388,6 +389,7 @@ function spreadChoice(data){
       	}
       })
      
+
       input.val(cvo.choice_code);
       label.text(cvo.choice_content);
       const div = $('<div class="choice-price">');
@@ -399,8 +401,10 @@ function spreadChoice(data){
   
       box.append(newDiv);
     }
+
 	
 	calculate();
+
 }
 
 function count(p){

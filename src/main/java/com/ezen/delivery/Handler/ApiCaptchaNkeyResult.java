@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 네이버 캡차 API 예제 - 키발급, 키 비교
-public class ApiExamCaptchaNkeyResult {
+public class ApiCaptchaNkeyResult {
 
     public static void main(String[] args) {
         String clientId = "BwPXQd2HaNZ5eWMSnF7z";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "DiPkQjdmfi";//애플리케이션 클라이언트 시크릿값";
 
-        String code = "1"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
+        String code = "0"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
         String key = "YOUR_CAPTCHA_KEY"; // 캡차 키 발급시 받은 키값
         String value = "YOUR_INPUT"; // 사용자가 입력한 캡차 이미지 글자값
         String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
