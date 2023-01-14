@@ -9,12 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketDetailVO;
+import com.ezen.delivery.domain.BasketVO;
 import com.ezen.delivery.domain.ChoiceVO;
-import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.repository.BasketDAO;
 import com.ezen.delivery.repository.BasketDetailDAO;
 import com.ezen.delivery.repository.ChoiceDAO;
-import com.ezen.delivery.repository.FoodDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,6 +90,14 @@ public class BasketServiceImpl implements BasketService {
 	public int modifyCount(BasketDTO basket) {
 			
 		return bdao.updateCount(basket);
+	}
+
+	@Override
+	public int getDinerCode(String user_id) {
+		
+		BasketVO bvo = bdao.selectOne(user_id);
+		
+		return ;
 	}
 
 }

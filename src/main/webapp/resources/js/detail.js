@@ -296,17 +296,6 @@ function addModalForm(data){
 	let modalForm = $("#modal-form");
 	
 	$("#modal_food_code").val(data.foodvo.food_code);
-	$("#modal_order_food_count").val(data.basket_order_count);
-	
-	let choices = $(".form-check-input");
-	console.log(choices);
-	let cnt = 0;
-	for(let choice of choices){
-		if(choice.checked){
-			let choiceForm = $('<input type="text" name="choiceList['+ cnt++ +'].choice_code" val="'+choice.value+'" hidden>');
-			modalForm.append(choiceForm);
-		}
-	} 
 
 }
 
@@ -367,7 +356,19 @@ function postBasketToServer(basketData){
 //모달창 주문하기 버튼 클릭 이벤트
 $(".modal-order").click(function(){
 	
-	$("#modal-form").submit();
+	let modalForm = $("#modal-form");
+	let choices = $(".form-check-input");
+	let cnt = 0;
+	for(let choice of choices){
+		if(choice.checked){
+			console.log("choice :"+choice.value);
+			let choiceForm = $('<input type="text" name="choiceList['+ cnt++ +'].choice_code" value="'+choice.value+'" hidden>');
+			modalForm.append(choiceForm);
+		}
+	}
+	$("#modal_order_food_count").val($(".modal-amount").text());
+	console.log($("#modal-form"));
+	modalForm.submit();
 	
 })
 
@@ -376,7 +377,6 @@ function spreadChoice(data){
 
 	let save_dir = data.filevo.file_save_dir;
 	let splitArr = save_dir.split(`\\`);
-
 
 	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;

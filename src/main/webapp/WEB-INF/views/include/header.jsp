@@ -27,8 +27,7 @@
 			</c:if>
 			<c:if test="${user.user_id != null }">
 				<li class="nav-item"><div class="box"><a href="/member/logout" class="nav-link" aria-current="page">로그아웃</a></div></li>
-				<!-- 장바구니 href 임시로 지정함 -->
-				<li class="nav-item"><div class="box2"><a href="/member/order" class="nav-link">장바구니</a></div></li>
+				<li class="nav-item"><div class="box2"><a href="/basket/diner" class="nav-link">장바구니</a></div></li>
 				<li class="nav-item"><div class="box2"><a href="/member/detail_userInfo" class="nav-link">회원정보</a></div></li>
 			</c:if>
 		</ul>

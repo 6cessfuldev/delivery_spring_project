@@ -3,6 +3,7 @@ package com.ezen.delivery.repository;
 import java.util.List;
 
 import com.ezen.delivery.domain.BasketDTO;
+import com.ezen.delivery.domain.BasketVO;
 
 public interface BasketDAO {
 
@@ -15,5 +16,7 @@ public interface BasketDAO {
 	public List<BasketDTO> selectList(String basket_user_id);
 	
 	public BasketDTO checkBasket(BasketDTO basket);
+
+	public BasketVO selectOne(String user_id);
 	
 }

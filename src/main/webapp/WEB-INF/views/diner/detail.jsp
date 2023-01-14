@@ -471,10 +471,10 @@
       <div class="modal-footer d-flex">
         <div class="add-basket py-3">장바구니에 넣기</div>
         <div class="modal-order py-3">주문하기</div>
-        <form action="/order/modal" method="post" id="modal-form">
-        	<input type="text" name="food_code" id="modal_food_code" val="" hidden>
-        	<input type="text" name="order_food_count" id="modal_basket_order_count" val="" hidden>       	
-        	//<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
+        <form action="/order/" method="post" id="modal-form">
+        	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
+        	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
+        	<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
         </form>
       </div>
     </div>

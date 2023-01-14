@@ -8,7 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.ezen.delivery.domain.UserVO;
 
-public class BasketInterceptor implements HandlerInterceptor {
+public class OrderInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -19,7 +19,7 @@ public class BasketInterceptor implements HandlerInterceptor {
 		UserVO uvo = (UserVO)session.getAttribute("user");
 		
 		if(uvo == null) {
-			response.sendRedirect("/index");
+			response.sendRedirect("/member/login");
 			return false;
 		}else {
 			return true;

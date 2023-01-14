@@ -13,5 +13,7 @@ public interface BasketService {
 	public int removeByBasketCode(int basket_code);
 
 	public int modifyCount(BasketDTO basket);
+
+	public int getDinerCode(String user_id);
 	
 }
