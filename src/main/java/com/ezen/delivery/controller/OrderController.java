@@ -21,12 +21,13 @@ public class OrderController {
 	@Inject
 	private OrderService osv;
 	
-	@GetMapping("/order/{user_id}")
-	public void orderPageGet(@PathVariable("user_id") String user_id, OrderDTO odto, Model model) {
+	@GetMapping("/{user_id}")
+	public String orderPageGet(@PathVariable("user_id") String user_id, OrderDTO odto, Model model) {
 		
 		log.info(">>> user_id" + user_id);
 		log.info(">>> orders : " + odto.getOrders());
 		
+		return "/member/order";
 	}
 
 }
