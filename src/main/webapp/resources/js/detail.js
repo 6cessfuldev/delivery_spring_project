@@ -281,12 +281,33 @@ function openModal(food_code){
     success: function(data, status, xhr){
       console.log(data);
       spreadChoice(data);
-      addBasketEvent(data);     
+      addBasketEvent(data);
+      addModalForm(data);   
     },
     error: function(xhr, status, error){
       console.log(error);
     }
   })
+}
+
+//모달창에서 주문하기 버튼 폼태그 데이터 입력
+function addModalForm(data){
+	
+	let modalForm = $("#modal-form");
+	
+	$("#modal_food_code").val(data.foodvo.food_code);
+	$("#modal_order_food_count").val(data.basket_order_count);
+	
+	let choices = $(".form-check-input");
+	console.log(choices);
+	let cnt = 0;
+	for(let choice of choices){
+		if(choice.checked){
+			let choiceForm = $('<input type="text" name="choiceList['+ cnt++ +'].choice_code" val="'+choice.value+'" hidden>');
+			modalForm.append(choiceForm);
+		}
+	} 
+
 }
 
 //모달창 오픈 시 장바구니 추가하기 버튼 이벤트 
@@ -346,8 +367,8 @@ function postBasketToServer(basketData){
 //모달창 주문하기 버튼 클릭 이벤트
 $(".modal-order").click(function(){
 	
-	basketReload();
-	$(".btn-close").click();
+	$("#modal-form").submit();
+	
 })
 
 // 모달창 내용 채우기
@@ -450,7 +471,9 @@ function basketReload(){
 function refreshBasket(data){
 	let basket = $("#basket-menu-list");
 	basket.html(" ");
+	let form = $("#order-form");
 	for(let bdto of data){
+	
 		let basketItem = $('<div class="basket-item">');
 		
 		let basketMenu = $('<div class="basket-menu">');
