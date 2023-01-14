@@ -43,54 +43,64 @@
 <br>
 <br>
 
-<button type="button" class="addChoiceBtn">옵션추가</button>
+음식 옵션 <a href="/admin/choice/register?food_code=${food.food_code }"><button type="button" class="addChoiceBtn">추가</button></a>
 <br>
 <br>
 
-<div id="addChoiceBox"></div>
+<div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">옵션 내용</th>
+              <th scope="col">옵션 가격</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+         	<c:forEach items="${choiceList}" var="cvo">
+            <tr>
+              <td>${cvo.choice_code}</td>
+              <td>${cvo.choice_content}</td>
+              <td>${cvo.choice_price}</td>
+              <td><a href="/admin/choice/modify?choice_code=${cvo.choice_code }">수정</a></td>
+              <td><a href="/admin/choice/remove?choice_code=${cvo.choice_code }">삭제</a></td>
+            </tr>
+            </c:forEach>
+          </tbody>
+       	</table>
+     	</div>
+
+
+
+
+
+
+
+
+
+<!-- <div id="addChoiceBox"></div> -->
 
 
 <script>
-    $('.addChoiceBtn').click(function(){
+ /*    $('.addChoiceBtn').click(function(){
     	
         const box = document.getElementById('addChoiceBox');
         const newP = document.createElement('p');
         
-        newP.innerHTML = `<table>`;
-        newP.innerHTML += `<tr>`;
-    /*     newP.innerHTML += `<td><input type="text" id="choice_title" placeholder="옵션 제목"></td>`; */
+        newP.innerHTML = `<table><tr>`;
         newP.innerHTML += `<td><input type="text" id="subchoice_content_" placeholder="옵션 내용"></td>`;
         newP.innerHTML += `<td><input type="number" id="subchoice_price" placeholder="옵션 가격"></td>`;
         newP.innerHTML += `<td></td>`;
         newP.innerHTML += `<td><input type="button" class="addSubBtn" value="추가"></td>`;
-        newP.innerHTML += `</tr>`;
-        newP.innerHTML += `</table><br>`;
-    /*     newP.innerHTML += `<div id="addSubBox"></div>`; */
+        newP.innerHTML += `</tr></table><br>`;
+
         
         box.appendChild(newP);
         
-      /*   $('.addSubBtn').click(function(){
-
-            const cnt = $('#inputCnt').val();
-            
-            for(let i=0; i<cnt; i++){
-                const subBox = document.getElementById('addSubBox');
-                const newSubP = document.createElement('p');
-    
-                newSubP.innerHTML += `<table>`;
-                newSubP.innerHTML += `<tr>`;
-                newSubP.innerHTML += `<td><input type="text" hidden></td>`;
-                newSubP.innerHTML += `<td><input type="text" placeholder="옵션 내용"></td>`;
-                newSubP.innerHTML += `<td><input type="text" placeholder="옵션 가격"></td>`;
-                newSubP.innerHTML += `</tr>`;
-                newSubP.innerHTML += `</table>`;
-    
-                subBox.appendChild(newSubP);
-            }
-
-        }); */
     });
-    
+     */
     
    
 

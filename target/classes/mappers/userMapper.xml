@@ -60,6 +60,14 @@
 		where user_id = #{user_id}
 	</update>
 	
+	<update id="updateUserFromAdmin">
+		update user set
+		user_email = #{user_email}, user_pw = #{user_pw}, 
+		user_name = #{user_name}, user_phone = #{user_phone}, 
+		user_birth = #{user_birth}, user_modify_date = now()
+		where user_id = #{user_id}
+	</update>
+	
 	<delete id="deleteUser">
 		delete from user 
 		where user_id = #{user_id}

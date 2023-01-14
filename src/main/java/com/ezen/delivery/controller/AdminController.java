@@ -14,12 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.ChoiceVO;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.service.ChoiceService;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.UserService;
@@ -43,28 +45,14 @@ public class AdminController {
    @Inject
    private UserService usv;
    
+   @Inject
+   private ChoiceService csv;
+   
    
    @GetMapping("/")
    public String main() {
       return "admin/main";
    }
-   
-   @GetMapping("/user")
-   public void getUser(Model model) {
-      List<UserVO> list = usv.getUserList();
-      model.addAttribute("list", list);
-   }
-   
-   @GetMapping("/user/detail")
-   public String userRegister(String user_id, Model model) {
-      UserVO uvo = usv.getUserByID(user_id);
-      model.addAttribute("user", uvo);
-      return "/admin/user/detail";
-   }
-   
-   @GetMapping("/user/register")
-   public void userRegister() {}
-   
    
    @GetMapping("/diner")
    public void diner(Model model) {
@@ -219,6 +207,10 @@ public class AdminController {
       model.addAttribute("file", fdto.getFilevo());
       model.addAttribute("food", fdto.getFoodvo());
       
+      List<ChoiceVO> list = csv.getList(food_code);
+      
+      model.addAttribute("choiceList", list);
+      
       return "/admin/food/detail";
    }
 
@@ -253,6 +245,95 @@ public class AdminController {
       return "redirect:/admin/diner/detail";
    }
    
+   @GetMapping("/choice/register")
+   public String choiceRegister(int food_code, Model model) {
+	   FoodVO fvo = fsv.getFood(food_code);
+	   model.addAttribute("food", fvo);
+	   
+	   return "admin/choice/register";
+   }
    
+   @PostMapping("/choice/insert")
+   public String choiceInsert(ChoiceVO cvo, RedirectAttributes reAttr) {
+	   int isOk = csv.register(cvo);
+	   log.info(">>> choice insert " + (isOk > 0 ? "Ok" : "Fail"));
+	   reAttr.addAttribute("food_code", cvo.getFood_code());
+	   
+	   return "redirect:/admin/food/detail";
+   }
+   
+   @GetMapping("/choice/modify")
+   public void choiceModify(int choice_code, Model model) {
+	   ChoiceVO cvo = csv.getChoice(choice_code);
+	   FoodVO fvo = fsv.getFood(cvo.getFood_code());
+	   model.addAttribute("choice", cvo);
+	   model.addAttribute("food", fvo);
+   }
+   
+   @GetMapping("/choice/update")
+   public String choiceUpdate(ChoiceVO cvo, RedirectAttributes reAttr) {
+	   int isOk = csv.update(cvo);
+	   log.info(">>> choice update " + (isOk > 0 ? "Ok" : "Fail"));
+	   reAttr.addAttribute("food_code", cvo.getFood_code());
+	   
+	   return "redirect:/admin/food/detail";
+   }
+   
+   @GetMapping("/choice/remove")
+   public String choiceRemove(int choice_code, RedirectAttributes reAttr) {
+	   ChoiceVO cvo = csv.getChoice(choice_code);
+	   int isOk = csv.remove(choice_code);
+	   log.info(">>> choice remove " + (isOk > 0 ? "Ok" : "Fail"));
+	   reAttr.addAttribute("food_code", cvo.getFood_code());
+	   
+	   return "redirect:/admin/food/detail";
+   }
+   
+   @GetMapping("/user")
+   public void getUser(Model model) {
+      List<UserVO> userList = usv.getUserList();
+      model.addAttribute("userList", userList);
+   }
+   
+   @GetMapping("/user/register")
+   public void userRegiseter() {}
+   
+   @GetMapping("/user/insert")
+   public String userInsert(UserVO uvo) {
+	   boolean isOk = usv.signUp(uvo);
+	   log.info(">>> admin user insert " + (isOk ? "Ok" : "Fail"));
+	   return "redirect:/admin/user";
+   }
+   
+   @GetMapping("/user/detail")
+   public String userDetail(String user_id, Model model) {
+      UserVO uvo = usv.getUserByID(user_id);
+      model.addAttribute("user", uvo);
+      
+      return "/admin/user/detail";
+   }
+   
+   @GetMapping("/user/modify")
+   public void userModify(String user_id, Model model) {
+	   UserVO uvo = usv.getUserByID(user_id);
+	   model.addAttribute("user", uvo);
+   }
+   
+   @GetMapping("/user/update")
+   public String userUpdate(UserVO uvo, RedirectAttributes reAttr) {
+	   int isOk = usv.modifyUserInfo(uvo);
+	   log.info(">>> user update " + (isOk > 0 ? "Ok" : "Fail"));
+	   reAttr.addAttribute("user_id", uvo.getUser_id());
+	   
+	   return "redirect:/admin/user/detail";
+   }
+   
+   @GetMapping("/user/remove")
+   public String userRemove(String user_id) {
+	   int isOk = usv.removeUserInfo(user_id);
+	   log.info(">>> user remove " + (isOk > 0 ? "Ok" : "Fail"));
+	   
+	   return "redirect:/admin/user";
+   }
    
 }
