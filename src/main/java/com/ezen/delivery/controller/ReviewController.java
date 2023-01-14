@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.ReviewService;
 
+import lombok.experimental.PackagePrivate;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -65,7 +67,16 @@ public class ReviewController {
 		return new ResponseEntity<List<ReviewDTO>>(list,HttpStatus.OK);
 	}
 	
+	//사장님댓글
+	@PatchMapping("/bossComment")
+	public ResponseEntity<String> bossComment(int review_diner_code, int review_order_code, String review_boss_comment){
+		String reviewContent = rsv.bossComment(review_diner_code, review_order_code, review_boss_comment);
+		return ResponseEntity.ok().body(reviewContent);
+	}
+	
 }
+
+
 
 //	삭제
 	
