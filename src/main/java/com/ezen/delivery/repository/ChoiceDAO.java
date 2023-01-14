@@ -8,6 +8,7 @@ public interface ChoiceDAO {
 
 	List<ChoiceVO> selectList(int food_code);
 
+
 	int insertChoice(ChoiceVO cvo);
 
 	ChoiceVO selectOne(int choice_code);
@@ -15,5 +16,8 @@ public interface ChoiceDAO {
 	int deleteChoice(int choice_code);
 
 	int updateChoice(ChoiceVO cvo);
+
+
+
 
 }

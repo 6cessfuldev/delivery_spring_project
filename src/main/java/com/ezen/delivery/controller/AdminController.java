@@ -137,8 +137,8 @@ public class AdminController {
          //새로 입력받은 이미지 파일을 저장소에 등록         
          fivo = fhd.uploadFiles(file);
          //기존에 사용하던 파일 코드가 있다면 재사용
-         if(dvo.getDiner_file_code() != 0) {
-            fivo.setFile_code(dvo.getDiner_file_code());            
+         if(dvo.getFile_code() != 0) {
+            fivo.setFile_code(dvo.getFile_code());            
          }
          
          ddto.setFivo(fivo);

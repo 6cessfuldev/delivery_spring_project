@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,19 +8,19 @@
 <script type="text/javascript" src="/resources/js/naveridlogin_js_sdk_2.0.2.js"></script>
 </head>
 <body>
-
 <form id="form" action="/member/naverLogin" method="post">
+
 <input id="accessToken" type="text" name="accessToken" value="" hidden="">
 </form>
 
 <script type="text/javascript">
 
 	var naver_id_login = new naver_id_login("BwPXQd2HaNZ5eWMSnF7z", "http://localhost:8089/member/callback");
-	//네이버 사용자 프로필 조회
+	//네이버 사용자 프로필 조회
 	naver_id_login.get_naver_userprofile("naverSignInCallback()");
 	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 	function naverSignInCallback() {
-	// 접근 토큰 값
+	// 접근 토큰 값
     var accessToken = document.getElementById('accessToken');
     
     accessToken.value = naver_id_login.oauthParams.access_token;
@@ -26,7 +28,6 @@
   
  	}
   
-
 </script>
 </body>
 </html>

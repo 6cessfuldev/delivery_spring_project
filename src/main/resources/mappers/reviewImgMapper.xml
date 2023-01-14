@@ -8,4 +8,21 @@
 	insert into review_img (review_code, review_img_uuid, review_img_save_dir, review_img_size, review_img_name, review_img_type)
 	values (#{review_code}, #{review_img_uuid}, #{review_img_save_dir}, #{review_img_size}, #{review_img_name},#{review_img_type})
 </insert> -->
+
+<insert id="insert" parameterType="com.ezen.delivery.domain.ReviewImgVO">
+
+	insert into review_img (review_code, review_img_uuid, review_img_save_dir, review_img_size, review_img_name, review_img_type)
+	values (#{review_code}, #{review_img_uuid}, #{review_img_save_dir}, #{review_img_size}, #{review_img_name}, #{review_img_type})
+</insert>
+<select id="selectFlist" resultType="com.ezen.delivery.domain.ReviewImgVO">
+	select * from review_img where review_code = #{diner_code}
+</select>
+
+<!-- <select id="selectFile" resultType="com.ezen.delivery.domain.ReviewImgVO">
+	select * from review_img where review_img_uuid = #{review_img_uuid}
+</select>
+<delete id="deleteFile">
+	delete from review_img where review_img_uuid = #{review_img_uuid}
+</delete> -->
 </mapper>
+

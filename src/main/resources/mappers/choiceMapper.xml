@@ -9,6 +9,7 @@
   		where food_code = #{food_code}
   	</select>
   	
+
   	<insert id="insertChoice">
   		insert into choice (food_code, choice_content, choice_price)
   		values (#{food_code}, #{choice_content}, #{choice_price})
@@ -29,4 +30,5 @@
   		delete from choice
   		where choice_code = #{choice_code}
   	</delete>
+
   </mapper>

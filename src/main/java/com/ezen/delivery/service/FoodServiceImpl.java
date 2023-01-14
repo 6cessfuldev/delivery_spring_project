@@ -33,7 +33,7 @@ public class FoodServiceImpl implements FoodService {
 		
 		for (FoodVO fovo : fovoList) {
 			FileVO fivo = fidao.selectByFileCode(fovo.getFood_file_code());
-			fodtoList.add(new FoodDTO(fovo, fivo));
+			fodtoList.add(new FoodDTO(fovo, fivo, null));
 		}
 		
 		return fodtoList;
@@ -77,7 +77,7 @@ public class FoodServiceImpl implements FoodService {
 		FoodVO fvo = fdao.selectByFoodCode(food_code);
 		FileVO fivo = fidao.selectByFileCode(fvo.getFood_file_code());
 		
-		return new FoodDTO(fvo, fivo);
+		return new FoodDTO(fvo, fivo, null);
 	}
 
 

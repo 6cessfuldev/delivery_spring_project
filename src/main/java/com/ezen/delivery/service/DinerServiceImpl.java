@@ -62,7 +62,7 @@ public class DinerServiceImpl implements DinerService {
 		
 		if(ddto.getFivo() != null) {
 			isOk *= fidao.insert(ddto.getFivo());
-			ddto.getDvo().setDiner_file_code(ddto.getFivo().getFile_code());
+			ddto.getDvo().setFile_code(ddto.getFivo().getFile_code());
 		}
 		
 		isOk *= ddao.insert(ddto.getDvo()); 
@@ -84,7 +84,7 @@ public class DinerServiceImpl implements DinerService {
 		}
 		
 		for (DinerVO dvo : dvoList) {
-			FileVO fvo = fidao.selectByFileCode(dvo.getDiner_file_code());
+			FileVO fvo = fidao.selectByFileCode(dvo.getFile_code());
 			ddtoList.add(new DinerDTO(dvo,fvo));
 		}
 		
@@ -94,7 +94,10 @@ public class DinerServiceImpl implements DinerService {
 	public DinerDTO getDiner(int diner_code) {
 		
 		DinerVO dvo = ddao.selectDiner(diner_code);
-		FileVO fivo = fidao.selectByFileCode(dvo.getDiner_file_code());
+		double avg = rdao.selectAvgStar(diner_code);
+		dvo.setDiner_score_avg(avg);
+		
+		FileVO fivo = fidao.selectByFileCode(dvo.getFile_code());
 		
 		return new DinerDTO(dvo, fivo);
 	}
@@ -109,7 +112,7 @@ public class DinerServiceImpl implements DinerService {
 				isUp *= fidao.update(ddto.getFivo());				
 			}else {
 				isUp *= fidao.insert(ddto.getFivo());
-				ddto.getDvo().setDiner_file_code(ddto.getFivo().getFile_code());
+				ddto.getDvo().setFile_code(ddto.getFivo().getFile_code());
 			}
 		}
 		
@@ -123,7 +126,7 @@ public class DinerServiceImpl implements DinerService {
 	public int remove(int diner_code) {
 		
 		int isDel = 1;
-		isDel *= fidao.delete(ddao.selectDiner(diner_code).getDiner_file_code());
+		isDel *= fidao.delete(ddao.selectDiner(diner_code).getFile_code());
 		isDel *= ddao.delete(diner_code);
 		
 		List<FoodDTO> fList = fsv.getListByDinerCode(diner_code);

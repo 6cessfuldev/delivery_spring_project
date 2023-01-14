@@ -1,17 +1,35 @@
 package com.ezen.delivery.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.domain.BasketDTO;
+import com.ezen.delivery.domain.BasketDetailVO;
+import com.ezen.delivery.domain.ChoiceVO;
+import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.repository.BasketDAO;
+import com.ezen.delivery.repository.BasketDetailDAO;
+import com.ezen.delivery.repository.ChoiceDAO;
+import com.ezen.delivery.repository.FoodDAO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BasketServiceImpl implements BasketService {
 
 	@Inject
 	private BasketDAO bdao;
+	
+	@Inject
+	private BasketDetailDAO bddao;
+	
+	@Inject
+	private ChoiceDAO cdao;
 	
 	@Override
 	public int addBasket(BasketDTO basket) {
@@ -23,12 +41,56 @@ public class BasketServiceImpl implements BasketService {
 		}
 		
 		try {
-			return bdao.insert(basket);
+			int isOk = 1;
+			isOk *= bdao.insert(basket);
+			for (ChoiceVO cvo : basket.getChoiceList()) {
+				BasketDetailVO bdvo = new BasketDetailVO(basket.getBasket_code(), cvo.getChoice_code());
+				isOk *= bddao.insert(bdvo);
+			}
+			return isOk;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public List<BasketDTO> getList(String user_id) {
+		
+		//장바구니 기본정보 basket_Code / food_code / basket_order_count
+		List<BasketDTO> bdtoList = bdao.selectList(user_id);
+		
+		for (BasketDTO bdto : bdtoList) {
+			
+			//주문 옵션 리스트 choiceList
+			List<ChoiceVO> choiceList = new ArrayList<ChoiceVO>();
+			List<BasketDetailVO> bdvoList = bddao.selectList(bdto.getBasket_code());
+			for (BasketDetailVO bdvo : bdvoList) {
+				choiceList.add(cdao.selectOne(bdvo.getChoice_code()));
+			}
+			
+			bdto.setChoiceList(choiceList);
+			
+			bdto.initBasket_content();
+			bdto.initSalePerOne();
+		}
+		
+		return bdtoList;
+	}
+
+	@Override
+	public int removeByBasketCode(int basket_code) {
+		
+		int isOk = bdao.delete(basket_code);
+		isOk = bddao.deleteByBasketCode(basket_code);
+		
+		return isOk;
+	}
+
+	@Override
+	public int modifyCount(BasketDTO basket) {
+			
+		return bdao.updateCount(basket);
 	}
 
 }

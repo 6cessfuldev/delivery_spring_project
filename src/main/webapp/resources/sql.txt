@@ -22,6 +22,7 @@ user_birth date not null,
 user_register_date datetime default now(),
 user_modify_date datetime default now(),
 user_isAdmin tinyint(1) default 0,
+user_naver_id varchar(40) not null,
 primary key(user_id));
 
 ## diner(음식점)
@@ -51,3 +52,18 @@ CREATE TABLE `deliverydb`.`choice` (
   `choice_content` VARCHAR(45) NOT NULL,
   `choice_price` INT NOT NULL,
   PRIMARY KEY (`choice_code`));
+
+
+## basket(장바구니)
+CREATE TABLE basket(
+basket_code int not null auto_increment,
+user_id varchar(40),
+food_code int not null,
+basket_order_count int not null,
+PRIMARY KEY (basket_code));
+
+##basket_detail(장바구니 상세)  
+CREATE TABLE basket_detail (
+basket_code int not null fk,
+choice_code int not null fk
+)

@@ -5,8 +5,13 @@
 <mapper namespace="com.ezen.delivery.repository.BasketDAO">
 
 <insert id="insert">
-	insert into basket(basket_user_id, basket_food_code, basket_order_count)
-		values(#{basket_user_id}, #{basket_food_code}, #{basket_order_count})
+
+<selectKey keyProperty="basket_code" resultType="int" order="BEFORE">
+      SELECT IFNULL(MAX(basket_code+1),1) from basket
+</selectKey>
+
+	insert into basket(basket_code, user_id, food_code, basket_order_count)
+		values(#{basket_code}, #{user_id}, #{food_code}, #{basket_order_count})
 </insert>
 
 <delete id="delete">
@@ -18,13 +23,13 @@
 </update>
 
 <select id="selectList" resultType="com.ezen.delivery.domain.BasketDTO">
-	select a.basket_code, a.basket_user_id, a.basket_food_code, b.food_name, b.food_price
-	from basket a left outer join food b on a.basket_food_code = b.food_code
-	where basket_user_id = #{basket_user_id}
+	select a.basket_code, a.user_id, a.food_code, a.basket_order_count, b.food_name, b.food_price
+	from basket a left outer join food b on a.food_code = b.food_code
+	where user_id = #{user_id}
 </select>
 
 <select id="checkBasket" resultType="com.ezen.delivery.domain.BasketDTO">
-	select * from basket where basket_user_id = #{basket_user_id} and basket_food_code=#{basket_food_code}
+	select * from basket where user_id = #{user_id} and food_code=#{food_code}
 </select>
 
 </mapper>

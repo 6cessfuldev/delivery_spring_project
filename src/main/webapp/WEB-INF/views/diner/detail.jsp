@@ -248,137 +248,65 @@
 					<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 						<div class="diner-score d-flex justify-content-center">
 							<div class="diner-score-total">
-								<p class="total-score">4.9</p>
-								<p class="total-star">★★★★☆</p>
-							</div>
-							<div class="diner-score-each">
-								<ul>
-									<li>
-										<span>맛&nbsp;&nbsp;&nbsp;</span> <span>★★★★☆</span> <span>4.9</span>
-									</li>
-									<li>
-										<span>양&nbsp;&nbsp;&nbsp;</span> <span>★★★★☆</span> <span>4.9</span>
-									</li>
-									<li>
-										<span>배달</span> <span>★★★★☆</span> <span>4.9</span>
-									</li>
-								</ul>
-							</div>
+								<p class="total-score">${diner.diner_score_avg}</p>
+								<p class="total-star">★★★★☆</p><!-- 평균 맞춰서 색 채워야함 -->
+							</div>					
 						</div>
 						<!-- diner-score -->
 
 						<div class="review-count">
 							<p>리뷰 472개 / 사장님댓글 452개</p>
 						</div>
-
-						<div class="review">
-					    <div class="review_box">
-                             <!--   <form action="/review/reviewfile" method="post" enctype="multipart/form-data"> -->
-                                <div class="review_spanBox">
-                                    <span class="review_span">얼마나 만족하셨나요?</span><br>
-                                    <span class="review_starT">맛&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
-                                    <span class="review_starT">양&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
-                                    <span class="review_starT">배달&nbsp;&nbsp;&nbsp;</span> <span class="review_star">★★★★☆</span> 
-                                </div>
-                                <br>
-                                
-		                     <span id="revWriter">${review.review_user_email}</span>
-		                    	<textarea name="content" class="review_content" rows="6" cols="100" id="review_con"
-		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea><br>
-		                          <div class="review_insertBox">
-		                          <!-- <button type="submit" id="regBtn" class="review_insert">완료</button> -->
-		                          </div>
-                                
-                                <input type="text" name="review_diner_code" value="${diner.diner_code}" hidden>
-                                <input type="text" name="review_taste_score" value="review_taste_score" hidden>
-                                <input type="text" name="review_amount_score" value="review_amount_score" hidden>
-                                <input type="text" name="review_delivery_score" value="review_delivery_score" hidden>
-                                
-                 
-                                <!-- 이미지파일 등록 -->
-                            <form action="/review/reviewfile" method="post" enctype="multipart/form-data">
-                            <div class="review_multiplebox">
-				                 <input type="file" id="review_multiple" name="files" accept="image/*" onchange="setThumbnail(event);" style="display: none" multiple>
-				                 <button type="button" id="trigger">사진</button>
 				
+						<!-- 별점 -->
+						<form name="starform" id="starform" method="post" action="./save">
+						  <div id="star">
+						    <fieldset>
+						        <legend id="starInfo">별을 클릭해서 채워주세요</legend>
+						        	<div id="starRadio">
+						         	<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+							        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+							        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+							        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+							        </div>
+						    </fieldset>
+						  </div>
+						</form>
+						
+							<textarea name="content" class="review_content" rows="7" cols="103" id="review_con"
+		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea ><br>
+		                    <div class="review_insertBox"></div>
+                               
+									
+						  <!-- 이미지파일 등록 -->
+                            <div class="review_multiplebox">
+				                 <input type="file" id="review_multiple" name="files[]" accept="image/*" onchange="readFile2('files[]');" style="display: none" multiple="multiple">
+				            		<br>
+								 <button type="button" id="trigger">사진</button>
 				                 <div id="image_container">		
-				                                                 
 				                 </div>
 				         	</div>      
-									<button type="submit" id="regBtn" class="review_insert">완료</button>
-                            </form>
-                        </div>
-                        
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div>
-
-						<div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div>
-
-						<div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div>
-
-						<div class="review">
-							<div class="review-head">
-								<span class="reviewer-id">gg**님</span> <span class="review-time-ago">14시간 전</span><a href="#">신고</a>
-							</div>
-							<div class="review-point">
-								<span class="review-star-point">★★★★★</span> |&nbsp;&nbsp; 맛 <span class="star">★</span> <span class="point-taste star">5</span> &nbsp;&nbsp;양 <span class="star">★</span> <span class="point-qty star">3</span> &nbsp;&nbsp;배달 <span class="star">★</span> <span class="point-deli star">5</span>
-							</div>
-							<div class="review-img"></div>
-							<div class="review-menu">
-								<span>김치삼겹장군/1(부추 선택(（추천）부추 넣어주세요)),돈부리치킨장군/2,매콤제육장군/1(부추 선택(（추천）부추 넣어주세요))</span>
-							</div>
-							<div class="review-content">
-								<p>맛있었어요~ 양이 좀 아쉽긴했지만 잘먹었습니다~</p>
-							</div>
-						</div>
+				         	<div class="review_insertBox">
+				         		<br>
+									<button type="button" id="regBtn" class="review_insert">완료</button>
+								<br>
+                            </div>
+                            
+                            	<!-- 등록 후 출력 화면 -->
+                         <div class="review">
+                            <div id="review-head"></div>
+                                
+                         </div>	
+					
+				
 						<div class="add-review d-flex justify-content-center align-items-center">
 							더보기&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
 								<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
 							  </svg>
 						</div>
-
-
 					</div>
+					
 					<!-- tab-pane -->
 					<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 						<div class="info-list">
@@ -471,46 +399,15 @@
 					<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 				  </svg></span>
 			</div>
-			<div class="basket-item">
-				<div class="basket-menu">핫크리스치킨 8조각</div>
-				<div class="basket-menu-price">
-					<div class="col-xs-6">
-						<a href="">X</a> <span>21,200원</span>
-					</div>
-					<div class="col-xs-6">
-						<a href="">-</a>&nbsp; <span>1 </span>&nbsp;<a href="">+</a>
-					</div>
-				</div>
-			</div>
-			<div class="basket-item">
-				<div class="basket-menu">핫크리스치킨 8조각</div>
-				<div class="basket-menu-price">
-					<div class="col-xs-6">
-						<a href="">X</a> <span>21,200원</span>
-					</div>
-					<div class="col-xs-6">
-						<a href="">-</a> &nbsp;<span>1 </span>&nbsp;<a href="">+</a>
-					</div>
-				</div>
-			</div>
-			<div class="basket-item">
-				<div class="basket-menu">핫크리스치킨 8조각</div>
-				<div class="basket-menu-price">
-					<div class="col-xs-6">
-						<a href="">X</a> <span>21,200원</span>
-					</div>
-					<div class="col-xs-6">
-						<a href="">-</a> &nbsp;<span>1 </span>&nbsp;<a href="">+</a>
-					</div>
-				</div>
-			</div>
-			<div class="basket-deli-price">
-				<span>배달요금</span> <span>2,000원</span> <span>별도</span>
-			</div>
-			<div class="basket-total-price">
-				<span>합계:</span> <span>21,200원</span>
-			</div>
 			
+			<div id="basket-menu-list"></div>
+				
+				<div class="basket-deli-price">
+					<span>배달요금</span> <span>2,000원</span> <span>별도</span>
+				</div>
+				<div class="basket-total-price">
+					<span>합계:</span> <span>21,200원</span>
+				</div>
 			
 
 		</div>
@@ -532,66 +429,23 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0">
-		  <div class="modal_img"></div>
+		  <div class="modal-img"></div>
 		  <div class="modal-text p-3 text-center">
 		  	<div class="food-title fs-5">후라이드치킨</div>
 		  	<div class="food-description fs-8">얇게 튀겨 더욱 바삭하고 속은 촉촉한, 진짜 후라이드!</div>
 		  </div>
 		  <div class="modal-food-price d-flex justify-content-between py-3 px-3"> 
 		  	<strong>가격</strong>
-		  	<strong>16,900원</strong>	
+		  	<strong id="modal-price">----원</strong>	
 		  </div>
-       	  
-       	<!--   <div class="item-list-wrap p-3">
-       	  	<div class="item-list-title">
-		  		<strong>치킨선택</strong>
-		  		<span>(필수 선택)</span>
-       	  	</div>
-       	  	<div class="item-list">
-       	  		<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-				  <label class="form-check-label" for="flexRadioDefault1">
-				    뼈
-				  </label>
-				</div>
-				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-				  <label class="form-check-label" for="flexRadioDefault2">
-				    순살
-				  </label>
-				</div>
-       	  	</div>
-       	  </div> -->
        	  
        	  <div class="item-list-wrap p-3">
        	  	<div class="item-list-title py-1">
-	  		<strong>치킨선택</strong>
-	  		<span>(필수 선택)</span>
+		  		<strong>옵션 선택</strong>
+		  		<span>(필수 선택)</span>
        	  	</div>
        	  	
-       	  	<div class="item-list">
-       	
-       	  	 	<%-- <div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-				  <label class="form-check-label" for="flexCheckDefault">
-				    ${choiceList.get(i).choice_content }
-				  </label>
-				  <div>${choiceList.get(i).choice_price }</div>
-				</div>
-    
-			 	<div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-				  <label class="form-check-label" for="flexCheckChecked">
-				    치즈볼
-				  </label>
-				</div>
-				<div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-				  <label class="form-check-label" for="flexCheckChecked">
-				    케이준후라이
-				  </label>
-				</div> --%>
-       	  	</div>
+       	  	<div class="item-list"></div>
        	  </div>
        	  
        	  <div class="modal-food-price d-flex justify-content-between py-2 px-3"> 
@@ -607,7 +461,7 @@
 		  <div class="modal-total-price-wrap d-flex justify-content-between py-2 px-3"> 
        	  	<strong>총 주문금액</strong>
        	  	<div class="modal-total-price">
-       	  		<strong>29,800원</strong>
+       	  		<strong id="modal-total">29,800원</strong>
        	  		<span>15,900원 이상 주문 시 할인</span>
        	  		<span>(최소 주문 금액 ${diner.diner_min_pay}원)</span>
        	  	</div>
@@ -621,17 +475,46 @@
     </div>
   </div>
 </div>
-
 <script type="text/javascript">
+	let diner_code = "<c:out value='${diner.diner_code}' />";
+	let user_id = "<c:out value='${sessionScope.user.user_id}' />";
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
-	console.log(diner_codeVal);
-	console.log(category);
 		
+	function readFile2(fileNames) {
+	    const target = document.getElementsByName(fileNames);
+	    const fileLength = target[0].files.length;
+	    console.log(fileLength);
+	      if (fileLength<1) return;
+	
+	      $.each(target[0].files, function(index, file){
+	          const reader = new FileReader();
+	          reader.onload = function(e) {
+	             var div = document.createElement("div");
+	              var xBtn = document.createElement("button");
+	              xBtn.innerText="X";
+	              xBtn.addEventListener("click", function(){
+	                 div.remove();
+	              }) 
+	              var img = document.createElement("img"); 
+	                img.setAttribute("src", e.target.result);               
+	               div.appendChild(xBtn);
+	               div.appendChild(img);
+	           console.log("index"+index);
+	              document.querySelector("div#image_container").appendChild(div);
+	              
+	           }
+	          reader.readAsDataURL(event.target.files[index]);
+	      }); 
+	 } 
+
 </script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/detail.js"></script>
-
+<script>
+getReviewList(diner_code);
+basketReload();
+</script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>
