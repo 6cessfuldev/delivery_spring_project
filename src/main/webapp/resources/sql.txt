@@ -10,6 +10,7 @@ grant all privileges on deliverydb.* to 'springUser'@'localhost' identified by '
 -- 변경내용 메모리에 반영(적용완료)
 flush privileges;
   
+  
 ## user(회원)
 
 create table user(
@@ -19,11 +20,12 @@ user_pw varchar(500),
 user_name varchar(40) not null,
 user_phone varchar(40) not null,
 user_birth date not null,
-user_register_date datetime default now(),
-user_modify_date datetime default now(),
-user_isAdmin tinyint(1) default 0,
 user_naver_id varchar(40) not null,
+user_register_date datetime default now(),
+user_modify_date datetime,
+user_isAdmin tinyint(1) default 0,
 primary key(user_id));
+
 
 ## diner(음식점)
 
@@ -43,30 +45,34 @@ diner_category varchar(15),
 diner_addr_point point,
 primary key(diner_code));
 
+
 ## choice(옵션)
 
-CREATE TABLE `deliverydb`.`choice` (
-  `choice_code` INT NOT NULL AUTO_INCREMENT,
-  `food_code` INT NOT NULL,
-  `choice_content` VARCHAR(45) NOT NULL,
-  `choice_price` INT NOT NULL,
-  PRIMARY KEY (`choice_code`));
+create table choice(
+choice_code int not null auto_increment,
+food_code int not null,
+choice_content varchar(45) not null,
+choice_price int not null,
+primary key(choice_code));
+
 
 ## basket(장바구니)
 
-CREATE TABLE basket(
+create table basket(
 basket_code int not null auto_increment,
-user_id varchar(40),
+user_id varchar(40) not null,
 food_code int not null,
 basket_order_count int not null,
-PRIMARY KEY (basket_code));
+primary key(basket_code));
+
 
 ## basket_detail(장바구니 상세)  
 
-CREATE TABLE basket_detail (
+create table basket_detail (
 basket_code int not null fk,
 choice_code int not null fk
 )
+
 
 ## login(로그인기록)
 

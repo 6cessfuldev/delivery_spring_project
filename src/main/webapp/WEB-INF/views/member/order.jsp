@@ -20,7 +20,7 @@
                 <input id="order_post"  type="text" placeholder="주소입력(클릭)" readonly onclick="findAddr()">
                 <input id="order_addr" type="text" placeholder="" readonly> <br><br>
                 <input type="text" id="order_addrInput" placeholder="상세주소를 입력하세요."><br>
-                <p id="order_p2">연락처 010-0000-0000</p> 
+                <p id="order_p2">연락처 ${user.user_phone }</p> 
                 <input type="checkbox" id="order_check">
                 <label for="order_check" id="order_checkLabel"><span>안심번호 사용</span></label>
                 <button id="order_num">변경</button>
@@ -53,9 +53,9 @@
         </div>
         <div id="order_payInfo">
             <ul id="order_ul">
-                <li id="order_li">주문금액 00,000원</li>
+                <li id="order_li">주문금액 ${orderTotalPrice }원</li>
                 <li id="order_li">배달비 0,000원</li>
-                <li id="order_li">총 결제금액 00,000원</li>
+                <li id="order_li">총 결제금액 ${orderTotalPrice }원</li>
             </ul>
             <button type="button" id="order_payAll">결제하기</button>
         </div>
