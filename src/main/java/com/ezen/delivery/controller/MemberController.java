@@ -41,6 +41,7 @@ public class MemberController {
 	
 
 	// 이메일 인증
+	
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String mailCheckGET(String email) throws Exception {
@@ -128,6 +129,7 @@ public class MemberController {
 	}
 	
 	// 이메일 중복 확인
+	
 	@PostMapping("/userEmailCheck")
 	public ResponseEntity<String> userEmailCheck(String user_email){
 		log.info(user_email);
@@ -151,7 +153,6 @@ public class MemberController {
 		
 		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
 				: new ResponseEntity<String>("0", HttpStatus.OK));
-							
 	}
 	
 	// 로그인
@@ -167,11 +168,9 @@ public class MemberController {
 		if (isUser != null) { // 로그인 성공
 			HttpSession session = req.getSession();
 			session.setAttribute("user", isUser);
+			model.addAttribute("user", isUser);
 			int isOk = usv.loginDate(user_id);
 			log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
-
-			model.addAttribute("user", isUser);
-//			model.addAttribute("msg", "1");
 			
 			return "redirect:/";
 		
@@ -179,11 +178,13 @@ public class MemberController {
 			model.addAttribute("msg", "0");
 			int isOk = usv.loginFailCnt(user_id);
 			log.info(">>> add fail Count " + (isOk > 0 ? "Ok" : "Fail"));
+
 			return "/member/login";
 		}
 	}
 	
 	// 네이버 로그인
+	
 	@GetMapping("/callback")
 	public void callback() {}
 	
