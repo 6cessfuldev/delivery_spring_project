@@ -295,8 +295,8 @@
                             
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
-                            <div id="review-head"></div>
-                                
+                            <div id="review-head">
+                            </div>
                          </div>	
 					
 				
@@ -508,10 +508,6 @@
 	 } 
 
 </script>
-<!-- jQuery -->
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
-<!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-최신버전}.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>

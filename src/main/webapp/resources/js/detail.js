@@ -191,7 +191,9 @@ function getReviewList(diner_code){
                 div += `<div class="review-point">${star0}<span class="starScore">${reviewDTO.rvo.review_score}</span></div>`;
                 div += `<div class="review-menu"></div>`;
 		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
+                div += `<button type="button" class="bossComment">답글</button>`;
 		        div += `</div>`;
+                div += `<div id="bossComment"></div>`;
 		        review.innerHTML += div;
                 if(reviewDTO.flist.length > 0){      
                     for(let img of reviewDTO.flist){
@@ -215,6 +217,20 @@ function getReviewList(diner_code){
         
     })
 }
+
+$(".bossComment").click(function(){ 
+    console.log("test");
+    commentText();
+});
+
+function commentText(){
+        const box = document.getElementById("#bossComment");
+        const newText = document.createElement('input');
+        newText.innerHTML = `<textarea name="content" class="boss_content" rows="3" cols="103" id="boss_comment"
+        placeholder="답글을 적어주세요."></textarea>`;
+        box.appendChild(newText);
+}
+
 
 // async function removeReviewServer(review_code){
 //     try {

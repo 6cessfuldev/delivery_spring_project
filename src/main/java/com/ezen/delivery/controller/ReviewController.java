@@ -74,8 +74,6 @@ public class ReviewController {
 		return ResponseEntity.ok().body(reviewContent);
 	}
 	
-	
-	
 }
 
 

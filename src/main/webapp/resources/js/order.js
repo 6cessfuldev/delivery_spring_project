@@ -17,6 +17,7 @@ function findAddr(){
 
 
 //결제 api
+
 // 주문번호 만들기
 function createOrderNum(){
 	const date = new Date();
@@ -41,23 +42,26 @@ function paymentCard(data) {
 		
 	IMP.init("imp55477503"); 
 		
+	// 3.결제 요청하기
 	IMP.request_pay({ // param
 		pg: "html5_inicis",
-	  	pay_method: data.payMethod,
-	  	merchant_uid: data.orderNum,
-	  	name: data.name,
-	  	amount: data.amount,
+	  	pay_method: data.,
+	  	merchant_uid: data.,
+	  	name: data.,
+	  	amount: data.,
 	   	buyer_email: "",
 	   	buyer_name: "",
-	  	buyer_tel: data.phone,
-	  	buyer_addr: data.deleveryAddress2 + " " + data.deleveryAddress3,
-	  	buyer_postcode: data.deleveryAddress1,
+	  	buyer_tel: data.,
+	  	buyer_addr: data. + " " + data.,
+	  	buyer_postcode: data.,
 	  	m_redirect_url: m_redirect, 
   	}, 
 	function (rsp) { // callback
 		if (rsp.success) {
-         // 결제 성공 시 로직,
+         // 결제 성공 시 로직
+		 // 결제고유번호
 	        data.impUid = rsp.imp_uid;
+		// 주문번호
 	        data.merchant_uid = rsp.merchant_uid;
 	        paymentComplete(data);  
 			
@@ -71,7 +75,7 @@ function paymentCard(data) {
 function paymentComplete(data) {
 	
 	 $.ajax({
-		url: "/api/order/payment/complete",
+		url: "?",
         method: "POST",
         data: data,
 	})

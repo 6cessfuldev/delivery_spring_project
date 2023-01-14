@@ -563,6 +563,15 @@ main{
 	height: 180px;
 }
 
+.bossComment{
+	text-decoration: none;
+	border: none;
+	font-size: 15px;
+	color: gray;
+	float: right;
+	margin-top: 160px;
+}
+
 #exampleModal{
 	height:600px;
 	margin-top : 30px;
