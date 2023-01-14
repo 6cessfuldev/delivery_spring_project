@@ -9,11 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.BasketService;
+import com.ezen.delivery.domain.OrderDTO;
+import com.ezen.delivery.domain.OrderFoodDTO;
+
 import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.UserService;
 
@@ -52,5 +56,13 @@ public class OrderController {
 		
 		return "/member/order";
 	}
+	
+//	@PostMapping("/")
+//	public String orderPagePOST(OrderFoodDTO ofdto, Model model) {
+//		
+//		log.info(">>> orders : " + ofdto.toString());
+//		
+//		return "/member/order";
+//	}
 
 }
