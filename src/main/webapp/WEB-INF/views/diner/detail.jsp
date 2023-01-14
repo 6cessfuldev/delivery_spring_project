@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
 <main>
-<div class="category">
+	<div class="category">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
 				<div class="category-btn" id="cate-all" >전체보기</div>
@@ -408,11 +408,10 @@
 				<div class="basket-total-price">
 					<span>합계:</span> <span id="total">21,200원</span>
 				</div>
-			
+				<div class="order-btn" onclick="location.href='/order/${sessionScope.user.user_id}';">주문하기</div>
+			</div>
 
 		</div>
-
-	</div>
 
 </main>
 

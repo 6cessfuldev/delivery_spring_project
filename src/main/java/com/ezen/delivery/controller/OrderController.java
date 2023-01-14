@@ -27,6 +27,7 @@ public class OrderController {
 	@Inject
 	private OrderService osv;
 	
+
 	@Inject
 	private BasketService bsv;
 	
@@ -50,7 +51,6 @@ public class OrderController {
 		model.addAttribute("orderTotalPrice", orderTotalPrice);
 		
 		return "/member/order";
-		
 	}
 
 }

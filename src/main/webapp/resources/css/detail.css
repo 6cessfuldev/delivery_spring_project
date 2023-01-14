@@ -721,7 +721,7 @@ main{
 .modal-footer>div{
 	margin:0;
 	width:50%;
-	hegiht: 300px;
+	hegiht: 100px;
 }
 
 .choice-price{
@@ -738,4 +738,14 @@ main{
 
 .menu-amount{
 	
+}
+
+.order-btn{
+	cursor:pointer;
+	margin-top : 10px;
+	padding:10px;
+	text-align : center;
+	color:white;
+	font-size : 20px;
+	background-color:#cf5430;
 }
