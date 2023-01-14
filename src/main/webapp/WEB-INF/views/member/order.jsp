@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <link type="text/css" rel="stylesheet" href="/resources/css/order.css">
 <script type="text/javascript" src="/resources/js/order.js"></script>
+<title>먹어요</title>
 </head>
 <body>
 <jsp:include page="../include/header.jsp"></jsp:include>
@@ -20,7 +21,7 @@
                 <input id="order_post"  type="text" placeholder="주소입력(클릭)" readonly onclick="findAddr()">
                 <input id="order_addr" type="text" placeholder="" readonly> <br><br>
                 <input type="text" id="order_addrInput" placeholder="상세주소를 입력하세요."><br>
-                <p id="order_p2">연락처 ${user.user_phone }</p> 
+                <p id="order_p2">연락처 ${user.user_phone }</p>
                 <input type="checkbox" id="order_check">
                 <label for="order_check" id="order_checkLabel"><span>안심번호 사용</span></label>
                 <button id="order_num">변경</button>
