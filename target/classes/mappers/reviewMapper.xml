@@ -18,6 +18,15 @@
 <select id="selectAvgStar" resultType="double">
 	select IFNULL(round(avg(review_score),1),0) from review where review_diner_code = #{diner_code};
 </select>
+
+<!-- 사장님 댓글 -->
+<update id="bossComment">
+	update reivew set review_boss_comment=#{review_boss_comment}
+	where review_order_code=#{review_order_code}
+	and review_diner_code=#{review_diner_code}
+</update>
+
+
 <!-- <delete id="delete">
 	delete from review where review_code = #{review_code} 
 </delete> -->
