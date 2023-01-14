@@ -331,9 +331,12 @@ function postBasketToServer(basketData){
         contentType: 'application/json',
         data: JSON.stringify(basketData),
         success: function(data, status, xhr){
-        console.log(data);
-        basketReload();
-        
+        if(data == 1){
+	        basketReload();        
+        }else if(data == 2){
+        	alert("이미 등록된 메뉴입니다.");
+        }else
+        	location.href='/member/login'; 
         },
         error: function(xhr, status, error){
         console.log(error);
@@ -449,7 +452,6 @@ function refreshBasket(data){
 		let basketMenu = $('<div class="basket-menu">');
 		basketMenu.text(bdto.basket_content);
 		basketItem.append(basketMenu);
-		
 		let basketMenuPrice = $('<div class="basket-menu-price">');
 		let div1 = $('<div class="col-xs-6">');
 		let xBtn = $('<a>');
@@ -459,7 +461,7 @@ function refreshBasket(data){
 			removeBasket(basket_code, basketItem);
 		});
 		xBtn.text('X');
-		let basketPrice = $('<span class="px-2 fs-7">');
+		let basketPrice = $('<span class="px-2 fs-7 basket_price">');
 		basketPrice.text(bdto.total_price*bdto.basket_order_count+"원");
 		div1.append(xBtn);
 		div1.append(basketPrice);
@@ -498,6 +500,7 @@ function refreshBasket(data){
 		basketItem.append(basketMenuPrice);
 		basket.append(basketItem);
 	}
+
 }
 
 function changeAmount(basket_code, amount, basketItem){
@@ -536,7 +539,29 @@ function removeBasket(basket_code, basketItem){
     })	
 }
 
-//장바구니 총 금액 구하기
-//1. 장바구니 생성 시 총 합계 계산
-//2. 장바구니 수량 변경 시 총 합계 계산
-//3. 장바구니 삭제 시 총 합계 계산
+var target = document.getElementById('basket-menu-list');
+
+// 변경을 감지했을 때 실행할 부분
+var observer = new MutationObserver(mutations => {
+  let priceList = document.getElementsByClassName('basket_price');
+  let sum = 0;
+  for(let price of priceList){
+    let text = price.innerText;
+    console.log(text.substring(0, text.length-1));
+  	sum += Number(text.substring(0, text.length-1));
+  }
+  document.getElementById("total").innerText = sum+"원";
+});
+
+// 감지 설정
+var config = {
+  childList: true,	// 타겟의 하위 요소 추가 및 제거 감지
+  attributes: true,	// 타켓의 속성 변경를 감지
+  characterData: true,	// 타겟의 데이터 변경 감지
+  subtree: true,	// 타겟의 자식 노드 아래로도 모두 감지
+  attributeOldValue: false,	// 타겟의 속성 변경 전 속성 기록
+  characterDataOldValue: false	// 타겟의 데이터 변경 전 데이터 기록
+};
+
+observer.observe(target, config);
+
