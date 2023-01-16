@@ -36,8 +36,8 @@ public class BasketServiceTests {
 		int count = 3;
 		
 		BasketDTO basket = new BasketDTO();
-		basket.setBasket_user_id(user_id);
-		basket.setBasket_food_code(food_code);
+		basket.setUser_id(user_id);
+		basket.setFood_code(food_code);
 		basket.setBasket_order_count(count);
 		
 		int result = service.addBasket(basket);

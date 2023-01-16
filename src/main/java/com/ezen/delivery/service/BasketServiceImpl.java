@@ -95,9 +95,9 @@ public class BasketServiceImpl implements BasketService {
 	@Override
 	public int getDinerCode(String user_id) {
 		
-		BasketVO bvo = bdao.selectOne(user_id);
-		
-		return ;
+		int diner_code = bdao.selectDinerCodeByUserId(user_id);
+		log.info(diner_code+"");
+		return diner_code;
 	}
 
 }

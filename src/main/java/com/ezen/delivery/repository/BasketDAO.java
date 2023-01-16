@@ -17,6 +17,6 @@ public interface BasketDAO {
 	
 	public BasketDTO checkBasket(BasketDTO basket);
 
-	public BasketVO selectOne(String user_id);
+	public int selectDinerCodeByUserId(String user_id);
 	
 }

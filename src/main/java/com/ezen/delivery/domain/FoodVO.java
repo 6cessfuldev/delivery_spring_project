@@ -17,8 +17,8 @@ public class FoodVO {
 	private String food_name;
 	private int food_price;
 	private String food_intro;
-	private int food_file_code;
+	private int file_code;
 	private String food_reg_date;
 	private String food_state;
-	private int food_diner_code;
+	private int diner_code;
 }

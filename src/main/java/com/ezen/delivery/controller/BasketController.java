@@ -80,10 +80,10 @@ public class BasketController {
 		if(user == null) {
 			return "/member/login";
 		}
-		
+		//장바구니 값이 없을 경우 0
 		int diner_code = bsv.getDinerCode(user.getUser_id());
+		if(diner_code==0) return "redirect:/";
 		
-		
-		return 
+		return  "redirect:/diner/detail?diner_code="+diner_code;
 	}
 }
