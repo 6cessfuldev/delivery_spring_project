@@ -1,7 +1,6 @@
 package com.ezen.delivery.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,6 @@ import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
-import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.repository.DinerDAO;
 import com.ezen.delivery.repository.FileDAO;

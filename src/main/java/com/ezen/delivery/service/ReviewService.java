@@ -13,7 +13,7 @@ public interface ReviewService {
 
 	
 	//사장님댓글
-	String bossComment(int review_diner_code, int review_order_code, String review_boss_comment);
+	String bossComment(int review_diner_code, String review_boss_comment);
 
 
 //	int remove(int review_code);

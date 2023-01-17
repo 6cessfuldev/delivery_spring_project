@@ -60,13 +60,13 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	//사장님댓글
 	@Override
-	public String bossComment(int review_diner_code, int review_order_code, String review_boss_comment) {
+	public String bossComment(int review_diner_code, String review_boss_comment) {
 		review_boss_comment = review_boss_comment.replace("\n","<br>").replaceAll(" ", "&nbsp");
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("diner_code", review_diner_code);
 		map.put("bossComment", review_boss_comment);
-		map.put("order_code", review_order_code);
+		//map.put("order_code", review_order_code);
 		
 		rdao.bossComment(map);
 		return review_boss_comment;

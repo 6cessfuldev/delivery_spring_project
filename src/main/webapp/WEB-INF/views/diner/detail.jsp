@@ -296,6 +296,7 @@
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
                             <div id="review-head">
+                            	  <div id="bossCommentBox"></div>
                             </div>
                          </div>	
 					
@@ -521,5 +522,20 @@
 <script>
 getReviewList(diner_code);
 basketReload();
+</script>
+<script>
+$(".bossComment").click(function(){ 
+    console.log("test");
+    commentText();
+});
+
+function commentText(){
+    // const add_textbox = () => {
+        const box = document.getElementById("#bossCommentBox");
+        const newText = document.createElement('textarea');
+        newText.innerHTML = `<textarea name="content" class="boss_content" rows="3" cols="103" id="boss_comment"
+        placeholder="답글을 적어주세요."></textarea>`;
+        box.appendChild(newText);
+    };
 </script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>

@@ -515,12 +515,19 @@ main{
 }
 
 /* 리뷰창 css */
+#bossCommentBox{
+	border-bottom: 1px solid gainsboro;
+}
+.reviewBox{
+	height: 300px;
+	/* border-bottom: 1px solid gainsboro; */
+}
 
-#review-head>div{
-	height: 250px;
+/* #review-head>div{
+	height: 300px;
 	border-bottom: 1px solid gainsboro;
 
-}
+} */
 .review-time-ago{
 	text-decoration: none;
 	float: right;
@@ -571,6 +578,11 @@ main{
 	float: right;
 	margin-top: 160px;
 }
+.boss_content{
+	width: 100px;
+	height: 100px;
+}
+
 
 #exampleModal{
 	height:600px;

@@ -1,8 +1,11 @@
 package com.ezen.delivery.controller;
 
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -22,10 +25,10 @@ import com.ezen.delivery.Handler.ReviewImgHandler;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
+import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.ReviewService;
 
-import lombok.experimental.PackagePrivate;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -45,13 +48,14 @@ public class ReviewController {
 	@PostMapping(value="/upload")
 	@ResponseBody
 //	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
-	public String upload(@RequestParam("file") MultipartFile[] files, ReviewVO rvo, HttpSession session) {
+	public String upload(@RequestParam("file") MultipartFile[] files, ReviewVO rvo, HttpServletRequest request) {
 		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
 			List<ReviewImgVO> list = rihd.uploadFiles(files);
 			ridto.setFList(list);
 		}		
-//		UserVO uvo = (UserVO)session.getAttribute("user");
+		HttpSession session = request.getSession();
+		UserVO uvo = (UserVO)session.getAttribute("user");
 		ridto.setRvo(rvo);		
 		int isOk = rsv.insert(ridto);	
 		log.info("fList : "+ridto.getFList());
@@ -68,9 +72,9 @@ public class ReviewController {
 	}
 	
 	//사장님댓글
-	@PatchMapping("/bossComment")
-	public ResponseEntity<String> bossComment(int review_diner_code, int review_order_code, String review_boss_comment){
-		String reviewContent = rsv.bossComment(review_diner_code, review_order_code, review_boss_comment);
+	@PatchMapping("/bossComment") //int review_order_code,
+	public ResponseEntity<String> bossComment(int review_diner_code,  String review_boss_comment){
+		String reviewContent = rsv.bossComment(review_diner_code, review_boss_comment);
 		return ResponseEntity.ok().body(reviewContent);
 	}
 	
