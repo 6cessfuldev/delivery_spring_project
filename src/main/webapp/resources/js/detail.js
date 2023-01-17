@@ -505,6 +505,7 @@ function refreshBasket(data){
 		basketMenuPrice.append(div1);
 		let div2 = $('<div class="col-xs-6">');
 		let minusBtn = $('<a>');
+        minusBtn.css("cursor", "pointer");
 		minusBtn.text(' ─ ');
 		minusBtn.click(()=>{
 			if(Number(amount.text())>1){
@@ -521,6 +522,7 @@ function refreshBasket(data){
 		amount.text(bdto.basket_order_count);
 		div2.append(amount);
 		let plusBtn = $('<a>');
+        plusBtn.css("cursor", "pointer");
 		plusBtn.text(' ┼ ');
 		plusBtn.click(()=>{
 			if(Number(amount.text())<99){

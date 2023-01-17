@@ -35,8 +35,8 @@ public class BasketDAOTests {
 		int count = 2;
 		
 		BasketDTO basket = new BasketDTO();
-		basket.setBasket_user_id(user_id);
-		basket.setBasket_food_code(food_code);
+		basket.setUser_id(user_id);
+		basket.setFood_code(food_code);
 		basket.setBasket_order_count(count);
 		
 		assertThat(bdao.insert(basket), is(1));
@@ -67,7 +67,7 @@ public class BasketDAOTests {
 		List<BasketDTO> list = bdao.selectList(user_id);
 		for (BasketDTO basket : list) {
 			log.info(basket.toString());
-			basket.initSaleTotal();
+			basket.initSalePerOne();
 			log.info("init price : "+basket.toString());
 		}
 	}
@@ -78,8 +78,8 @@ public class BasketDAOTests {
 		int food_code = 1;
 		
 		BasketDTO basket = new BasketDTO();
-		basket.setBasket_user_id(user_id);
-		basket.setBasket_food_code(food_code);
+		basket.setUser_id(user_id);
+		basket.setFood_code(food_code);
 		
 		BasketDTO resultBasket = bdao.checkBasket(basket);
 		log.info(resultBasket.toString());

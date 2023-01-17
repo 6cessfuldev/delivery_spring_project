@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.delivery.domain.BasketDTO;
+import com.ezen.delivery.domain.OrderFoodDTO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.BasketService;
-import com.ezen.delivery.domain.OrderDTO;
-import com.ezen.delivery.domain.OrderFoodDTO;
-
 import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.UserService;
 
@@ -66,4 +64,13 @@ public class OrderController {
 		return "/member/order";
 	}
 
+	@GetMapping("/myOrderList")
+	public String orderListPageGET(HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		
+		//주문 내역 가져오기
+		
+		return "/member/myOrderList";
+	}
+	
 }
