@@ -64,7 +64,6 @@ function regist(){
     //     alert('로그인이 필요한 서비스 입니다.');
     //         return;
     // }else{
-        // const revText = document.getElementById('review_con').value;
         const formData = new FormData();
         const data = $('#review_multiple');
         const revText = document.getElementById('review_con').value;
@@ -94,9 +93,6 @@ function regist(){
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
                     formData.append('review_reg_date', data);
-
-                    // 여기에서 review_score_avg를 ,,, append,, 해줘야하나,,? 근데 평균을 계산해서,,
-                    // formData.append('review_user_id', user_id);
                 }
                 
             } 
@@ -190,12 +186,14 @@ function getReviewList(diner_code){
                  }
 
                 let div = `<div>`;
-                div += `<div class="reviewer-id>`;
-                div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}</span><a href="#">신고</a>`;
-                div += `<div class="review-point">${star0} ${reviewDTO.rvo.review_score}</div>`;
+                div += `<div class="reviewer-id>"</div>`;
+                div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}<a class="review-a" href="#">신고</a></span>`;
+                div += `<div class="review-point">${star0}<span class="starScore">${reviewDTO.rvo.review_score}</span></div>`;
                 div += `<div class="review-menu"></div>`;
 		        div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
+                div += `<button type="button" class="bossComment">답글</button>`;
 		        div += `</div>`;
+                div += `<div id="bossComment"></div>`;
 		        review.innerHTML += div;
                 if(reviewDTO.flist.length > 0){      
                     for(let img of reviewDTO.flist){
@@ -219,6 +217,20 @@ function getReviewList(diner_code){
         
     })
 }
+
+$(".bossComment").click(function(){ 
+    console.log("test");
+    commentText();
+});
+
+function commentText(){
+        const box = document.getElementById("#bossComment");
+        const newText = document.createElement('input');
+        newText.innerHTML = `<textarea name="content" class="boss_content" rows="3" cols="103" id="boss_comment"
+        placeholder="답글을 적어주세요."></textarea>`;
+        box.appendChild(newText);
+}
+
 
 // async function removeReviewServer(review_code){
 //     try {
@@ -445,6 +457,7 @@ function calculate(){
 	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
 
 	$("#modal-total").text(modalTotal+"원");
+
 }
 
 //장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
@@ -589,6 +602,7 @@ var observer = new MutationObserver(mutations => {
     console.log(text.substring(0, text.length-1));
   	sum += Number(text.substring(0, text.length-1));
   }
+  	localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
 });
 
