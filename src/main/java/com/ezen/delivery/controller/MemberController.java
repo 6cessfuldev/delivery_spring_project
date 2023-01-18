@@ -1,6 +1,8 @@
 package com.ezen.delivery.controller;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -9,13 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.ResolvableType;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.Handler.ApiMemberProfile;
-import com.ezen.delivery.domain.LoginVO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.UserService;
 
@@ -41,8 +43,13 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	// 이메일 인증
+	private static String authorizationRequestBaseUri = "oauth2/authorization";
+	Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
+
+  @Autowired
+  private ClientRegistrationRepository clientRegistrationRepository;
 	
+	// 이메일 인증	
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String mailCheckGET(String email) throws Exception {
@@ -159,7 +166,24 @@ public class MemberController {
 	// 로그인
 	
 	@GetMapping("/login")
-	public void loginGet() {}
+	public String loginGet(Model model) {
+		
+		Iterable<ClientRegistration> clientRegistrations = null;
+	    ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
+	      .as(Iterable.class);
+	    if (type != ResolvableType.NONE && 
+	      ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
+	        clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+	    }
+
+	    clientRegistrations.forEach(registration -> 
+	      oauth2AuthenticationUrls.put(registration.getClientName(), 
+	      authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+	    model.addAttribute("urls", oauth2AuthenticationUrls);
+
+	    return "/member/login";
+		
+	}
 
 	@PostMapping("/login")
 	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
