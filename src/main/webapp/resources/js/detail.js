@@ -47,20 +47,11 @@ document.getElementById('trigger').addEventListener('click', ()=> {
 });
 
 
-
-
-
-
 //리뷰 regist 메소드 클릭 이벤트
 $("#regBtn").click(function(){ 
     regist();
 });
 function regist(){
-
-
-       
-
-
     let file = $('#review_multiple').val();
    console.log("파일:"+file);
     const regExp = new RegExp("\.(exe|sh|bat|msi|dll|js)$");
@@ -68,11 +59,10 @@ function regist(){
     const maxSize = 1024*1024*20; //20MB
     
 
+
     if(user_id === ''){
         alert('로그인이 필요한 서비스 입니다.');
             return;
-    // }else if(){
-    //     alert('주문자만 작성 가능합니다.');
     }else{
         const formData = new FormData();
         const data = $('#review_multiple');
@@ -98,6 +88,9 @@ function regist(){
                     alert("리뷰를 입력해주세요.");
                     review_con.focus();
                     return false;
+                }else if(data[i].files.length > 3){
+                    alert("파일 개수가 초과되었습니다.");
+                    history.go(-0.5);
                 } else {        
                     formData.append('review_diner_code', diner_code);
                     formData.append('review_content', revText);
@@ -113,7 +106,6 @@ function regist(){
         for (var pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]);
           }
-
         $.ajax({
             url:'/review/upload',
             type : 'post',
@@ -198,102 +190,90 @@ function getReviewList(diner_code){
                         break;
                  }   
 
+                 
                  let div = `<div class="reviewBox">`;
                  div += `<div class="reviewer-id">${reviewDTO.rvo.user_id}</div>`;
                  div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}<a class="review-a" href="#">신고</a></span>`;
                  div += `<div class="review-point">${star0}<span class="starScore">${reviewDTO.rvo.review_score}</span></div>`;
                  div += `<div class="review-menu"></div>`;
                  div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
-                 div += `<button type="button" class="bossComment">답글달기</button>`;
-                 //div += '<button type="button" class="bossComment'+commentCount+'">답글달기</button>';
-                //  div += `<div id="bossCommentBox"></div>`
-                //  div += '<div id="bossCommentBox'+commentCount+'"></div>'
+                //  if(){}
+                 div += '<button type="button" class="bossComment">답글달기</button>';
                  div += `</div>`;
                  review.innerHTML += div;
-                 if(reviewDTO.flist.length > 0){      
-                     for(let img of reviewDTO.flist){
-                        console.log(img);
-               		 let save_dir = img.review_img_save_dir.split('\\');
-               		 let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
-               		 console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
-               		 let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
-                        let imgTag = document.createElement("img");
-                        imgTag.id = 'review_img';
-                        imgTag.src = real;
-                        review.childNodes[count].append(imgTag);
-	                }
-                    // count++;
+               
+               if(reviewDTO.flist.length > 0){      
+                  for(let img of reviewDTO.flist){
+                      console.log(img);
+                      let save_dir = img.review_img_save_dir.split('\\');
+                      let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
+                      console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
+                      let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+                      let imgTag = document.createElement("img");
+                      imgTag.id = 'review_img';
+                      imgTag.src = real;
+                      review.childNodes[count].append(imgTag);
+                    }
+                    count++;
                 }
-                // let div2 = '<div>';
-                // div2.id="bossCommentBox'+commentCount+'";
-                // div2 += `</div>`
-                // review.innerHTML += div2;
+               
+               }
+               
+           } else {
+               let div = `<div>첫번째 리뷰를 작성해주세요!</div>`;
+               review.innerHTML += div;
+           }
+           
+       })
 
-                // count++;
-
-                $(".bossComment").on("click", function(){
-                  //  if($("#bossCommentBox"+commentCount).has("input").length==0){
-                    //const comment = document.getElementById('bossCommentBox');
-                    //comment.innerHTML="";
-                       // let newText = document.createElement('input');
-                       // let newBtn = document.createElement('button');
-                        $(this).hide();
-                        // comment.append(newText);
-                        // comment.append(newBtn);
-                        let div3 = `<div>`;
-                        div3 += `<input>`;
-                        div3 += `<button type="button">답글등록`;
-                        
-                        review.innerHTML += div3;
-                   // }
-                   // commentCount++; 
-                })
-                count++;
-
-                // $(".bossComment"+commentCount).on("click", function(){
-                //     if($("#bossCommentBox"+commentCount).has("input").length==0){
-                //         const comment = document.getElementById("bossCommentBox"+commentCount);
-                //         $(".bossComment"+commentCount).hide();
-                //         let div3 = `<div>`;
-                //         div3 += `<input>`;
-                //         div3 += `<button type="button">답글등록`;
-                        
-                //         comment.innerHTML += div3;
-                //     }
-                //     commentCount++; 
-                // })
-                
-                
-            }
-            
-            //     $(document).on('click','button[class="bossComment'+commentCount+'"]',function(){
-            //         if($("#bossCommentBox"+commentCount).has("input").length==0){
-            //             let box = $("#bossCommentBox"+commentCount);
-            //             console.log(box);
-            //             // let newText = document.createElement('input');
-            //             // let newBtn = document.createElement('button');
-            //             //newBtn.innerText='답글등록';
-            //             $(".bossComment"+commentCount).hide();
-            //             box.append($("<input>").val("dkarnjss"));
-            //             box.append($("<button>"));
-            //             // box.append(document.createElement('input'));
-            //             // box.append( document.createElement('button'));
-            //             console.log("test");
-            //          }
-            //     });
-            //     commentCount++; 
-            // }
-            
-        } else {
-            let div = `<div>첫번째 리뷰를 작성해주세요!</div>`;
-            review.innerHTML += div;
-        }
-        
-    })
-    
-    
 }
+// let div2 = '<div>';
+// div2.id="bossCommentBox'+commentCount+'";
+// div2 += `</div>`
+// review.innerHTML += div2;
 
+//  count++;
+
+// $(".bossComment"+commentCount).on("click", function(){
+//     if($("#bossCommentBox"+commentCount).has("input").length==0){
+//    const comment = document.getElementById('bossCommentBox'+commentCount);
+//     comment.innerHTML="";
+//         //let newText = document.createElement('input');
+//         //let newBtn = document.createElement('button');
+//         //newBtn.innerText = '답글등록';
+//          $(this).hide();
+//        //div2.append(newText);
+//         // $(this).append(newText);
+//         // $(this).append(newBtn);
+//         // comment.append(newText);
+//         // comment.append(newBtn);
+//         let div3 = `<div>`;
+//         div3 += `<input>`;
+//         div3 += `<button type="button">답글등록`;
+        
+//         $("#bossCommentBox"+commentCount).innerHTML += div3;
+//     }
+// })
+// commentCount++; 
+//}
+
+//     $(document).on('click','button[class="bossComment'+commentCount+'"]',function(){
+//         if($("#bossCommentBox"+commentCount).has("input").length==0){
+//             let box = $("#bossCommentBox"+commentCount);
+//             console.log(box);
+//             // let newText = document.createElement('input');
+//             // let newBtn = document.createElement('button');
+//             //newBtn.innerText='답글등록';
+//             $(".bossComment"+commentCount).hide();
+//             box.append($("<input>").val("dkarnjss"));
+//             box.append($("<button>"));
+//             // box.append(document.createElement('input'));
+//             // box.append( document.createElement('button'));
+//             console.log("test");
+//          }
+//     });
+//     commentCount++; 
+// }
 // $(document).on('click','button[class="bossComment'+commentCount+'"]',function(){
 //     if(document.getElementById("bossCommentBox"+commentCount).innerHTML == ''){
 //        let box = document.getElementById("bossCommentBox"+commentCount);
