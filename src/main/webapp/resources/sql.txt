@@ -44,6 +44,7 @@ diner_company_num varchar(12),
 diner_category varchar(15),
 diner_delivery_fee int default 0,
 diner_addr_point point,
+diner_score_avg bouble,
 primary key(diner_code));
 
 
@@ -85,6 +86,7 @@ log_fail_count tinyint(1) not null default 0,
 primary key(log_code));
 
 
+
 ## order(주문내역)
 
 create table order(
@@ -114,3 +116,10 @@ food_code int not null,
 order_food_count int not null,
 order_food_price int not null,
 primary key(order_food_code));
+
+## review (리뷰)
+review_taste_score 삭제
+review_amount_score 삭제
+review_delivery_score 삭제
+
+review_score int 추가

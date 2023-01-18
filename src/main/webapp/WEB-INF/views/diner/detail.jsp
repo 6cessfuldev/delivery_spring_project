@@ -295,8 +295,8 @@
                             
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
-                            <div id="review-head"></div>
-                                
+                            <div id="review-head">
+                            </div>
                          </div>	
 					
 				
