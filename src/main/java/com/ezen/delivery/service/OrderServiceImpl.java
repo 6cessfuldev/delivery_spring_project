@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.repository.OrderDAO;
@@ -21,16 +22,17 @@ import com.google.gson.JsonObject;
 import lombok.Data;
 
 @Service
+@PropertySource("classpath:application.yml")
 public class OrderServiceImpl implements OrderService {
 	
 	@Inject
 	private OrderDAO odao;
 
-	@Value("${imp_key}")
-	private String impKey;
+	@Value("${import.imp_key}")
+	private String imp_key;
 	
-	@Value("${imp_secret}")
-	private String impSecret;
+	@Value("${import.imp_secret}")
+	private String imp_secret;
 	
 	@Data
 	private class Response{
@@ -58,8 +60,8 @@ public class OrderServiceImpl implements OrderService {
 		conn.setDoOutput(true);
 		JsonObject json = new JsonObject();
 
-		json.addProperty("imp_key", impKey);
-		json.addProperty("imp_secret", impSecret);
+		json.addProperty("imp_key", imp_key);
+		json.addProperty("imp_secret", imp_secret);
 		
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 		
