@@ -71,6 +71,7 @@
         let user_phone = '<c:out value="${sessionScope.user.user_phone}"/>';
         let basketList = '<c:out value="${basketList}"/>';
         let order_name = '<c:out value="${order_name}"/>';
+        let diner_code = '<c:out value="${diner_code}"/>';
     </script>
 <script type="text/javascript" src="/resources/js/order.js"></script>
 </body>

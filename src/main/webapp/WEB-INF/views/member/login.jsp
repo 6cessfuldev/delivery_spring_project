@@ -28,9 +28,9 @@
 				<br> <input type="checkbox" id="login_check"> <label
 					for="login_check" id="login_checkLabel"><span>자동 로그인</span></label>
 				<div id="login_aBox">
-					<a href="/member/find_id" id="login_a">아이디 찾기 |</a> <a
-						href="/member/find_pw" id="login_a">비밀번호 찾기 |</a> <a
-						href="/member/signup" id="login_a">회원가입</a><br>
+					<a href="/member/find_id" id="login_a">아이디 찾기 |</a>
+					<a href="/member/find_pw" id="login_a">비밀번호 찾기 |</a>
+					<a href="/member/signup" id="login_a">회원가입</a><br>
 				</div>
 				<br> <br>
 				<button type="submit" id="login_button">로그인</button>

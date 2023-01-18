@@ -13,7 +13,8 @@ let param = {
 	m_redirect_url : '/index', // 예: https://www.my-service.com/payments/complete/mobile
 	niceMobileV2 : true, // 신규 모바일 버전 적용 시 설정
 	IMP_UID : '',
-	order_food_code : createOrderFoodCode()
+	order_food_code : createOrderFoodCode(),
+	diner_code : diner_code
 }
 
 function findAddr(){

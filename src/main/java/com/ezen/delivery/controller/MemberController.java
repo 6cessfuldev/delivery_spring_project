@@ -114,7 +114,10 @@ public class MemberController {
 	// 회원가입
 	
 	@GetMapping("/signup")
-	public void signUpGet() {}
+	public void signUpGet() {
+		
+		log.info("회원가입");
+	}
 
 	@PostMapping("/signup")
 	public String signUpPost(Model model, UserVO uvo) {

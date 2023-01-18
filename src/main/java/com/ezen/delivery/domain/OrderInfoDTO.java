@@ -1,17 +1,9 @@
 package com.ezen.delivery.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Setter
-@Getter
-public class PayVO {
+@Data
+public class OrderInfoDTO {
 	
 	private String pg;
 	private String pay_method;
@@ -27,4 +19,7 @@ public class PayVO {
 	private boolean niceMobileV2;
 	private String IMP_UID;
 	private long order_food_code;
+	private int diner_code;
+	private String user_id;
+	
 }

@@ -1,6 +1,5 @@
 package com.ezen.delivery.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,12 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.OrderFoodDTO;
-import com.ezen.delivery.domain.PayVO;
-
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.BasketService;
 import com.ezen.delivery.service.OrderService;
@@ -32,8 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 
 public class OrderController {
-	
-
 	
 	@Inject
 	private OrderService osv;
@@ -57,17 +51,20 @@ public class OrderController {
 		orderName = "(먹어요)";
 		
 		for(BasketDTO bdto : bList) {
-			orderName+=bdto.getFood_name();
-			orderName+="/";
+			orderName += bdto.getFood_name();
+			orderName += "/";
 			orderTotalPrice += bdto.getTotal_price() * bdto.getBasket_order_count();
 		}
+		
 		log.info(orderName);
+		
+		int diner_code = bsv.getDinerCode(user_id);
 		
 		model.addAttribute("user", uvo);
 		model.addAttribute("basketList", bList);
 		model.addAttribute("order_name", orderName);
-		
 		model.addAttribute("orderTotalPrice", orderTotalPrice);
+		model.addAttribute("diner_code", diner_code);
 		
 		return "/member/order";
 	}
@@ -78,16 +75,6 @@ public class OrderController {
 		log.info(">>> orderFoodDTO : " + ofdto.toString());
 		log.info("user_id : " + user_id);
 		return "/member/order";
-	}
-
-	@ResponseBody
-	@PostMapping("/payment/complete")
-	public String paymentComplete(PayVO pvo) throws IOException {
-		log.info(pvo.toString());
-		
-		String token = osv.getToken();
-		
-		return "1";
 	}
 	
 	

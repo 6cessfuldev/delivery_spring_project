@@ -5,4 +5,72 @@
   
   <mapper namespace="com.ezen.delivery.repository.OrderDAO">
   
+ 	<select id="foodPriceList" resultType="int">
+ 		<foreach collection="list" item="basketDTO" separator="union all">
+ 			select sum(food_price) sum from food 
+ 			where food_code = #{basketDTO.food_code} 
+ 		</foreach>
+ 	</select>
+  	
+  	<select id="choicePriceList" resultType="int">
+  	
+  		<foreach collection="list" item="basketDTO" separator="union all">
+  			<if test="basketDTO.choiceList.size == 0">
+				select 0 from dual 
+			</if>
+			
+  			<if test="basketDTO.choiceList.size != 0">
+	  			select sum(choice_price) sum from choice
+	  			where choice_code in
+	  			<foreach collection="basketDTO.choiceList" item="i" open="(" close=")" separator=",">
+	  				#{i.choice_code}
+	  			</foreach>
+	  		</if>
+	  		
+  		</foreach>
+  	</select>
+  	
+  	<select id="getDeliveryFee" resultType="int">
+  		select diner_delivery_fee from diner
+  		where diner_code = #{diner_code}
+  	</select>
+  	
+  	<insert id="order">
+  		INSERT INTO ORDER (
+  			order_code,
+  			diner_code,
+  			user_id,
+  			order_pay_method,
+  			order_phone,
+  			order_address1,
+  			order_address2,
+  			order_address3,
+  			order_total_price,
+  			order_request
+  		) VALUES (
+  			#{order_code},
+  			#{diner_code},
+  			#{user_id},
+  			#{order_pay_method},
+  			#{order_phone},
+  			#{order_address1},
+  			#{order_address2},
+  			#{order_address3},
+  			#{order_total_price},
+  			#{order_request}
+  		)
+  	</insert>
+  	
+  	<update id="orderDetail" parameterType="java.util.HashMap">
+  		<foreach collection="detail" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL"> 
+				 INTO order_food (
+					order_food_code,
+					order_food_info
+				) VALUES (
+					#{item.order_food_code},
+			   		#{item.food_info_JSON}
+				)
+			</foreach> 
+  	</update>
+  	
   </mapper>
