@@ -32,5 +32,9 @@
 	select * from basket where user_id = #{user_id} and food_code=#{food_code}
 </select>
 
+<select id="selectDinerCodeByUserId" resultType="int">
+	 select ifnull(max(diner_code),0) from basket a right join food b on a.food_code = b.food_code where user_id = #{user_id} limit 0,1;
+</select>
+
 </mapper>
 

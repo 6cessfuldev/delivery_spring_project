@@ -24,16 +24,6 @@
 		</div>
 	</div>
 </div>
-		<form id="addr-form" action="/diner/search" method="get">
-			<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
-			<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
-			<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
-			<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
-			<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
-			
-			
-		</form>
-<main>
 	<div class="category">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
@@ -77,6 +67,7 @@
 			</li>
 		</ul>
 	</div>
+<main>
 
 	<div class="contents bg-light">
 		
@@ -145,6 +136,13 @@
 	</div>
 
 </main>
+		<form id="addr-form" action="/diner/search" method="get">
+			<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
+			<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
+			<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
+			<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
+			<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>			
+		</form>
 <div id="endList"></div>
 <script>
 let category = '<c:out value="${sessionScope.pvo.category}" />';

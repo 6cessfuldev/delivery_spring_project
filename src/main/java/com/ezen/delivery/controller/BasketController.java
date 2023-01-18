@@ -6,8 +6,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.BasketDTO;
+import com.ezen.delivery.domain.BasketVO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.BasketService;
 
@@ -56,7 +56,7 @@ public class BasketController {
 		List<BasketDTO> bdtoList = bsv.getList(user_id);
 		
 		return bdtoList;
-	}
+	}	
 	
 	@DeleteMapping("/{basket_code}")
 	@ResponseBody
@@ -71,5 +71,19 @@ public class BasketController {
 	public String basketCountPUT(@ModelAttribute("basket") BasketDTO basket ) {
 		
 		return bsv.modifyCount(basket)+"";
+	}
+	
+	@GetMapping("/diner")
+	public String basketDinerGET(HttpSession session, Model model) {
+		
+		UserVO user = (UserVO)session.getAttribute("user");
+		if(user == null) {
+			return "/member/login";
+		}
+		//장바구니 값이 없을 경우 0
+		int diner_code = bsv.getDinerCode(user.getUser_id());
+		if(diner_code==0) return "redirect:/";
+		
+		return  "redirect:/diner/detail?diner_code="+diner_code;
 	}
 }

@@ -196,7 +196,7 @@ public class AdminController {
       int isOk = fsv.register(fdto);
       log.info("insert food "+(isOk>0?"success":"fail"));
          
-      return dinerDetail(fvo.getFood_diner_code(), model);
+      return dinerDetail(fvo.getDiner_code(), model);
    }
    
    @GetMapping("food/detail")
@@ -240,7 +240,7 @@ public class AdminController {
       int isOk = fsv.remove(food_code);
       log.info("remove food "+(isOk>0?"success":"fail"));
 
-      rttr.addAttribute("diner_code", fvo.getFood_diner_code());
+      rttr.addAttribute("diner_code", fvo.getDiner_code());
       
       return "redirect:/admin/diner/detail";
    }

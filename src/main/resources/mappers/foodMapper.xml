@@ -4,12 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.delivery.repository.FoodDAO">
 <select id="selectList" resultType="com.ezen.delivery.domain.FoodVO">
-	select * from food where food_diner_code = #{diner_code}
+	select * from food where diner_code = #{diner_code}
 </select>
 
 <insert id="insert">
-	insert into food(food_name, food_price, food_intro, food_file_code, food_state, food_diner_code) 
-		values(#{food_name}, #{food_price}, #{food_intro}, #{food_file_code}, #{food_state}, #{food_diner_code} )
+	insert into food(food_name, food_price, food_intro, file_code, food_state, diner_code) 
+		values(#{food_name}, #{food_price}, #{food_intro}, #{file_code}, #{food_state}, #{diner_code} )
 </insert>
 
 <select id="selectByFoodCode" resultType="com.ezen.delivery.domain.FoodVO">
@@ -17,7 +17,7 @@
 </select>
 
 <update id="update">
-	update food set food_name=#{food_name}, food_price=#{food_price}, food_intro=#{food_intro}, food_file_code=#{food_file_code}, food_state=#{food_state}
+	update food set food_name=#{food_name}, food_price=#{food_price}, food_intro=#{food_intro}, file_code=#{file_code}, food_state=#{food_state}
 		where food_code = #{food_code}
 </update>
 

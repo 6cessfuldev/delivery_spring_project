@@ -27,8 +27,8 @@ public class FoodDAOTests {
 	public void testInsert() {
 		
 		FoodVO fvo = new FoodVO();
-		fvo.setFood_diner_code(100);
-		fvo.setFood_file_code(1);
+		fvo.setDiner_code(100);
+		fvo.setFile_code(1);
 		fvo.setFood_intro("맛있는 야식");
 		fvo.setFood_name("노랑통닭");
 		fvo.setFood_price(23000);

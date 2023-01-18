@@ -1,4 +1,4 @@
-package com.ezen.delivery.repository;
+package com.ezen.delivery.util;
 
 import java.io.File;
 
