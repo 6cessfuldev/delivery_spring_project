@@ -11,7 +11,7 @@ $('#user_email').keyup(function () {
         type: "post",
         data: { "user_email": user_email },
         dataType: 'json',
-        success: function (result) {
+        success: function (result, error) {
             if (result == 1) {
                 $("#email_feedback").html('이미 사용중인 이메일입니다.');
                 $("#email_feedback").attr("class", "incorrect");
@@ -20,8 +20,9 @@ $('#user_email').keyup(function () {
                 $("#email_feedback").attr("class", "correct");
             }
         },
-        error: function () {
+        error: function (error) {
             alert("서버요청실패");
+            console.log(error);
         }
     })
 })

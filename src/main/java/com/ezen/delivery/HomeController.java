@@ -38,6 +38,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String test() {
+		
 		return "index";
 	}
 	

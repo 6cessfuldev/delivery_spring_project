@@ -72,7 +72,8 @@
     </tx:advice>
 
 	<aop:config>
-        <aop:advisor advice-ref="transactionAdvice" pointcut="bean(*Service)"/>
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.ezen.delivery.service..*(..))" />
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointcut" />
     </aop:config>
     
 <tx:annotation-driven/>

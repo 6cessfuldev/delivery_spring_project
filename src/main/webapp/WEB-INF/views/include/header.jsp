@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,9 @@
 					<li class="nav-item"><div class="box"><a href="/member/login" class="nav-link" aria-current="page">로그인</a></div></li>
 				</c:if>
 				<c:if test="${user.user_id != null }">
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+					<li class="nav-item"><div class="box"><a href="/admin" class="nav-link" aria-current="page">관리자</a></div></li>
+					</security:authorize>
 					<li class="nav-item"><div class="box"><a href="/member/logout" class="nav-link" aria-current="page">로그아웃</a></div></li>
 					<li class="nav-item"><div class="box2"><a href="/basket/diner" class="nav-link">장바구니</a></div></li>
 					<li class="nav-item"><div class="box2"><a href="/member/detail_userInfo" class="nav-link">마이페이지</a></div></li>

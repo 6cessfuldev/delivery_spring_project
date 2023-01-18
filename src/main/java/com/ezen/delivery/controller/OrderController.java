@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.OrderFoodDTO;
@@ -72,5 +73,5 @@ public class OrderController {
 		
 		return "/member/myOrderList";
 	}
-	
+
 }

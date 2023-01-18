@@ -272,6 +272,8 @@ let	modalOptionPrice = 0;
 
 function openModal(food_code){
   modalAmount=1;
+  modalFoodPrice = 0;
+  modalPotionPrice = 0;
   $(".modal-amount").text(modalAmount);
   $("#modalTrigger").click();
   $.ajax({
