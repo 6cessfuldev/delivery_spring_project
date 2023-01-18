@@ -19,10 +19,8 @@ public class ReviewVO {
 	private String review_user_id;
 	private String review_content;
 	private int review_score;
-//	private int review_taste_score;
-//	private int review_amount_score;
-//	private int review_delivery_score;
 	private String review_reg_date;
 	private String review_mod_date;
-
+ 	private String review_boss_comment;
+//  private int review_count;
 }

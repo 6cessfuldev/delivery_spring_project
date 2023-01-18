@@ -306,49 +306,6 @@ main{
 	border-top: 1px solid rgb(209, 203, 203);
 }
 
-/* .reviewer-id{
-	border: 1px solid black;
-	font-weight: 800;
-}
-
-.review-head>a{
-	float: right;
-}
-
-.review-time-ago{
-	color:grey;
-	font-size: 13px;
-}
-
-.review-point{
-	font-size: 14px;
-	color : grey;
-}
-
-.review-star-point{
-	color : rgb(221, 221, 20);
-}
-
-.star{
-	color : rgb(221, 221, 20);
-}
-
-.review-img{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	height: 350px;
-}
-
-.review-menu{
-	font-size: 13px;
-	color: rgb(82, 184, 150);
-	margin-bottom: 6px;
-}
-
-.review-content{
-	font-size: 15px;
-} */
-
 .add-review{
 	cursor: pointer;
 	border-top: 1px solid rgb(209, 203, 203);
@@ -509,9 +466,7 @@ main{
 #image_container>div>img{
 	width:100px;
 } 
-#review_img{
-	 width: 200px;
-}
+
 /* 별점css */
 #starform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
@@ -558,51 +513,40 @@ main{
 	font-size: 15px;
 	color: gray;
 }
+
 /* 리뷰창 css */
 
 #review-head>div{
-	border: 1px solid black;
+	height: 250px;
+	border-bottom: 1px solid gainsboro;
+
 }
-#review-head>div>div>a{
-	float: right;
+.review-time-ago{
 	text-decoration: none;
-	color: gray;
-	font-size: 15px;
-}
-.review-id>span{
-	/* margin-left: 200px; */
-	text-align: right;
-	font-size: 30px;
-}
-
-.review-head>a{
 	float: right;
-}
-
-#review-time-ago{
-	border: 1px solid black;
-	color:grey;
+	color: gray;
 	font-size: 13px;
+}
+.review-a{
+	color: gray;
+	text-decoration: none;
+	font-size: 14px;
 }
 
 .review-point{
-	font-size: 100px;
-	color : grey;
+	font-size: 15px;
+	color : rgb(235, 235, 45);
 }
 
-.review-star-point{
-	color : rgb(221, 221, 20);
+.starScore{
+	margin-left: 5px;
+	color :  gray;
 }
 
 .star{
-	color : rgb(221, 221, 20);
+	color : rgb(235, 235, 45);
 }
 
-.review-img{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	height: 350px;
-}
 
 .review-menu{
 	font-size: 13px;
@@ -612,9 +556,21 @@ main{
 
 .review-content{
 	font-size: 15px;
-} */
+}
 
+#review_img{
+	width: 180px;
+	height: 180px;
+}
 
+.bossComment{
+	text-decoration: none;
+	border: none;
+	font-size: 15px;
+	color: gray;
+	float: right;
+	margin-top: 160px;
+}
 
 #exampleModal{
 	height:600px;
@@ -721,7 +677,7 @@ main{
 .modal-footer>div{
 	margin:0;
 	width:50%;
-	hegiht: 100px;
+	height: 60px;
 }
 
 .choice-price{

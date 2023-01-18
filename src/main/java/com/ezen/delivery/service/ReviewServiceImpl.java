@@ -1,7 +1,9 @@
 package com.ezen.delivery.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -56,6 +58,24 @@ public class ReviewServiceImpl implements ReviewService {
 		return 0;
 		
 	}
+	//사장님댓글
+	@Override
+	public String bossComment(int review_diner_code, int review_order_code, String review_boss_comment) {
+		review_boss_comment = review_boss_comment.replace("\n","<br>").replaceAll(" ", "&nbsp");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("diner_code", review_diner_code);
+		map.put("bossComment", review_boss_comment);
+		map.put("order_code", review_order_code);
+		
+		rdao.bossComment(map);
+		return review_boss_comment;
+	}
+
+	
+	
+	//삭제
+
 //	@Override
 //	public int remove(int review_code) {
 //		
@@ -71,7 +91,4 @@ public class ReviewServiceImpl implements ReviewService {
 //	
 //		return ridao.deleteFile(review_img_uuid);
 //	}
-
-
-
 }
