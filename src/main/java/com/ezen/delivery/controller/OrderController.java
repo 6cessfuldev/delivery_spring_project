@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/order/*")
 @Controller
+
 public class OrderController {
+	
+
 	
 	@Inject
 	private OrderService osv;
@@ -41,6 +43,7 @@ public class OrderController {
 	
 	@Inject
 	private UserService usv;
+	
 	
 	@GetMapping("/order/{user_id}")
 	public String orderPageGet(@PathVariable("user_id") String user_id, Model model, HttpServletRequest req) {
@@ -86,6 +89,7 @@ public class OrderController {
 		
 		return "1";
 	}
+	
 	
 //	@PostMapping("/")
 //	public String orderPagePOST(OrderFoodDTO ofdto, Model model) {
