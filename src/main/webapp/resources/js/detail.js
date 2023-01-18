@@ -457,6 +457,7 @@ function calculate(){
 	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
 
 	$("#modal-total").text(modalTotal+"원");
+
 }
 
 //장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
@@ -599,6 +600,7 @@ var observer = new MutationObserver(mutations => {
     console.log(text.substring(0, text.length-1));
   	sum += Number(text.substring(0, text.length-1));
   }
+  	localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
 });
 

@@ -474,7 +474,7 @@
         <form action="/order/modal" method="post" id="modal-form">
         	<input type="text" name="food_code" id="modal_food_code" val="" hidden>
         	<input type="text" name="order_food_count" id="modal_basket_order_count" val="" hidden>       	
-        	//<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
+        	<%-- <input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden> --%>
         </form>
       </div>
     </div>
