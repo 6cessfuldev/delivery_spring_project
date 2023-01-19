@@ -7,10 +7,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.repository.UserDAO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class PrincipalDetailsService implements UserDetailsService {
 
 	@Inject
 	private UserDAO udao;
@@ -18,14 +20,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		 
-		UserDetails userInfo = null;
-	        try {
-	            userInfo = (UserDetails) udao.getUser(username); 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        
-	        return userInfo;
+		UserVO byUsername = udao.getUser(username);
+        if(byUsername != null){
+            return new PrincipalDetails(byUsername);
+        }
+        return null;
 	}
 
 }

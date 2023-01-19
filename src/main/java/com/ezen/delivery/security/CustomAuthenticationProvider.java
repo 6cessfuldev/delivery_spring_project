@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Resource
-	CustomUserDetailsService customUserDetailsService;
+	PrincipalDetailsService customUserDetailsService;
 	
 	@Resource
 	private BCryptPasswordEncoder passwordEncoder;

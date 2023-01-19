@@ -10,8 +10,8 @@
 	</select>
 	
 	<insert id="insertUser">
-		insert into user (user_id, user_email, user_pw, user_name, user_phone, user_birth)
-		values (#{user_id}, #{user_email}, #{user_pw}, #{user_name}, #{user_phone}, #{user_birth})
+		insert into user (user_id, user_email, user_pw, user_name, user_phone, user_birth, user_Role, provider, providerId)
+		values (#{user_id}, #{user_email}, #{user_pw}, #{user_name}, #{user_phone}, #{user_birth}, #{user_Role}, #{provider}, #{providerId})
 	</insert>
 	
 	<insert id="insertNaverUser">

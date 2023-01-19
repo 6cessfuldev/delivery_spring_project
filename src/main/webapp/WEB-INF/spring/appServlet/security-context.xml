@@ -14,4 +14,7 @@
 	<context:annotation-config />
 	<bean id="securityConfig" class="com.ezen.delivery.security.SecurityConfig" />	
 	  
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	</bean>
 </beans>

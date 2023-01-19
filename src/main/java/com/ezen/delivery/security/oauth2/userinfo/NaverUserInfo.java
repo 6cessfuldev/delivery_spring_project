@@ -1,10 +1,9 @@
-package com.ezen.delivery.auth;
+package com.ezen.delivery.security.oauth2.userinfo;
 
 import java.util.Map;
 
-public class NaverUserInfo implements OAuth2UserInfo {
-
-	private Map<String, Object> attributes; //OAuth2User.getAttributes();
+public class NaverUserInfo implements OAuth2UserInfo{
+    private Map<String, Object> attributes; //OAuth2User.getAttributes();
     private Map<String, Object> attributesResponse;
 
     public NaverUserInfo(Map<String, Object> attributes) {
