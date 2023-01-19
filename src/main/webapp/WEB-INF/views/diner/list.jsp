@@ -116,7 +116,7 @@
 								<p class="diner-text">
 								<span class="score">★${ddto.dvo.diner_score_avg}</span>
 
-								| 리뷰 1902 | 사장님댓글 791 
+								| 리뷰 ${ddto.dvo.diner_review_count} | 사장님댓글 791 
 								</p>
 								<p class="diner-text">
 								<span class="del-option">${ddto.dvo.diner_method_pay}</span> |

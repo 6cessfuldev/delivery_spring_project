@@ -99,8 +99,7 @@ function regist(){
                     //formData.append('review_order_code',orderCode);
                     //formData.append('review_reg_date', data);
                 }
-                
-            } 
+            }
         }
 
         for (var pair of formData.entries()) {
@@ -120,7 +119,7 @@ function regist(){
                 if (result === 'Success'){ //=== 타입 변환X
                     $('#review_multiple').val('');                   
                     document.querySelector("div#image_container").innerHTML='';
-                    $('#review_con').val('');
+                    $('#review_con').val('');;
                     console.log(result);
                     alert("리뷰를 등록했습니다.");
                     getReviewList(diner_code);
@@ -129,6 +128,7 @@ function regist(){
                 }
             },
             error : function(){
+                console.log("error");
                 alert("업로드에 실패했습니다.");
                 
             }

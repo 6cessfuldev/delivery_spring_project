@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,23 +49,23 @@ public class ReviewController {
 	@PostMapping(value="/upload")
 	@ResponseBody
 //	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
-	public String upload(@RequestParam("file") MultipartFile[] files, @RequestParam(name = "diner_code") int diner_code, ReviewVO rvo, HttpServletRequest request) {
+	public String upload(@RequestParam("file") MultipartFile[] files,@RequestParam("diner_code") int diner_code, ReviewVO rvo, HttpServletRequest request) {
 		
 		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
 			List<ReviewImgVO> list = rihd.uploadFiles(files);
 			ridto.setFList(list);
-		}		
+		}
 		HttpSession session = request.getSession();
 		UserVO uvo = (UserVO)session.getAttribute("user");
 		ridto.setRvo(rvo);		
-		int isOk = rsv.insert(ridto, diner_code);	
+		int isOk = rsv.insert(ridto,diner_code);
 		log.info("fList : "+ridto.getFList());
 		log.info("rvo : "+ridto.getRvo());
 		
 		return "Success";
 	}
-
+	
 	
 	@GetMapping(value ="/list/{diner_code}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<ReviewDTO>> spread(@PathVariable("diner_code")int diner_code){

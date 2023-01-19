@@ -20,7 +20,8 @@ public interface ReviewDAO {
 
 	void bossComment(Map<String, Object> map);
 
-	void update(int diner_code);
+	void updateCount(int diner_code);
+
 
 
 

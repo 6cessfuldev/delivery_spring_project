@@ -13,6 +13,7 @@ import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.PagingVO;
+import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.repository.DinerDAO;
 import com.ezen.delivery.repository.FileDAO;
 import com.ezen.delivery.repository.ReviewDAO;
@@ -84,6 +85,10 @@ public class DinerServiceImpl implements DinerService {
 		for (DinerVO dvo : dvoList) {
 			FileVO fvo = fidao.selectByFileCode(dvo.getFile_code());
 			ddtoList.add(new DinerDTO(dvo,fvo));
+			
+			int diner_code = dvo.getDiner_code();
+			
+			ddao.selectReview(diner_code);
 		}
 		
 		return ddtoList;
@@ -137,6 +142,11 @@ public class DinerServiceImpl implements DinerService {
 		return isDel;
 	}
 
+//	@Override
+//	public DinerDTO getDinerCount(int diner_code) {
+//		
+//		return ddao.selectDinerCount(diner_code);
+//	}
 
 
 }

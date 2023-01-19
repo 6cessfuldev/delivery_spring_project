@@ -54,8 +54,7 @@ public class ReviewServiceImpl implements ReviewService {
 		for(ReviewImgVO rivo : ridto.getFList()) {			
 			rivo.setReview_code(ridto.getRvo().getReview_code());
 			isOk *= ridao.insert(rivo);
-			rdao.update(diner_code);
-			
+			rdao.updateCount(diner_code);
 		}
 		return 0;
 		
@@ -73,6 +72,7 @@ public class ReviewServiceImpl implements ReviewService {
 		rdao.bossComment(map);
 		return review_boss_comment;
 	}
+
 
 
 	

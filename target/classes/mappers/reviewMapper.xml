@@ -19,11 +19,12 @@
 	select IFNULL(round(avg(review_score),1),0) from review where diner_code = #{diner_code}
 </select>
 
-<update id="update" parameterType="int">
-	update review set review_count = review_count+1 where diner_code = #{diner_code}
+<update id="updateCount" parameterType="int">
+	update diner a inner join review B
+	on a.diner_code = b.diner_code
+ 	set a.diner_review_count = a.diner_review_count+1
+   	where a.diner_code = #{diner_code}
 </update>
-
-
 
 <!-- 사장님 댓글 -->
 <!-- <update id="bossComment">

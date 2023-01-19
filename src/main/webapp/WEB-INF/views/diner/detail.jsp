@@ -245,11 +245,11 @@
 							</div>					
 						</div>
 						<!-- diner-score -->
-
+					
 						<div class="review-count">
-							<p>리뷰 472개 / 사장님댓글 452개</p>
+							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 452</p>
 						</div>
-				
+					
 						<!-- 별점 -->
 						<form name="starform" id="starform" method="post" action="./save">
 						  <div id="star">
@@ -265,7 +265,6 @@
 						    </fieldset>
 						  </div>
 						</form>
-						
 							<textarea name="content" class="review_content" rows="7" cols="103" id="review_con"
 		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea ><br>
 		                    <div class="review_insertBox"></div>
