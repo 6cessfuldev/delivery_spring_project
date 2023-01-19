@@ -39,6 +39,11 @@
 		<br>
 		<a href="/oauth2/authorization/google">구글 로그인</a>
 		<a href="/oauth2/authorization/naver">네이버 로그인</a>
+		
+		<c:forEach items="${urls}" var="url">
+			<a href="/${url.value}">${url.key}</a>
+		</c:forEach>
+		
 		<!-- 네이버 로그인 버튼 노출 영역 -->
 		<div id="naver_id_login"></div>
 		<!-- //네이버 로그인 버튼 노출 영역 -->

@@ -11,6 +11,11 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.security.oauth2.userinfo.OAuth2UserInfo;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
 	private UserVO user;
@@ -21,6 +26,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         this.user = user;
     }
     
+    //OAuth 로그인 시 사용
     public PrincipalDetails(UserVO user, OAuth2UserInfo oAuth2UserInfo) {
         this.user = user;
         this.oAuth2UserInfo = oAuth2UserInfo;
@@ -69,19 +75,11 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         return true;
     }
 
-    /**
-     * OAuth2User 구현
-     * @return
-     */
     @Override
     public Map<String, Object> getAttributes() {
         return oAuth2UserInfo.getAttributes();
     }
 
-    /**
-     * OAuth2User 구현
-     * @return
-     */
     @Override
     public String getName() {
         return oAuth2UserInfo.getProviderId();

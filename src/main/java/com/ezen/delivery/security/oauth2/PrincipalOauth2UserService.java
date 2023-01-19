@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class PrincipalOauth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 	@Inject 
 	private UserDAO udao;
@@ -33,9 +33,7 @@ public class PrincipalOauth2UserService implements OAuth2UserService<OAuth2UserR
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
     	
-    	log.info("principalservice");
-    	OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
-        OAuth2User oAuth2User = null;
+        OAuth2User oAuth2User = super.loadUser(userRequest);
         
         OAuth2UserInfo oAuth2UserInfo = null;	//추가
         String provider = userRequest.getClientRegistration().getRegistrationId();    
@@ -44,26 +42,29 @@ public class PrincipalOauth2UserService implements OAuth2UserService<OAuth2UserR
         if(provider.equals("google")){
         	log.info("google in");
             oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+            System.out.println(oAuth2UserInfo.getAttributes());
         }
         else if(provider.equals("naver")){
             oAuth2UserInfo = new NaverUserInfo(oAuth2User.getAttributes());
         }
         
         String providerId = oAuth2UserInfo.getProviderId();	//수정
-        String username = provider+"_"+providerId;  			
-
+        String user_id = provider+"_"+providerId;
+        String user_name = oAuth2UserInfo.getName();
+        
         String uuid = UUID.randomUUID().toString().substring(0, 6);
         String password = bCryptPasswordEncoder.encode("패스워드"+uuid); 
 
         String email = oAuth2UserInfo.getEmail();	//수정
         String role = "USER";
 
-        UserVO byUsername = udao.getUser(username);
+        UserVO byUsername = udao.getUser(user_id);
         
         //DB에 없는 사용자라면 회원가입처리
         if(byUsername == null){
             byUsername = new UserVO();
-            byUsername.setUser_id(username);
+            byUsername.setUser_id(user_id);
+            byUsername.setUser_name(user_name);
             byUsername.setUser_pw(password);
             byUsername.setUser_email(email);
             byUsername.setUser_Role(role);

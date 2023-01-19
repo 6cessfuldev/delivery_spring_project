@@ -19,9 +19,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.endpoint.NimbusAuthorizationCodeTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
+import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
+import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -73,6 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             return OAuth2Provider.GOOGLE.getBuilder(client)
                     .clientId(clientId)
                     .clientSecret(clientSecret)
+                    .scope("email", "profile")
                     .build();
         }
 
@@ -111,13 +118,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests()
+		http.csrf().disable()
+				.authorizeRequests()
 				.antMatchers("/member/login").permitAll()
 				.antMatchers("/index").permitAll()
 				.antMatchers("/").permitAll()
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and()
-				.csrf().disable()
 //				.formLogin()
 //				.loginPage("/member/login")
 //				.loginProcessingUrl("/login")
@@ -128,18 +135,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				.invalidateHttpSession(true)
 //				.deleteCookies("remember-me", "JESSION_ID")
 				.oauth2Login()
-			    .loginPage("/member/login")
 			    .clientRegistrationRepository(clientRegistrationRepository())
                 .authorizedClientService(authorizedClientService())
+                .loginPage("/member/login")
+                .defaultSuccessUrl("/member/loginSuccess")
+//                .authorizationEndpoint()
+//                .baseUri("/oauth2/authorize-client")
+//                .authorizationRequestRepository(authorizationRequestRepository())
+//            .and()
 				.userInfoEndpoint()			// 로그인 성공 후 사용자정보를 가져온다
 		    		.userService(principalOauth2UserService)
-//                .defaultSuccessUrl("/index")			// 로그인 성공하면 "/" 으로 이동
-//                .failureUrl("/member/login")
-			    
+//    		.and()
+//	    		.tokenEndpoint()
+//	    		  .accessTokenResponseClient(accessTokenResponseClient())
 			.and()
+				
 				.successHandler(loginSuccessHandler())
 				.failureHandler(loginFailureHandler());
 			    
+	}
+	
+	@Bean
+	public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> 
+	  accessTokenResponseClient() {
+	 
+	    return new NimbusAuthorizationCodeTokenResponseClient();
+	}
+	
+	@Bean
+	public AuthorizationRequestRepository<OAuth2AuthorizationRequest> 
+	  authorizationRequestRepository() {
+	 
+	    return new HttpSessionOAuth2AuthorizationRequestRepository();
 	}
 
 	@Bean

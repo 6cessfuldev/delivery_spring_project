@@ -20,7 +20,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		 
+		System.out.println(username);
 		UserVO byUsername = udao.getUser(username);
+		System.out.println(byUsername.toString());
         if(byUsername != null){
             return new PrincipalDetails(byUsername);
         }

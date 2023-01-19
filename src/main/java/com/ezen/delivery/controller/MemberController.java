@@ -17,8 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +32,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.Handler.ApiMemberProfile;
-import com.ezen.delivery.domain.Role;
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,34 +48,14 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;	
 	
-	@Autowired
-    private ClientRegistrationRepository clientRegistrationRepository;
-	
 	private static String authorizationRequestBaseUri = "oauth2/authorization";
-    Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
-    
-    @GetMapping("/oauth_login")
-    public Map getLoginLink(Model model) {
-        Iterable<ClientRegistration> clientRegistrations = null;
+	Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
 
-        ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
-                .as(Iterable.class);
-
-        if (type != ResolvableType.NONE &&
-                ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
-            clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
-        }
-
-        clientRegistrations.forEach(registration ->
-                oauth2AuthenticationUrls.put(registration.getClientName(),
-                        authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
-        model.addAttribute("urls", oauth2AuthenticationUrls);
-
-        log.info(oauth2AuthenticationUrls.toString());
-        return oauth2AuthenticationUrls;
-    }
-    
-    
+   @Autowired
+   private ClientRegistrationRepository clientRegistrationRepository;
+   
+   @Autowired
+   private OAuth2AuthorizedClientService authorizedClientService;
 	
 	// 이메일 인증
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
@@ -190,11 +174,55 @@ public class MemberController {
 
 	// 로그인
 	@GetMapping("/login")
-	public String loginGet() {
+	public String loginGet(Model model) {
 
-		return "/member/login";
+		Iterable<ClientRegistration> clientRegistrations = null;
+	    ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
+	      .as(Iterable.class);
+	    if (type != ResolvableType.NONE && 
+	      ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
+	        clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+	    }
 
+	    clientRegistrations.forEach(registration -> 
+	      oauth2AuthenticationUrls.put(registration.getClientName(), 
+	      authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+	    model.addAttribute("urls", oauth2AuthenticationUrls);
+
+	    return "/member/login";
 	}
+	
+	@GetMapping("/loginSuccess")
+	public @ResponseBody String getLoginInfo(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println(principalDetails.getAttributes());
+		
+		return "OAuth 세션 정보 확인하기"; 
+	}
+	
+//	@GetMapping("/loginSuccess")
+//	public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
+//	    
+//		OAuth2AuthorizedClient client = authorizedClientService
+//	      .loadAuthorizedClient(
+//	        authentication.getAuthorizedClientRegistrationId(), 
+//	          authentication.getName());
+//	    
+//	    String userInfoEndpointUri = client.getClientRegistration()
+//	    		  .getProviderDetails().getUserInfoEndpoint().getUri();
+//
+//	    		if (!StringUtils.isEmpty(userInfoEndpointUri)) {
+//	    		    RestTemplate restTemplate = new RestTemplate();
+//	    		    HttpHeaders headers = new HttpHeaders();
+//	    		    headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken()
+//	    		      .getTokenValue());
+//	    		    HttpEntity entity = new HttpEntity("", headers);
+//	    		    ResponseEntity <Map>response = restTemplate
+//	    		      .exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
+//	    		    Map userAttributes = response.getBody();
+//	    		    model.addAttribute("name", userAttributes.get("name"));
+//	    		}
+//	    return "loginSuccess";
+//	}
 
 	@PostMapping("/login")
 	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
