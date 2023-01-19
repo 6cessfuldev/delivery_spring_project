@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class OrderDetailDTO {
 	
-	private long order_food_code;
+	private long order_code;
 	private String food_info_JSON;
 
 }

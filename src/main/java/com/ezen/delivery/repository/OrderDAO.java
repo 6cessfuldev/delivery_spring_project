@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ezen.delivery.domain.BasketDTO;
+import com.ezen.delivery.domain.OrderDetailDTO;
 import com.ezen.delivery.domain.OrderInfoDTO;
 
 public interface OrderDAO {
@@ -16,7 +17,7 @@ public interface OrderDAO {
 
 	void order(OrderInfoDTO oidto);
 
-	void orderDetail(Map<String, Object> orderDetailMap);
+	void orderDetail(OrderDetailDTO[] oddto);
 
 	
 

@@ -5,21 +5,19 @@ import lombok.Data;
 @Data
 public class OrderInfoDTO {
 	
-	private String pg;
-	private String pay_method;
-	private String merchant_uid;
-	private String name;
-	private int amount;
-	private String buyer_email;
-	private String buyer_name;
-	private String buyer_tel;
-	private String buyer_addr;
-	private String buyer_postcode;
-	private String m_redirect_url;
-	private boolean niceMobileV2;
-	private String IMP_UID;
-	private long order_food_code;
+	private long order_code;
+	private String order_pg;
+	private String order_pay_method;
+	private String order_name;
+	private int order_amount;
+	private String order_buyer_email;
+	private String order_buyer_name;
+	private String order_buyer_tel;
+	private String order_buyer_addr;
+	private String order_buyer_postcode;
+	private String order_m_redirect_url;
+	private boolean order_niceMobileV2;
+	private String order_IMP_UID;
 	private int diner_code;
-	private String user_id;
 	
 }

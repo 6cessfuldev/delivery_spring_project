@@ -1,8 +1,6 @@
 package com.ezen.delivery.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -15,7 +13,6 @@ import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketListDTO;
 import com.ezen.delivery.domain.OrderDetailDTO;
 import com.ezen.delivery.domain.OrderInfoDTO;
-import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.repository.OrderDAO;
 import com.google.gson.Gson;
 
@@ -84,12 +81,7 @@ public class OrderServiceImpl implements OrderService {
 		int total = bldto.getTotalPrice();
 		
 		oidto.setDiner_code(bldto.getDiner_code());
-		oidto.setAmount(total);
-
-		
-		UserVO user = (UserVO)session.getAttribute("user");
-		String user_id = user.getUser_id();
-		oidto.setUser_id(user_id);
+		oidto.setOrder_amount(total);
 
 		
 		List<BasketDTO> basketList = bldto.getBasketList();
@@ -99,16 +91,14 @@ public class OrderServiceImpl implements OrderService {
 		
 		for(int i=0;i<oddto.length;i++) {
 			String basketJSON = gson.toJson(basketList.get(i));
-			oddto[i] = new OrderDetailDTO(oidto.getOrder_food_code(), basketJSON);
+			oddto[i] = new OrderDetailDTO(oidto.getOrder_code(), basketJSON);
 		}
 		
 		odao.order(oidto);
 		
 		
-		Map<String, Object> orderDetailMap = new HashMap<>(); 
-		orderDetailMap.put("user_id", user_id);
-		orderDetailMap.put("detail", oddto); 
-		odao.orderDetail(orderDetailMap);
+		log.info(oddto.toString());
+		odao.orderDetail(oddto);
 		
 		
 		return null;

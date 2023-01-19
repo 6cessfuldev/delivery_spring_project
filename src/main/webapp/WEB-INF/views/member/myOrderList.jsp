@@ -8,7 +8,7 @@
 <div class="category">
 	<ul class="nav justify-content-center">
 		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/order/myOrderList";'>주문/결제 조회<div>
+			<div class="category-btn" onclick='location.href ="/order/myOrderList";'>주문/결제 조회</div>
 		</li>
 		<li class="nav-item">
 			<div class="category-btn" onclick='location.href ="/dibs/myDibsList";'>찜목록</div>
@@ -28,7 +28,7 @@
 
 <main>
 	<div class="row justify-content-center pt-5">
-		
+
 	  <div class="col-sm-8 card-wrap">
 	   	<h5 class="card-head">2023.1.17 주문</h5>
 		<div class="card mb-3">
@@ -36,6 +36,7 @@
 		    <div class="col-md-2 ">
 		      <img src="/resources/source/chicken.png" class="img-fluid rounded-start" alt="...">
 		    </div>
+		    <!-- 여러 메뉴 주문 시 반복 -->
 		    <div class="col-md-8">
 		      <div class="card-body">
 		        <h5 class="card-title">푸라닭 블랙알리오치킨</h5>
@@ -51,7 +52,7 @@
 		</div>
 	  </div>
 	  
-	  <div class="col-sm-8 card-wrap">
+	 <!--  <div class="col-sm-8 card-wrap">
 	   	<h5 class="card-head">2023.1.17 주문</h5>
 		<div class="card mb-3">
 		 <div class="row g-0 align-items-center">
@@ -71,7 +72,7 @@
 		    </div>
 		  </div>
 		</div>
-	  </div>
+	  </div> -->
 	  
 	  
 	</div>

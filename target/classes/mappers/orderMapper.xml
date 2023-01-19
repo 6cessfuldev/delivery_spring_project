@@ -36,41 +36,52 @@
   	</select>
   	
   	<insert id="order">
-  		INSERT INTO ORDER (
+  		INSERT INTO `ORDER` (
   			order_code,
-  			diner_code,
-  			user_id,
+  			order_pg,
   			order_pay_method,
-  			order_phone,
-  			order_address1,
-  			order_address2,
-  			order_address3,
-  			order_total_price,
-  			order_request
+  			order_name,
+  			order_amount,
+  			order_buyer_email,
+  			order_buyer_name,
+  			order_buyer_tel,
+  			order_buyer_addr,
+  			order_buyer_postcode,
+  			order_m_redirect_url,
+  			order_niceMobileV2,
+  			order_IMP_UID,
+  			diner_code
+  			
   		) VALUES (
   			#{order_code},
-  			#{diner_code},
-  			#{user_id},
+  			#{order_pg},
   			#{order_pay_method},
-  			#{order_phone},
-  			#{order_address1},
-  			#{order_address2},
-  			#{order_address3},
-  			#{order_total_price},
-  			#{order_request}
+  			#{order_name},
+  			#{order_amount},
+  			#{order_buyer_email},
+  			#{order_buyer_name},
+  			#{order_buyer_tel},
+  			#{order_buyer_addr},
+  			#{order_buyer_postcode},
+  			#{order_m_redirect_url},
+  			#{order_niceMobileV2},
+  			#{order_IMP_UID},
+  			#{diner_code}
+  			
   		)
   	</insert>
   	
-  	<update id="orderDetail" parameterType="java.util.HashMap">
-  		<foreach collection="detail" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL"> 
-				 INTO order_food (
-					order_food_code,
-					order_food_info
-				) VALUES (
-					#{item.order_food_code},
+  	<insert id="orderDetail">
+  		INSERT INTO ORDER_FOOD (
+				order_code,
+				order_food_info
+		) VALUES 
+  		<foreach collection="array" item="item" separator=","> 
+				(
+					#{item.order_code},
 			   		#{item.food_info_JSON}
 				)
-			</foreach> 
-  	</update>
+		</foreach> 
+  	</insert>
   	
   </mapper>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-=======
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/order.css">
@@ -51,8 +50,8 @@
 	                <button onclick="danalPay()" type="button" id="order_payBut2">핸드폰결제</button>
 	                <br><br>
 	                <p id="order_payP">만나서결제</p>
-	            <button type="button" id="order_cash">현금</button>
-	            <button type="button" id="order_card">카드</button>
+	            <button type="button" onclick="cashPay()" id="order_cash">현금</button>
+	            <button type="button" onclick="" id="order_card">카드</button>
 	        </div>
 	        <div id="order_payInfo">
 	            <ul id="order_ul">

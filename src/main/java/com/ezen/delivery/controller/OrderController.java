@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ezen.delivery.domain.BasketDTO;
+import com.ezen.delivery.domain.OrderDetailDTO;
 import com.ezen.delivery.domain.OrderFoodDTO;
+import com.ezen.delivery.domain.OrderInfoDTO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.BasketService;
 import com.ezen.delivery.service.OrderService;
@@ -26,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/order/*")
 @Controller
-
 public class OrderController {
 	
 	@Inject
@@ -40,7 +41,7 @@ public class OrderController {
 	
 	
 	@GetMapping("/order/{user_id}")
-	public String orderPageGet(@PathVariable("user_id") String user_id, Model model, HttpServletRequest req) {
+	public String orderPageGet(@PathVariable("user_id")String user_id, Model model, HttpServletRequest req) {
 		
 		List<BasketDTO> bList = bsv.getList(user_id);
 		UserVO uvo = usv.getUserByID(user_id);
@@ -89,9 +90,17 @@ public class OrderController {
 
 	@GetMapping("/myOrderList")
 	public String orderListPageGET(HttpSession session, Model model) {
+		
 		UserVO user = (UserVO)session.getAttribute("user");
 		
 		//주문 내역 가져오기
+		// order_code 주고 order_food_info (JSON형태) 가져오기
+		
+		OrderInfoDTO oidto = osv.getOrderInfoDTO(order_code);
+		oidto.getOrder_amount()
+		OrderDetailDTO oddto = osv.getOrderDetailDTO(order_code); // select
+		
+		
 		
 		return "/member/myOrderList";
 	}
