@@ -390,17 +390,6 @@ function addModalForm(data){
 	let modalForm = $("#modal-form");
 	
 	$("#modal_food_code").val(data.foodvo.food_code);
-	$("#modal_order_food_count").val(data.basket_order_count);
-	
-	let choices = $(".form-check-input");
-	console.log(choices);
-	let cnt = 0;
-	for(let choice of choices){
-		if(choice.checked){
-			let choiceForm = $('<input type="text" name="choiceList['+ cnt++ +'].choice_code" val="'+choice.value+'" hidden>');
-			modalForm.append(choiceForm);
-		}
-	} 
 
 }
 
@@ -461,7 +450,19 @@ function postBasketToServer(basketData){
 //모달창 주문하기 버튼 클릭 이벤트
 $(".modal-order").click(function(){
 	
-	$("#modal-form").submit();
+	let modalForm = $("#modal-form");
+	let choices = $(".form-check-input");
+	let cnt = 0;
+	for(let choice of choices){
+		if(choice.checked){
+			console.log("choice :"+choice.value);
+			let choiceForm = $('<input type="text" name="choiceList['+ cnt++ +'].choice_code" value="'+choice.value+'" hidden>');
+			modalForm.append(choiceForm);
+		}
+	}
+	$("#modal_order_food_count").val($(".modal-amount").text());
+	console.log($("#modal-form"));
+	modalForm.submit();
 	
 })
 
@@ -470,7 +471,6 @@ function spreadChoice(data){
 
 	let save_dir = data.filevo.file_save_dir;
 	let splitArr = save_dir.split(`\\`);
-
 
 	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
@@ -539,6 +539,7 @@ function calculate(){
 	let modalTotal = (modalFoodPrice+modalOptionPrice)*modalAmount;
 
 	$("#modal-total").text(modalTotal+"원");
+
 }
 
 //장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
@@ -599,6 +600,7 @@ function refreshBasket(data){
 		basketMenuPrice.append(div1);
 		let div2 = $('<div class="col-xs-6">');
 		let minusBtn = $('<a>');
+        minusBtn.css("cursor", "pointer");
 		minusBtn.text(' ─ ');
 		minusBtn.click(()=>{
 			if(Number(amount.text())>1){
@@ -615,6 +617,7 @@ function refreshBasket(data){
 		amount.text(bdto.basket_order_count);
 		div2.append(amount);
 		let plusBtn = $('<a>');
+        plusBtn.css("cursor", "pointer");
 		plusBtn.text(' ┼ ');
 		plusBtn.click(()=>{
 			if(Number(amount.text())<99){
@@ -681,6 +684,7 @@ var observer = new MutationObserver(mutations => {
     console.log(text.substring(0, text.length-1));
   	sum += Number(text.substring(0, text.length-1));
   }
+  	localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
 });
 

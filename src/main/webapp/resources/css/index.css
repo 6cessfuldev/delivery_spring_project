@@ -20,8 +20,8 @@
 	background-color : white;
 	box-shadow: none;
 	border: none;
-	height: 45px;
-	width: 45px;
+	height: 42px;
+	width: 42px;
 	border-radius: 5px;
 }
 
@@ -206,4 +206,12 @@ main{
 	background-size: 200px;
 	background-position:20px 100px;
 	background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+
+	#search-input{
+		width : 250px;
+	}
+
 }

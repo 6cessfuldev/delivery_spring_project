@@ -18,7 +18,7 @@ public class LogAdvice {
 	public Object logMethodInfo( ProceedingJoinPoint pjp) {
 		
 		System.out.println("===============================");
-		log.info("Target : " + pjp.getTarget());
+		log.info("Target : " + pjp.getTarget().toString());
 		log.info("Param : " + Arrays.toString(pjp.getArgs()));
 		
 		Object result = null;

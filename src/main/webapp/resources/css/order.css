@@ -12,8 +12,9 @@
 }
 #order_icon{
     float: left;
+    padding-top: 30px;
     width: 80px;
-    height: 80px;
+    height: 100px;
 }
 #order{
     width: 900px;
@@ -23,6 +24,7 @@
     /* border: 1px solid black; */
 }
 #order_p1{
+    margin-top: 0px;
     font-size: 20px;
     font-weight: 600;
 }
@@ -55,7 +57,7 @@
     height: 40px;
     font-size: 17px;
     border: none;
-    background-color: rgba(96, 145, 81);
+    background-color: rgba(2, 2, 2, 0.61);
     color: white;
     margin-top: 10px;
     margin-right: 45px;
@@ -137,15 +139,16 @@ input[id="order_checkbox"]:checked::after{
     font-size: 17px;
     font-weight: 600;
 }
- #order_payBut,#order_payBut2,#order_cupon{
+ #order_payBut,#order_payBut2,#order_cash,#order_card{
     width: 200px;
     height: 40px;
     font-size: 17px;
     border: none;
-    background-color: rgba(96, 145, 81);
+    background-color: rgba(2, 2, 2, 0.61);
     color: white;
     margin-left: 20px;
 }
+
 #order_payBut2{
     margin-top: 10px;
 } 
@@ -166,10 +169,10 @@ input[id="order_checkbox"]:checked::after{
 }
 #order_payAll{
     width: 230px;
-    height: 50px;
-    border: 3px solid rgba(96, 145, 81);
-    background-color: white;
-    font-size: 18px;
-    font-weight: 600;
-    color: rgba(96, 145, 81);
+    height: 55px;
+    border: none;
+    background-color: rgba(96, 145, 81);
+    font-size: 25px;
+    font-weight: 500;
+    color: white;
 }

@@ -32,7 +32,7 @@ public class FoodServiceImpl implements FoodService {
 		List<FoodVO> fovoList = fdao.selectList(diner_code);
 		
 		for (FoodVO fovo : fovoList) {
-			FileVO fivo = fidao.selectByFileCode(fovo.getFood_file_code());
+			FileVO fivo = fidao.selectByFileCode(fovo.getFile_code());
 			fodtoList.add(new FoodDTO(fovo, fivo, null));
 		}
 		
@@ -47,7 +47,7 @@ public class FoodServiceImpl implements FoodService {
 		if(fdto.getFilevo() != null) {
 			isOk *= fidao.insert(fdto.getFilevo());			
 		}
-		fdto.getFoodvo().setFood_file_code(fdto.getFilevo().getFile_code());
+		fdto.getFoodvo().setFile_code(fdto.getFilevo().getFile_code());
 		isOk *= fdao.insert(fdto.getFoodvo());
 		
 		return isOk; 
@@ -75,7 +75,7 @@ public class FoodServiceImpl implements FoodService {
 	public FoodDTO getDetail(int food_code) {
 
 		FoodVO fvo = fdao.selectByFoodCode(food_code);
-		FileVO fivo = fidao.selectByFileCode(fvo.getFood_file_code());
+		FileVO fivo = fidao.selectByFileCode(fvo.getFile_code());
 		
 		return new FoodDTO(fvo, fivo, null);
 	}

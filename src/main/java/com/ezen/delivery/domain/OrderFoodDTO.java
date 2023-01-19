@@ -18,7 +18,7 @@ public class OrderFoodDTO {
 	// 뷰로부터 전달받을 값
 	private int food_code;
 	private int order_food_count;
-
+	
 	private List<ChoiceVO> choiceList;
 	
 	// DB로부터 꺼내올 값
@@ -29,7 +29,11 @@ public class OrderFoodDTO {
 	private int total_price;
 
 	public void totalPrice(){
-		this.total_price = this.order_food_count * this.food_price;
+		int cListSum = 0;
+		for(ChoiceVO cvo : choiceList) {
+			cListSum += cvo.getChoice_price();
+		}
+		this.total_price = (this.food_price + cListSum) * this.order_food_count ;
 	}
 		
 }

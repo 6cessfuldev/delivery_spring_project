@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketDetailVO;
+import com.ezen.delivery.domain.BasketListDTO;
 import com.ezen.delivery.domain.ChoiceVO;
-import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.repository.BasketDAO;
 import com.ezen.delivery.repository.BasketDetailDAO;
 import com.ezen.delivery.repository.ChoiceDAO;
-import com.ezen.delivery.repository.FoodDAO;
+import com.ezen.delivery.repository.DinerDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +30,9 @@ public class BasketServiceImpl implements BasketService {
 	
 	@Inject
 	private ChoiceDAO cdao;
+	
+	@Inject
+	private DinerDAO ddao;
 	
 	@Override
 	public int addBasket(BasketDTO basket) {
@@ -74,8 +77,23 @@ public class BasketServiceImpl implements BasketService {
 			bdto.initBasket_content();
 			bdto.initSalePerOne();
 		}
-		
 		return bdtoList;
+	}
+	
+	public BasketListDTO getBasketListDTO(String user_id) {
+		
+		int diner_code = getDinerCode(user_id);
+		List<BasketDTO> bdtoList = getList(user_id);
+		int totalPrice = 0;
+		for (BasketDTO basketDTO : bdtoList) {
+			basketDTO.initSalePerOne();
+			totalPrice += basketDTO.getTotal_price();
+		}
+		
+		int diner_delivery_fee = ddao.selectDiner(diner_code).getDiner_delivery_fee();
+		
+		return new BasketListDTO(diner_code, user_id, totalPrice, diner_delivery_fee, bdtoList);
+		
 	}
 
 	@Override
@@ -91,6 +109,14 @@ public class BasketServiceImpl implements BasketService {
 	public int modifyCount(BasketDTO basket) {
 			
 		return bdao.updateCount(basket);
+	}
+
+	@Override
+	public int getDinerCode(String user_id) {
+		
+		int diner_code = bdao.selectDinerCodeByUserId(user_id);
+		log.info(diner_code+"");
+		return diner_code;
 	}
 
 }

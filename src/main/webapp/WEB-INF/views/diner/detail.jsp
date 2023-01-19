@@ -52,14 +52,6 @@
 		</ul>
 	</div>
 
-	<form id="addr-form" action="/diner/search" method="get">
-		<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
-		<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
-		<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
-		<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
-		<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
-	</form>
-
 	<div class=" col-sm-8 contents bg-light d-flex justify-content-center pt-3">
 		
 		<div class="diner-detail">
@@ -416,6 +408,13 @@
 		</div>
 
 </main>
+	<form id="addr-form" action="/diner/search" method="get">
+		<input type="text" id="jibunAddr" name="jibunAddr" value="${sessionScope.pvo.jibunAddr}" hidden>
+		<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
+		<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
+		<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
+		<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+	</form>
 
 <!-- Button trigger modal -->
 <button type="button" id="modalTrigger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
@@ -470,17 +469,17 @@
        	  	
       </div>
       <div class="modal-footer d-flex">
-        <div class="add-basket py-3">장바구니에 넣기</div>
-        <div class="modal-order py-3">주문하기</div>
-        <form action="/order/modal" method="post" id="modal-form">
-        	<input type="text" name="food_code" id="modal_food_code" val="" hidden>
-        	<input type="text" name="order_food_count" id="modal_basket_order_count" val="" hidden>       	
-        	//<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
-        </form>
+        <div class="add-basket py-3" style="cursor:pointer;">장바구니에 넣기</div>
+        <div class="modal-order py-3" style="cursor:pointer;">주문하기</div>
       </div>
     </div>
   </div>
 </div>
+<form action="/order/" method="post" id="modal-form">
+        	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
+        	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
+        	<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
+        </form>
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
 	let user_id = "<c:out value='${sessionScope.user.user_id}' />";

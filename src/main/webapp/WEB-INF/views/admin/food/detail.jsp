@@ -37,7 +37,7 @@
     </tr>
 	<tr>
         <th>음식점 코드</th>
-        <td>${food.food_diner_code}</td>
+        <td>${food.diner_code}</td>
     </tr>
 </table>
 <br>

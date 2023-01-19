@@ -8,10 +8,10 @@ import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.DinerVO;
 
 public interface DinerDAO {
+	
+	List<DinerVO> selectListAll();
 
 	List<DinerVO> selectListFirst();
-
-	List<DinerVO> selectTenDinerByCategory(PagingVO dsvo);
 
 	int insert(DinerVO dvo);
 
@@ -21,7 +21,7 @@ public interface DinerDAO {
 
 	List<DinerVO> selectListbyCate(PagingVO pvo);
 
-	List<DinerVO> selectListAll();
+	
 
 	int update(DinerVO dvo);
 

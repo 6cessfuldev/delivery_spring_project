@@ -5,23 +5,26 @@ header{
     height: 68px;
     background-color:#e3e1e2;
 }
+
+header>div{
+	width:900px;
+}
 #logo_img{
-  margin-top:-23px;
+	width:80px;
+	margin-top:-5px;
 }
 header>.nav{
     float: right;
-    margin-right: 300px;
 }
 header>.logo{
-    margin-left:20% ;
+
 }
 
 .box>.nav-link,.box2>.nav-link {
     color: rgba(59, 56, 56, 0.938);
-   
 }
 header>nav>.nav-item{
-    margin-right: 30px;
+
 }
 .box,.box2{
     border: 1px solid rgba(59, 56, 56, 0.938);
@@ -46,7 +49,7 @@ header>nav>.nav-item{
 @media screen and (max-width: 768px) {
 
     header>.logo{
-        margin-left:10% ;
+        margin-left:0% ;
     }
     header>.nav{
         margin-right: 30px;
