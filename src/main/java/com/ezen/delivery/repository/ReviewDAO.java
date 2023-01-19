@@ -10,7 +10,7 @@ public interface ReviewDAO {
 
 
 	//리뷰등록(get)
-	List<ReviewVO> selectReview(int review_diner_code);
+	List<ReviewVO> selectReview(int diner_code);
 
 	int insertReview(ReviewVO rvo);
 
@@ -19,6 +19,10 @@ public interface ReviewDAO {
 	int delete(int review_code);
 
 	void bossComment(Map<String, Object> map);
+
+	void update(int diner_code);
+
+
 
 
 }

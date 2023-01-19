@@ -48,7 +48,8 @@ public class ReviewController {
 	@PostMapping(value="/upload")
 	@ResponseBody
 //	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
-	public String upload(@RequestParam("file") MultipartFile[] files, ReviewVO rvo, HttpServletRequest request) {
+	public String upload(@RequestParam("file") MultipartFile[] files, @RequestParam(name = "diner_code") int diner_code, ReviewVO rvo, HttpServletRequest request) {
+		
 		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
 			List<ReviewImgVO> list = rihd.uploadFiles(files);
@@ -57,9 +58,10 @@ public class ReviewController {
 		HttpSession session = request.getSession();
 		UserVO uvo = (UserVO)session.getAttribute("user");
 		ridto.setRvo(rvo);		
-		int isOk = rsv.insert(ridto);	
+		int isOk = rsv.insert(ridto, diner_code);	
 		log.info("fList : "+ridto.getFList());
 		log.info("rvo : "+ridto.getRvo());
+		
 		return "Success";
 	}
 
@@ -73,8 +75,8 @@ public class ReviewController {
 	
 	//사장님댓글
 	@PatchMapping("/bossComment") //int review_order_code,
-	public ResponseEntity<String> bossComment(int review_diner_code,  String review_boss_comment){
-		String reviewContent = rsv.bossComment(review_diner_code, review_boss_comment);
+	public ResponseEntity<String> bossComment(int diner_code,  String review_boss_comment){
+		String reviewContent = rsv.bossComment(diner_code, review_boss_comment);
 		return ResponseEntity.ok().body(reviewContent);
 	}
 	

@@ -25,6 +25,4 @@ public class UserVO {
 	private int user_isAdmin;
 	//private String user_order_code;
 
-	//주문하면 order_code는 현재 날자 + 랜덤숫자,,?
-	//order_code 만들어서 review_order_code랑,,같으면 작성 가능?
 }

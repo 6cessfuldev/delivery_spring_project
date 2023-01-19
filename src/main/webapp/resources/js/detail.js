@@ -92,7 +92,7 @@ function regist(){
                     alert("파일 개수가 초과되었습니다.");
                     history.go(-0.5);
                 } else {        
-                    formData.append('review_diner_code', diner_code);
+                    formData.append('diner_code', diner_code);
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
                     formData.append('user_id', user_id);
