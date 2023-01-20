@@ -14,6 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -103,6 +104,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return null;
     }
 	 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // resources 모든 접근을 허용하는 설정을 해버리면
+        // HttpSecurity 설정한 ADIM권한을 가진 사용자만 resources 접근가능한 설정을 무시해버린다.
+        web.ignoring()
+                .antMatchers("/resources/**");
+    }
 	 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -110,13 +118,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 			.cors().disable()
 				.authorizeRequests()
-				.antMatchers("/resources/**").permitAll()
 				.antMatchers("/member/login").permitAll()
 				.antMatchers("/index").permitAll()
 				.antMatchers("/").permitAll()
 				.antMatchers("/diner/list").permitAll()
 				.antMatchers("/diner/detail").permitAll()
-				.antMatchers("/order/order").permitAll()
+				.antMatchers("/order/**").hasRole("USER")
+				.anyRequest().authenticated()
 			.and()
 				.formLogin()
 				.loginPage("/member/login.html")

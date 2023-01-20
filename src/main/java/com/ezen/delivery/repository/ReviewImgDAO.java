@@ -7,14 +7,14 @@ import com.ezen.delivery.domain.ReviewImgVO;
 public interface ReviewImgDAO {
 
 	int insert(ReviewImgVO rivo);
-	////이미지파일(diner컨트롤러랑 연결)
-//	int insertImg(ReviewImgVO rivo);
 
 	List<ReviewImgVO> selectFlist(int reviewCode);
 
-//	ReviewImgVO selectFile(String review_img_uuid);
-//
-//	int deleteFile(String review_img_uuid);
+	ReviewImgVO selectFile(int review_code);
+
+	int deleteFile(int review_code);
+
+
 
 }
 

@@ -3,6 +3,8 @@
 
 application.properties
 
+application.yml
+
 ### Eclipse ###
 .metadata
 bin/

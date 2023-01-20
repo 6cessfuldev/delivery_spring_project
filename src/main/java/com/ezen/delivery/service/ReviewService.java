@@ -3,24 +3,24 @@ package com.ezen.delivery.service;
 import java.util.List;
 
 import com.ezen.delivery.domain.ReviewDTO;
+import com.ezen.delivery.domain.ReviewImgVO;
 
 
 public interface ReviewService {
 
-	List<ReviewDTO> getList(int review_diner_code);
+	List<ReviewDTO> getList(int diner_code);
 	
-	int insert(ReviewDTO ridto);
-
+	int insert(ReviewDTO ridto, int diner_code);
 	
 	//사장님댓글
-	String bossComment(int review_diner_code, int review_order_code, String review_boss_comment);
+	//String bossComment(int diner_code, String review_boss_comment);
 
+	int remove(int review_code);
 
-//	int remove(int review_code);
-//
-//	ReviewImgVO selectFile(String review_img_uuid);
-//
-//	int deleteFile(String review_img_uuid);
+	ReviewImgVO selectFile(int review_code);
+
+	int deleteFile(int review_code);
+
 
 
 

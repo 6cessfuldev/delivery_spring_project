@@ -11,10 +11,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Setter
 @Getter
-public class UserVO {
-	
-	private static final long serialVersionUID = 1L;
-	
+public class UserVO {                                                             
+		
 	private String user_id;
 	private String user_email;
 	private String user_pw;

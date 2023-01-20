@@ -14,16 +14,17 @@ flush privileges;
 ## user(회원)
 
 create table user(
-user_id varchar(40) not null,
+user_id varchar(60) not null,
 user_email varchar(40) not null,
-user_pw varchar(500),
+user_pw varchar(500), not null,
 user_name varchar(40) not null,
-user_phone varchar(40) not null,
-user_birth date not null,
-user_naver_id varchar(40),
+user_phone varchar(40),
+user_birth date,
 user_register_date datetime default now(),
 user_modify_date datetime,
-user_isAdmin tinyint(1) default 0,
+user_role varchar(20) default "USER",
+provider varchar(45),
+providerId varchar(45),
 primary key(user_id));
 
 
@@ -33,18 +34,19 @@ create table diner(
 diner_code int auto_increment,
 file_code int,
 diner_name varchar(50) not null,
-diner_min_pay int,
 diner_address varchar(200) not null,
 diner_notice text,
 diner_open_time time,
 diner_close_time time,
+diner_min_pay int,
 diner_method_pay varchar(20),
 diner_business_name varchar(50),
 diner_company_num varchar(12),
 diner_category varchar(15),
 diner_delivery_fee int default 0,
 diner_addr_point point,
-diner_score_avg bouble,
+diner_score_avg double,
+diner_review_count int default 0,
 primary key(diner_code));
 
 
@@ -62,7 +64,7 @@ primary key(choice_code));
 
 create table basket(
 basket_code int not null auto_increment,
-user_id varchar(40) not null,
+user_id varchar(60) not null,
 food_code int not null,
 basket_order_count int not null,
 primary key(basket_code));
@@ -79,47 +81,67 @@ choice_code int not null);
 
 create table login(
 log_code int not null auto_increment,
-user_id varchar(40) not null,
+user_id varchar(60) not null,
 log_date datetime,
 log_out_date datetime,
 log_fail_count tinyint(1) not null default 0,
 primary key(log_code));
 
 
-
 ## order(주문내역)
 
-create table order(
-order_code int not null auto_increment,
+create table `order`(
+order_code bigint not null,
+order_pg varchar(45) not null,
+order_pay_method varchar(45) not null,
+order_name varchar(500) not null,
+order_amount int not null,
+order_buyer_email varchar(100) not null,
+order_buyer_name varchar(45) not null,
+order_buyer_tel varchar(45) not null,
+order_buyer_addr varchar(500) not null,
+order_buyer_postcode varchar(30) not null,
+order_m_redirect_url varchar(45) not null,
+order_niceMobileV2 varchar(20) not null,
+order_IMP_UID varchar(100) not null,
 diner_code int not null,
-user_id varchar(40),
-order_date datetime default now(),
-order_pay_method varchar(30),
-order_state varchar(40) not null default '주문접수 대기중',
-order_phone varchar(40) not null,
-order_address1 varchar(200) not null,
-order_address2 varchar(200) not null,
-order_address3 varchar(200) not null,
-order_total_price int not null,
-order_used_point int default 0,
-order_request varchar(2000),
-order_IMP_UID varchar(30),
 primary key(order_code));
 
 
 ## order_food(주문메뉴)
 
 create table order_food(
-order_food_code int not null auto_increment,
-user_id varchar(40) not null,
-food_code int not null,
-order_food_count int not null,
-order_food_price int not null,
-primary key(order_food_code));
+order_code bigint not null,
+order_food_info varchar(2000) not null
+);
+
+
 
 ## review (리뷰)
-review_taste_score 삭제
-review_amount_score 삭제
-review_delivery_score 삭제
+	
+create table review(
+review_code int not null auto_increment,
+review_order_code int,
+diner_code int,
+user_id varchar(40),
+review_content text not null,
+review_score int,
+review_reg_date datetime default now(),
+review_mod_date datetime default now(),
+review_boss_comment text,
+primary key(review_code));
 
-review_score int 추가
+
+## review_img (리뷰이미지)
+
+create table review_img(
+review_img_code int not null auto_increment,
+review_code int not null,
+review_img_uuid varchar(256),
+review_img_save_dir varchar(256) not null,
+review_img_size int,
+review_img_name varchar(512) not null,
+review_img_type tinyint(1) default 0,
+review_img_reg_date datetime default now(),
+primary key(review_img_code));
+

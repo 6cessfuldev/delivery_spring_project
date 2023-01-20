@@ -246,16 +246,16 @@
 							</div>					
 						</div>
 						<!-- diner-score -->
-
+					
 						<div class="review-count">
-							<p>리뷰 472개 / 사장님댓글 452개</p>
+							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 2</p>
 						</div>
-				
+					
 						<!-- 별점 -->
 						<form name="starform" id="starform" method="post" action="./save">
 						  <div id="star">
 						    <fieldset>
-						        <legend id="starInfo">별을 클릭해서 채워주세요</legend>
+						        <legend id="starInfo">별을 꼭 클릭해서 채워주세요</legend>
 						        	<div id="starRadio">
 						         	<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
 							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
@@ -266,7 +266,6 @@
 						    </fieldset>
 						  </div>
 						</form>
-						
 							<textarea name="content" class="review_content" rows="7" cols="103" id="review_con"
 		                          placeholder="음식과 가게에 대한 솔직한 후기를 적어주세요!"></textarea ><br>
 		                    <div class="review_insertBox"></div>
@@ -289,6 +288,7 @@
                             	<!-- 등록 후 출력 화면 -->
                          <div class="review">
                             <div id="review-head">
+                            	  <div id="bossCommentBox"></div>
                             </div>
                          </div>	
 					
@@ -479,7 +479,7 @@
         </form>
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
-	let user_id = "<sec:authorize access='isAuthenticated()'>'<sec:authentication property='principal.username'/>'</sec:authorize>";
+	let user_id = "<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>";
 	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';

@@ -131,6 +131,9 @@ public class MemberController {
 
 	@GetMapping("/signup")
 	public void signUpGet() {
+
+		log.info("회원가입");
+
 	}
 
 	@PostMapping("/signup")
@@ -176,30 +179,6 @@ public class MemberController {
 	@GetMapping("/login")
 	public void loginGet(Model model) {}
 	
-//	@GetMapping("/loginSuccess")
-//	public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
-//	    
-//		OAuth2AuthorizedClient client = authorizedClientService
-//	      .loadAuthorizedClient(
-//	        authentication.getAuthorizedClientRegistrationId(), 
-//	          authentication.getName());
-//	    
-//	    String userInfoEndpointUri = client.getClientRegistration()
-//	    		  .getProviderDetails().getUserInfoEndpoint().getUri();
-//
-//	    		if (!StringUtils.isEmpty(userInfoEndpointUri)) {
-//	    		    RestTemplate restTemplate = new RestTemplate();
-//	    		    HttpHeaders headers = new HttpHeaders();
-//	    		    headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken()
-//	    		      .getTokenValue());
-//	    		    HttpEntity entity = new HttpEntity("", headers);
-//	    		    ResponseEntity <Map>response = restTemplate
-//	    		      .exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
-//	    		    Map userAttributes = response.getBody();
-//	    		    model.addAttribute("name", userAttributes.get("name"));
-//	    		}
-//	    return "loginSuccess";
-//	}
 
 //	@PostMapping("/login")
 //	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
