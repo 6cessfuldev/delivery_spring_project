@@ -5,4 +5,100 @@
   
   <mapper namespace="com.ezen.delivery.repository.OrderDAO">
   
+ 	<select id="foodPriceList" resultType="int">
+ 		<foreach collection="list" item="basketDTO" separator="union all">
+ 			select sum(food_price) sum from food 
+ 			where food_code = #{basketDTO.food_code} 
+ 		</foreach>
+ 	</select>
+  	
+  	<select id="choicePriceList" resultType="int">
+  	
+  		<foreach collection="list" item="basketDTO" separator="union all">
+  			<if test="basketDTO.choiceList.size == 0">
+				select 0 from dual 
+			</if>
+			
+  			<if test="basketDTO.choiceList.size != 0">
+	  			select sum(choice_price) sum from choice
+	  			where choice_code in
+	  			<foreach collection="basketDTO.choiceList" item="i" open="(" close=")" separator=",">
+	  				#{i.choice_code}
+	  			</foreach>
+	  		</if>
+	  		
+  		</foreach>
+  	</select>
+  	
+  	<select id="getDeliveryFee" resultType="int">
+  		select diner_delivery_fee from diner
+  		where diner_code = #{diner_code}
+  	</select>
+  	
+  	<insert id="order">
+  		INSERT INTO `ORDER` (
+  			order_code,
+  			order_pg,
+  			order_pay_method,
+  			order_name,
+  			order_amount,
+  			order_buyer_email,
+  			order_buyer_name,
+  			order_buyer_tel,
+  			order_buyer_addr,
+  			order_buyer_postcode,
+  			order_m_redirect_url,
+  			order_niceMobileV2,
+  			order_IMP_UID,
+  			diner_code
+  			
+  		) VALUES (
+  			#{order_code},
+  			#{order_pg},
+  			#{order_pay_method},
+  			#{order_name},
+  			#{order_amount},
+  			#{order_buyer_email},
+  			#{order_buyer_name},
+  			#{order_buyer_tel},
+  			#{order_buyer_addr},
+  			#{order_buyer_postcode},
+  			#{order_m_redirect_url},
+  			#{order_niceMobileV2},
+  			#{order_IMP_UID},
+  			#{diner_code}
+  			
+  		)
+  	</insert>
+  	
+  	<insert id="orderDetail">
+  		INSERT INTO ORDER_FOOD (
+				order_code,
+				order_food_info
+		) VALUES 
+  		<foreach collection="array" item="item" separator=","> 
+				(
+					#{item.order_code},
+			   		#{item.food_info_JSON}
+				)
+		</foreach> 
+  	</insert>
+  	
+  	<select id="orderInfoDTOList" resultType="com.ezen.delivery.domain.OrderInfoDTO">
+  		select * from `order`
+  		where order_buyer_email = #{user_email}
+  	</select>
+  	
+  	<select id="orderDetailDTOList" resultType="com.ezen.delivery.domain.OrderDetailDTO">
+  		select * from order_food
+  		where order_code = #{order_code}
+  	</select>
+  	
+  	<select id="getDinerName" resultType="String">
+  		select d.diner_name
+		from diner b
+		inner join order o
+		on o.order_code = b.order_code
+  	</select>
+  	
   </mapper>

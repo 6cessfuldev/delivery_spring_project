@@ -87,36 +87,32 @@ log_fail_count tinyint(1) not null default 0,
 primary key(log_code));
 
 
-
 ## order(주문내역)
 
-create table order(
-order_code int not null auto_increment,
+create table `order`(
+order_code bigint not null,
+order_pg varchar(45) not null,
+order_pay_method varchar(45) not null,
+order_name varchar(500) not null,
+order_amount int not null,
+order_buyer_email varchar(100) not null,
+order_buyer_name varchar(45) not null,
+order_buyer_tel varchar(45) not null,
+order_buyer_addr varchar(500) not null,
+order_buyer_postcode varchar(30) not null,
+order_m_redirect_url varchar(45) not null,
+order_niceMobileV2 varchar(20) not null,
+order_IMP_UID varchar(100) not null,
 diner_code int not null,
-user_id varchar(40),
-order_date datetime default now(),
-order_pay_method varchar(30),
-order_state varchar(40) not null default '주문접수 대기중',
-order_phone varchar(40) not null,
-order_address1 varchar(200) not null,
-order_address2 varchar(200) not null,
-order_address3 varchar(200) not null,
-order_total_price int not null,
-order_used_point int default 0,
-order_request varchar(2000),
-order_IMP_UID varchar(30),
 primary key(order_code));
 
 
 ## order_food(주문메뉴)
 
 create table order_food(
-order_food_code int not null auto_increment,
-user_id varchar(40) not null,
-food_code int not null,
-order_food_count int not null,
-order_food_price int not null,
-primary key(order_food_code));
+order_code bigint not null,
+order_food_info varchar(2000) not null
+);
 
 
 
