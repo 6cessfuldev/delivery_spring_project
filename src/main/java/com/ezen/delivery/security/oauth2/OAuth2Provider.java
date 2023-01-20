@@ -11,7 +11,7 @@ public enum OAuth2Provider {
         @Override
         public ClientRegistration.Builder getBuilder(String registrationId) {
             ClientRegistration.Builder builder = getBuilder(registrationId,
-                    ClientAuthenticationMethod.POST, DEFAULT_REDIRECT_URL);
+                    ClientAuthenticationMethod.POST, "http://localhost:8089/login/oauth2/code/naver");
             builder.scope("profile");
             builder.authorizationUri("https://nid.naver.com/oauth2.0/authorize");
             builder.tokenUri("https://nid.naver.com/oauth2.0/token");
@@ -22,21 +22,21 @@ public enum OAuth2Provider {
         }
     },
 
-//    KAKAO {
-//
-//        @Override
-//        public ClientRegistration.Builder getBuilder(String registrationId) {
-//            ClientRegistration.Builder builder = getBuilder(registrationId,
-//                    ClientAuthenticationMethod.POST, DEFAULT_REDIRECT_URL);
-//            builder.scope("profile");
-//            builder.authorizationUri("https://kauth.kakao.com/oauth/authorize");
-//            builder.tokenUri("https://kauth.kakao.com/oauth/token");
-//            builder.userInfoUri("https://kapi.kakao.com/v1/user/me");
-//            builder.userNameAttributeName("id");
-//            builder.clientName("Kakao");
-//            return builder;
-//        }
-//    },
+    KAKAO {
+
+        @Override
+        public ClientRegistration.Builder getBuilder(String registrationId) {
+            ClientRegistration.Builder builder = getBuilder(registrationId,
+                    ClientAuthenticationMethod.POST, "http://localhost:8089/login/oauth2/code/kakao");
+            builder.scope("profile_nickname", "account_email");
+            builder.authorizationUri("https://kauth.kakao.com/oauth/authorize");
+            builder.tokenUri("https://kauth.kakao.com/oauth/token");
+            builder.userInfoUri("https://kapi.kakao.com/v2/user/me");
+            builder.userNameAttributeName("id");
+            builder.clientName("Kakao");
+            return builder;
+        }
+    },
 
     GOOGLE {
 
@@ -53,39 +53,23 @@ public enum OAuth2Provider {
             builder.clientName("Google");
             return builder;
         }
-    };
+    },
 
-//    GITHUB {
-//
-//        @Override
-//        public ClientRegistration.Builder getBuilder(String registrationId) {
-//            ClientRegistration.Builder builder = getBuilder(registrationId,
-//                    ClientAuthenticationMethod.BASIC, DEFAULT_REDIRECT_URL);
-//            builder.scope("read:user");
-//            builder.authorizationUri("https://github.com/login/oauth/authorize");
-//            builder.tokenUri("https://github.com/login/oauth/access_token");
-//            builder.userInfoUri("https://api.github.com/user");
-//            builder.userNameAttributeName("id");
-//            builder.clientName("GitHub");
-//            return builder;
-//        }
-//    },
-//
-//    FACEBOOK {
-//
-//        @Override
-//        public ClientRegistration.Builder getBuilder(String registrationId) {
-//            ClientRegistration.Builder builder = getBuilder(registrationId,
-//                    ClientAuthenticationMethod.POST, DEFAULT_REDIRECT_URL);
-//            builder.scope("public_profile", "email");
-//            builder.authorizationUri("https://www.facebook.com/v2.8/dialog/oauth");
-//            builder.tokenUri("https://graph.facebook.com/v2.8/oauth/access_token");
-//            builder.userInfoUri("https://graph.facebook.com/me?fields=id,name,email");
-//            builder.userNameAttributeName("id");
-//            builder.clientName("Facebook");
-//            return builder;
-//        }
-//    };
+    FACEBOOK {
+
+        @Override
+        public ClientRegistration.Builder getBuilder(String registrationId) {
+            ClientRegistration.Builder builder = getBuilder(registrationId,
+                    ClientAuthenticationMethod.POST, "http://localhost:8089/login/oauth2/code/facebook");
+            builder.scope("public_profile", "email");
+            builder.authorizationUri("https://www.facebook.com/v2.8/dialog/oauth");
+            builder.tokenUri("https://graph.facebook.com/v2.8/oauth/access_token");
+            builder.userInfoUri("https://graph.facebook.com/me?fields=id,name,email");
+            builder.userNameAttributeName("id");
+            builder.clientName("Facebook");
+            return builder;
+        }
+    };
 
     private static final String DEFAULT_REDIRECT_URL = "{baseUrl}/{action}/oauth2/code/{registrationId}";
 

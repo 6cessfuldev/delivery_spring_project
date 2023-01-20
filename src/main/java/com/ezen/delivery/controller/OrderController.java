@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.OrderFoodDTO;
 import com.ezen.delivery.domain.PayVO;
-
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.BasketService;
 import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.UserService;
@@ -42,8 +40,20 @@ public class OrderController {
 	@Inject
 	private UserService usv;
 	
-	@GetMapping("/order/{user_id}")
-	public String orderPageGet(@PathVariable("user_id") String user_id, Model model, HttpServletRequest req) {
+	@GetMapping("/page")
+	public String orderPageGet(Authentication authentication, Model model) {
+		
+		System.out.println("orderrrr");
+		
+		System.out.println(authentication);
+		
+		if(authentication.getPrincipal() == null) {
+			return "/member/login";
+		}
+		
+		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		
+		String user_id = principalDetails.getUsername();
 		
 		List<BasketDTO> bList = bsv.getList(user_id);
 		UserVO uvo = usv.getUserByID(user_id);
@@ -86,15 +96,6 @@ public class OrderController {
 		
 		return "1";
 	}
-	
-//	@PostMapping("/")
-//	public String orderPagePOST(OrderFoodDTO ofdto, Model model) {
-//		
-//		log.info(">>> orders : " + ofdto.toString());
-//		
-//		return "/member/order";
-//	}
-
 
 	@GetMapping("/myOrderList")
 	public String orderListPageGET(HttpSession session, Model model) {
@@ -105,4 +106,5 @@ public class OrderController {
 		return "/member/myOrderList";
 	}
 
+	
 }

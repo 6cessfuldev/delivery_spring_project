@@ -174,30 +174,7 @@ public class MemberController {
 
 	// 로그인
 	@GetMapping("/login")
-	public String loginGet(Model model) {
-
-		Iterable<ClientRegistration> clientRegistrations = null;
-	    ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
-	      .as(Iterable.class);
-	    if (type != ResolvableType.NONE && 
-	      ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
-	        clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
-	    }
-
-	    clientRegistrations.forEach(registration -> 
-	      oauth2AuthenticationUrls.put(registration.getClientName(), 
-	      authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
-	    model.addAttribute("urls", oauth2AuthenticationUrls);
-
-	    return "/member/login";
-	}
-	
-	@GetMapping("/loginSuccess")
-	public @ResponseBody String getLoginInfo(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		System.out.println(principalDetails.getAttributes());
-		
-		return "OAuth 세션 정보 확인하기"; 
-	}
+	public void loginGet(Model model) {}
 	
 //	@GetMapping("/loginSuccess")
 //	public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
@@ -224,64 +201,63 @@ public class MemberController {
 //	    return "loginSuccess";
 //	}
 
-	@PostMapping("/login")
-	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
-		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);
-		UserVO isUser = usv.isUser(user_id, user_pw);
-
-		if (isUser != null) { // 로그인 성공
-			HttpSession session = req.getSession();
-			session.setAttribute("user", isUser);
-			model.addAttribute("user", isUser);
-			int isOk = usv.loginDate(user_id);
-			log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
-
-			return "redirect:/";
-
-		} else { // 로그인 실패
-			model.addAttribute("msg", "0");
-			int isOk = usv.loginFailCnt(user_id);
-			log.info(">>> add fail Count " + (isOk > 0 ? "Ok" : "Fail"));
-
-			return "/member/login";
-		}
-	}
+//	@PostMapping("/login")
+//	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
+//		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);
+//		UserVO isUser = usv.isUser(user_id, user_pw);
+//
+//		if (isUser != null) { // 로그인 성공
+//			HttpSession session = req.getSession();
+//			session.setAttribute("user", isUser);
+//			model.addAttribute("user", isUser);
+//			int isOk = usv.loginDate(user_id);
+//			log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+//
+//			return "redirect:/";
+//
+//		} else { // 로그인 실패
+//			model.addAttribute("msg", "0");
+//			int isOk = usv.loginFailCnt(user_id);
+//			log.info(">>> add fail Count " + (isOk > 0 ? "Ok" : "Fail"));
+//
+//			return "/member/login";
+//		}
+//	}
 
 	// 네이버 로그인
 
 	@GetMapping("/callback")
 	public void callback() {
 	}
-
-	@PostMapping("/naverLogin")
-	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
-
-		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
-		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
-
-		if (getUser == null) { // 미가입 회원인 경우
-
-			boolean isUp = usv.naverSignUp(naverUser);
-
-			if (isUp) {
-				HttpSession session = req.getSession();
-				session.setAttribute("user", naverUser);
-				model.addAttribute("user", naverUser);
-				int isOk = usv.loginDate(naverUser.getUser_id());
-				log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
-			}
-
-		} else { // 이미 가입한 회원인 경우
-			HttpSession session = req.getSession();
-			session.setAttribute("user", getUser);
-			model.addAttribute("user", getUser);
-			int isOk = usv.loginDate(getUser.getUser_id());
-			log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
-		}
-
-		return "/member/naverLogin";
-
-	}
+	
+//	@PostMapping("/naverLogin")
+//	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
+//
+//		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
+//		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
+//
+//		if (getUser == null) { // 미가입 회원인 경우
+//
+//			boolean isUp = usv.naverSignUp(naverUser);
+//
+//			if (isUp) {
+//				HttpSession session = req.getSession();
+//				session.setAttribute("user", naverUser);
+//				model.addAttribute("user", naverUser);
+//				int isOk = usv.loginDate(naverUser.getUser_id());
+//				log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+//			}
+//
+//		} else { // 이미 가입한 회원인 경우
+//			HttpSession session = req.getSession();
+//			session.setAttribute("user", getUser);
+//			model.addAttribute("user", getUser);
+//			int isOk = usv.loginDate(getUser.getUser_id());
+//			log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+//		}
+//
+//		return "/member/naverLogin";
+//	}
 
 	// 회원 정보
 
@@ -326,19 +302,18 @@ public class MemberController {
 	}
 
 	// 로그아웃
-
-	@GetMapping("/logout")
-	public String logoutGet(HttpServletRequest req, HttpSession session) {
-
-		UserVO uvo = (UserVO) session.getAttribute("user");
-		int isOk = usv.logoutDate(uvo.getUser_id());
-		log.info(">>> update logout date " + (isOk > 0 ? "Ok" : "Fail"));
-
-		req.getSession().removeAttribute("user");
-		req.getSession().invalidate();
-
-		return "redirect:/";
-	}
+//	@GetMapping("/logout")
+//	public String logoutGet(HttpServletRequest req, HttpSession session) {
+//
+//		UserVO uvo = (UserVO) session.getAttribute("user");
+//		int isOk = usv.logoutDate(uvo.getUser_id());
+//		log.info(">>> update logout date " + (isOk > 0 ? "Ok" : "Fail"));
+//
+//		req.getSession().removeAttribute("user");
+//		req.getSession().invalidate();
+//
+//		return "redirect:/";
+//	}
 
 	// 아이디 찾기
 

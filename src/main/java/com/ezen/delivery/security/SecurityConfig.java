@@ -12,22 +12,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.endpoint.NimbusAuthorizationCodeTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -50,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Environment env;
 
     private static String CLIENT_PROPERTY_KEY= "spring.security.oauth2.client.registration.";
-    private static List<String> clients = Arrays.asList("google", "naver");
+    private static List<String> clients = Arrays.asList("google", "naver", "facebook", "kakao");
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
@@ -83,26 +79,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .build();
         }
 
-//        if (client.equals("facebook")) {
-//            return OAuth2Provider.FACEBOOK.getBuilder(client)
-//                    .clientId(clientId)
-//                    .clientSecret(clientSecret)
-//                    .build();
-//        }
-//
-//        if (client.equals("github")) {
-//            return OAuth2Provider.GITHUB.getBuilder(client)
-//                    .clientId(clientId)
-//                    .clientSecret(clientSecret)
-//                    .build();
-//        }
-//
-//        if (client.equals("kakao")) {
-//            return OAuth2Provider.KAKAO.getBuilder(client)
-//                    .clientId(clientId)
-//                    .clientSecret(clientSecret)
-//                    .build();
-//        }
+        if (client.equals("facebook")) {
+            return OAuth2Provider.FACEBOOK.getBuilder(client)
+                    .clientId(clientId)
+                    .clientSecret(clientSecret)
+                    .build();
+        }
+
+        if (client.equals("kakao")) {
+            return OAuth2Provider.KAKAO.getBuilder(client)
+                    .clientId(clientId)
+                    .clientSecret(clientSecret)
+                    .build();
+        }
 
         if (client.equals("naver")) {
             return OAuth2Provider.NAVER.getBuilder(client)
@@ -119,54 +108,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.csrf().disable()
+			.cors().disable()
 				.authorizeRequests()
+				.antMatchers("/resources/**").permitAll()
 				.antMatchers("/member/login").permitAll()
 				.antMatchers("/index").permitAll()
 				.antMatchers("/").permitAll()
-				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/diner/list").permitAll()
+				.antMatchers("/diner/detail").permitAll()
+				.antMatchers("/order/order").permitAll()
 			.and()
-//				.formLogin()
-//				.loginPage("/member/login")
-//				.loginProcessingUrl("/login")
-//				.successHandler(loginSuccessHandler())
-//			.and()
-//				.logout()
-//				.logoutUrl("/member/logout")
-//				.invalidateHttpSession(true)
-//				.deleteCookies("remember-me", "JESSION_ID")
+				.formLogin()
+				.loginPage("/member/login.html")
+				.loginProcessingUrl("/member/login.html")
+				.successHandler(loginSuccessHandler())
+				.usernameParameter("user_id")
+				.passwordParameter("user_pw")
+			.and()
 				.oauth2Login()
 			    .clientRegistrationRepository(clientRegistrationRepository())
                 .authorizedClientService(authorizedClientService())
-                .loginPage("/member/login")
-                .defaultSuccessUrl("/member/loginSuccess")
-//                .authorizationEndpoint()
-//                .baseUri("/oauth2/authorize-client")
-//                .authorizationRequestRepository(authorizationRequestRepository())
-//            .and()
+                .loginPage("/member/login.html")
 				.userInfoEndpoint()			// 로그인 성공 후 사용자정보를 가져온다
 		    		.userService(principalOauth2UserService)
-//    		.and()
-//	    		.tokenEndpoint()
-//	    		  .accessTokenResponseClient(accessTokenResponseClient())
 			.and()
-				
+				.defaultSuccessUrl("/")
 				.successHandler(loginSuccessHandler())
-				.failureHandler(loginFailureHandler());
+				.failureHandler(loginFailureHandler())
+
+			.and()
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
+				.deleteCookies("JSESSIONID", "remember-me");
 			    
-	}
-	
-	@Bean
-	public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> 
-	  accessTokenResponseClient() {
-	 
-	    return new NimbusAuthorizationCodeTokenResponseClient();
-	}
-	
-	@Bean
-	public AuthorizationRequestRepository<OAuth2AuthorizationRequest> 
-	  authorizationRequestRepository() {
-	 
-	    return new HttpSessionOAuth2AuthorizationRequestRepository();
 	}
 
 	@Bean
@@ -184,17 +159,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new CustomLoginFailureHandler();
 	}
 	
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		
-//		auth.userDetailsService(customUserService())
-//			.passwordEncoder(bcryptPasswordEncoder());
-//	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		auth.userDetailsService(customUserService())
+			.passwordEncoder(bcryptPasswordEncoder());
+	}
 
-//	@Bean
-//	public UserDetailsService customUserService() {
-//		return new PrincipalDetailsService();
-//	}
+	@Bean
+	public UserDetailsService customUserService() {
+		return new PrincipalDetailsService();
+	}
 	
 	@Bean
 	public PasswordEncoder bcryptPasswordEncoder() {

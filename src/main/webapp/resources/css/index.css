@@ -109,15 +109,14 @@ main{
 	background-color : rgb(244, 250, 252);
 }
 
-.event{
-	background-image: url(""); 
-	background-size: 170px;
-	background-repeat: no-repeat;
-	background-position: 0px 35px;
-}
-
 .event:hover{
 	background-size : 230px;
+}
+
+.event{
+	background-image: url("/resources/source/event.gif"); 
+	background-size:cover;
+	background-repeat: no-repeat;
 }
 
 .all{
@@ -128,9 +127,9 @@ main{
 }
 
 .forone{
-	background-image: url("/resources/source/forone.png"); 
+	background-image: url("/resources/source/forone.gif"); 
 	background-size: 215px;
-	background-position:0px 40px;
+	background-position:0px -16px;
 	background-repeat: no-repeat;
 }
 
@@ -204,7 +203,7 @@ main{
 .mart{
 	background-image: url("/resources/source/lunchbox.png"); 
 	background-size: 200px;
-	background-position:20px 100px;
+	background-position:20px 10px;
 	background-repeat: no-repeat;
 }
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
@@ -393,17 +394,14 @@
 			</div>
 			
 			<div id="basket-menu-list"></div>
-				
 				<div class="basket-deli-price">
 					<span>배달요금</span> <span>${diner.diner_delivery_fee}원</span> <span>별도</span>
 				</div>
 				<div class="basket-total-price">
 					<span>합계:</span> <span id="total">0원</span>
 				</div>
-
-				<div class="order-btn" onclick="location.href='/order/${sessionScope.user.user_id}';">주문하기</div>
+				<div class="order-btn" onclick='location.href="/order/page";'>주문하기</div>
 			</div>
-
 		</div>
 
 </main>
@@ -474,14 +472,15 @@
     </div>
   </div>
 </div>
-<form action="/order/" method="post" id="modal-form">
+<form action="/order" method="post" id="modal-form">
         	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
         	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
         	<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
         </form>
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
-	let user_id = "<c:out value='${sessionScope.user.user_id}' />";
+	let user_id = "<sec:authorize access='isAuthenticated()'>'<sec:authentication property='principal.username'/>'</sec:authorize>";
+	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 		

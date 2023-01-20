@@ -7,14 +7,15 @@ import javax.inject.Inject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.repository.UserDAO;
+import com.ezen.delivery.security.oauth2.userinfo.FacebookUserInfo;
 import com.ezen.delivery.security.oauth2.userinfo.GoogleUserInfo;
+import com.ezen.delivery.security.oauth2.userinfo.KakaoUserInfo;
 import com.ezen.delivery.security.oauth2.userinfo.NaverUserInfo;
 import com.ezen.delivery.security.oauth2.userinfo.OAuth2UserInfo;
 
@@ -42,14 +43,22 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         if(provider.equals("google")){
         	log.info("google in");
             oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
-            System.out.println(oAuth2UserInfo.getAttributes());
         }
         else if(provider.equals("naver")){
+        	log.info("naver in");
             oAuth2UserInfo = new NaverUserInfo(oAuth2User.getAttributes());
+        }else if(provider.equals("facebook")){
+        	log.info("facebook in");
+            oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
+        }else if(provider.equals("kakao")){
+        	log.info("kakao in");
+            oAuth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
         }
         
+        System.out.println(oAuth2UserInfo.getAttributes());
+        
         String providerId = oAuth2UserInfo.getProviderId();	//수정
-        String user_id = provider+"_"+providerId;
+        String user_id = provider+providerId;
         String user_name = oAuth2UserInfo.getName();
         
         String uuid = UUID.randomUUID().toString().substring(0, 6);

@@ -347,6 +347,10 @@ function addBasketEvent(data){
 // 장바구니에 등록할 데이터
 function postBasketToServer(basketData){
 	
+	if(basketData.user_id == null || basketData.user_id == ""){
+		location.href="/member/login";
+	}
+	
 	$.ajax({
         url: '/basket/add/',
         type: 'POST',
@@ -462,15 +466,16 @@ function calculate(){
 
 }
 
+$(".order-btn").hide();
 //장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
 function basketReload(){
 	console.log("Reload");
-	$(".order-btn").hide();
 	if(user_id == null || user_id == "") return;
-
+    console.log(user_id);
     $.ajax({
-        url: '/basket/list/'+user_id,
-        type: 'GET',
+        url: '/basket/list/',
+        type: 'POST',
+        data: {user_id : user_id},
         dataType: 'json',
         success: function(data, status, xhr){
         	console.log(data);
