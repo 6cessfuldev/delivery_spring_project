@@ -66,7 +66,7 @@ function regist(){
         const formData = new FormData();
         const data = $('#review_multiple');
         const revText = document.getElementById('review_con').value;
-        const star = document.querySelector('input[name="rating"]:checked').value;
+       
         console.log('폼 데이터 : ' + formData);
         console.log('data : ' + data );
         console.log(data[0]); 
@@ -84,10 +84,28 @@ function regist(){
                     alert("리뷰를 입력해주세요.");
                     review_con.focus();
                     return false;
+                }else if($("input:radio[name='rating']").is(":checked")==false){
+                    alert("별을 선택해주세요.");
                 }else if(data[i].files.length > 3){
                     alert("파일 개수가 초과되었습니다.");
-                    history.go(-0.5);
-                }else {        
+                    history.go(-0.5);    
+                }else {    
+                    const star = document.querySelector('input[name="rating"]:checked').value;    
+                    formData.append('diner_code', diner_code);
+                    formData.append('review_content', revText);
+                    formData.append('review_score', star);
+                    formData.append('user_id', user_id);
+                    //formData.append('review_order_code',orderCode);
+                }
+            }else{
+                if(revText == null || revText == ''){
+                    alert("리뷰를 입력해주세요.");
+                    review_con.focus();
+                    return false;
+                }else if($("input:radio[name='rating']").is(":checked")==false){
+                    alert("별을 선택해주세요.");   
+                }else {    
+                    const star = document.querySelector('input[name="rating"]:checked').value;    
                     formData.append('diner_code', diner_code);
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
@@ -112,7 +130,7 @@ function regist(){
                 if (result === 'Success'){ //=== 타입 변환X
                     $('#review_multiple').val('');                   
                     document.querySelector("div#image_container").innerHTML='';
-                    $('#review_con').val('');;
+                    $('#review_con').val('');
                     console.log(result);
                     alert("리뷰를 등록했습니다.");
                     getReviewList(diner_code);
@@ -182,7 +200,6 @@ function getReviewList(diner_code){
                         star0 = star5;
                         break;
                  }   
-
                  
                  let div = `<div class="reviewBox" data-review_code="${reviewDTO.rvo.review_code}">`;
                  div += `<div class="reviewer-id">${reviewDTO.rvo.user_id}</div>`;
@@ -208,8 +225,8 @@ function getReviewList(diner_code){
                       imgTag.src = real;
                       review.childNodes[count].append(imgTag);
                     }
-                    count++;
                 }
+                count++;
                
                }
                
@@ -595,4 +612,3 @@ var config = {
 };
 
 observer.observe(target, config);
-

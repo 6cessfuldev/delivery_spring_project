@@ -51,10 +51,12 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int insert(ReviewDTO ridto, int diner_code) {
 		int isOk = rdao.insertReview(ridto.getRvo());
-		for(ReviewImgVO rivo : ridto.getFList()) {			
-			rivo.setReview_code(ridto.getRvo().getReview_code());
-			isOk *= ridao.insert(rivo);
-			rdao.updateCount(diner_code);
+		if(ridto.getFList() != null) {
+			for(ReviewImgVO rivo : ridto.getFList()) {			
+				rivo.setReview_code(ridto.getRvo().getReview_code());
+				isOk *= ridao.insert(rivo);
+				rdao.updateCount(diner_code);
+			}
 		}
 		return 0;
 		

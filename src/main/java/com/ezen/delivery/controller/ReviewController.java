@@ -46,8 +46,7 @@ public class ReviewController {
 
 	@PostMapping(value="/upload")
 	@ResponseBody
-//	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
-	public String upload(@RequestParam("file") MultipartFile[] files,@RequestParam("diner_code") int diner_code, ReviewVO rvo, HttpServletRequest request) {
+	public String upload(@RequestParam(value ="file", required=false) MultipartFile[] files,@RequestParam("diner_code") int diner_code, ReviewVO rvo, HttpServletRequest request) {
 		
 		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
