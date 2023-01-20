@@ -7,7 +7,7 @@
 <div class="category">
 	<ul class="nav justify-content-center">
 		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/index";'>주문/결제 조회<div>
+			<div class="category-btn" onclick='location.href ="/index";'>주문/결제 조회</div>
 		</li>
 		<li class="nav-item">
 			<div class="category-btn" id="cate-ff">찜목록</div>

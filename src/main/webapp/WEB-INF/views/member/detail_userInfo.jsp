@@ -8,7 +8,7 @@
 <div class="category">
 	<ul class="nav justify-content-center">
 		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/order/myOrderList";'>주문/결제 조회<div>
+			<div class="category-btn" onclick='location.href ="/order/myOrderList";'>주문/결제 조회</div>
 		</li>
 		<li class="nav-item">
 			<div class="category-btn" id="cate-ff">찜목록</div>
@@ -55,5 +55,4 @@
 </div>
 
 <jsp:include page="../include/footer2.jsp"></jsp:include>
-
 <script src="/resources/js/detail_userInfo.js"></script>
