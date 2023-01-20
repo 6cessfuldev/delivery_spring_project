@@ -47,6 +47,8 @@
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 	</bean>
 
+	<!-- <mybatis-spring:scan base-package="com.ezen.delivery.dao"/> -->
+
 	<mybatis-spring:scan
 		base-package="com.ezen.delivery.repository" />
 

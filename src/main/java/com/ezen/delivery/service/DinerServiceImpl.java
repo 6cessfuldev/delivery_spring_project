@@ -1,7 +1,6 @@
 package com.ezen.delivery.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,8 +12,8 @@ import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
-import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.PagingVO;
+import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.repository.DinerDAO;
 import com.ezen.delivery.repository.FileDAO;
 import com.ezen.delivery.repository.ReviewDAO;
@@ -84,7 +83,14 @@ public class DinerServiceImpl implements DinerService {
 		}
 		
 		for (DinerVO dvo : dvoList) {
+			
 			FileVO fvo = fidao.selectByFileCode(dvo.getFile_code());
+			
+			int diner_code = dvo.getDiner_code();
+			double avg = rdao.selectAvgStar(diner_code);
+			int count = rdao.reviewCount(diner_code);
+			dvo.setDiner_review_count(count);
+			dvo.setDiner_score_avg(avg);
 			ddtoList.add(new DinerDTO(dvo,fvo));
 		}
 		
@@ -96,7 +102,8 @@ public class DinerServiceImpl implements DinerService {
 		DinerVO dvo = ddao.selectDiner(diner_code);
 		double avg = rdao.selectAvgStar(diner_code);
 		dvo.setDiner_score_avg(avg);
-		
+		int count = rdao.reviewCount(diner_code);
+		dvo.setDiner_review_count(count);
 		FileVO fivo = fidao.selectByFileCode(dvo.getFile_code());
 		
 		return new DinerDTO(dvo, fivo);
@@ -138,7 +145,6 @@ public class DinerServiceImpl implements DinerService {
 		
 		return isDel;
 	}
-
 
 
 }

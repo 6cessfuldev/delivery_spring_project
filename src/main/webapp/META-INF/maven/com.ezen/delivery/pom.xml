@@ -63,56 +63,55 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>runtime</scope>
-		</dependency>
+      <!-- Logging -->
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>${org.slf4j-version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+         <version>${org.slf4j-version}</version>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
+         <version>${org.slf4j-version}</version>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.15</version>
+         <exclusions>
+            <exclusion>
+               <groupId>javax.mail</groupId>
+               <artifactId>mail</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>javax.jms</groupId>
+               <artifactId>jms</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>com.sun.jdmk</groupId>
+               <artifactId>jmxtools</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>com.sun.jmx</groupId>
+               <artifactId>jmxri</artifactId>
+            </exclusion>
+         </exclusions>
+         <scope>runtime</scope>
+      </dependency>
 
-		<!-- @Inject -->
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
-
+      <!-- @Inject -->
+      <dependency>
+         <groupId>javax.inject</groupId>
+         <artifactId>javax.inject</artifactId>
+         <version>1</version>
+      </dependency>
 		<!-- Servlet -->
 		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
 			<version>2.5</version> <scope>provided</scope> </dependency> -->
@@ -139,28 +138,27 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>5.3.10</version>
-			<scope>test</scope>
-		</dependency>
+      <!-- Test -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.12</version>
+         <scope>test</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-test</artifactId>
+         <version>5.3.10</version>
+         <scope>test</scope>
+      </dependency>
 
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest</artifactId>
-			<version>2.2</version>
-			<scope>test</scope>
-		</dependency>
-
+      <dependency>
+         <groupId>org.hamcrest</groupId>
+         <artifactId>hamcrest</artifactId>
+         <version>2.2</version>
+         <scope>test</scope>
+      </dependency>
 
 		<!-- DB -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -193,15 +191,14 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
-		<!-- lombok -->
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.24</version>
-			<scope>provided</scope>
-		</dependency>
+      <!-- lombok -->
+      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <version>1.18.24</version>
+         <scope>provided</scope>
+      </dependency>
 
 		<!-- security -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
@@ -227,49 +224,48 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>5.5.3</version>
-		</dependency>
+		</dependency>	
 
+      <!-- stmp 메일 전송 관련 라이브러리 -->
+      <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+      <dependency>
+         <groupId>javax.mail</groupId>
+         <artifactId>mail</artifactId>
+         <version>1.4.7</version>
+      </dependency>
 
-		<!-- stmp 메일 전송 관련 라이브러리 -->
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context-support</artifactId>
+         <version>${org.springframework-version}</version>
+      </dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-
-		<!-- file -->
-		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-core</artifactId>
-			<version>1.28</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-parsers</artifactId>
-			<version>1.28</version>
-		</dependency>
+      <!-- file -->
+      <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+      <dependency>
+         <groupId>commons-fileupload</groupId>
+         <artifactId>commons-fileupload</artifactId>
+         <version>1.4</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+      <dependency>
+         <groupId>commons-io</groupId>
+         <artifactId>commons-io</artifactId>
+         <version>2.11.0</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+      <dependency>
+         <groupId>org.apache.tika</groupId>
+         <artifactId>tika-core</artifactId>
+         <version>1.28</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
+      <dependency>
+         <groupId>org.apache.tika</groupId>
+         <artifactId>tika-parsers</artifactId>
+         <version>1.28</version>
+      </dependency>
 
 		<!-- 비동기 통신을 위한 JSON 관련 lib -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
@@ -293,43 +289,43 @@
 			<version>2.8.9</version>
 		</dependency>
 
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-					</additionalProjectnatures>
-					<additionalBuildcommands>
-						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-					</additionalBuildcommands>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<compilerArgument>-Xlint:all</compilerArgument>
-					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<configuration>
-					<mainClass>org.test.int1.Main</mainClass>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+   </dependencies>
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-eclipse-plugin</artifactId>
+            <version>2.9</version>
+            <configuration>
+               <additionalProjectnatures>
+                  <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+               </additionalProjectnatures>
+               <additionalBuildcommands>
+                  <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+               </additionalBuildcommands>
+               <downloadSources>true</downloadSources>
+               <downloadJavadocs>true</downloadJavadocs>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.5.1</version>
+            <configuration>
+               <source>11</source>
+               <target>11</target>
+               <compilerArgument>-Xlint:all</compilerArgument>
+               <showWarnings>true</showWarnings>
+               <showDeprecation>true</showDeprecation>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <configuration>
+               <mainClass>org.test.int1.Main</mainClass>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 </project>

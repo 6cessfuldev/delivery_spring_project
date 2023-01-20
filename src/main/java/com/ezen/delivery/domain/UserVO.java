@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Setter
 @Getter
-public class UserVO {
+public class UserVO {                                                             
 	
 	private String user_id;
 	private String user_email;
@@ -23,5 +23,6 @@ public class UserVO {
 	private String user_register_date;
 	private String user_modify_date;
 	private int user_isAdmin;
+	//private String user_order_code;
 
 }

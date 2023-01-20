@@ -4,31 +4,42 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.delivery.repository.ReviewDAO">
 <select id="selectReview" resultType="com.ezen.delivery.domain.ReviewVO">
-	select * from review where review_diner_code=#{diner_code} order by review_code desc;
+	select * from review where diner_code=#{diner_code} order by review_code desc;
 </select>
 
 <insert id="insertReview" parameterType="com.ezen.delivery.domain.ReviewVO">
 	<selectKey keyProperty="review_code" resultType="int" order="BEFORE">
 	      SELECT IFNULL(MAX(review_code+1),1) from review
 	</selectKey>
-	insert into review (review_code, review_diner_code,review_content,review_score)
-	values (#{review_code},#{review_diner_code}, #{review_content}, #{review_score})
+	insert into review (review_code,user_id, diner_code, review_content, review_score)
+	values (#{review_code}, #{user_id}, #{diner_code}, #{review_content}, #{review_score})
 </insert>
 
 <select id="selectAvgStar" resultType="double">
-	select IFNULL(round(avg(review_score),1),0) from review where review_diner_code = #{diner_code};
+	select IFNULL(round(avg(review_score),1),0) from review where diner_code = #{diner_code}
+</select>
+
+<update id="updateCount" parameterType="int">
+	update diner a inner join review B
+	on a.diner_code = b.diner_code
+ 	set a.diner_review_count = a.diner_review_count+1
+   	where a.diner_code = #{diner_code}
+</update>
+
+<select id="reviewCount" resultType="int">
+	select count(*) from review where diner_code = #{diner_code}
 </select>
 
 <!-- 사장님 댓글 -->
-<update id="bossComment">
+<!-- <update id="bossComment">
 	update reivew set review_boss_comment=#{review_boss_comment}
-	where review_order_code=#{review_order_code}
-	and review_diner_code=#{review_diner_code}
-</update>
+	where diner_code=#{diner_code}
+	and diner_code=#{diner_code}
+</update> -->
 
 
-<!-- <delete id="delete">
+<delete id="delete">
 	delete from review where review_code = #{review_code} 
-</delete> -->
+</delete>
 </mapper>
 
