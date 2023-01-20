@@ -16,13 +16,13 @@ public interface ReviewDAO {
 
 	double selectAvgStar(int diner_code);
 
+	//void bossComment(Map<String, Object> map);
+
 	int delete(int review_code);
-
-	void bossComment(Map<String, Object> map);
-
+	
 	void updateCount(int diner_code);
 
-
+	int reviewCount(int diner_code);
 
 
 

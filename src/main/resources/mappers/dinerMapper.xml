@@ -46,11 +46,8 @@ insert into diner(file_code, diner_name, diner_address, diner_min_pay, diner_not
 	delete from diner where diner_code = #{diner_code}
 </delete>
 
-<select id="selectReview">
+<select id="selectReview" resultType="com.ezen.delivery.domain.DinerVO">
 	select diner_review_count, diner_score_avg from diner where diner_code = #{diner_code}
 </select>
 
-<!-- <select id="selectDinerCount" resultType="int">
-	select diner_review_count from diner
-</select> -->
 </mapper>

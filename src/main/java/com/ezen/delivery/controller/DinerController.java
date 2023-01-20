@@ -64,8 +64,7 @@ public class DinerController {
 		log.info(list.size()+"");		
 		model.addAttribute("dList", list);
 		model.addAttribute("pvo", pvo);
-		
-		
+	
 		
 		return "/diner/list";
 	}

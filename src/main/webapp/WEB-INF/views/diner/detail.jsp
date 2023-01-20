@@ -247,7 +247,7 @@
 						<!-- diner-score -->
 					
 						<div class="review-count">
-							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 452</p>
+							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 2</p>
 						</div>
 					
 						<!-- 별점 -->
@@ -520,20 +520,5 @@
 <script>
 getReviewList(diner_code);
 basketReload();
-</script>
-<script>
-$(".bossComment").click(function(){ 
-    console.log("test");
-    commentText();
-});
-
-function commentText(){
-    // const add_textbox = () => {
-        const box = document.getElementById("#bossCommentBox");
-        const newText = document.createElement('textarea');
-        newText.innerHTML = `<textarea name="content" class="boss_content" rows="3" cols="103" id="boss_comment"
-        placeholder="답글을 적어주세요."></textarea>`;
-        box.appendChild(newText);
-    };
 </script>
 <jsp:include page="../include/footer2.jsp"></jsp:include>

@@ -60,38 +60,34 @@ public class ReviewServiceImpl implements ReviewService {
 		
 	}
 	//사장님댓글
+//	@Override
+//	public String bossComment(int diner_code, String review_boss_comment) {
+//		review_boss_comment = review_boss_comment.replace("\n","<br>").replaceAll(" ", "&nbsp");
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("diner_code", diner_code);
+//		map.put("bossComment", review_boss_comment);
+//		//map.put("order_code", review_order_code);
+//		
+//		rdao.bossComment(map);
+//		return review_boss_comment;
+//	}
+
+	//삭제
 	@Override
-	public String bossComment(int diner_code, String review_boss_comment) {
-		review_boss_comment = review_boss_comment.replace("\n","<br>").replaceAll(" ", "&nbsp");
+	public int remove(int review_code) {
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("diner_code", diner_code);
-		map.put("bossComment", review_boss_comment);
-		//map.put("order_code", review_order_code);
+		return rdao.delete(review_code);
+	}
+	@Override
+	public ReviewImgVO selectFile(int review_code) {
 		
-		rdao.bossComment(map);
-		return review_boss_comment;
+		return ridao.selectFile(review_code);
+	}
+	@Override
+	public int deleteFile(int review_code) {
+		
+		return ridao.deleteFile(review_code);
 	}
 
-
-
-	
-	
-	//삭제
-
-//	@Override
-//	public int remove(int review_code) {
-//		
-//		return rdao.delete(review_code);
-//	}
-//	@Override
-//	public ReviewImgVO selectFile(String review_img_uuid) {
-//		
-//		return ridao.selectFile(review_img_uuid);
-//	}
-//	@Override
-//	public int deleteFile(String review_img_uuid) {
-//	
-//		return ridao.deleteFile(review_img_uuid);
-//	}
 }

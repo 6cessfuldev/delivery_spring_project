@@ -83,12 +83,15 @@ public class DinerServiceImpl implements DinerService {
 		}
 		
 		for (DinerVO dvo : dvoList) {
+			
 			FileVO fvo = fidao.selectByFileCode(dvo.getFile_code());
-			ddtoList.add(new DinerDTO(dvo,fvo));
 			
 			int diner_code = dvo.getDiner_code();
-			
-			ddao.selectReview(diner_code);
+			double avg = rdao.selectAvgStar(diner_code);
+			int count = rdao.reviewCount(diner_code);
+			dvo.setDiner_review_count(count);
+			dvo.setDiner_score_avg(avg);
+			ddtoList.add(new DinerDTO(dvo,fvo));
 		}
 		
 		return ddtoList;
@@ -141,12 +144,6 @@ public class DinerServiceImpl implements DinerService {
 		
 		return isDel;
 	}
-
-//	@Override
-//	public DinerDTO getDinerCount(int diner_code) {
-//		
-//		return ddao.selectDinerCount(diner_code);
-//	}
 
 
 }

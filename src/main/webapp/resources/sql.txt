@@ -45,6 +45,7 @@ diner_category varchar(15),
 diner_delivery_fee int default 0,
 diner_addr_point point,
 diner_score_avg bouble,
+diner_review_count int default 0,
 primary key(diner_code));
 
 
@@ -117,9 +118,33 @@ order_food_count int not null,
 order_food_price int not null,
 primary key(order_food_code));
 
-## review (리뷰)
-review_taste_score 삭제
-review_amount_score 삭제
-review_delivery_score 삭제
 
-review_score int 추가
+
+## review (리뷰)
+	
+create table review(
+review_code int not null auto_increment,
+review_order_code int,
+diner_code int,
+user_id varchar(40),
+review_content text not null,
+review_score int,
+review_reg_date datetime default now(),
+review_mod_date datetime default now(),
+review_boss_comment text,
+primary key(review_code));
+
+
+## review_img (리뷰이미지)
+
+create table review_img(
+review_img_code int not null auto_increment,
+review_code int not null,
+review_img_uuid varchar(256),
+review_img_save_dir varchar(256) not null,
+review_img_size int,
+review_img_name varchar(512) not null,
+review_img_type tinyint(1) default 0,
+review_img_reg_date datetime default now(),
+primary key(review_img_code));
+

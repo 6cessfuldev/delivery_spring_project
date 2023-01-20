@@ -12,6 +12,11 @@
 <select id="selectFlist" resultType="com.ezen.delivery.domain.ReviewImgVO">
 	select * from review_img where review_code = #{diner_code}
 </select>
-
+<select id="selectFile" resultType="com.ezen.delivery.domain.ReviewImgVO">
+	select * from review_img where review_code = #{review_code}
+</select>
+<delete id="deleteFile" >
+	delete from review_img where review_code = #{review_code}
+</delete>
 </mapper>
 

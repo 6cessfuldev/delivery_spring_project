@@ -28,8 +28,7 @@ public interface DinerDAO {
 
 	int delete(int diner_code);
 
-	void selectReview(int diner_code);
+	List<DinerVO> selectReview(int diner_code);
 
-//	DinerDTO selectDinerCount(int diner_code);
 
 }

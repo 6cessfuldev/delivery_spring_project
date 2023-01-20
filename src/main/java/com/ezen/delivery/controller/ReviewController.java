@@ -1,7 +1,5 @@
 package com.ezen.delivery.controller;
 
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,8 +43,7 @@ public class ReviewController {
 	private ReviewImgHandler rihd;
 	@Inject
 	private ReviewService rsv;
-	
-	
+
 	@PostMapping(value="/upload")
 	@ResponseBody
 //	public String upload(@RequestParam(value ="file", required=false) MultipartFile file, 
@@ -74,37 +72,26 @@ public class ReviewController {
 		return new ResponseEntity<List<ReviewDTO>>(list,HttpStatus.OK);
 	}
 	
+	
 	//사장님댓글
-	@PatchMapping("/bossComment") //int review_order_code,
-	public ResponseEntity<String> bossComment(int diner_code,  String review_boss_comment){
-		String reviewContent = rsv.bossComment(diner_code, review_boss_comment);
-		return ResponseEntity.ok().body(reviewContent);
+//	@PatchMapping("/bossComment") //int review_order_code,
+//	public ResponseEntity<String> bossComment(int diner_code,  String review_boss_comment){
+//		String reviewContent = rsv.bossComment(diner_code, review_boss_comment);
+//		return ResponseEntity.ok().body(reviewContent);
+//	}
+	
+
+	//삭제
+	@DeleteMapping(value="/delete/{review_code}", produces = {MediaType.TEXT_PLAIN_VALUE})
+	   public ResponseEntity<String> remove(@PathVariable("review_code")int review_code){
+	      log.info("review remove : "+review_code);
+	      int isUp = rsv.remove(review_code);
+	      log.info("remove isUp : " + (isUp>0?"ok":"fail"));
+	      ReviewImgVO rivo = rsv.selectFile(review_code); 
+	      int isOk = rsv.deleteFile(review_code);
+	      isOk *= rihd.deleteFile(rivo);
+	      return isUp>0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	
 }
-
-
-
-//	삭제
-	
-//	@DeleteMapping("/file/{review_img_uuid}")
-//	public ResponseEntity<String> deleteFile(@PathVariable("review_img_uuid")String review_img_uuid){
-//	      ReviewImgVO rivo = rsv.selectFile(review_img_uuid); 
-//	      int isOk = rsv.deleteFile(review_img_uuid); 
-//	      isOk *= rihd.deleteFile(rivo); 
-//		
-//		return isOk > 0? new ResponseEntity<String>("1",HttpStatus.OK)
-//				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
-//
-//	 
-//	@DeleteMapping(value="/review/{review_code}", produces = {MediaType.TEXT_PLAIN_VALUE})
-//	   public ResponseEntity<String> remove(@PathVariable("review_code")int review_code){
-//	      log.info("review remove : "+review_code);
-//	      int isUp = rsv.remove(review_code);
-//	      log.info("remove isUp : " + (isUp>0?"ok":"fail"));
-//	      
-//	      return isUp>0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-//	   }
-//	
-	

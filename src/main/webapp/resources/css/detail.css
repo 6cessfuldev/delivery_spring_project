@@ -520,7 +520,7 @@ main{
 }
 .reviewBox{
 	height: 300px;
-	/* border-bottom: 1px solid gainsboro; */
+	border-bottom: 1px solid gainsboro;
 }
 
 /* #review-head>div{
@@ -528,16 +528,22 @@ main{
 	border-bottom: 1px solid gainsboro;
 
 } */
+.reviewer-id{
+	font-size: 15px;
+	color: gray;
+}
 .review-time-ago{
 	text-decoration: none;
 	float: right;
 	color: gray;
 	font-size: 13px;
+	
 }
 .review-a{
 	color: gray;
 	text-decoration: none;
 	font-size: 14px;
+	margin-left: 5px;
 }
 
 .review-point{
@@ -576,13 +582,20 @@ main{
 	font-size: 15px;
 	color: gray;
 	float: right;
-	margin-top: 160px;
+	margin-top: 185px;
 }
-.boss_content{
+/* .boss_content{
 	width: 100px;
 	height: 100px;
-}
+} */
 
+.deleteBtn{
+	border: none;
+	background: none;
+	float: right;
+	font-size: 13px;
+	color: gray;
+}
 
 #exampleModal{
 	height:600px;

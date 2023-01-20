@@ -11,9 +11,6 @@ import com.ezen.delivery.domain.DinerVO;
 public interface DinerService {
 
 	List<DinerVO> getListFirst();
-	
-	//이미지파일(diner컨트롤러랑 연결)
-//	int reviewFile(ReviewDTO rdto); 
 
 	DinerDTO getDiner(int diner_code);
 
@@ -27,7 +24,7 @@ public interface DinerService {
 
 	int remove(int diner_code);
 
-//	DinerDTO getDinerCount(int diner_code);
+
 
 
 

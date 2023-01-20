@@ -51,14 +51,13 @@ document.getElementById('trigger').addEventListener('click', ()=> {
 $("#regBtn").click(function(){ 
     regist();
 });
+
 function regist(){
     let file = $('#review_multiple').val();
    console.log("파일:"+file);
     const regExp = new RegExp("\.(exe|sh|bat|msi|dll|js)$");
     const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
     const maxSize = 1024*1024*20; //20MB
-    
-
 
     if(user_id === ''){
         alert('로그인이 필요한 서비스 입니다.');
@@ -68,21 +67,18 @@ function regist(){
         const data = $('#review_multiple');
         const revText = document.getElementById('review_con').value;
         const star = document.querySelector('input[name="rating"]:checked').value;
-
         console.log('폼 데이터 : ' + formData);
         console.log('data : ' + data );
         console.log(data[0]); 
         console.log(data[0].files);
         console.log(data[0].files[0]);
         console.log(data[0].files[1]);
-
+        
         for(let i = 0; i < data.length; i++){
             if(data[i].files.length>0){
                 for(let j = 0; j < data[i].files.length; j++){
                     console.log(data[i].files[j]);
-
-                    formData.append('file',data[i].files[j]);
-
+                    formData.append('file',data[i].files[j]);   
                 }
                 if(revText == null || revText == ''){
                     alert("리뷰를 입력해주세요.");
@@ -91,17 +87,14 @@ function regist(){
                 }else if(data[i].files.length > 3){
                     alert("파일 개수가 초과되었습니다.");
                     history.go(-0.5);
-                } else {        
+                }else {        
                     formData.append('diner_code', diner_code);
                     formData.append('review_content', revText);
                     formData.append('review_score', star);
                     formData.append('user_id', user_id);
                     //formData.append('review_order_code',orderCode);
-                    //formData.append('review_reg_date', data);
                 }
             }
-        }
-
         for (var pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]);
           }
@@ -133,8 +126,9 @@ function regist(){
                 
             }
         });// end ajax
-        //}if문
+        }
     }
+
 }
 
 //리뷰 뿌리기
@@ -162,7 +156,6 @@ function getReviewList(diner_code){
         review.innerHTML = ""; 
         if(result.length > 0){ 
                 let count = 0;
-                let commentCount = 0;
             for(let reviewDTO of result){ 
                  const star = reviewDTO.rvo.review_score;
                  console.log(star);
@@ -191,14 +184,15 @@ function getReviewList(diner_code){
                  }   
 
                  
-                 let div = `<div class="reviewBox">`;
+                 let div = `<div class="reviewBox" data-review_code="${reviewDTO.rvo.review_code}">`;
                  div += `<div class="reviewer-id">${reviewDTO.rvo.user_id}</div>`;
+                 div += `<button class="deleteBtn" type="button">X</button>`;
                  div += `<span class="review-time-ago">${reviewDTO.rvo.review_reg_date}<a class="review-a" href="#">신고</a></span>`;
                  div += `<div class="review-point">${star0}<span class="starScore">${reviewDTO.rvo.review_score}</span></div>`;
                  div += `<div class="review-menu"></div>`;
                  div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
-                //  if(){}
                  div += '<button type="button" class="bossComment">답글달기</button>';
+                 div += `<br>`;
                  div += `</div>`;
                  review.innerHTML += div;
                
@@ -227,136 +221,38 @@ function getReviewList(diner_code){
        })
 
 }
-// let div2 = '<div>';
-// div2.id="bossCommentBox'+commentCount+'";
-// div2 += `</div>`
-// review.innerHTML += div2;
-
-//  count++;
-
-// $(".bossComment"+commentCount).on("click", function(){
-//     if($("#bossCommentBox"+commentCount).has("input").length==0){
-//    const comment = document.getElementById('bossCommentBox'+commentCount);
-//     comment.innerHTML="";
-//         //let newText = document.createElement('input');
-//         //let newBtn = document.createElement('button');
-//         //newBtn.innerText = '답글등록';
-//          $(this).hide();
-//        //div2.append(newText);
-//         // $(this).append(newText);
-//         // $(this).append(newBtn);
-//         // comment.append(newText);
-//         // comment.append(newBtn);
-//         let div3 = `<div>`;
-//         div3 += `<input>`;
-//         div3 += `<button type="button">답글등록`;
-        
-//         $("#bossCommentBox"+commentCount).innerHTML += div3;
-//     }
-// })
-// commentCount++; 
-//}
-
-//     $(document).on('click','button[class="bossComment'+commentCount+'"]',function(){
-//         if($("#bossCommentBox"+commentCount).has("input").length==0){
-//             let box = $("#bossCommentBox"+commentCount);
-//             console.log(box);
-//             // let newText = document.createElement('input');
-//             // let newBtn = document.createElement('button');
-//             //newBtn.innerText='답글등록';
-//             $(".bossComment"+commentCount).hide();
-//             box.append($("<input>").val("dkarnjss"));
-//             box.append($("<button>"));
-//             // box.append(document.createElement('input'));
-//             // box.append( document.createElement('button'));
-//             console.log("test");
-//          }
-//     });
-//     commentCount++; 
-// }
-// $(document).on('click','button[class="bossComment'+commentCount+'"]',function(){
-//     if(document.getElementById("bossCommentBox"+commentCount).innerHTML == ''){
-//        let box = document.getElementById("bossCommentBox"+commentCount);
-//        let newText = document.createElement('input');
-//        let newBtn = document.createElement('button');
-//        newBtn.innerText='답글등록';
-//        $(".bossComment"+commentCount).hide();
-//        box.append(newText);
-//        box.append(newBtn);
-//        console.log("test");
-//     }
-// });
-// commentCount++; 
-// function commentText(){
-   
-// } 
-
-//동적으로 추가된 div
-// let div2 = document.createElement("div");
-// div2.class = "bossCommentBox";
-// review.append(div2);
-// count++;
-// 여기까지 고정?
-
-// $(".bossComment").click(function(){
-//     let box = document.getElementById(".bossCommentBox");
-//     let newText = document.createElement('textarea');
-//     $('.review-head').on('change','.bossCommentBox', function(){
-//         box.append(newText);
-//         console.log("test");
-//     })
-    //box.childNodes[count].appendChild(newText);
-    //commentText();
-// });
-            
-// newText.innerHTML = `<textarea name="content" class="boss_content" rows="3" cols="103" id="boss_comment"
-// placeholder="답글을 적어주세요."></textarea>`;
-
 
 //삭제
-// async function removeReviewServer(review_code){
-//     try {
-//         const url ='/review/review/'+review_code;
-//         const config = {
-//             method : 'delete'
-//         };
-//         const resp = await fetch(url, config);
-//         const result = await resp.text();
-//         return result;
+async function removeReviewServer(review_code){
+    try {
+        const url ='/review/delete/'+review_code;
+        const config = {
+            method : 'delete'
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
 
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+    } catch (error) {
+        console.log("removeReviewServer error");
+        console.log(error);
+    }
+}
 
-// async function removeImgReviewServer(review_img_uuid){
-//     try {
-//         const url ='/review/file/'+review_img_uuid;
-//         const config = {
-//             method : 'delete'
-//         };
-//         const resp = await fetch(url, config);
-//         const result = await resp.text();
-//         return result;
-
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
-
-// document.addEventListener('click', (e)=>{
-//   if(e.target.classList.contains('del')){
-//          let  = e.target.closest('div');
-//          removeReviewServer(review_codeVal).then(result => {
-//             if(result>0){
-//                 // removeReviewImgServer(review_img_uuid);
-//                 alert("리뷰를 삭제했어요!");
-//             }
-//             getReviewList(diner_code);
-//          })  
-//     }
-// })
+document.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('deleteBtn')){
+      let div = e.target.closest('div');
+      console.log(div.classList);
+      let review_codeVal = div.dataset.review_code;
+      console.log(review_codeVal);
+         removeReviewServer(review_codeVal).then(result => {
+            if(result>0){
+                alert("리뷰를 삭제했어요!");
+            }
+            getReviewList(diner_code);
+         })  
+    }
+})
 
 
 //모달창 총 주문 계산을 위한 변수
@@ -699,3 +595,4 @@ var config = {
 };
 
 observer.observe(target, config);
+
