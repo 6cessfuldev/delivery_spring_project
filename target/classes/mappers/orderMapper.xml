@@ -84,4 +84,21 @@
 		</foreach> 
   	</insert>
   	
+  	<select id="orderInfoDTOList" resultType="com.ezen.delivery.domain.OrderInfoDTO">
+  		select * from `order`
+  		where order_buyer_email = #{user_email}
+  	</select>
+  	
+  	<select id="orderDetailDTOList" resultType="com.ezen.delivery.domain.OrderDetailDTO">
+  		select * from order_food
+  		where order_code = #{order_code}
+  	</select>
+  	
+  	<select id="getDinerName" resultType="String">
+  		select d.diner_name
+		from diner b
+		inner join order o
+		on o.order_code = b.order_code
+  	</select>
+  	
   </mapper>

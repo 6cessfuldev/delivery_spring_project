@@ -19,6 +19,12 @@ public interface OrderDAO {
 
 	void orderDetail(OrderDetailDTO[] oddto);
 
+	List<OrderInfoDTO> orderInfoDTOList(String user_email);
+
+	List<OrderDetailDTO> orderDetailDTOList(long order_code);
+
+	String getDinerName(long order_code);
+
 	
 
 }

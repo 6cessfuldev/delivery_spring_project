@@ -124,7 +124,7 @@ function requestPay() {
 			 param.order_code = rsp.merchant_uid;
 			 paymentComplete(param);
 			 console.log(rsp);
-			 /*location.href="/order/myOrderList";*/
+			 location.href="/order/myOrderList";
 		  } else {
 			alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
 		  }

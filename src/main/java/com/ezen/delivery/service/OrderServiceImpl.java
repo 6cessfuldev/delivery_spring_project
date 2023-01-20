@@ -103,6 +103,23 @@ public class OrderServiceImpl implements OrderService {
 		
 		return null;
 	}
+
+	@Override
+	public List<OrderInfoDTO> orderInfoDTOList(String user_email) {
+		return odao.orderInfoDTOList(user_email);
+	}
+
+	@Override
+	public List<OrderDetailDTO> orderDetailDTOList(long order_code) {
+		return odao.orderDetailDTOList(order_code);
+	}
+
+	@Override
+	public String getDinerName(long order_code) {
+		return odao.getDinerName(order_code);
+	}
+
+	
 	
 
 }
