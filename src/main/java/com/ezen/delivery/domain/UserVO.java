@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @Getter
 public class UserVO {                                                             
-	
+		
 	private String user_id;
 	private String user_email;
 	private String user_pw;
@@ -22,7 +22,8 @@ public class UserVO {
 	private String user_naver_id;
 	private String user_register_date;
 	private String user_modify_date;
-	private int user_isAdmin;
-	//private String user_order_code;
+	private String user_Role;
+	private String provider;    // oauth2를 이용할 경우 어떤 플랫폼을 이용하는지
+    private String providerId;  // oauth2를 이용할 경우 아이디값
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +27,7 @@ import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.ReviewService;
 
@@ -46,15 +48,16 @@ public class ReviewController {
 
 	@PostMapping(value="/upload")
 	@ResponseBody
-	public String upload(@RequestParam(value ="file", required=false) MultipartFile[] files,@RequestParam("diner_code") int diner_code, ReviewVO rvo, HttpServletRequest request) {
+	public String upload(@RequestParam(value ="file", required=false) MultipartFile[] files,@RequestParam("diner_code") int diner_code, ReviewVO rvo, Authentication authentication) {
+		
+		log.info(rvo.toString());
 		
 		ReviewDTO ridto = new ReviewDTO();		
 		if(files != null && files.length > 0) {
 			List<ReviewImgVO> list = rihd.uploadFiles(files);
 			ridto.setFList(list);
 		}
-		HttpSession session = request.getSession();
-		UserVO uvo = (UserVO)session.getAttribute("user");
+				
 		ridto.setRvo(rvo);		
 		int isOk = rsv.insert(ridto,diner_code);
 		log.info("fList : "+ridto.getFList());

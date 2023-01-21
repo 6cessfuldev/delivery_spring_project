@@ -32,7 +32,9 @@
 	
 	<main>
 		<div class="d-flex justify-content-center">
-			<div class='card-box event'>event</div>
+			<div class='card-box event'>
+				<!-- <img alt="" src="/resources/source/event.gif" width="180px"> -->
+			</div>
 			<div class='card-box all' onclick="clickCategory('all')">전체보기</div>
 			<div class='card-box forone' onclick="clickCategory('aa')">1인분 주문</div>
 			<div class='card-box franchise' onclick="clickCategory('ff')">프랜차이즈</div>

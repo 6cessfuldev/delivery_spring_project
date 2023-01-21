@@ -2,8 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
 
 application.properties
-application.yml
 
+application.yml
 
 ### Eclipse ###
 .metadata

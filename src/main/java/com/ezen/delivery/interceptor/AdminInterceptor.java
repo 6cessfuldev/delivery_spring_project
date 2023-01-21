@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.ezen.delivery.domain.Role;
 import com.ezen.delivery.domain.UserVO;
 
 public class AdminInterceptor implements HandlerInterceptor{
@@ -14,15 +15,14 @@ public class AdminInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-		HttpSession session = request.getSession();
-		
-		UserVO uvo = (UserVO)session.getAttribute("user");
-		
-		if(uvo == null || uvo.getUser_isAdmin()!=1) {
-			response.sendRedirect("/main");
-			return false;
-		}
-		
+		/*
+		 * HttpSession session = request.getSession();
+		 * 
+		 * UserVO uvo = (UserVO)session.getAttribute("user");
+		 * 
+		 * if(uvo == null || uvo.getUser_Role()!=Role.ROLE_USER) {
+		 * response.sendRedirect("/main"); return false; }
+		 */
 		return true;
 	}
 

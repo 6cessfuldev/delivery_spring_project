@@ -56,7 +56,7 @@
 	        <div id="order_payInfo">
 	            <ul id="order_ul">
 	                <li id="order_li">주문금액 ${orderTotalPrice }원</li>
-	                <li id="order_li">배달비 0,000원</li>
+	                <li id="order_li">배달비 ${diner.diner_delivery_fee}원</li>
 	                <li id="order_li">총 결제금액 ${orderTotalPrice }원</li>
 	            </ul>
 	            <button onclick="requestPay()" type="button" id="order_payAll">결제하기</button>

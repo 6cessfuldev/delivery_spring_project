@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketListDTO;
+import com.ezen.delivery.domain.DinerVO;
 
 public interface BasketService {
 
@@ -18,5 +19,7 @@ public interface BasketService {
 	public int getDinerCode(String user_id);
 
 	public BasketListDTO getBasketListDTO(String user_id);
+
+	public DinerVO getDiner(String user_id);
 	
 }

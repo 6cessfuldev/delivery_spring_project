@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketVO;
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,22 +38,23 @@ public class BasketController {
 	//등록성공 : 1 / 이미 데이터 있음 : 2 / 로그인 필요 : 3
 	@PostMapping("/add") 
 	@ResponseBody
-	public String addBasketPOST(@RequestBody BasketDTO basket, HttpServletRequest request) {
+	public String addBasketPOST(@RequestBody BasketDTO basket, Authentication authentication) {
 		
 		log.info(basket.toString());
 		
-		HttpSession session = request.getSession();
-		UserVO uvo = (UserVO)session.getAttribute("user");
-		if(uvo == null) {
+		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		if(principalDetails == null) {
 			return "3";
 		}
 		
 		return bsv.addBasket(basket)+"";
 	}
 	
-	@GetMapping("/list/{user_id}")
+	@PostMapping("/list")
 	@ResponseBody
-	public List<BasketDTO> getListGET(@PathVariable("user_id") String user_id) {
+	public List<BasketDTO> getListPOST(String user_id) {
+		
+		log.info(user_id);
 		
 		List<BasketDTO> bdtoList = bsv.getList(user_id);
 		
@@ -74,14 +77,18 @@ public class BasketController {
 	}
 	
 	@GetMapping("/diner")
-	public String basketDinerGET(HttpSession session, Model model) {
-		
-		UserVO user = (UserVO)session.getAttribute("user");
-		if(user == null) {
+	public String basketDinerGET(Authentication authentication, Model model) {
+		log.info("basket/diner");
+		if(authentication == null) {
 			return "/member/login";
 		}
+		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		
+		String user_id = principalDetails.getUsername();
+		log.info(user_id);
+		
 		//장바구니 값이 없을 경우 0
-		int diner_code = bsv.getDinerCode(user.getUser_id());
+		int diner_code = bsv.getDinerCode(user_id);
 		if(diner_code==0) return "redirect:/";
 		
 		return  "redirect:/diner/detail?diner_code="+diner_code;

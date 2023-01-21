@@ -12,7 +12,7 @@
 			음식 가격 : <input type="number" name="food_price"><br>
 			음식 소개 : <input type="text" name="food_intro"><br>
 			음식 품절 여부 : <input type="text" name="food_state" value="N"><br>
-			음식점 코드 : <input type="text" name="food_diner_code" value="${diner.diner_code}" readonly><br>
+			음식점 코드 : <input type="text" name="diner_code" value="${diner.diner_code}" readonly><br>
 			
 			<button type="submit">등록</button>
 		</form>	

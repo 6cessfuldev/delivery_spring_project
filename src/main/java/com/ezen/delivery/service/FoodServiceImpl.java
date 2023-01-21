@@ -30,6 +30,7 @@ public class FoodServiceImpl implements FoodService {
 		
 		List<FoodDTO> fodtoList = new ArrayList<FoodDTO>();
 		List<FoodVO> fovoList = fdao.selectList(diner_code);
+		log.info(fovoList.toString());
 		
 		for (FoodVO fovo : fovoList) {
 			FileVO fivo = fidao.selectByFileCode(fovo.getFile_code());

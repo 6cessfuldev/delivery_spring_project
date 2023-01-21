@@ -1,6 +1,8 @@
 package com.ezen.delivery.controller;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -9,11 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ResolvableType;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +32,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.Handler.ApiMemberProfile;
-import com.ezen.delivery.domain.LoginVO;
 import com.ezen.delivery.domain.UserVO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,11 +46,18 @@ public class MemberController {
 	@Inject
 	private UserService usv;
 	@Autowired
-	private JavaMailSender mailSender;
+	private JavaMailSender mailSender;	
 	
+	private static String authorizationRequestBaseUri = "oauth2/authorization";
+	Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
 
-	// 이메일 인증
+   @Autowired
+   private ClientRegistrationRepository clientRegistrationRepository;
+   
+   @Autowired
+   private OAuth2AuthorizedClientService authorizedClientService;
 	
+	// 이메일 인증
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String mailCheckGET(String email) throws Exception {
@@ -75,9 +91,9 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		String num = Integer.toString(checkNum);
-		
+
 		return num;
 
 	}
@@ -110,18 +126,20 @@ public class MemberController {
 		}
 
 	}
-	
+
 	// 회원가입
-	
+
 	@GetMapping("/signup")
 	public void signUpGet() {
-		
+
 		log.info("회원가입");
+
 	}
 
 	@PostMapping("/signup")
 	public String signUpPost(Model model, UserVO uvo) {
 		log.info(uvo.toString());
+		uvo.setUser_Role("USER");
 		boolean isUp = usv.signUp(uvo);
 		if (isUp) {
 			return "/member/login";
@@ -130,189 +148,190 @@ public class MemberController {
 			return "/member/signup";
 		}
 	}
-	
+
 	// 이메일 중복 확인
-	
+
 	@PostMapping("/userEmailCheck")
-	public ResponseEntity<String> userEmailCheck(String user_email){
+	public ResponseEntity<String> userEmailCheck(String user_email) {
 		log.info(user_email);
-		
+
 		int emailExisted = usv.emailExist(user_email);
 		log.info("" + emailExisted);
-		
-		return (emailExisted > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+
+		return (emailExisted > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
-	
-	
+
 	// 아이디 중복 확인
-	
+
 	@PostMapping("/userIdCheck")
-	public ResponseEntity<String> userIdCheck(String user_id){
+	public ResponseEntity<String> userIdCheck(String user_id) {
 		log.info(user_id);
-		
+
 		int existed = usv.isExist(user_id);
 		log.info("" + existed);
-		
-		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+
+		return (existed > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
-	
+
 	// 로그인
-	
 	@GetMapping("/login")
-	public void loginGet() {}
-
-	@PostMapping("/login")
-	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
-		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);
-		UserVO isUser = usv.isUser(user_id, user_pw);
-		
-		if (isUser != null) { // 로그인 성공
-			HttpSession session = req.getSession();
-			session.setAttribute("user", isUser);
-			model.addAttribute("user", isUser);
-			int isOk = usv.loginDate(user_id);
-			log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
-			
-			return "redirect:/";
-		
-		} else { // 로그인 실패
-			model.addAttribute("msg", "0");
-			int isOk = usv.loginFailCnt(user_id);
-			log.info(">>> add fail Count " + (isOk > 0 ? "Ok" : "Fail"));
-
-			return "/member/login";
-		}
-	}
+	public void loginGet(Model model) {}
 	
+
+//	@PostMapping("/login")
+//	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
+//		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);
+//		UserVO isUser = usv.isUser(user_id, user_pw);
+//
+//		if (isUser != null) { // 로그인 성공
+//			HttpSession session = req.getSession();
+//			session.setAttribute("user", isUser);
+//			model.addAttribute("user", isUser);
+//			int isOk = usv.loginDate(user_id);
+//			log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+//
+//			return "redirect:/";
+//
+//		} else { // 로그인 실패
+//			model.addAttribute("msg", "0");
+//			int isOk = usv.loginFailCnt(user_id);
+//			log.info(">>> add fail Count " + (isOk > 0 ? "Ok" : "Fail"));
+//
+//			return "/member/login";
+//		}
+//	}
+
 	// 네이버 로그인
-	
+
 	@GetMapping("/callback")
-	public void callback() {}
-	
-	@PostMapping("/naverLogin")
-	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
-		
-		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
-		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
-		
-		if(getUser == null) { // 미가입 회원인 경우
-			
-			boolean isUp = usv.naverSignUp(naverUser);
-			
-			if (isUp) {
-				HttpSession session = req.getSession();
-				session.setAttribute("user", naverUser);
-				model.addAttribute("user", naverUser);
-				int isOk = usv.loginDate(naverUser.getUser_id());
-				log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
-			} 
-			
-		} else { // 이미 가입한 회원인 경우
-			HttpSession session = req.getSession();
-			session.setAttribute("user", getUser);
-			model.addAttribute("user", getUser);
-			int isOk = usv.loginDate(getUser.getUser_id());
-			log.info(">>> update login date " + (isOk > 0? "Ok" : "Fail"));
-		}
-		
-		return "/member/naverLogin";
-		
+	public void callback() {
 	}
 	
+//	@PostMapping("/naverLogin")
+//	public String naverLoginPost(String accessToken, Model model, HttpServletRequest req) {
+//
+//		UserVO naverUser = ApiMemberProfile.getProfile(accessToken);
+//		UserVO getUser = usv.getUserByID(naverUser.getUser_id());
+//
+//		if (getUser == null) { // 미가입 회원인 경우
+//
+//			boolean isUp = usv.naverSignUp(naverUser);
+//
+//			if (isUp) {
+//				HttpSession session = req.getSession();
+//				session.setAttribute("user", naverUser);
+//				model.addAttribute("user", naverUser);
+//				int isOk = usv.loginDate(naverUser.getUser_id());
+//				log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+//			}
+//
+//		} else { // 이미 가입한 회원인 경우
+//			HttpSession session = req.getSession();
+//			session.setAttribute("user", getUser);
+//			model.addAttribute("user", getUser);
+//			int isOk = usv.loginDate(getUser.getUser_id());
+//			log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+//		}
+//
+//		return "/member/naverLogin";
+//	}
+
 	// 회원 정보
-	
-	@GetMapping({"/detail_userInfo", "/modify_userInfo" })
-	public void userInfo() {}
-	
+
+	@GetMapping({ "/detail_userInfo", "/modify_userInfo" })
+	public void userInfo() {
+	}
+
 	// 회원 정보 수정
 
 	@PostMapping("/modify_userInfo")
-	public ResponseEntity<String> modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session){
+	public ResponseEntity<String> modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session) {
 		log.info(user_id);
 		log.info(new_pw);
 		log.info(new_phone);
-		
+
 		// 세션 변경
-		UserVO user = (UserVO)session.getAttribute("user");
+		UserVO user = (UserVO) session.getAttribute("user");
 		user.setUser_phone(new_phone);
 		session.setAttribute("user", user);
-		
+
 		// DB 변경
 		int modUser = usv.modifyUserInfo(user_id, new_pw, new_phone);
 		log.info("" + modUser);
-		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
-	
+
 	// 회원 탈퇴
-	
+
 	@PostMapping("/remove_userInfo")
-	public ResponseEntity<String> removeUserInfo(String user_id, HttpServletRequest req){
+	public ResponseEntity<String> removeUserInfo(String user_id, HttpServletRequest req) {
 		log.info(user_id);
-		
+
 		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
-		
+
 		int delUser = usv.removeUserInfo(user_id);
 		log.info("" + delUser);
-		
-		return ( delUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
-				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)); 
-	}
-	
-	// 로그아웃
-	
-	@GetMapping("/logout")
-	public String logoutGet(HttpServletRequest req, HttpSession session) {
-		
-		UserVO uvo = (UserVO)session.getAttribute("user");
-		int isOk = usv.logoutDate(uvo.getUser_id());
-		log.info(">>> update logout date " + (isOk > 0 ? "Ok" : "Fail"));
-		
-		req.getSession().removeAttribute("user");
-		req.getSession().invalidate();
-		
-		return "redirect:/";
+
+		return (delUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
+	// 로그아웃
+//	@GetMapping("/logout")
+//	public String logoutGet(HttpServletRequest req, HttpSession session) {
+//
+//		UserVO uvo = (UserVO) session.getAttribute("user");
+//		int isOk = usv.logoutDate(uvo.getUser_id());
+//		log.info(">>> update logout date " + (isOk > 0 ? "Ok" : "Fail"));
+//
+//		req.getSession().removeAttribute("user");
+//		req.getSession().invalidate();
+//
+//		return "redirect:/";
+//	}
+
 	// 아이디 찾기
-	
+
 	@GetMapping("/find_id")
-	public void findIdGet() {}
-	
-	@PostMapping(value="/find_id")
-	public ResponseEntity<String> findId(String user_email){
+	public void findIdGet() {
+	}
+
+	@PostMapping(value = "/find_id")
+	public ResponseEntity<String> findId(String user_email) {
 		log.info(user_email);
-		
+
 		UserVO user = usv.getId(user_email);
 		log.info("" + user);
-		
-		return (user.getUser_id() != null ? new ResponseEntity<String>(user.getUser_id(), HttpStatus.OK) 
+
+		return (user.getUser_id() != null ? new ResponseEntity<String>(user.getUser_id(), HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));
 	}
 
 	// 비밀번호 찾기
-	
+
 	@GetMapping("/find_pw")
-	public void findPwGet() {}
-	
+	public void findPwGet() {
+	}
+
 	// 비밀번호 변경
-	
+
 	@GetMapping("/update_pw")
-	public void updatePwGet() {}
-	
+	public void updatePwGet() {
+	}
+
 	@PostMapping("/update_pw")
-	public ResponseEntity<String> updatePw(String getEmail, String new_pw){
+	public ResponseEntity<String> updatePw(String getEmail, String new_pw) {
 		log.info(getEmail);
 		log.info(new_pw);
-			
+
 		int isEqual = usv.updatePw(getEmail, new_pw);
 		log.info("" + isEqual);
-		return ( isEqual > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) 
+		return (isEqual > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.OK));
 	}
-	
-	
+
 }

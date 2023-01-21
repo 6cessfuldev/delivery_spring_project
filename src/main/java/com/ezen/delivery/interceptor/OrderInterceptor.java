@@ -14,18 +14,18 @@ public class OrderInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
+//		
+//		UserVO uvo = (UserVO)session.getAttribute("user");
+//		
+//		if(uvo == null) {
+//			response.sendRedirect("/member/login");
+//			return false;
+//		}else {
+//			return true;
+//		}
 		
-		UserVO uvo = (UserVO)session.getAttribute("user");
-		
-		if(uvo == null) {
-			response.sendRedirect("/member/login");
-			return false;
-		}else {
-			return true;
-		}
+		return true;
 	}
-
-	
 	
 }

@@ -11,6 +11,7 @@ import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketDetailVO;
 import com.ezen.delivery.domain.BasketListDTO;
 import com.ezen.delivery.domain.ChoiceVO;
+import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.repository.BasketDAO;
 import com.ezen.delivery.repository.BasketDetailDAO;
 import com.ezen.delivery.repository.ChoiceDAO;
@@ -117,6 +118,12 @@ public class BasketServiceImpl implements BasketService {
 		int diner_code = bdao.selectDinerCodeByUserId(user_id);
 		log.info(diner_code+"");
 		return diner_code;
+	}
+
+	@Override
+	public DinerVO getDiner(String user_id) {
+		
+		return bdao.selectDinerByUserId(user_id);
 	}
 
 }
