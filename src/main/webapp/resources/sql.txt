@@ -16,7 +16,7 @@ flush privileges;
 create table user(
 user_id varchar(60) not null,
 user_email varchar(40) not null,
-user_pw varchar(500), not null,
+user_pw varchar(500) not null,
 user_name varchar(40) not null,
 user_phone varchar(40),
 user_birth date,
@@ -49,6 +49,29 @@ diner_score_avg double,
 diner_review_count int default 0,
 primary key(diner_code));
 
+## food(음식)
+create table food(
+food_code int auto_increment,
+food_name varchar(40) not null,
+food_price int not null,
+food_intro varchar(100),
+food_register_date datetime default now(),
+food_state varchar(10) default "N",
+file_code int,
+diner_code int,
+primary key(food_code));
+
+## file(파일)
+create table file(
+file_code int auto_increment,
+file_uuid varchar(256),
+file_save_dir varchar(256) not null,
+file_size int,
+file_name varchar(512) not null,
+file_type tinyint(1) default 0,
+file_reg_date datetime default now(),
+primary key(file_code));
+
 
 ## choice(옵션)
 
@@ -80,7 +103,7 @@ choice_code int not null);
 ## login(로그인기록)
 
 create table login(
-log_code int not null auto_increment,
+log_code int auto_increment,
 user_id varchar(60) not null,
 log_date datetime,
 log_out_date datetime,
@@ -114,8 +137,6 @@ create table order_food(
 order_code bigint not null,
 order_food_info varchar(2000) not null
 );
-
-
 
 ## review (리뷰)
 	

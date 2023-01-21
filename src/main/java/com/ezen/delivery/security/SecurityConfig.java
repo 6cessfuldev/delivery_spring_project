@@ -108,8 +108,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // resources 모든 접근을 허용하는 설정을 해버리면
         // HttpSecurity 설정한 ADIM권한을 가진 사용자만 resources 접근가능한 설정을 무시해버린다.
-        web.ignoring()
-                .antMatchers("/resources/**");
+    	web.ignoring()
+                .antMatchers("/resources/**")
+                .antMatchers("/upload/**");
+                
+            
     }
 	 
 	@Override
@@ -118,13 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 			.cors().disable()
 				.authorizeRequests()
-				.antMatchers("/member/login").permitAll()
-				.antMatchers("/index").permitAll()
-				.antMatchers("/").permitAll()
-				.antMatchers("/diner/list").permitAll()
-				.antMatchers("/diner/detail").permitAll()
 				.antMatchers("/order/**").hasRole("USER")
-				.anyRequest().authenticated()
 			.and()
 				.formLogin()
 				.loginPage("/member/login.html")

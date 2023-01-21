@@ -356,7 +356,7 @@
 								</div>
 								<div class="info-text">
 									<span class="info-list-title">상호명</span> <span>${diner.diner_business_name}</span><br>
-									<span class="info-list-title">사업자등록번호</span> <span>${diner_company_num}	</span>
+									<span class="info-list-title">사업자등록번호</span> <span>${diner.diner_company_num}	</span>
 								</div>
 							</div>
 

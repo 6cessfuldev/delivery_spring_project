@@ -81,6 +81,7 @@ public class DinerController {
 		log.info("diner_address : "+diner.getDiner_address());
 		log.info("count:"+diner.getDiner_review_count());
 		List<FoodDTO> foodList = fsv.getListByDinerCode(diner_code);
+		log.info(foodList.toString());
 		
 		model.addAttribute("fivo", fivo);
 		model.addAttribute("foodList",foodList);

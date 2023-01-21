@@ -101,6 +101,7 @@ public class DinerServiceImpl implements DinerService {
 		
 		DinerVO dvo = ddao.selectDiner(diner_code);
 		double avg = rdao.selectAvgStar(diner_code);
+		log.info(avg+"");
 		dvo.setDiner_score_avg(avg);
 		int count = rdao.reviewCount(diner_code);
 		dvo.setDiner_review_count(count);
