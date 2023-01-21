@@ -72,6 +72,7 @@
         let basketList = '<c:out value="${basketList}"/>';
         let order_name = '<c:out value="${order_name}"/>';
         let diner_code = '<c:out value="${diner.diner_code}"/>';
+        let diner_delivery_fee = '<c:out value="${diner.diner_delivery_fee}"/>';
     </script>
 <script type="text/javascript" src="/resources/js/order.js"></script>
 </body>

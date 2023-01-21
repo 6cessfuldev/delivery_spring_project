@@ -12,7 +12,7 @@ public interface OrderService {
 
 	long orderPriceCheck(BasketListDTO bldto);
 
-	String order(BasketListDTO bldto, OrderInfoDTO oidto, HttpSession session);
+	String order(BasketListDTO bldto, OrderInfoDTO oidto);
 
 	List<OrderInfoDTO> orderInfoDTOList(String user_email);
 

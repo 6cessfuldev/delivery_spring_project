@@ -104,7 +104,7 @@ public class OrderController {
 
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 			
-		String user_email = principalDetails.getAttribute("email");
+		String user_email = principalDetails.getUser().getUser_email();
 		
 		log.info("user_email : "+user_email);
 
