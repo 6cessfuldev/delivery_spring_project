@@ -153,7 +153,6 @@ function paymentCash(data){
 	}) // done 
     .fail(function() {
 		alert("에러");
-		location.replace("/");
 	}) 
 }
 
