@@ -82,6 +82,7 @@ function cashPay(){
 // 결제 요청
 function requestPay() {
  	console.log(param);
+ 	param.order_buyer_tel = $("#order_phone").val();
 
 	if(param.order_buyer_postcode == null || param.order_buyer_postcode == "" || param.order_buyer_addr == null || param.order_buyer_addr == "") {
 		alert("배달 받으실 주소를 입력해 주세요.");
