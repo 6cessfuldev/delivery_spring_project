@@ -51,9 +51,29 @@
 }
 
 .card-head{
+	width: 750px;
 	font-size : 26px;
 	margin-bottom: 15px;
+	padding-top: 20px;
 	font-weight: 600;
+	float: left;
+}
+
+.col-md-2{
+	float: right;
+	padding-bottom: 20px;
+}
+
+.dinerName{
+	font-size: 22px;
+	font-weight: 500;
+	margin: 10px 0 10px 0;
+	
+}
+
+.card{
+	float: left;
+	padding-left: 20px;
 }
 
 .btn{
