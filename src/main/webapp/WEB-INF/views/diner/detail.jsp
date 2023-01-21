@@ -475,11 +475,11 @@
 <form action="/order" method="post" id="modal-form">
         	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
         	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
-        	<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
+        	<input type="text" name="user_id" val="<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>" hidden>
         </form>
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
-	let user_id = "<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>";
+	let user_id = <sec:authorize access='!isAuthenticated()'>""</sec:authorize><sec:authorize access='isAuthenticated()'>"<sec:authentication property='principal.username'/>"</sec:authorize>;
 	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';

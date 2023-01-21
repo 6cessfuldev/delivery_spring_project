@@ -1,17 +1,17 @@
 package com.ezen.delivery.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
+import com.ezen.delivery.repository.DinerDAO;
 import com.ezen.delivery.repository.ReviewDAO;
 import com.ezen.delivery.repository.ReviewImgDAO;
 
@@ -25,6 +25,8 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewDAO rdao;
 	@Inject
 	ReviewImgDAO ridao;
+	@Inject
+	DinerDAO ddao;
 
 	@Override
 	public List<ReviewDTO> getList(int diner_code) {
@@ -48,6 +50,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return rdtoList;
 	}
+	
 	@Override
 	public int insert(ReviewDTO ridto, int diner_code) {
 		int isOk = rdao.insertReview(ridto.getRvo());
@@ -55,11 +58,18 @@ public class ReviewServiceImpl implements ReviewService {
 			for(ReviewImgVO rivo : ridto.getFList()) {			
 				rivo.setReview_code(ridto.getRvo().getReview_code());
 				isOk *= ridao.insert(rivo);
-				rdao.updateCount(diner_code);
 			}
 		}
-		return 0;
+		rdao.updateCount(diner_code);
+
+		double scoreAvg = rdao.selectAvgStar(diner_code);
+		DinerVO dvo = new DinerVO();
+		dvo.setDiner_code(diner_code);
+		dvo.setDiner_score_avg(scoreAvg);
+		isOk *= ddao.updateScore(dvo);
 		
+
+		return 0;
 	}
 	//사장님댓글
 //	@Override

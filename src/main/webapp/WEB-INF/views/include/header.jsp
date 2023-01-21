@@ -30,7 +30,7 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<li class="nav-item"><div class="box"><a href="/admin" class="nav-link" aria-current="page">관리자</a></div></li>
+					<li class="nav-item"><div class="box"><a href="/admin/" class="nav-link" aria-current="page">관리자</a></div></li>
 					</sec:authorize>
 					<li class="nav-item"><div class="box" onclick="logout()"><a href="#" class="nav-link" aria-current="page">로그아웃</a></div></li>
 					<li class="nav-item"><div class="box2"><a href="/basket/diner" class="nav-link">장바구니</a></div></li>
