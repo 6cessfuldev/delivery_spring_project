@@ -112,7 +112,7 @@ choice_code int not null,
 FOREIGN KEY (basket_code)
 REFERENCES basket(basket_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 FOREIGN KEY (choice_code)
-REFERENCES choice(choice_code) ON UPDATE CASCADE ON DELETE RESTRICT
+REFERENCES choice(choice_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(basket_code));
 
 
@@ -164,7 +164,7 @@ create table review(
 review_code int not null auto_increment,
 review_order_code int,
 diner_code int,
-user_id varchar(40),
+user_id varchar(60),
 review_content text not null,
 review_score int,
 review_reg_date datetime default now(),

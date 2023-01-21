@@ -12,16 +12,40 @@
 	select * from diner limit 0, 20
 </select>
 
-<select id="selectList" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select diner_code, file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
-			diner_business_name, diner_company_num, diner_category, diner_delivery_fee, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner 
-			order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+<sql id="select_diner">
+select diner_code, file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
+			diner_business_name, diner_company_num, diner_category, diner_delivery_fee, ST_X(diner_addr_point) as diner_addr_lng, 
+			ST_Y(diner_addr_point) as diner_addr_lat, diner_score_avg, diner_review_count from diner
+</sql>
+
+<select id="selectListByDistance" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	where ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10
 </select>
 
-<select id="selectListbyCate" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
-	select diner_code, file_code, diner_name, diner_address, diner_min_pay, diner_notice, diner_open_time, diner_close_time, diner_method_pay,
-			diner_business_name, diner_company_num, diner_category, diner_delivery_fee, ST_X(diner_addr_point) as diner_addr_lng, ST_Y(diner_addr_point) as diner_addr_lat from diner 
-			where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+<select id="selectListByReview" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	where ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_review_count desc limit #{startNum}, 10
+</select>
+
+<select id="selectListByScore" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	where ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_score_avg desc limit #{startNum}, 10
+</select>
+
+<select id="selectCathListByDistance" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+</select>
+
+<select id="selectCathListByReview" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	where diner_category like concat('%', #{category}, '%') and ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_review_count desc limit #{startNum}, 10
+</select>
+
+<select id="selectCathListByScore" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	where diner_category like concat('%', #{category}, '%') and ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_score_avg desc limit #{startNum}, 10
 </select>
 
 <insert id="insert">
@@ -46,8 +70,8 @@ insert into diner(file_code, diner_name, diner_address, diner_min_pay, diner_not
 	delete from diner where diner_code = #{diner_code}
 </delete>
 
-<select id="selectReview" resultType="com.ezen.delivery.domain.DinerVO">
-	select diner_review_count, diner_score_avg from diner where diner_code = #{diner_code}
-</select>
+<update id="updateScore">
+	update diner set diner_score_avg = #{diner_score_avg} where diner_code = #{diner_code}
+</update>
 
 </mapper>
