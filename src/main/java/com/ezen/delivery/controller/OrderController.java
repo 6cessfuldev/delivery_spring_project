@@ -54,12 +54,11 @@ public class OrderController {
 
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 
-		String user_id = principalDetails.getUsername();
-
+		UserVO uvo = principalDetails.getUser();
+		String user_id = uvo.getUser_id();
 		List<BasketDTO> bList = bsv.getList(user_id);
 		System.out.println("BasketDTO : " + bList);
 		
-		UserVO uvo = usv.getUserByID(user_id);
 
 		int orderTotalPrice = 0;
 		String orderName = "(먹어요)";
@@ -104,7 +103,7 @@ public class OrderController {
 
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 			
-		String user_email = principalDetails.getAttribute("email");
+		String user_email = principalDetails.getUser().getUser_email();
 		
 		log.info("user_email : "+user_email);
 
