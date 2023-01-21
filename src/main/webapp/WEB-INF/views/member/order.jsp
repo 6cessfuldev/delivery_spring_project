@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/order.css">
@@ -12,18 +13,18 @@
 <body>
    <div id="order_wrapper">
         <div id="order_content">
-            <div id="order_img">
+            <!-- <div id="order_img">
                 <a href="#" id="order_iconA"><img id="order_icon" src="/resources/source/home.png"></a>
-             </div><br><br><br><br><br><br>
+             </div><br><br><br><br><br><br> -->
             <div id="order">
                 <p id="order_p1">주문자 정보</p>
                 <input id="order_post"  type="text" placeholder="주소입력(클릭)" readonly onclick="findAddr()">
                 <input id="order_addr" type="text" readonly> <br><br>
-                <input type="text" id="order_addrInput" placeholder="상세주소를 입력하세요."><br>
-                <p id="order_p2">연락처 ${user.user_phone }</p>
+                <input type="text" id="order_addrInput" placeholder="상세주소를 입력하세요."><br><br>
+                <input type="text" id="order_phone" value="${user.user_phone}" placehoder="핸드폰번호를 입력하세요.">
                 <input type="checkbox" id="order_check">
                 <label for="order_check" id="order_checkLabel"><span>안심번호 사용</span></label>
-                <button id="order_num">변경</button>
+
        		</div>
        		<br><br>
 	        <div id="order_checkDiv">
