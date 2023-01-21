@@ -109,7 +109,7 @@ public class OrderController {
 		log.info("user_email : "+user_email);
 
 		List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
-		model.addAttribute("userOrderHistoryList", userOrderHistoryList);
+		
 		
 		List<OrderInfoDTO> oidtoList = osv.orderInfoDTOList(user_email);
 
@@ -123,7 +123,7 @@ public class OrderController {
 			log.info(oddtoList.toString());
 
 			List<OrderHistoryDTO> orderHistoryList = new ArrayList<OrderHistoryDTO>();
-			model.addAttribute("orderHistoryList", orderHistoryList);
+			
 		
 
 			for (int j = 0; j < oddtoList.size(); j++) {
@@ -170,7 +170,9 @@ public class OrderController {
 
 			userOrderHistoryList.add(orderHistoryList);
 		}
+		model.addAttribute("userOrderHistoryList", userOrderHistoryList);
 
+		
 		return "/member/myOrderList";
 	}
 
