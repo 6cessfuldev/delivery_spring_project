@@ -108,9 +108,10 @@ public class OrderController {
 		
 		log.info("user_email : "+user_email);
 
-		List<OrderInfoDTO> oidtoList = osv.orderInfoDTOList(user_email);
-
 		List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
+		model.addAttribute("userOrderHistoryList", userOrderHistoryList);
+		
+		List<OrderInfoDTO> oidtoList = osv.orderInfoDTOList(user_email);
 
 		for (int i = 0; i < oidtoList.size(); i++) {
 
