@@ -123,6 +123,8 @@ public class OrderController {
 			log.info(oddtoList.toString());
 
 			List<OrderHistoryDTO> orderHistoryList = new ArrayList<OrderHistoryDTO>();
+			model.addAttribute("orderHistoryList", orderHistoryList);
+		
 
 			for (int j = 0; j < oddtoList.size(); j++) {
 
@@ -153,10 +155,10 @@ public class OrderController {
 					String food_name = (String) jsonObj.get("food_name");
 					ohdto.setFood_name(food_name);
 
-					int total_price = (int) jsonObj.get("total_price");
+					int total_price = Integer.parseInt(String.valueOf(jsonObj.get("total_price")));
 					ohdto.setTotal_price(total_price);
 
-					int order_count = (int) jsonObj.get("basket_order_count");
+					int order_count = Integer.parseInt(String.valueOf(jsonObj.get("basket_order_count")));
 					ohdto.setOrder_count(order_count);
 
 				} catch (Exception e) {

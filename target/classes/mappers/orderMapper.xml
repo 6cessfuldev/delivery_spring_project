@@ -95,10 +95,10 @@
   	</select>
   	
   	<select id="getDinerName" resultType="String">
-  		select d.diner_name
+  		select diner_name
 		from diner b
-		inner join order o
-		on o.order_code = b.order_code
+		inner join `order` o
+		on o.diner_code = b.diner_code
   	</select>
   	
   </mapper>
