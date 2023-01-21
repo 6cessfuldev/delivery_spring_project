@@ -135,6 +135,14 @@ main{
 
 }
 
+.diner-name-field{
+	float: left;
+}
+
+.dib-field{
+	float: right;
+}
+
 .diner-info{
 	display: flex;
 	padding-top: 8px;
