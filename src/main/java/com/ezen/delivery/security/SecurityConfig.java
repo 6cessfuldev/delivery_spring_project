@@ -137,7 +137,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.oauth2Login()
 			    .clientRegistrationRepository(clientRegistrationRepository())
                 .authorizedClientService(authorizedClientService())
-                .loginPage("/member/login.html")
+                .loginPage("/member/login")
 				.userInfoEndpoint()			// 로그인 성공 후 사용자정보를 가져온다
 		    		.userService(principalOauth2UserService)
 			.and()

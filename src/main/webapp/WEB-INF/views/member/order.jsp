@@ -58,7 +58,7 @@
 	            <ul id="order_ul">
 	                <li id="order_li">주문금액 ${orderTotalPrice }원</li>
 	                <li id="order_li">배달비 ${diner.diner_delivery_fee}원</li>
-	                <li id="order_li">총 결제금액 ${orderTotalPrice }원</li>
+	                <li id="order_li">총 결제금액 ${orderTotalPrice + diner.diner_delivery_fee}원</li>
 	            </ul>
 	            <button onclick="requestPay()" type="button" id="order_payAll">결제하기</button>
 	        </div>
@@ -66,12 +66,13 @@
     </div>
     <jsp:include page="../include/footer2.jsp"></jsp:include>
     <script>
-        let user_email = '<c:out value="${sessionScope.user.user_email}"/>';
-        let user_name = '<c:out value="${sessionScope.user.user_name}"/>';
-        let user_phone = '<c:out value="${sessionScope.user.user_phone}"/>';
+        let user_email = '<c:out value="${user.user_email}"/>';
+        let user_name = '<c:out value="${user.user_name}"/>';
+        let user_phone = '<c:out value="${user.user_phone}"/>';
         let basketList = '<c:out value="${basketList}"/>';
         let order_name = '<c:out value="${order_name}"/>';
-        let diner_code = '<c:out value="${diner_code}"/>';
+        let diner_code = '<c:out value="${diner.diner_code}"/>';
+        let diner_delivery_fee = '<c:out value="${diner.diner_delivery_fee}"/>';
     </script>
 <script type="text/javascript" src="/resources/js/order.js"></script>
 </body>

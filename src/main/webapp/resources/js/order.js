@@ -4,7 +4,7 @@ let param = {
 	order_pg : '',
 	order_pay_method : 'card',
 	order_name : order_name,
-	order_amount : localStorage.getItem("orderTotalPrice"),
+	order_amount : Number(localStorage.getItem("orderTotalPrice")) + Number(diner_delivery_fee),
 	order_buyer_email : user_email,
 	order_buyer_name : user_name,
 	order_buyer_tel : user_phone,
