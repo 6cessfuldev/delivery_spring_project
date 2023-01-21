@@ -12,11 +12,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -130,6 +133,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("user_id")
 				.passwordParameter("user_pw")
 			.and()
+				.userDetailsService(customUserService())
 				.oauth2Login()
 			    .clientRegistrationRepository(clientRegistrationRepository())
                 .authorizedClientService(authorizedClientService())
@@ -154,6 +158,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
     }
 	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+
+		return super.authenticationManagerBean();
+	}
+
 	@Bean
 	public AuthenticationSuccessHandler loginSuccessHandler() {
 		return new CustomLoginSuccessHandler();

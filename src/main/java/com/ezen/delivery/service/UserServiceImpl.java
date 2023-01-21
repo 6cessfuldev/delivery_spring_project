@@ -3,13 +3,20 @@ package com.ezen.delivery.service;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.repository.UserDAO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +28,8 @@ public class UserServiceImpl implements UserService {
 	private UserDAO udao;
 	@Inject
 	PasswordEncoder passwordEncoder;
+	@Inject
+	private AuthenticationManager authenticationManager;
 
 	@Override
 	public boolean signUp(UserVO uvo) {
@@ -112,13 +121,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int modifyUserInfo(String user_id, String new_pw, String new_phone) {
+	public int modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session) {
 		
 		// 비밀번호 암호화
 		String encodeNewPw = passwordEncoder.encode(new_pw);
 		new_pw = encodeNewPw;
 		
-		return udao.updateUser(user_id, new_pw, new_phone);
+		int isUp = udao.updateUser(user_id, new_pw, new_phone);
+		UserVO uvo = udao.getUser(user_id);
+		//세션 변경
+		if(isUp>0) {
+			SecurityContextHolder.clearContext();
+		    PrincipalDetails updateUserDetails = new PrincipalDetails(uvo);
+			Authentication newAuthentication = new UsernamePasswordAuthenticationToken(updateUserDetails, null, updateUserDetails.getAuthorities());
+			SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+			session.setAttribute("SPRING_SECURITY_CONTEXT", newAuthentication);
+		}
+		
+		return isUp; 
 	}
 
 	@Override
