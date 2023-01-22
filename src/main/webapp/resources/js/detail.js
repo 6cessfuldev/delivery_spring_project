@@ -166,15 +166,17 @@ function getReviewList(diner_code){
     spreadReviewServer(diner_code).then(result =>{ 
         console.log(result);
         const review = document.getElementById('review-head');
+        review.innerHTML = "";
         const star1 = '★☆☆☆☆';
         const star2 = '★★☆☆☆';
         const star3 = '★★★☆☆';
         const star4 = '★★★★☆';
         const star5 = '★★★★★';
-        review.innerHTML = ""; 
+       
         if(result.length > 0){ 
                 let count = 0;
             for(let reviewDTO of result){ 
+                let img_box=document.createElement('div');
                  const star = reviewDTO.rvo.review_score;
                  console.log(star);
 
@@ -200,7 +202,6 @@ function getReviewList(diner_code){
                         star0 = star5;
                         break;
                  }   
-                 
                  let div = `<div class="reviewBox" data-review_code="${reviewDTO.rvo.review_code}">`;
                  div += `<div class="reviewer-id">${reviewDTO.rvo.user_id}</div>`;
                  div += `<button class="deleteBtn" type="button">X</button>`;
@@ -208,28 +209,33 @@ function getReviewList(diner_code){
                  div += `<div class="review-point">${star0}<span class="starScore">${reviewDTO.rvo.review_score}</span></div>`;
                  div += `<div class="review-menu"></div>`;
                  div += `<div class="review-content">${reviewDTO.rvo.review_content}</div>`;
-                 div += '<button type="button" class="bossComment">답글달기</button>';
                  div += `<br>`;
-                 div += `</div>`;
-                 review.innerHTML += div;
-               
-               if(reviewDTO.flist.length > 0){      
-                  for(let img of reviewDTO.flist){
+                 if(reviewDTO.flist.length > 0){      
+                    for(let img of reviewDTO.flist){
                       console.log(img);
                       let save_dir = img.review_img_save_dir.split('\\');
                       let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
                       console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
                       let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
-                      let imgTag = document.createElement("img");
-                      imgTag.id = 'review_img';
-                      imgTag.src = real;
-                      review.childNodes[count].append(imgTag);
-                    }
-                }
-                count++;
-               
-               }
-               
+                      let imgTest = '<img src="'+real+'" id="review_img">';
+                      div += imgTest;
+                      }
+                  }
+                 //div += '<button type="button" id="bossComment" class="bossComment">답글달기</button>';
+                 div += `<input value='' id='bossCommentText' class='bossCommentText' placeholder="사장님 답글을 남겨주세요!"></input>`;
+                 div += '<button type="button" id="bossCommentBtn" class="bossCommentBtn">답글달기</button>';
+                 div += `<br><br><br><br><br></div>`             
+                 let bossDiv = `<div class="bossCommentPrint"><span class="bosstext" >사장님 💬&nbsp&nbsp&nbsp&nbsp</span>`;
+                 bossDiv += `${reviewDTO.rvo.review_boss_comment}</div>`;
+                 review.innerHTML += div;
+                 if(reviewDTO.rvo.review_boss_comment != null){
+                    review.innerHTML += bossDiv;
+                 }
+
+                 count++;        
+            
+ 
+            }
            } else {
                let div = `<div>첫번째 리뷰를 작성해주세요!</div>`;
                review.innerHTML += div;
@@ -238,6 +244,63 @@ function getReviewList(diner_code){
        })
 
 }
+
+
+
+
+//사장님댓글
+function commentPost(bossData) {
+   // const commentData = $('.bossCommentText').val();
+    const commentData = bossData.review_boss_comment;
+   //console.log(commentData);
+    console.log(bossData);
+   //console.log(bossData.review_code);
+    if(commentData == null || commentData == ''){
+        alert("댓글 등록을 실패했습니다.");
+        return;
+    }
+    $.ajax({
+        url: '/review/bossComment/'+bossData.review_code,
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(bossData),
+        success: function(data, status, xhr){
+        if(data == 1){
+            alert("사장님 댓글을 등록했어요!");
+            getReviewList(diner_code);    
+        }
+    },
+        error: function(error, status, xhr){
+        console.log(error);
+        }
+      
+    });
+
+}
+$(document).on("click",".bossCommentBtn",function (e){
+	if(e.target.classList.contains('bossCommentBtn')){
+	    let div = e.target.closest('div');
+	    console.log(div.classList);
+        let review_codeVal = div.dataset.review_code;
+        const input = e.target.previousSibling;
+        console.log(input.classList);
+        const commentData = input.value;
+        console.log(commentData);
+        const bossData = {
+             review_boss_comment : commentData,
+             review_code : review_codeVal
+        }
+     console.log(bossData);
+     commentPost(bossData);
+    
+    }
+	
+ });
+
+
+
+
 
 //삭제
 async function removeReviewServer(review_code){
@@ -256,6 +319,7 @@ async function removeReviewServer(review_code){
     }
 }
 
+
 document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('deleteBtn')){
       let div = e.target.closest('div');
@@ -264,7 +328,9 @@ document.addEventListener('click', (e)=>{
       console.log(review_codeVal);
          removeReviewServer(review_codeVal).then(result => {
             if(result>0){
+                if(user_id == user_id){
                 alert("리뷰를 삭제했어요!");
+                }
             }
             getReviewList(diner_code);
          })  

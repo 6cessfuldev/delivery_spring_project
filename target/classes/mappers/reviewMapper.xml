@@ -31,15 +31,17 @@
 </select>
 
 <!-- 사장님 댓글 -->
-<!-- <update id="bossComment">
-	update reivew set review_boss_comment=#{review_boss_comment}
-	where diner_code=#{diner_code}
-	and diner_code=#{diner_code}
-</update> -->
-
+<update id="updateComment" parameterType="com.ezen.delivery.domain.ReviewVO">
+	update review set review_boss_comment=#{review_boss_comment}
+	where review_code = #{review_code} 
+</update>
 
 <delete id="delete">
 	delete from review where review_code = #{review_code} 
 </delete>
+
+<select id="selectBossComment" resultType="com.ezen.delivery.domain.ReviewVO">
+	select review_boss_comment from review where review_code = #{review_code}
+</select>
 </mapper>
 

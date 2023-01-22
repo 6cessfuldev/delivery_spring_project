@@ -286,11 +286,10 @@
                             </div>
                             
                             	<!-- 등록 후 출력 화면 -->
-                         <div class="review">
+
                             <div id="review-head">
-                            	  <div id="bossCommentBox"></div>
+
                             </div>
-                         </div>	
 					
 				
 						<div class="add-review d-flex justify-content-center align-items-center">
@@ -479,7 +478,7 @@
         </form>
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
-	let user_id = "<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>";
+	let user_id = <sec:authorize access='!isAuthenticated()'>""</sec:authorize><sec:authorize access='isAuthenticated()'>"<sec:authentication property='principal.username'/>"</sec:authorize>;
 	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';

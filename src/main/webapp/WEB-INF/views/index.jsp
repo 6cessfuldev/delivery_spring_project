@@ -86,7 +86,7 @@
 		
 	}
 	
-	//주소 검색
+	//검색어로 주소 검색
 	function searchAddress(keyword){
 		var places = new kakao.maps.services.Places();
 		var callback = function(result, status) {
@@ -130,7 +130,8 @@
 	var options = {
 			size: 5
 	}
-
+	
+	//가공된 주소로 검색
 	function searchAddr(keyword){
 		
 		if(keyword=="") {
