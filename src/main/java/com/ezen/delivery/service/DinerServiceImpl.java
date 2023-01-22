@@ -76,10 +76,29 @@ public class DinerServiceImpl implements DinerService {
 		List<DinerVO> dvoList = null;
 		
 		if(pvo.getCategory().equals("all")) {
-			
-			dvoList = ddao.selectList(pvo);
+			switch (pvo.getOrder()) {
+			case 1:
+				dvoList = ddao.selectListByDistance(pvo);
+				break;
+			case 2:
+				dvoList = ddao.selectListByReview(pvo);
+				break;
+			default :
+				dvoList = ddao.selectListByScore(pvo);
+				break;
+			}
 		}else {
-			dvoList = ddao.selectListbyCate(pvo);
+			switch (pvo.getOrder()) {
+			case 1:
+				dvoList = ddao.selectCathListByDistance(pvo);
+				break;
+			case 2:
+				dvoList = ddao.selectCathListByReview(pvo);
+				break;
+			default :
+				dvoList = ddao.selectCathListByScore(pvo);
+				break;
+			}
 		}
 		
 		for (DinerVO dvo : dvoList) {

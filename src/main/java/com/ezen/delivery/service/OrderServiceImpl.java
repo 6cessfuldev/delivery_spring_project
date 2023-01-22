@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public String order(BasketListDTO bldto, OrderInfoDTO oidto, HttpSession session) {
+	public String order(BasketListDTO bldto, OrderInfoDTO oidto) {
 		
 		Gson gson = new Gson();
 		

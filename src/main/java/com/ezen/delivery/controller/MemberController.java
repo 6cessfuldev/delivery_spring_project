@@ -48,15 +48,6 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;	
 	
-	private static String authorizationRequestBaseUri = "oauth2/authorization";
-	Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
-
-   @Autowired
-   private ClientRegistrationRepository clientRegistrationRepository;
-   
-   @Autowired
-   private OAuth2AuthorizedClientService authorizedClientService;
-	
 	// 이메일 인증
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
@@ -241,7 +232,19 @@ public class MemberController {
 	// 회원 정보
 
 	@GetMapping({ "/detail_userInfo", "/modify_userInfo" })
-	public void userInfo() {
+	public void userInfo(Authentication authentication, Model model) {
+		log.info(authentication.toString());
+		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		String user_id = principalDetails.getUsername();
+		log.info(principalDetails.getUser().toString());
+		int isOauth = 0;
+		if(principalDetails.getOAuth2UserInfo()!=null) {
+			isOauth = 1;
+		}
+		
+		UserVO uvo = usv.getUserByID(user_id);
+		model.addAttribute("user", uvo);
+		model.addAttribute("isOauth", isOauth);
 	}
 
 	// 회원 정보 수정
@@ -252,13 +255,8 @@ public class MemberController {
 		log.info(new_pw);
 		log.info(new_phone);
 
-		// 세션 변경
-		UserVO user = (UserVO) session.getAttribute("user");
-		user.setUser_phone(new_phone);
-		session.setAttribute("user", user);
-
 		// DB 변경
-		int modUser = usv.modifyUserInfo(user_id, new_pw, new_phone);
+		int modUser = usv.modifyUserInfo(user_id, new_pw, new_phone, session);
 		log.info("" + modUser);
 		return (modUser > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR));

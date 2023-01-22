@@ -474,7 +474,7 @@
 <form action="/order" method="post" id="modal-form">
         	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
         	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
-        	<input type="text" name="user_id" val="${sessionScope.user.user_id}" hidden>
+        	<input type="text" name="user_id" val="<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>" hidden>
         </form>
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";

@@ -20,21 +20,19 @@
 </select>
 
 <update id="updateCount" parameterType="int">
-	update diner a inner join review B
-	on a.diner_code = b.diner_code
- 	set a.diner_review_count = a.diner_review_count+1
-   	where a.diner_code = #{diner_code}
+	update diner set diner_review_count = diner_review_count+1 where diner_code = #{diner_code}
 </update>
 
 <select id="reviewCount" resultType="int">
 	select count(*) from review where diner_code = #{diner_code}
 </select>
 
-<!-- 사장님 댓글 -->
+
 <update id="updateComment" parameterType="com.ezen.delivery.domain.ReviewVO">
 	update review set review_boss_comment=#{review_boss_comment}
 	where review_code = #{review_code} 
 </update>
+
 
 <delete id="delete">
 	delete from review where review_code = #{review_code} 

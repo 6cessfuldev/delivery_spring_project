@@ -54,12 +54,11 @@ public class OrderController {
 
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 
-		String user_id = principalDetails.getUsername();
-
+		UserVO uvo = principalDetails.getUser();
+		String user_id = uvo.getUser_id();
 		List<BasketDTO> bList = bsv.getList(user_id);
 		System.out.println("BasketDTO : " + bList);
 		
-		UserVO uvo = usv.getUserByID(user_id);
 
 		int orderTotalPrice = 0;
 		String orderName = "(먹어요)";
@@ -104,13 +103,14 @@ public class OrderController {
 
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 			
-		String user_email = principalDetails.getAttribute("email");
+		String user_email = principalDetails.getUser().getUser_email();
 		
 		log.info("user_email : "+user_email);
 
-		List<OrderInfoDTO> oidtoList = osv.orderInfoDTOList(user_email);
-
 		List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
+		
+		
+		List<OrderInfoDTO> oidtoList = osv.orderInfoDTOList(user_email);
 
 		for (int i = 0; i < oidtoList.size(); i++) {
 
@@ -122,6 +122,8 @@ public class OrderController {
 			log.info(oddtoList.toString());
 
 			List<OrderHistoryDTO> orderHistoryList = new ArrayList<OrderHistoryDTO>();
+			
+		
 
 			for (int j = 0; j < oddtoList.size(); j++) {
 
@@ -152,10 +154,10 @@ public class OrderController {
 					String food_name = (String) jsonObj.get("food_name");
 					ohdto.setFood_name(food_name);
 
-					int total_price = (int) jsonObj.get("total_price");
+					int total_price = Integer.parseInt(String.valueOf(jsonObj.get("total_price")));
 					ohdto.setTotal_price(total_price);
 
-					int order_count = (int) jsonObj.get("basket_order_count");
+					int order_count = Integer.parseInt(String.valueOf(jsonObj.get("basket_order_count")));
 					ohdto.setOrder_count(order_count);
 
 				} catch (Exception e) {
@@ -167,7 +169,9 @@ public class OrderController {
 
 			userOrderHistoryList.add(orderHistoryList);
 		}
+		model.addAttribute("userOrderHistoryList", userOrderHistoryList);
 
+		
 		return "/member/myOrderList";
 	}
 

@@ -2,6 +2,10 @@ package com.ezen.delivery.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.Authentication;
+
 import com.ezen.delivery.domain.UserVO;
 
 public interface UserService {
@@ -22,7 +26,7 @@ public interface UserService {
 
 	UserVO getUserDetail(String user_id);
 
-	int modifyUserInfo(String user_id, String new_pw, String new_phone);
+	int modifyUserInfo(String user_id, String new_pw, String new_phone, HttpSession session);
 
 	int emailExist(String user_email);
 

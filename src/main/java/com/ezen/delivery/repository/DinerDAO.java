@@ -17,18 +17,29 @@ public interface DinerDAO {
 
 	int insert(DinerVO dvo);
 
-	List<DinerVO> selectList(PagingVO pvo);
+	List<DinerVO> selectListByDistance(PagingVO pvo);
+	
+	List<DinerVO> selectListByReview(PagingVO pvo);
+	
+	List<DinerVO> selectListByScore(PagingVO pvo);
 
 	DinerVO selectDiner(int diner_code);
-
-	List<DinerVO> selectListbyCate(PagingVO pvo);
-
 
 	int update(DinerVO dvo);
 
 	int delete(int diner_code);
 
 	List<DinerVO> selectReview(int diner_code);
+
+	List<DinerVO> selectCathListByDistance(PagingVO pvo);
+
+	List<DinerVO> selectCathListByReview(PagingVO pvo);
+
+	List<DinerVO> selectCathListByScore(PagingVO pvo);
+
+	int updateScore(DinerVO dvo);
+	
+	
 
 
 }

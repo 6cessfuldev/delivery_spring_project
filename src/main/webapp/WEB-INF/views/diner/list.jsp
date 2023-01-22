@@ -94,8 +94,8 @@
 					<select name="" id="search-option">
 						<option value="">기본 정렬순</option>
 						<option value="">거리순</option>
-						<option value="">별점순</option>
 						<option value="">리뷰 많은 순</option>
+						<option value="">별점 순</option>
 					</select>
 				</div>
 			</div>

@@ -65,7 +65,7 @@ public class AdminController {
    public void dinerRegister() {}
 
    @PostMapping("/diner/insert")
-   public String dinerInsert(DinerVO dvo, @RequestParam List<String> category, @RequestParam(value="file", required=false) MultipartFile file ) {
+   public String dinerInsert(DinerVO dvo, @RequestParam(value="category", required=false) List<String> category, @RequestParam(value="file", required=false) MultipartFile file ) {
       
       DinerDTO ddto = new DinerDTO();
       
@@ -77,6 +77,8 @@ public class AdminController {
       dvo.setDiner_category(diner_category);
       
       ddto.setDvo(dvo);
+      
+      log.info(dvo.toString());
       
       if(file!=null) {
          FileVO fvo = fhd.uploadFiles(file);
