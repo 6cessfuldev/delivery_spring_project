@@ -41,6 +41,37 @@ $("#search-option").on("change", ()=>{
 	$("#addr-form").submit();
 })
 
+// 찜하기
+document.getElementsByClassName('dib-field')[0].addEventListener('click',()=>{
+    
+    if(user_id == ''){
+        alert("로그인이 필요합니다.");
+        return;
+    }
+    
+    $.ajax({
+        url: '/dibs/update/'+diner_code,
+        success: function(result) {
+            if(result=="1"){            
+                let div = document.getElementsByClassName('dib-field')[0];
+                if(div.innerText=="♡"){
+                    div.innerText="♥";
+
+                } else{
+                    div.innerText="♡";
+                }
+            
+            }else{
+                alert("서버 에러.");
+            }
+        },
+        error: function(){
+            alert("서버 에러");
+        }
+    })
+})
+
+
 //사진 업로드 버튼
 document.getElementById('trigger').addEventListener('click', ()=> {
     document.getElementById('review_multiple').click();

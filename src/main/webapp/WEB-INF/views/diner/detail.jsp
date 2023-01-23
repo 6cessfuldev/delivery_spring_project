@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
@@ -59,15 +60,24 @@
 		<div class="diner-detail">
 			<div class=diner-header>
 				<div class="diner-name">
-					${diner.diner_name}
+					<span class=diner-name-field>${diner.diner_name}</span>
+					<span class="dib-field">
+						<c:choose>
+							<c:when test="${isDibs eq 0}"> ♡</c:when>
+							<c:when test="${isDibs ne 0}"> ♥</c:when>
+						</c:choose></span>
+
+					
+					
 				</div>
 				<div class="diner-info">
 					<div class="diner-img">
 						<img src="/upload/${fn:replace(fivo.file_save_dir, '\\','/')}/${fivo.file_uuid}_${fivo.file_name}" alt="" width="70" height="70">
 					</div>
 					<div class="diner-infos">
-						<p class="score"><i class="bi bi-star-fill"></i></p>
-						<p>최소주문금액 ${diner.diner_min_pay}원</p>
+						<p class="score">★★★★☆</p>
+						<fmt:formatNumber value="${diner.diner_min_pay}" var="minPay" pattern="#,###" />
+						<p>최소주문금액 ${minPay}원</p>
 						<p>결제 <span>${diner.diner_method_pay}</span></p>
 						<p>배달시간 <span>38분~48분</span></p>
 					</div>
@@ -396,7 +406,8 @@
 			
 			<div id="basket-menu-list"></div>
 				<div class="basket-deli-price">
-					<span>배달요금</span> <span>${diner.diner_delivery_fee}원</span> <span>별도</span>
+					<fmt:formatNumber value="${diner.diner_delivery_fee}" var="deliveryFee" pattern="#,###" />
+					<span>배달요금</span> <span>${deliveryFee}원</span> <span>별도</span>
 				</div>
 				<div class="basket-total-price">
 					<span>합계:</span> <span id="total">0원</span>
@@ -461,7 +472,7 @@
        	  	<div class="modal-total-price">
        	  		<strong id="modal-total">29,800원</strong>
        	  		<span>15,900원 이상 주문 시 할인</span>
-       	  		<span>(최소 주문 금액 ${diner.diner_min_pay}원)</span>
+       	  		<span>(최소 주문 금액 ${minPay}원)</span>
        	  	</div>
        	  </div>
        	  	
@@ -486,6 +497,7 @@
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 	const order_code = '<c:out value="${order_code}" />';
 	const diner_min_pay = '<c:out value="${diner.diner_min_pay}" />';
+	alert('<c:out value="${isDibs}" />');
 
 	if(order_code!=''){
 		$("#home-tab-pane").removeClass("show");

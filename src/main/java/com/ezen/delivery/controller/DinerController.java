@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ezen.delivery.domain.DibsVO;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.repository.UserDAO;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
+import com.ezen.delivery.service.DibsService;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.OrderService;
@@ -44,6 +48,9 @@ public class DinerController {
 	
 	@Inject
 	private OrderService osv;
+	
+	@Inject
+	private DibsService disv;
 	
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -75,7 +82,7 @@ public class DinerController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam(name="diner_code" )int diner_code, @RequestParam(name="order_code", required=false) String order_code, Model model) {
+	public String detail(@RequestParam(name="diner_code" )int diner_code, @RequestParam(name="order_code", required=false) String order_code, Authentication authentication, Model model) {
 		log.info(""+diner_code);
 		DinerDTO ddto = dsv.getDiner(diner_code);
 		
@@ -88,9 +95,21 @@ public class DinerController {
 		List<FoodDTO> foodList = fsv.getListByDinerCode(diner_code);
 		log.info(foodList.toString());
 		
+		int isDibs = 0;
+		if(authentication != null) {
+			PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+			String user_id = principalDetails.getUsername();	
+			log.info(user_id);
+			DibsVO divo = new DibsVO();
+			divo.setDiner_code(diner_code);
+			divo.setUser_id(user_id);
+			isDibs = disv.countDibs(divo);
+		}
+		
 		model.addAttribute("fivo", fivo);
 		model.addAttribute("foodList",foodList);
 		model.addAttribute("diner",diner);
+		model.addAttribute("isDibs", isDibs);
 		model.addAttribute("order_code", order_code);
 		
 		return "/diner/detail";
