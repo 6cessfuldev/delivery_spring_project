@@ -25,5 +25,13 @@
 	delete from food where food_code = #{food_code}
 </delete>
 
+<select id="selectTotalCount" resultType="int">
+	select count(*) from food where diner_code = #{diner_code} 
+</select>
+
+<select id="selectListByDinerCodeWithPaging" resultType="com.ezen.delivery.domain.FoodVO">
+	select * from food where diner_code = #{diner_code} limit #{pgvo.pageStart},#{pgvo.qty}
+</select>
+
 </mapper>
 

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.delivery.domain.AdminPagingVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
@@ -79,6 +80,24 @@ public class FoodServiceImpl implements FoodService {
 		FileVO fivo = fidao.selectByFileCode(fvo.getFile_code());
 		
 		return new FoodDTO(fvo, fivo, null);
+	}
+
+	@Override
+	public int totalCount(int diner_code) {
+		return fdao.selectTotalCount(diner_code);
+	}
+
+	@Override
+	public List<FoodDTO> getListByDinerCodeWithPaging(int diner_code, AdminPagingVO pgvo) {
+		
+		List<FoodDTO> fdtoList = new ArrayList<FoodDTO>();
+		
+		List<FoodVO> fvoList = fdao.selectListByDinerCodeWithPaging(diner_code, pgvo);
+		for (FoodVO foodVO : fvoList) {
+			FileVO fivo = fidao.selectByFileCode(foodVO.getFile_code());
+			fdtoList.add(new FoodDTO(foodVO, fivo, null));
+		}
+		return fdtoList;
 	}
 
 
