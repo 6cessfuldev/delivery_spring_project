@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.ezen.delivery.service.UserService;
+import com.ezen.delivery.security.oauth2.PrincipalDetails;
+import com.ezen.delivery.service.LoginService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Inject
-	private UserService usv;
+	private LoginService lsv;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -28,9 +29,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		log.info("=========login Success==========");
 		
-		String user_id = request.getParameter("user_id");
-		//int isOk = usv.loginDate(user_id);
-		//log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
+		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		String user_id = principalDetails.getUsername();
+		
+		int isOk = lsv.loginDate(user_id);
+		log.info(">>> update login date " + (isOk > 0 ? "Ok" : "Fail"));
 		
 		List<String> roleNames = new ArrayList<String>();
 		

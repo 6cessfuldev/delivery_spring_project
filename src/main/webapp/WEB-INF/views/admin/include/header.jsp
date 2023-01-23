@@ -59,7 +59,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/admin/loginHistory">
               <span data-feather="layers" class="align-text-bottom"></span>
               로그인기록
             </a>

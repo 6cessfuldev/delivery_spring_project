@@ -1,5 +1,6 @@
 package com.ezen.delivery.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,10 +21,13 @@ import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
+import com.ezen.delivery.domain.LoginDTO;
+import com.ezen.delivery.domain.LoginVO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.ChoiceService;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
+import com.ezen.delivery.service.LoginService;
 import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +51,9 @@ public class AdminController {
    
    @Inject
    private ChoiceService csv;
+   
+   @Inject
+   private LoginService lsv;
    
    
    @GetMapping("/")
@@ -336,6 +343,21 @@ public class AdminController {
 	   log.info(">>> user remove " + (isOk > 0 ? "Ok" : "Fail"));
 	   
 	   return "redirect:/admin/user";
+   }
+   
+   @GetMapping("/loginHistory")
+   public void getloginHistory(Model model) {
+	  
+	  List<LoginDTO> ldtoList = new ArrayList<LoginDTO>();
+      
+	  List<LoginVO> loginList = lsv.getLoginList();
+
+      for(int i=0; i<loginList.size(); i++) {
+    	  UserVO user = usv.getUserByID(loginList.get(i).getUser_id());
+    	  
+      }
+      
+      model.addAttribute("loginHistory", ldtoList);
    }
    
 }

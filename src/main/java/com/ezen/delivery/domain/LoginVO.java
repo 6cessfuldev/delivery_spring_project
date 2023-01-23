@@ -17,6 +17,5 @@ public class LoginVO {
 	private String user_id;
 	private String log_date;
 	private String log_out_date;
-	private int log_fail_count;
 	
 }

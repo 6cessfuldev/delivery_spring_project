@@ -12,30 +12,19 @@
             <th scope="col">이름</th>
             <th scope="col">연락처</th>
             <th scope="col">생년월일</th>
-            <th scope="col">소셜로그인</th>
-            <th scope="col">가입일</th>
-            <th scope="col">주문수</th>
-            <th scope="col">리뷰수</th>
-            <th scope="col">가입승인</th>
+            <th scope="col">로그인</th>
+            <th scope="col">로그아웃</th>
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${userList}" var="user">
+        <c:forEach items="${loginList}" var="login">
             <tr>
-                <td><a href="/admin/user/detail?user_id=${user.user_id}">${user.user_id}</a></td>
+                <td>${login.user_id}</td>
                 <td>${user.user_name}</td>
                 <td>${user.user_phone}</td>
                 <td>${user.user_birth}</td>
-                <c:if test="${user.user_naver_id eq null}">
-                <td>N</td>
-                </c:if>
-                <c:if test="${user.user_naver_id ne null}">
-                <td>Y</td>
-                </c:if>
-                <td>${user.user_register_date}</td>
-                <td>0</td>
-                <td>0</td>
-                <td>완료</td>
+                <td>${login.log_date }</td>
+                <td>${login.log_out_date }</td>
             </tr>
         </c:forEach>
     </tbody>

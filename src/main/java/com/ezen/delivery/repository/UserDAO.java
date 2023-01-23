@@ -36,11 +36,8 @@ public interface UserDAO {
 
 	List<UserVO> selectList();
 
-	int updateLoginDate(String user_id);
-	
 	int updateLoginFailCnt(String user_id);
 
-	int updateLogoutDate(String user_id);
 
 
 
