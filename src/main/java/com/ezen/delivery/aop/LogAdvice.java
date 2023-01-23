@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class LogAdvice {
-
+	
 	@Around("execution(* com.ezen.delivery.service.*.*(..))")
 	public Object logMethodInfo( ProceedingJoinPoint pjp) {
 		
@@ -33,6 +33,7 @@ public class LogAdvice {
 		
 		return result; 
 	}
+
 
 }
 

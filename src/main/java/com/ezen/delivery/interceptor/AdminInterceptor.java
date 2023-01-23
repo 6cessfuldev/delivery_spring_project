@@ -2,12 +2,8 @@ package com.ezen.delivery.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
-
-import com.ezen.delivery.domain.Role;
-import com.ezen.delivery.domain.UserVO;
 
 public class AdminInterceptor implements HandlerInterceptor{
 
