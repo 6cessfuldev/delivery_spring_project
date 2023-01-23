@@ -126,4 +126,10 @@ public class BasketServiceImpl implements BasketService {
 		return bdao.selectDinerByUserId(user_id);
 	}
 
+	@Override
+	public int getCount(String user_id) {
+		
+		return bdao.selectCount(user_id);
+	}
+
 }

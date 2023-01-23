@@ -36,7 +36,7 @@
 		<div class="col-sm-8 card-wrap">
 		  <h5 class="card-head"><fmt:formatDate value="${dateValue }" pattern="yyyy.MM.dd"/> 주문</h5>
 		  	<div class=col-md-2>
-			     <div class="btn border-secondary mb-2 review-btn" style="--bs-border-opacity: .5;">리뷰 작성하기</div>
+			     <div class="btn border-secondary mb-2 review-btn" style="--bs-border-opacity: .5;" onclick="location.href='/diner/review?order_code=${uohList[0].order_code}';">리뷰 작성하기</div>
 			     <div class="btn border-secondary review-btn" style="--bs-border-opacity: .5;">교환 반품 신청</div>
 			</div>
 			<div class="card mb-3">
@@ -45,7 +45,7 @@
 			   <c:forEach items="${uohList}" var="ohList">
 					<div class="row g-0 align-items-center">
 					   <div class="col-md-2 ">
-					     <img src="/resources/source/chicken.png" class="img-fluid rounded-start" alt="...">
+					     <img src="/upload/${fn:replace(ohList.fivo.file_save_dir, '\\','/')}/${ohList.fivo.file_uuid}_${ohList.fivo.file_name}" class="img-fluid rounded-start" alt="...">
 					   </div>
 					   <div class="col-md-8">
 					     <div class="card-body">

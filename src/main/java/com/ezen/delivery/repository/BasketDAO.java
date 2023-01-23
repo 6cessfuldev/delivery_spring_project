@@ -21,5 +21,7 @@ public interface BasketDAO {
 	public int selectDinerCodeByUserId(String user_id);
 
 	public DinerVO selectDinerByUserId(String user_id);
+
+	public int selectCount(String user_id);
 	
 }

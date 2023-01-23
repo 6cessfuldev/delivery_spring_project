@@ -60,7 +60,14 @@
 			<div class=diner-header>
 				<div class="diner-name">
 					<span class=diner-name-field>${diner.diner_name}</span>
-					<span class="dib-field">♡</span>
+					<span class="dib-field">
+						<c:choose>
+							<c:when test="${isDibs eq 0}"> ♡</c:when>
+							<c:when test="${isDibs ne 0}"> ♥</c:when>
+						</c:choose></span>
+
+					
+					
 				</div>
 				<div class="diner-info">
 					<div class="diner-img">
@@ -404,7 +411,7 @@
 				<div class="basket-total-price">
 					<span>합계:</span> <span id="total">0원</span>
 				</div>
-				<div class="order-btn" onclick='location.href="/order/page";'>주문하기</div>
+				<div class="order-btn" onclick='order()'>주문하기</div>
 			</div>
 		</div>
 
@@ -487,6 +494,17 @@
 	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
+	const order_code = '<c:out value="${order_code}" />';
+	const diner_min_pay = '<c:out value="${diner.diner_min_pay}" />';
+	alert('<c:out value="${isDibs}" />');
+
+	if(order_code!=''){
+		$("#home-tab-pane").removeClass("show");
+		$("#home-tab-pane").removeClass("active");
+		$("#profile-tab-pane").addClass("show");
+		$("#profile-tab-pane").addClass("active");
+		document.querySelector('.total-star').scrollIntoView({ behavior: 'smooth' });
+	}
 		
 	function readFile2(fileNames) {
 	    const target = document.getElementsByName(fileNames);

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.DinerVO;
+import com.ezen.delivery.domain.FileVO;
+import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.OrderDetailDTO;
 import com.ezen.delivery.domain.OrderFoodDTO;
 import com.ezen.delivery.domain.OrderHistoryDTO;
@@ -26,6 +27,7 @@ import com.ezen.delivery.domain.OrderInfoDTO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.BasketService;
+import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.UserService;
 
@@ -44,6 +46,9 @@ public class OrderController {
 
 	@Inject
 	private UserService usv;
+	
+	@Inject
+	private FoodService fsv;
 
 	@GetMapping("/page")
 	public String orderPageGet(Authentication authentication, Model model) {
@@ -105,7 +110,7 @@ public class OrderController {
 			
 		String user_email = principalDetails.getUser().getUser_email();
 		
-		log.info("user_email : "+user_email);
+		log.info("user_email : " + user_email);
 
 		List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
 		
@@ -152,7 +157,12 @@ public class OrderController {
 					log.info(choice_contents);
 
 					String food_name = (String) jsonObj.get("food_name");
+					int food_code = Integer.parseInt(String.valueOf(jsonObj.get("food_code")));
+					FoodDTO fdto = fsv.getDetail(food_code);
+					FileVO fivo = fdto.getFilevo();
+
 					ohdto.setFood_name(food_name);
+					ohdto.setFivo(fivo);
 
 					int total_price = Integer.parseInt(String.valueOf(jsonObj.get("total_price")));
 					ohdto.setTotal_price(total_price);

@@ -5,6 +5,7 @@
 <jsp:include page="./include/header.jsp"></jsp:include>
 
 	<div class="table-responsive">
+		<a href="/admin/diner/register">음식점 추가</a>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
