@@ -91,6 +91,7 @@ public class DinerController {
 		model.addAttribute("fivo", fivo);
 		model.addAttribute("foodList",foodList);
 		model.addAttribute("diner",diner);
+		model.addAttribute("isDibs",isDIbs);
 		model.addAttribute("order_code", order_code);
 		
 		return "/diner/detail";
