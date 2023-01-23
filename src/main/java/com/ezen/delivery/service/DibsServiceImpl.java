@@ -1,5 +1,7 @@
 package com.ezen.delivery.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +29,16 @@ public class DibsServiceImpl implements DibsService {
 			isUp = didao.insert(dvo);
 		}
 		return isUp ;
+	}
+
+	@Override
+	public int countDibs(DibsVO divo) {
+		return didao.selectCountDibs(divo);
+	}
+
+	@Override
+	public List<DibsVO> dibsList(String user_id) {
+		return didao.selectDibsList(user_id);
 	}
 
 }

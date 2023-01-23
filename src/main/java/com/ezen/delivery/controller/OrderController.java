@@ -110,7 +110,7 @@ public class OrderController {
 			
 		String user_email = principalDetails.getUser().getUser_email();
 		
-		log.info("user_email : "+user_email);
+		log.info("user_email : " + user_email);
 
 		List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
 		

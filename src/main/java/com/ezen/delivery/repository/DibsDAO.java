@@ -1,5 +1,7 @@
 package com.ezen.delivery.repository;
 
+import java.util.List;
+
 import com.ezen.delivery.domain.DibsVO;
 
 public interface DibsDAO {
@@ -11,5 +13,9 @@ public interface DibsDAO {
 	int delete(DibsVO dvo);
 
 	int insert(DibsVO dvo);
+
+	int selectCountDibs(DibsVO divo);
+
+	List<DibsVO> selectDibsList(String user_id);
 
 }

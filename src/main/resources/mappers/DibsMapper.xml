@@ -18,4 +18,14 @@
   		insert into dibs (user_id, diner_code)
   		values (#{user_id}, #{diner_code})
   	</insert>
+  	
+  	<select id="selectCountDibs" resultType="int">
+  		select count(*) from dibs
+  		where diner_code = #{diner_code} and user_id = #{user_id}
+  	</select>
+  	
+  	<select id="selectDibsList" resultType="com.ezen.delivery.domain.DibsVO">
+  		select * from dibs
+  		where user_id = #{user_id}
+  	</select>
   </mapper>

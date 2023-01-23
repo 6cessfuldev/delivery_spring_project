@@ -141,14 +141,10 @@ main{
 
 .dib-field{
 	float: right;
-}
-
-.addDib{
-	color: #666;
-}
-
-.removeDib{
-	color: #cfcfcf;
+	color: red;
+	font-size: 25px;
+	font-weight: 800;
+	margin-right: 15px;
 }
 
 .diner-info{

@@ -54,14 +54,12 @@ document.getElementsByClassName('dib-field')[0].addEventListener('click',()=>{
         success: function(result) {
             if(result=="1"){            
                 let div = document.getElementsByClassName('dib-field')[0];
-                if(div.classList.contains("addDib")){
-                    div.classList.remove("addDib");
-                    div.classList.add("removeDib");
-                }else{
-                    div.classList.add("addDib");
-                    div.classList.remove("removeDib");
+                if(div.innerText=="♡"){
+                    div.innerText="♥";
+
+                } else{
+                    div.innerText="♡";
                 }
-            
             
             }else{
                 alert("서버 에러.");

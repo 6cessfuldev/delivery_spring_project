@@ -27,6 +27,7 @@ provider varchar(45),
 providerId varchar(45),
 primary key(user_id));
 
+
 ## file(파일)
 create table file(
 file_code int auto_increment,
@@ -37,6 +38,7 @@ file_name varchar(512) not null,
 file_type tinyint(1) default 0,
 file_reg_date datetime default now(),
 primary key(file_code));
+
 
 ## diner(음식점)
 
@@ -60,6 +62,7 @@ diner_review_count int default 0,
 FOREIGN KEY (file_code)
 REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(diner_code));
+
 
 ## food(음식)
 create table food(
@@ -158,6 +161,7 @@ order_code bigint not null,
 order_food_info varchar(2000) not null
 );
 
+
 ## review (리뷰)
 	
 create table review(
@@ -191,4 +195,12 @@ review_img_reg_date datetime default now(),
 FOREIGN KEY (review_code)
 REFERENCES review(review_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(review_img_code));
+
+
+## dibs (찜하기)
+
+crete table dibs(
+user_id varchar(60) not null,
+diner_code int not null
+);
 
