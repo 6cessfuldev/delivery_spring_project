@@ -29,7 +29,6 @@ import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.BasketService;
 import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.OrderService;
-import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 

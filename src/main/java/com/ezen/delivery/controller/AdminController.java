@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.AdminPagingVO;
 import com.ezen.delivery.domain.ChoiceVO;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
@@ -23,11 +27,15 @@ import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.LoginDTO;
 import com.ezen.delivery.domain.LoginVO;
+import com.ezen.delivery.domain.OrderDetailDTO;
+import com.ezen.delivery.domain.OrderHistoryDTO;
+import com.ezen.delivery.domain.OrderInfoDTO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.ChoiceService;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.LoginService;
+import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +62,9 @@ public class AdminController {
    
    @Inject
    private LoginService lsv;
+   
+   @Inject
+   private OrderService osv;
    
    
    @GetMapping("/")
@@ -346,18 +357,74 @@ public class AdminController {
    }
    
    @GetMapping("/loginHistory")
-   public void getloginHistory(Model model) {
+   public void getLoginHistory(Model model) {
+	  
+	  List<LoginVO> lvoList = lsv.getLoginList();
 	  
 	  List<LoginDTO> ldtoList = new ArrayList<LoginDTO>();
-      
-	  List<LoginVO> loginList = lsv.getLoginList();
+	  
+	  for (LoginVO lvo : lvoList) {
+		  
+		  LoginDTO ldto = new LoginDTO();
+		  ldto.setLvo(lvo);
+		  UserVO uvo = usv.getUserByID(lvo.getUser_id());
+		  ldto.setUvo(uvo);
+		  
+		  ldtoList.add(ldto);
 
-      for(int i=0; i<loginList.size(); i++) {
-    	  UserVO user = usv.getUserByID(loginList.get(i).getUser_id());
-    	  
-      }
+	  }
       
       model.addAttribute("loginHistory", ldtoList);
+   }
+   
+   @GetMapping("/orderHistory")
+   public void getOrderHistory(Model model) {
+	   
+	   List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
+	   
+	   List<OrderInfoDTO> oidtoList = osv.orderInfoDTOListAll();
+	   
+	   for(OrderInfoDTO oidto : oidtoList) {
+		   
+		   long order_code = oidto.getOrder_code();
+		   String diner_name = osv.getDinerName(order_code);
+		   
+		   String user_email = oidto.getOrder_buyer_email();
+		   
+		   List<OrderDetailDTO> oddtoList = osv.orderDetailDTOList(order_code);
+		   
+		   List<OrderHistoryDTO> orderHistoryList = new ArrayList<OrderHistoryDTO>();
+		   
+		   for(OrderDetailDTO oddto : oddtoList) {
+			   
+			   
+			   OrderHistoryDTO ohdto = new OrderHistoryDTO();
+			   ohdto.setOrder_code(order_code);
+			   ohdto.setDiner_name(diner_name);
+			   ohdto.setUser_email(user_email);
+			   
+
+				orderHistoryList.add(ohdto);
+			}
+
+			userOrderHistoryList.add(orderHistoryList);
+		}
+		model.addAttribute("userOrderHistoryList", userOrderHistoryList);
+		   
+   }
+   
+   @GetMapping("/order/search")
+   public String orderSearch(Model model, @RequestParam(name="order_sort")String order_sort, @RequestParam(name="keyword")String keyword) {
+	  log.info(order_sort);
+	  if(order_sort == "date") {
+		  
+	  } else if (order_sort == "diner_name") {
+		  
+	  } else if (order_sort == "user_email") {
+		  
+	  }
+	  
+	  return "/admin/orderHistory";
    }
    
 }

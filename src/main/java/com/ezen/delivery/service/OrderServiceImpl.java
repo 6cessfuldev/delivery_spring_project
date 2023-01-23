@@ -129,6 +129,11 @@ public class OrderServiceImpl implements OrderService {
 		return odao.selectDinerCode(order_code);
 	}
 
+	@Override
+	public List<OrderInfoDTO> orderInfoDTOListAll() {
+		return odao.orderInfoDTOListAll();
+	}
+
 	
 	
 

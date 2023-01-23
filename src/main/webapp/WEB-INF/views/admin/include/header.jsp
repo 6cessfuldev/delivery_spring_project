@@ -65,7 +65,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/admin/orderHistory">
               <span data-feather="layers" class="align-text-bottom"></span>
               주문내역
             </a>

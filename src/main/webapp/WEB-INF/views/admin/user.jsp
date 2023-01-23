@@ -26,10 +26,10 @@
                 <td>${user.user_name}</td>
                 <td>${user.user_phone}</td>
                 <td>${user.user_birth}</td>
-                <c:if test="${user.user_naver_id eq null}">
+                <c:if test="${user.provider eq null}">
                 <td>N</td>
                 </c:if>
-                <c:if test="${user.user_naver_id ne null}">
+                <c:if test="${user.provider ne null}">
                 <td>Y</td>
                 </c:if>
                 <td>${user.user_register_date}</td>
