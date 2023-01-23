@@ -60,7 +60,6 @@ public class DibsController {
 		List<DibsVO> dibsList = disv.dibsList(user_id);
 		
 		List<DinerDTO> ddtoList = new ArrayList<DinerDTO>();
-//		ddtoList.get(0).getDvo().getDiner_name()
 		
 		for(int i=0; i<dibsList.size(); i++) {
 			
