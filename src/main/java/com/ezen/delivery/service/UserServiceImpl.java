@@ -167,26 +167,11 @@ public class UserServiceImpl implements UserService {
 		
 		return udao.updateUserFromAdmin(uvo);
 	}
-
-	@Override
-	public int loginDate(String user_id) {
-		return udao.updateLoginDate(user_id);
-	}
 	
 	@Override
 	public int loginFailCnt(String user_id) {
 		return udao.updateLoginFailCnt(user_id);
 	}
-
-	@Override
-	public int logoutDate(String user_id) {
-		return udao.updateLogoutDate(user_id);
-	}
-
-
-
-
-	
 	
 
 }

@@ -43,9 +43,6 @@ public class OrderController {
 
 	@Inject
 	private BasketService bsv;
-
-	@Inject
-	private UserService usv;
 	
 	@Inject
 	private FoodService fsv;

@@ -22,6 +22,7 @@ public class UserVO {
 	private String user_naver_id;
 	private String user_register_date;
 	private String user_modify_date;
+	private int login_fail_count;
 	private String user_Role;
 	private String provider;    // oauth2를 이용할 경우 어떤 플랫폼을 이용하는지
     private String providerId;  // oauth2를 이용할 경우 아이디값

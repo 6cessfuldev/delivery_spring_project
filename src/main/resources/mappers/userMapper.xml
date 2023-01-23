@@ -77,21 +77,9 @@
 		select * from user
 	</select>
 	
-	<update id="updateLoginDate">
-		update login set
-		log_date = now()
-		where user_id = #{user_id}
-	</update>
-	
-	<update id="updateLoginFailCnt">
-		update login set
-		log_fail_count = log_fail_count + 1
-		where user_id = #{user_id}
-	</update>
-	
-	<update id="updateLogoutDate">
-		update login set
-		log_out_date = now()
+	 <update id="updateLoginFailCnt">
+		update user set
+		user_login_fail = user_login_fail + 1
 		where user_id = #{user_id}
 	</update>
 	

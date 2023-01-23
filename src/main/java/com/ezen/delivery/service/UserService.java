@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.Authentication;
-
 import com.ezen.delivery.domain.UserVO;
 
 public interface UserService {
@@ -38,11 +36,9 @@ public interface UserService {
 
 	int modifyUserInfo(UserVO uvo);
 
-	int loginDate(String user_id);
-	
 	int loginFailCnt(String user_id);
-
-	int logoutDate(String user_id);
+	
+	
 
 
 
