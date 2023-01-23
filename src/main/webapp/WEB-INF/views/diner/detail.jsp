@@ -6,6 +6,7 @@
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/detail.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
 <main>
@@ -65,7 +66,7 @@
 						<img src="/upload/${fn:replace(fivo.file_save_dir, '\\','/')}/${fivo.file_uuid}_${fivo.file_name}" alt="" width="70" height="70">
 					</div>
 					<div class="diner-infos">
-						<p class="score">★★★★☆</p>
+						<p class="score"><i class="bi bi-star-fill"></i></p>
 						<p>최소주문금액 ${diner.diner_min_pay}원</p>
 						<p>결제 <span>${diner.diner_method_pay}</span></p>
 						<p>배달시간 <span>38분~48분</span></p>

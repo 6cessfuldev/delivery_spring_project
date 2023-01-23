@@ -74,4 +74,13 @@ insert into diner(file_code, diner_name, diner_address, diner_min_pay, diner_not
 	update diner set diner_score_avg = #{diner_score_avg} where diner_code = #{diner_code}
 </update>
 
+<select id="selectTotalCount" resultType="int">
+	select count(*) from diner
+</select>
+
+<select id="selectWithAdminPaging" resultType="com.ezen.delivery.domain.DinerVO">
+	<include refid="select_diner"></include>
+	limit #{pageStart},#{qty}
+</select>
+
 </mapper>

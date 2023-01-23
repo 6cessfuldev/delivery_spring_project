@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ezen.delivery.domain.PagingVO;
 import com.ezen.delivery.domain.ReviewVO;
+import com.ezen.delivery.domain.AdminPagingVO;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 
@@ -38,6 +39,10 @@ public interface DinerDAO {
 	List<DinerVO> selectCathListByScore(PagingVO pvo);
 
 	int updateScore(DinerVO dvo);
+
+	int selectTotalCount();
+
+	List<DinerVO> selectWithAdminPaging(AdminPagingVO pgvo);
 	
 	
 
