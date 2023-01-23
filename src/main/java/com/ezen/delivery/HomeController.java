@@ -21,15 +21,7 @@ public class HomeController {
 	private BasketService bsv;
 
 	@RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
-	public String index(Authentication authentication, Model model) {
-		
-		int basket_count = 0;
-		if(authentication != null) {
-			PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
-			String user_id = principalDetails.getUsername();
-			basket_count = bsv.getCount(user_id);
-		}
-		model.addAttribute("basket_count", basket_count);
+	public String index() {
 		
 		return "index";
 	}

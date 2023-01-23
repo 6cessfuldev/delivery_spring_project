@@ -33,7 +33,7 @@
 	<mybatis-spring:scan
 		base-package="com.ezen.delivery.repository" />
 
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:aspectj-autoproxy />
 
 	<!-- navermail설정 -->
 	<bean id="mailSender"
@@ -65,7 +65,6 @@
 	<tx:advice id="transactionAdvice">
         <tx:attributes>
             <tx:method name="get*" read-only="true"/>
-            <tx:method name="*" />
         </tx:attributes>
     </tx:advice>
 
@@ -73,6 +72,8 @@
 		<aop:pointcut id="transactionPointcut" expression="execution(* com.ezen.delivery.service..*(..))" />
         <aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointcut" />
     </aop:config>
+    
+    <context:component-scan base-package="com.ezen.delivery.service" />
     
 <tx:annotation-driven/>
 </beans>

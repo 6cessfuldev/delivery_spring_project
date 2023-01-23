@@ -54,6 +54,9 @@ public class AdminController {
 	@Inject
 	private ChoiceService csv;
 
+	@Inject
+	private LoginService lsv;
+	
 	@GetMapping("/")
 	public String main() {
 		return "admin/main";
