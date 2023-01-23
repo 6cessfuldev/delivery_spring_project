@@ -171,6 +171,7 @@ public class MemberController {
 	public void loginGet(Model model) {}
 	
 
+// 	스프링 시큐리티 formlogin과 CustomLoginSuccessHandler, CustomLoginFailureHandler으로 기능 이전 
 //	@PostMapping("/login")
 //	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
 //		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);

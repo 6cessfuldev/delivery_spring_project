@@ -130,6 +130,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/member/login")
 				.loginProcessingUrl("/member/login")
 				.successHandler(loginSuccessHandler())
+				.failureHandler(loginFailureHandler())
 				.usernameParameter("user_id")
 				.passwordParameter("user_pw")
 			.and()

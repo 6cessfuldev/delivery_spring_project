@@ -74,7 +74,10 @@ function danalPay(){
 }
 
 function cashPay(){
-	param.order_pay_method = '현장결제';
+	param.order_pay_method = '현금결제';
+}
+function CardPay(){
+	param.order_pay_method = '카드결제';
 }
 
 
@@ -99,8 +102,8 @@ function requestPay() {
 		return;
 	}
 	
-	if(param.order_pay_method == '현장결제'){
-		paymentCash(param);
+	if(param.order_pay_method == '현금결제' || param.order_pay_method == '카드결제'){
+		paymentOff(param);
 		return;
 	}
  	
@@ -137,10 +140,10 @@ function requestPay() {
 
 
 // 현장에서 결제
-function paymentCash(data){
+function paymentOff(data){
 	
 	$.ajax({
-		url: "/order/payment-cash",
+		url: "/order/payment-offline",
         method: "POST",
         data: data,
 	})
