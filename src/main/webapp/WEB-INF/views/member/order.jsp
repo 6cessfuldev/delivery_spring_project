@@ -53,7 +53,7 @@
 	                <br><br>
 	                <p id="order_payP">만나서결제</p>
 	            <button type="button" onclick="cashPay()" id="order_cash">현금</button>
-	            <button type="button" onclick="" id="order_card">카드</button>
+	            <button type="button" onclick="CardPay()" id="order_card">카드</button>
 	        </div>
 	        <div id="order_payInfo">
 	            <ul id="order_ul">

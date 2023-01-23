@@ -33,7 +33,7 @@ public class OrderApiController {
 	@Inject
 	private PaymentService psv;
 
-	@PostMapping("/order/payment-cash")
+	@PostMapping("/order/payment-offline")
 	public ResponseEntity<String> paymentCash(Authentication authentication, OrderInfoDTO oidto) throws IOException {
 
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();

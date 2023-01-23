@@ -20,6 +20,8 @@ public interface OrderService {
 
 	String getDinerName(long order_code);
 
+	int getDinerCode(long order_code);
+
 
 
 }

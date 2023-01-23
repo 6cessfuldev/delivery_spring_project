@@ -637,7 +637,7 @@ var observer = new MutationObserver(mutations => {
     console.log(text.substring(0, text.length-1));
   	sum += Number(text.substring(0, text.length-1));
   }
-  	localStorage.setItem("orderTotalPrice", sum);
+  localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
 });
 
@@ -652,3 +652,12 @@ var config = {
 };
 
 observer.observe(target, config);
+
+function order(){
+	const orderPrice = Number(localStorage.getItem("orderTotalPrice"));
+	if(orderPrice < Number(diner_min_pay)){
+		alert("최소 주문 금액은 "+diner_min_pay+"원입니다.");
+		return;
+	}
+	location.href="/order/page";	
+}
