@@ -2,6 +2,10 @@ package com.ezen.delivery.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.ezen.delivery.domain.AdminPagingVO;
+import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
 
 public interface FoodDAO {
@@ -16,6 +20,9 @@ public interface FoodDAO {
 
 	int delete(int food_code);
 
+	int selectTotalCount(int diner_code);
+
+	List<FoodVO> selectListByDinerCodeWithPaging(@Param("diner_code")int diner_code, @Param("pgvo")AdminPagingVO pgvo);
 
 
 }
