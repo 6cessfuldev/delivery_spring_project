@@ -7,25 +7,7 @@
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/myOrderList.css">
 
-<div class="category">
-	<ul class="nav justify-content-center">
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/order/myOrderList";'>주문/결제 조회</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/dibs/myDibsList";'>찜목록</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-hh">리뷰 관리</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-pp">적립금 내역</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/member/detail_userInfo";'>회원 정보</div>
-		</li>
-	</ul>
-</div>
+<jsp:include page="../include/myPageHeader.jsp"></jsp:include>
 
 
 <main>
@@ -67,5 +49,3 @@
 </main>
 
 <jsp:include page="../include/footer2.jsp"></jsp:include>
-
-<script src="/resources/js/detail_userInfo.js"></script>
