@@ -3,6 +3,7 @@ package com.ezen.delivery.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -14,16 +15,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
 import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.PagingVO;
-import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.repository.UserDAO;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
+import com.ezen.delivery.service.OrderService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +41,9 @@ public class DinerController {
 	
 	@Inject
 	private FoodService fsv;
+	
+	@Inject
+	private OrderService osv;
 	
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -70,7 +75,7 @@ public class DinerController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(@RequestParam(name="diner_code" )int diner_code, Model model) {
+	public String detail(@RequestParam(name="diner_code" )int diner_code, @RequestParam(name="order_code", required=false) String order_code, Model model) {
 		log.info(""+diner_code);
 		DinerDTO ddto = dsv.getDiner(diner_code);
 		
@@ -86,6 +91,9 @@ public class DinerController {
 		model.addAttribute("fivo", fivo);
 		model.addAttribute("foodList",foodList);
 		model.addAttribute("diner",diner);
+		model.addAttribute("order_code", order_code);
+		
+		return "/diner/detail";
 	}
 	
 	@GetMapping(value="/moreList/{listCnt}", produces= {MediaType.APPLICATION_JSON_VALUE})
@@ -99,6 +107,13 @@ public class DinerController {
 		log.info(list.size()+"");
 		return new ResponseEntity<List<DinerDTO>>(list, HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/review")
+	public String reviewPage(long order_code, RedirectAttributes rttr) {
+		
+		int diner_code = osv.getDinerCode(order_code); 
+		return "redirect:/diner/detail?diner_code="+diner_code+"&order_code="+order_code;
 	}
 
 }

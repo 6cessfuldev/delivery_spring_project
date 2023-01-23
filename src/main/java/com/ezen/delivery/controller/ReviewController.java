@@ -21,21 +21,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.ReviewImgHandler;
+import com.ezen.delivery.domain.OrderInfoDTO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.DinerService;
+import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-
 @RequestMapping("/review/*")
 public class ReviewController {
 	
@@ -45,6 +47,8 @@ public class ReviewController {
 	private ReviewImgHandler rihd;
 	@Inject
 	private ReviewService rsv;
+	@Inject
+	private OrderService osv;
 
 	@PostMapping(value="/upload")
 	@ResponseBody
@@ -85,15 +89,14 @@ public class ReviewController {
 
 	//삭제
 	@DeleteMapping(value="/delete/{review_code}", produces = {MediaType.TEXT_PLAIN_VALUE})
-	   public ResponseEntity<String> remove(@PathVariable("review_code")int review_code){
-	      log.info("review remove : "+review_code);
-	      int isUp = rsv.remove(review_code);
-	      log.info("remove isUp : " + (isUp>0?"ok":"fail"));
-	      ReviewImgVO rivo = rsv.selectFile(review_code); 
-	      int isOk = rsv.deleteFile(review_code);
-	      isOk *= rihd.deleteFile(rivo);
-	      return isUp>0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+	public ResponseEntity<String> remove(@PathVariable("review_code")int review_code){
+		log.info("review remove : "+review_code);
+		int isUp = rsv.remove(review_code);
+		log.info("remove isUp : " + (isUp>0?"ok":"fail"));
+		ReviewImgVO rivo = rsv.selectFile(review_code); 
+		int isOk = rsv.deleteFile(review_code);
+		isOk *= rihd.deleteFile(rivo);
+      return isUp>0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
 	
 }

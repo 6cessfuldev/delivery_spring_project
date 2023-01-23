@@ -9,8 +9,13 @@
 <a href="/admin/diner/remove?diner_code=${diner.diner_code}">삭제</a>
 <br><br>
     <caption>음식점 상세정보</caption>
-    <img src="/upload/${fn:replace(file.file_save_dir, '\\','/')}/${file.file_uuid}_${file.file_name}" width="100px">
-<table>
+<table class="table table-info p-2" border=1>
+	<tr>	
+		<th>음식점 로고</th>
+    	<td>
+    		<img src="/upload/${fn:replace(file.file_save_dir, '\\','/')}/${file.file_uuid}_${file.file_name}" width="100px">
+		</td>
+	</tr>
     <tr>
         <th>음식점 코드</th>
         <td>${diner.diner_code}</td>

@@ -13,6 +13,7 @@ import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketListDTO;
 import com.ezen.delivery.domain.OrderDetailDTO;
 import com.ezen.delivery.domain.OrderInfoDTO;
+import com.ezen.delivery.repository.BasketDAO;
 import com.ezen.delivery.repository.OrderDAO;
 import com.google.gson.Gson;
 
@@ -43,6 +44,8 @@ public class OrderServiceImpl implements OrderService {
 		private int amount;
 	}
 	
+	@Inject
+	private BasketDAO bdao;
 
 	@Override
 	public long orderPriceCheck(BasketListDTO bldto) {
@@ -96,10 +99,12 @@ public class OrderServiceImpl implements OrderService {
 		
 		odao.order(oidto);
 		
-		
 		log.info(oddto.toString());
 		odao.orderDetail(oddto);
 		
+		for (BasketDTO bdto : basketList) {
+			bdao.delete(bdto.getBasket_code());
+		}
 		
 		return null;
 	}
@@ -117,6 +122,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String getDinerName(long order_code) {
 		return odao.getDinerName(order_code);
+	}
+
+	@Override
+	public int getDinerCode(long order_code) {
+		return odao.selectDinerCode(order_code);
 	}
 
 	

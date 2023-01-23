@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>먹어요</title>
 <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="/resources/css/header.css">
 
@@ -32,17 +32,28 @@
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<li class="nav-item"><div class="box"><a href="/admin/" class="nav-link" aria-current="page">관리자</a></div></li>
 					</sec:authorize>
-					<li class="nav-item"><div class="box" onclick="logout()"><a href="#" class="nav-link" aria-current="page">로그아웃</a></div></li>
-					<li class="nav-item"><div class="box2"><a href="/basket/diner" class="nav-link">장바구니</a></div></li>
+					<li class="nav-item"><div class="box" id="basket-box"><a href="/basket/diner" class="nav-link" id='basket'>장바구니</a></div></li>
 					<li class="nav-item"><div class="box2"><a href="/member/detail_userInfo" class="nav-link">마이페이지</a></div></li>
+					<li class="nav-item"><div class="box2" onclick="logout()"><a href="#" class="nav-link" aria-current="page">로그아웃</a></div></li>
 				</sec:authorize>
 			</ul>
 		</div>
 	  </header>
 	  
 	  <script type="text/javascript">
+		
+	  const basket_count = "<c:out value='${basket_count}' />";
+	  if(basket_count > 0 ){
+		  let a = document.getElementById("basket");
+		  a.innerText = "장바구니("+basket_count+")";
+		  a.className +=" text-light";
+		  let box = document.getElementById("basket-box");
+		  box.className +=" bg-secondary";
+	  }
+	  
 	  function logout(){
 		  console.log("logout click");
 		  $("#logout").submit();
 	  }
+
 	  </script>

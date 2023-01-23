@@ -21,5 +21,7 @@ public interface BasketService {
 	public BasketListDTO getBasketListDTO(String user_id);
 
 	public DinerVO getDiner(String user_id);
+
+	public int getCount(String user_id);
 	
 }
