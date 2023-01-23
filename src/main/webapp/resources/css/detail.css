@@ -143,6 +143,14 @@ main{
 	float: right;
 }
 
+.addDib{
+	color: #666;
+}
+
+.removeDib{
+	color: #cfcfcf;
+}
+
 .diner-info{
 	display: flex;
 	padding-top: 8px;
