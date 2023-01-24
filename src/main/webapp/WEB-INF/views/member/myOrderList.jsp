@@ -14,13 +14,16 @@
 	<div class="row justify-content-center pt-5">
 	
 	<c:forEach items="${userOrderHistoryList }" var="uohList">
+
 		<fmt:parseDate value="${fn:substring(uohList[0].order_code, 0, 8)}" var="dateValue" pattern="yyyyMMdd"/>
 		<div class="col-sm-8 card-wrap">
 		  <h5 class="card-head"><fmt:formatDate value="${dateValue }" pattern="yyyy.MM.dd"/> 주문</h5>
-		  	<div class=col-md-2>
-			     <div class="btn border-secondary mb-2 review-btn" style="--bs-border-opacity: .5;" onclick="location.href='/diner/review?order_code=${uohList[0].order_code}';">리뷰 작성하기</div>
+		  	<div  class="btn-group">
+			     <div class="btn border-secondary review-btn" style="--bs-border-opacity: .5;" onclick="location.href='/diner/review?order_code=${uohList[0].order_code}';">리뷰 작성하기</div>
 			     <div class="btn border-secondary review-btn" style="--bs-border-opacity: .5;">교환 반품 신청</div>
 			</div>
+			<div>
+		</div>
 			<div class="card mb-3">
 				<div class=dinerName>😋 ${uohList[0].diner_name}</div>
 				<!-- 여러 메뉴 주문 시 반복 -->

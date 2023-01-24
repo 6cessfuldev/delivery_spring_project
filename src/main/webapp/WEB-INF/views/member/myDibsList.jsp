@@ -108,7 +108,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="card-end col-md-2">
 							<div class="btn border-secondary">리뷰보기</div>
 							<div class="btn border-secondary">삭제</div>
 						</div>
