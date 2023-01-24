@@ -259,7 +259,7 @@
 						<!-- diner-score -->
 					
 						<div class="review-count">
-							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 2</p>
+							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 ${diner.diner_boss_comment_count}</p>
 						</div>
 					
 						<!-- 별점 -->
@@ -297,11 +297,10 @@
                             </div>
                             
                             	<!-- 등록 후 출력 화면 -->
-                         <div class="review">
+
                             <div id="review-head">
-                            	  <div id="bossCommentBox"></div>
+
                             </div>
-                         </div>	
 					
 				
 						<div class="add-review d-flex justify-content-center align-items-center">

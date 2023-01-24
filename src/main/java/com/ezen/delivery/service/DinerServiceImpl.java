@@ -109,8 +109,11 @@ public class DinerServiceImpl implements DinerService {
 			int diner_code = dvo.getDiner_code();
 			double avg = rdao.selectAvgStar(diner_code);
 			int count = rdao.reviewCount(diner_code);
+			int commentCount = rdao.commentCount(diner_code);
+			dvo.setDiner_boss_comment_count(commentCount);
 			dvo.setDiner_review_count(count);
 			dvo.setDiner_score_avg(avg);
+			
 			ddtoList.add(new DinerDTO(dvo,fvo));
 		}
 		
@@ -125,6 +128,8 @@ public class DinerServiceImpl implements DinerService {
 		dvo.setDiner_score_avg(avg);
 		int count = rdao.reviewCount(diner_code);
 		dvo.setDiner_review_count(count);
+		int commentCount = rdao.commentCount(diner_code);
+		dvo.setDiner_boss_comment_count(commentCount);
 		FileVO fivo = fidao.selectByFileCode(dvo.getFile_code());
 		
 		return new DinerDTO(dvo, fivo);

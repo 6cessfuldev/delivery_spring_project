@@ -92,6 +92,7 @@ public class DinerController {
 		log.info("diner_name : "+diner.getDiner_name());
 		log.info("diner_address : "+diner.getDiner_address());
 		log.info("count:"+diner.getDiner_review_count());
+		log.info("boss:"+diner.getDiner_boss_comment_count());
 		List<FoodDTO> foodList = fsv.getListByDinerCode(diner_code);
 		log.info(foodList.toString());
 		

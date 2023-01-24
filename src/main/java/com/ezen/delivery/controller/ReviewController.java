@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.delivery.Handler.ReviewImgHandler;
-import com.ezen.delivery.domain.OrderInfoDTO;
 import com.ezen.delivery.domain.ReviewDTO;
 import com.ezen.delivery.domain.ReviewImgVO;
 import com.ezen.delivery.domain.ReviewVO;
@@ -77,16 +77,18 @@ public class ReviewController {
 		List<ReviewDTO> list = rsv.getList(diner_code);
 		return new ResponseEntity<List<ReviewDTO>>(list,HttpStatus.OK);
 	}
-	
-	
-	//사장님댓글
-//	@PatchMapping("/bossComment") //int review_order_code,
-//	public ResponseEntity<String> bossComment(int diner_code,  String review_boss_comment){
-//		String reviewContent = rsv.bossComment(diner_code, review_boss_comment);
-//		return ResponseEntity.ok().body(reviewContent);
-//	}
-	
 
+	//사장님댓글
+	@PostMapping("/bossComment/{review_code}") 
+	@ResponseBody
+	public int bossCommentupload(@RequestBody ReviewVO rvo,@PathVariable("review_code")int review_code) {
+		log.info("review_code : "+review_code);
+		int isUp = rsv.bossComment(rvo);	
+		return  isUp>0 ? 1 : 0;
+		
+	}
+
+	
 	//삭제
 	@DeleteMapping(value="/delete/{review_code}", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> remove(@PathVariable("review_code")int review_code){
@@ -99,4 +101,5 @@ public class ReviewController {
       return isUp>0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+
 }
