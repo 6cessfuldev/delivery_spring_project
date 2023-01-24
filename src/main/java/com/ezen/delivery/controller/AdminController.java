@@ -407,14 +407,12 @@ public class AdminController {
 		   
 		   for(OrderDetailDTO oddto : oddtoList) {
 			   
-			   
 			   OrderHistoryDTO ohdto = new OrderHistoryDTO();
 			   ohdto.setOrder_code(order_code);
 			   ohdto.setDiner_name(diner_name);
 			   ohdto.setUser_email(user_email);
-			   
 
-				orderHistoryList.add(ohdto);
+			   orderHistoryList.add(ohdto);
 			}
 
 			userOrderHistoryList.add(orderHistoryList);
@@ -424,7 +422,7 @@ public class AdminController {
    }
    
    @GetMapping("/order/search")
-   public String orderSearch(Model model, @RequestParam(name="order_sort")String order_sort, @RequestParam(name="keyword")String keyword) {
+   public String orderSearch(Model model, @RequestParam(name = "order_sort")String order_sort, @RequestParam(name = "keyword")String keyword) {
 	  log.info(order_sort);
 	  if(order_sort == "date") {
 		  
