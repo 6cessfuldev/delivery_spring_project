@@ -78,13 +78,6 @@ public class AdminController {
 		model.addAttribute("list", list);
 	}
 	
-	   @GetMapping("/diner")
-	   public void diner(Model model) {
-	      List<DinerVO> list = dsv.getList();
-	      log.info(list.size()+"");
-	      model.addAttribute("list", list);
-	   }
-
 	@GetMapping("/diner/register")
 	public void dinerRegister() {
 	}
