@@ -126,4 +126,20 @@ public class BasketServiceImpl implements BasketService {
 		return bdao.selectDinerCodeByBasketCode(basket_code);
 	}
 
+	public BasketListDTO getBasketListDTO(String user_id) {
+		
+		int diner_code = getDinerCode(user_id);
+		List<BasketDTO> bdtoList = getList(user_id);
+		int totalPrice = 0;
+		for (BasketDTO basketDTO : bdtoList) {
+			basketDTO.initSalePerOne();
+			totalPrice += basketDTO.getTotal_price();
+		}
+		
+		int diner_delivery_fee = ddao.selectDiner(diner_code).getDiner_delivery_fee();
+		
+		return new BasketListDTO(diner_code, user_id, totalPrice, diner_delivery_fee, bdtoList);
+		
+	}
+
 }
