@@ -141,7 +141,14 @@
 			<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
 			<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
 			<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
-			<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>			
+			<c:choose>
+				<c:when test='${sessionScope.pvo.order ne ""}'>
+					<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+				</c:when>
+				<c:otherwise>
+					<input type="text" id="order" name="order" value="1" hidden>
+				</c:otherwise>
+			</c:choose> 		
 		</form>
 <div id="endList"></div>
 <script>

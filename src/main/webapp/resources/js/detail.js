@@ -28,8 +28,8 @@ $(".category").children('ul').children('li').click(function(){
 
 	let cat = $(this).children('div').attr('id');
 	cat = cat.substring(5,cat.length);
-	console.log(cat);
     $("#category").val(cat);
+    console.log($("#order").val());
     $("#addr-form").submit();
 })
 

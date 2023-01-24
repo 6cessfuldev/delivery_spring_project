@@ -13,22 +13,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CommonExceptionAdvice {
 
-//	@ExceptionHandler(Exception.class)
-//	public String except(Exception ex, Model model) {
-//		
-//		log.error("exception...."+ex.getMessage());
-//		model.addAttribute("Exception", ex);
-//		log.error(model.toString());
-//		
-//		return "error_page";
-//		
-//	}
-//	
-//	@ExceptionHandler(NoHandlerFoundException.class)
-//	@ResponseStatus(HttpStatus.NOT_FOUND)
-//	public String handle404(NoHandlerFoundException ex) {
-//		
-//		return "custom404";
-//	}
-//	
+	@ExceptionHandler(Exception.class)
+	public String except(Exception ex, Model model) {
+		
+		log.error("exception...."+ex.getMessage());
+		model.addAttribute("Exception", ex);
+		log.error(model.toString());
+		
+		return "error_page";
+		
+	}
+	
+	@ExceptionHandler(NoHandlerFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String handle404(NoHandlerFoundException ex) {
+		
+		return "custom404";
+	}
+	
 }

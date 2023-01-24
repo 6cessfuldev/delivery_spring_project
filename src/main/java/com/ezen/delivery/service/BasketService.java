@@ -18,12 +18,12 @@ public interface BasketService {
 
 	public int getDinerCode(String user_id);
 
-	public BasketListDTO getBasketListDTO(String user_id);
-
 	public DinerVO getDiner(String user_id);
 
 	public int getCount(String user_id);
 
 	public int getDinerCodeByBasketCode(int basket_code);
+
+	public BasketListDTO getBasketListDTO(String user_id);
 	
 }

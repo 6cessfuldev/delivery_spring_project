@@ -231,6 +231,11 @@ main{
 	height: 110px;
 }
 
+.nav-item>.active{
+	background-color: rgb(66, 62, 62);
+	color:white;
+}
+
 .diner-menu-table{
 	margin-top: 10px;
 	margin-left: 10px;
