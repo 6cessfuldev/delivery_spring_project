@@ -128,9 +128,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable()
 			.cors().disable()
-				.authorizeRequests()
-				.antMatchers("/order/**").hasRole("USER")
-			.and()
+//				.authorizeRequests()
+//				.antMatchers("/order/**").hasRole("USER")
+//			.and()
 				.formLogin()
 				.loginPage("/member/login")
 				.loginProcessingUrl("/member/login")

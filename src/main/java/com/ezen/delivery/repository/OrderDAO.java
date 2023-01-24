@@ -27,6 +27,8 @@ public interface OrderDAO {
 
 	int selectDinerCode(long order_code);
 
+	List<OrderInfoDTO> orderInfoDTOListAll();
+
 	
 
 }

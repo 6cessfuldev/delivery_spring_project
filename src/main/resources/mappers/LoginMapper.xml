@@ -18,7 +18,7 @@
 	
 	<select id="selectLoginList" resultType="com.ezen.delivery.domain.LoginVO">
 		select * from login
-		order by user_id asc
+		order by log_date desc
 	</select>
    
   </mapper>

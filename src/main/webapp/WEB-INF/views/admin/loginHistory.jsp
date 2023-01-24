@@ -17,14 +17,14 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${loginList}" var="login">
+        <c:forEach items="${loginHistory}" var="login">
             <tr>
-                <td>${login.user_id}</td>
-                <td>${user.user_name}</td>
-                <td>${user.user_phone}</td>
-                <td>${user.user_birth}</td>
-                <td>${login.log_date }</td>
-                <td>${login.log_out_date }</td>
+                <td>${login.lvo.user_id}</td>
+                <td>${login.uvo.user_name }</td>
+                <td>${login.uvo.user_phone}</td>
+                <td>${login.uvo.user_birth}</td>
+                <td>${login.lvo.log_date }</td>
+                <td>${login.lvo.log_out_date }</td>
             </tr>
         </c:forEach>
     </tbody>

@@ -107,4 +107,8 @@
   		select diner_code from `order` where order_code = #{order_code}
   	</select>
   	
+  	<select id="orderInfoDTOListAll" resultType="com.ezen.delivery.domain.OrderInfoDTO">
+  		select * from `order`
+  	</select>
+  	
   </mapper>

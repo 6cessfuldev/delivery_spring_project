@@ -25,11 +25,15 @@ import com.ezen.delivery.domain.FoodDTO;
 import com.ezen.delivery.domain.FoodVO;
 import com.ezen.delivery.domain.LoginDTO;
 import com.ezen.delivery.domain.LoginVO;
+import com.ezen.delivery.domain.OrderDetailDTO;
+import com.ezen.delivery.domain.OrderHistoryDTO;
+import com.ezen.delivery.domain.OrderInfoDTO;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.service.ChoiceService;
 import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.FoodService;
 import com.ezen.delivery.service.LoginService;
+import com.ezen.delivery.service.OrderService;
 import com.ezen.delivery.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,17 +46,23 @@ public class AdminController {
 	@Inject
 	private DinerService dsv;
 
-	@Inject
-	private FoodService fsv;
-
-	@Inject
-	private FileHandler fhd;
-
-	@Inject
-	private UserService usv;
-
-	@Inject
-	private ChoiceService csv;
+   @Inject
+   private FoodService fsv;
+   
+   @Inject
+   private FileHandler fhd;
+   
+   @Inject
+   private UserService usv;
+   
+   @Inject
+   private ChoiceService csv;
+   
+   @Inject
+   private LoginService lsv;
+   
+   @Inject
+   private OrderService osv;
 
 	@GetMapping("/")
 	public String main() {
@@ -67,7 +77,7 @@ public class AdminController {
 		List<DinerVO> list = dsv.getListwithAdminPaging(pgvo);
 		model.addAttribute("list", list);
 	}
-
+	
 	@GetMapping("/diner/register")
 	public void dinerRegister() {
 	}
@@ -216,6 +226,8 @@ public class AdminController {
 
 		return "redirect:/diner/detail?diner_code="+fvo.getDiner_code();
 	}
+	
+	
 
 	@GetMapping("food/detail")
 	public String foodDetail(int food_code, Model model) {
@@ -357,17 +369,69 @@ public class AdminController {
   
      @GetMapping("/loginHistory")
    public void getloginHistory(Model model) {
-	  
+	  List<LoginVO> lvoList = lsv.getLoginList();
 	  List<LoginDTO> ldtoList = new ArrayList<LoginDTO>();
-      
-	  List<LoginVO> loginList = lsv.getLoginList();
-
-      for(int i=0; i<loginList.size(); i++) {
-    	  UserVO user = usv.getUserByID(loginList.get(i).getUser_id());
-    	  
-      }
-      
+	  
+	  for (LoginVO lvo : lvoList) {
+		  
+		  LoginDTO ldto = new LoginDTO();
+		  ldto.setLvo(lvo);
+		  UserVO uvo = usv.getUserByID(lvo.getUser_id());
+		  ldto.setUvo(uvo);
+		  
+		  ldtoList.add(ldto);
+	  }
       model.addAttribute("loginHistory", ldtoList);
+   }
+   
+   @GetMapping("/orderHistory")
+   public void getOrderHistory(Model model) {
+	   
+	   List<List<OrderHistoryDTO>> userOrderHistoryList = new ArrayList<List<OrderHistoryDTO>>();
+	   
+	   List<OrderInfoDTO> oidtoList = osv.orderInfoDTOListAll();
+	   
+	   for(OrderInfoDTO oidto : oidtoList) {
+		   
+		   long order_code = oidto.getOrder_code();
+		   String diner_name = osv.getDinerName(order_code);
+		   
+		   String user_email = oidto.getOrder_buyer_email();
+		   
+		   List<OrderDetailDTO> oddtoList = osv.orderDetailDTOList(order_code);
+		   
+		   List<OrderHistoryDTO> orderHistoryList = new ArrayList<OrderHistoryDTO>();
+		   
+		   for(OrderDetailDTO oddto : oddtoList) {
+			   
+			   
+			   OrderHistoryDTO ohdto = new OrderHistoryDTO();
+			   ohdto.setOrder_code(order_code);
+			   ohdto.setDiner_name(diner_name);
+			   ohdto.setUser_email(user_email);
+			   
+
+				orderHistoryList.add(ohdto);
+			}
+
+			userOrderHistoryList.add(orderHistoryList);
+		}
+		model.addAttribute("userOrderHistoryList", userOrderHistoryList);
+		   
+   }
+   
+   @GetMapping("/order/search")
+   public String orderSearch(Model model, @RequestParam(name="order_sort")String order_sort, @RequestParam(name="keyword")String keyword) {
+	  log.info(order_sort);
+	  if(order_sort == "date") {
+		  
+	  } else if (order_sort == "diner_name") {
+		  
+	  } else if (order_sort == "user_email") {
+		  
+	  }
+	  
+	  return "/admin/orderHistory";
    }
 
 }

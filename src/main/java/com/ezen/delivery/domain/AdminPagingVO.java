@@ -10,9 +10,11 @@ public class AdminPagingVO {
 	private int pageNo;
 	private int qty;
 	
+	private String type;
+	private String keyword;
+	
 	public AdminPagingVO() {
-		this.pageNo = 1;
-		this.qty = 10;
+		this(1,10);
 	}
 	
 	public AdminPagingVO(int pageNo, int qty) {
@@ -20,8 +22,12 @@ public class AdminPagingVO {
 		this.qty = qty;
 	}
 	
-	public int getPageStart() {
-		return (this.pageNo-1)*this.qty;
+	public int getPageStart() { // 시작(start) 번호 구하는 메서드
+		return (this.pageNo - 1) * qty; // DB에서 값을 limit 첫 시작이 0번지
 	}
-	
+
+	public String[] getTypeToArray() {
+		return this.type == null ? new String[] {} : this.type.split("");
+	}
+
 }

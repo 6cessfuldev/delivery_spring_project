@@ -22,6 +22,8 @@ public interface OrderService {
 
 	int getDinerCode(long order_code);
 
+	List<OrderInfoDTO> orderInfoDTOListAll();
+
 
 
 }
