@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <title>먹어요</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
@@ -20,7 +21,7 @@
 			<div class="card mb-3" style="max-width: 900px;">
 				  <div class="row g-0 align-items-center">
 				    <div class="col-md-2 text-center">
-				      <img src="/resources/source/fried.PNG" class="img-fluid rounded-start" alt="...">
+				      <img src="/upload/${fn:replace(dib.fivo.file_save_dir, '\\','/')}/${dib.fivo.file_uuid}_${dib.fivo.file_name}" class="img-fluid rounded-start" alt="...">
 				    </div>
 				    <div class="col-md-8">
 				      <div class="card-body">
