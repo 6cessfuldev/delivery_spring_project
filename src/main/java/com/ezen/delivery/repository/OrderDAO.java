@@ -25,6 +25,10 @@ public interface OrderDAO {
 
 	String getDinerName(long order_code);
 
+	int selectDinerCode(long order_code);
+
+	List<OrderInfoDTO> orderInfoDTOListAll();
+
 	
 
 }

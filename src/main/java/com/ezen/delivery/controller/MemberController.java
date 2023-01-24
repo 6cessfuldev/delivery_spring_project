@@ -1,8 +1,6 @@
 package com.ezen.delivery.controller;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -11,18 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ResolvableType;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ezen.delivery.Handler.ApiMemberProfile;
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.UserService;
@@ -45,6 +36,7 @@ public class MemberController {
 
 	@Inject
 	private UserService usv;
+	
 	@Autowired
 	private JavaMailSender mailSender;	
 	
@@ -171,6 +163,7 @@ public class MemberController {
 	public void loginGet(Model model) {}
 	
 
+// 	스프링 시큐리티 formlogin과 CustomLoginSuccessHandler, CustomLoginFailureHandler으로 기능 이전 
 //	@PostMapping("/login")
 //	public String loginPost(Model model, String user_id, String user_pw, HttpServletRequest req) {
 //		log.info(">>> user_id : " + user_id + " >>> user_pw : " + user_pw);

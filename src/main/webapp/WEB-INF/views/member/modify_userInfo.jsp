@@ -4,22 +4,7 @@
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/userInfo.css">
 
-<div class="category">
-	<ul class="nav justify-content-center">
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/index";'>주문/결제 조회</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-ff">찜목록</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-hh">리뷰 관리</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-pp">적립금 내역</div>
-		</li>
-	</ul>
-</div>
+<jsp:include page="../include/myPageHeader.jsp"></jsp:include>
 
 <div class="wrap-sign">
 	<div class="box-sign">

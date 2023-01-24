@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <title>먹어요</title>
 <jsp:include page="../include/header.jsp"></jsp:include>
@@ -52,13 +53,16 @@
 	                <br><br>
 	                <p id="order_payP">만나서결제</p>
 	            <button type="button" onclick="cashPay()" id="order_cash">현금</button>
-	            <button type="button" onclick="" id="order_card">카드</button>
+	            <button type="button" onclick="CardPay()" id="order_card">카드</button>
 	        </div>
 	        <div id="order_payInfo">
 	            <ul id="order_ul">
-	                <li id="order_li">주문금액 ${orderTotalPrice }원</li>
-	                <li id="order_li">배달비 ${diner.diner_delivery_fee}원</li>
-	                <li id="order_li">총 결제금액 ${orderTotalPrice + diner.diner_delivery_fee}원</li>
+	            	<fmt:formatNumber value="${orderTotalPrice}" var="orderPrice" pattern="#,###" />
+	            	<fmt:formatNumber value="${diner.diner_delivery_fee}" var="deliveryFee" pattern="#,###" />
+	            	<fmt:formatNumber value="${orderTotalPrice + diner.diner_delivery_fee}" var="orderTotalPrice" pattern="#,###" />
+	                <li id="order_li">주문금액 ${orderPrice }원</li>
+	                <li id="order_li">배달비 ${deliveryFee}원</li>
+	                <li id="order_li">총 결제금액 ${orderTotalPrice}원</li>
 	            </ul>
 	            <button onclick="requestPay()" type="button" id="order_payAll">결제하기</button>
 	        </div>

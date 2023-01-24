@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.ezen.delivery.repository.LoginDAO">
+   
+   <insert id="insertLoginDate">
+   		insert into login (user_id, log_date)
+   		values (#{user_id}, now())
+   </insert>
+   
+   <update id="updateLogoutDate">
+		update login set
+		log_out_date = now()
+		where user_id = #{user_id}
+	</update>
+	
+	<select id="selectLoginList" resultType="com.ezen.delivery.domain.LoginVO">
+		select * from login
+		order by log_date desc
+	</select>
+   
+  </mapper>

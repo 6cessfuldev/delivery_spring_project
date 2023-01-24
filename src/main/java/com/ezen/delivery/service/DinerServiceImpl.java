@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.ezen.delivery.Handler.FileHandler;
+import com.ezen.delivery.domain.AdminPagingVO;
 import com.ezen.delivery.domain.DinerDTO;
 import com.ezen.delivery.domain.DinerVO;
 import com.ezen.delivery.domain.FileVO;
@@ -171,5 +172,15 @@ public class DinerServiceImpl implements DinerService {
 		return isDel;
 	}
 
+
+	@Override
+	public int totalCount() {
+		return ddao.selectTotalCount();
+	}
+
+	@Override
+	public List<DinerVO> getListwithAdminPaging(AdminPagingVO pgvo) {
+		return ddao.selectWithAdminPaging(pgvo);
+	}
 
 }

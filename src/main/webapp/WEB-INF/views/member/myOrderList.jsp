@@ -7,25 +7,7 @@
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/resources/css/myOrderList.css">
 
-<div class="category">
-	<ul class="nav justify-content-center">
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/order/myOrderList";'>주문/결제 조회</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/dibs/myDibsList";'>찜목록</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-hh">리뷰 관리</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" id="cate-pp">적립금 내역</div>
-		</li>
-		<li class="nav-item">
-			<div class="category-btn" onclick='location.href ="/member/detail_userInfo";'>회원 정보</div>
-		</li>
-	</ul>
-</div>
+<jsp:include page="../include/myPageHeader.jsp"></jsp:include>
 
 
 <main>
@@ -36,7 +18,7 @@
 		<div class="col-sm-8 card-wrap">
 		  <h5 class="card-head"><fmt:formatDate value="${dateValue }" pattern="yyyy.MM.dd"/> 주문</h5>
 		  	<div class=col-md-2>
-			     <div class="btn border-secondary mb-2 review-btn" style="--bs-border-opacity: .5;">리뷰 작성하기</div>
+			     <div class="btn border-secondary mb-2 review-btn" style="--bs-border-opacity: .5;" onclick="location.href='/diner/review?order_code=${uohList[0].order_code}';">리뷰 작성하기</div>
 			     <div class="btn border-secondary review-btn" style="--bs-border-opacity: .5;">교환 반품 신청</div>
 			</div>
 			<div class="card mb-3">
@@ -45,7 +27,7 @@
 			   <c:forEach items="${uohList}" var="ohList">
 					<div class="row g-0 align-items-center">
 					   <div class="col-md-2 ">
-					     <img src="/resources/source/chicken.png" class="img-fluid rounded-start" alt="...">
+					     <img src="/upload/${fn:replace(ohList.fivo.file_save_dir, '\\','/')}/${ohList.fivo.file_uuid}_${ohList.fivo.file_name}" class="img-fluid rounded-start" alt="...">
 					   </div>
 					   <div class="col-md-8">
 					     <div class="card-body">
@@ -67,5 +49,3 @@
 </main>
 
 <jsp:include page="../include/footer2.jsp"></jsp:include>
-
-<script src="/resources/js/detail_userInfo.js"></script>

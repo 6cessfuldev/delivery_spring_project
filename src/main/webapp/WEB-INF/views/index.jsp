@@ -70,7 +70,7 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 	<script>
-
+	
 	let exten = $(".search-extention");
 	
 	//카테고리 버튼 주소가 입력되었을 때만 활성화

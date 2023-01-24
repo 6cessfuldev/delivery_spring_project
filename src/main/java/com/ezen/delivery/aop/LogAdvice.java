@@ -13,12 +13,32 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class LogAdvice {
-
+	
 	@Around("execution(* com.ezen.delivery.service.*.*(..))")
-	public Object logMethodInfo( ProceedingJoinPoint pjp) {
+	public Object serviceMethodInfo( ProceedingJoinPoint pjp) {
 		
 		System.out.println("===============================");
-		log.info("Target : " + pjp.getTarget().toString());
+		log.info("Target : " + pjp.getSignature().toShortString());
+		log.info("Param : " + Arrays.toString(pjp.getArgs()));
+		
+		Object result = null;
+		
+		try {
+			result = pjp.proceed();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("===============================");
+		
+		return result; 
+	}
+
+	@Around("execution(* com.ezen.delivery.controller.*.*(..))")
+	public Object controllerMethodInfo( ProceedingJoinPoint pjp) {
+		
+		System.out.println("===============================");
+		log.info("Target : " + pjp.getSignature().toShortString());
 		log.info("Param : " + Arrays.toString(pjp.getArgs()));
 		
 		Object result = null;

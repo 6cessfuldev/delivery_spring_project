@@ -1,11 +1,15 @@
 package com.ezen.delivery.security;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,6 +34,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.ezen.delivery.security.oauth2.OAuth2Provider;
 import com.ezen.delivery.security.oauth2.PrincipalOauth2UserService;
@@ -123,13 +128,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable()
 			.cors().disable()
-				.authorizeRequests()
-				.antMatchers("/order/**").hasRole("USER")
-			.and()
+//				.authorizeRequests()
+//				.antMatchers("/order/**").hasRole("USER")
+//			.and()
 				.formLogin()
 				.loginPage("/member/login")
 				.loginProcessingUrl("/member/login")
 				.successHandler(loginSuccessHandler())
+				.failureHandler(loginFailureHandler())
 				.usernameParameter("user_id")
 				.passwordParameter("user_pw")
 			.and()
@@ -149,6 +155,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/")
+				.logoutSuccessHandler(customLogoutSuccessHandler())
 				.deleteCookies("JSESSIONID", "remember-me");
 			    
 	}
@@ -185,6 +192,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public UserDetailsService customUserService() {
 		return new PrincipalDetailsService();
+	}
+	
+	@Bean
+	public LogoutSuccessHandler customLogoutSuccessHandler() {
+		return new CustomLogoutSuccessHandler();
 	}
 	
 	@Bean

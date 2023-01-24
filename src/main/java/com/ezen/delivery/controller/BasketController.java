@@ -3,8 +3,6 @@ package com.ezen.delivery.controller;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,10 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.BasketDTO;
-import com.ezen.delivery.domain.BasketVO;
-import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.BasketService;
+import com.ezen.delivery.service.FoodService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,8 +31,10 @@ public class BasketController {
 
 	@Inject
 	private BasketService bsv;
+	@Inject
+	private FoodService fsv;
 	
-	//등록성공 : 1 / 이미 데이터 있음 : 2 / 로그인 필요 : 3
+	//등록성공 : 1 / 이미 데이터 있음 : 2 / 장바구니에 다른 음식점 메뉴 있음 : 3 / 로그인 필요 4
 	@PostMapping("/add") 
 	@ResponseBody
 	public String addBasketPOST(@RequestBody BasketDTO basket, Authentication authentication) {
@@ -44,8 +43,16 @@ public class BasketController {
 		
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 		if(principalDetails == null) {
-			return "3";
+			return "4";
+		}else{
+			String user_id = principalDetails.getUsername();
+			int prev_diner_code = bsv.getDinerCode(user_id);
+			int next_diner_code = fsv.getFood(basket.getFood_code()).getDiner_code();
+			if(prev_diner_code != next_diner_code && prev_diner_code!= 0) {
+				return "3";
+			}
 		}
+		
 		
 		return bsv.addBasket(basket)+"";
 	}
@@ -59,7 +66,7 @@ public class BasketController {
 		List<BasketDTO> bdtoList = bsv.getList(user_id);
 		
 		return bdtoList;
-	}	
+	}
 	
 	@DeleteMapping("/{basket_code}")
 	@ResponseBody

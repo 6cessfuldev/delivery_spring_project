@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ezen.delivery.domain.BasketDTO;
 import com.ezen.delivery.domain.BasketDetailVO;
@@ -36,6 +37,7 @@ public class BasketServiceImpl implements BasketService {
 	private DinerDAO ddao;
 	
 	@Override
+	@Transactional
 	public int addBasket(BasketDTO basket) {
 		
 		BasketDTO checkBasket = bdao.checkBasket(basket);
@@ -59,6 +61,7 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
+	@Transactional
 	public List<BasketDTO> getList(String user_id) {
 		
 		//장바구니 기본정보 basket_Code / food_code / basket_order_count
@@ -81,27 +84,13 @@ public class BasketServiceImpl implements BasketService {
 		return bdtoList;
 	}
 	
-	public BasketListDTO getBasketListDTO(String user_id) {
-		
-		int diner_code = getDinerCode(user_id);
-		List<BasketDTO> bdtoList = getList(user_id);
-		int totalPrice = 0;
-		for (BasketDTO basketDTO : bdtoList) {
-			basketDTO.initSalePerOne();
-			totalPrice += basketDTO.getTotal_price();
-		}
-		
-		int diner_delivery_fee = ddao.selectDiner(diner_code).getDiner_delivery_fee();
-		
-		return new BasketListDTO(diner_code, user_id, totalPrice, diner_delivery_fee, bdtoList);
-		
-	}
 
 	@Override
+	@Transactional
 	public int removeByBasketCode(int basket_code) {
 		
 		int isOk = bdao.delete(basket_code);
-		isOk = bddao.deleteByBasketCode(basket_code);
+		isOk *= bddao.deleteByBasketCode(basket_code);
 		
 		return isOk;
 	}
@@ -124,6 +113,17 @@ public class BasketServiceImpl implements BasketService {
 	public DinerVO getDiner(String user_id) {
 		
 		return bdao.selectDinerByUserId(user_id);
+	}
+
+	@Override
+	public int getCount(String user_id) {
+		
+		return bdao.selectCount(user_id);
+	}
+
+	@Override
+	public int getDinerCodeByBasketCode(int basket_code) {
+		return bdao.selectDinerCodeByBasketCode(basket_code);
 	}
 
 }

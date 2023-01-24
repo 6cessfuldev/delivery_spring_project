@@ -41,6 +41,37 @@ $("#search-option").on("change", ()=>{
 	$("#addr-form").submit();
 })
 
+// 찜하기
+document.getElementsByClassName('dib-field')[0].addEventListener('click',()=>{
+    
+    if(user_id == ''){
+        alert("로그인이 필요합니다.");
+        return;
+    }
+    
+    $.ajax({
+        url: '/dibs/update/'+diner_code,
+        success: function(result) {
+            if(result=="1"){            
+                let div = document.getElementsByClassName('dib-field')[0];
+                if(div.innerText=="♡"){
+                    div.innerText="♥";
+
+                } else{
+                    div.innerText="♡";
+                }
+            
+            }else{
+                alert("서버 에러.");
+            }
+        },
+        error: function(){
+            alert("서버 에러");
+        }
+    })
+})
+
+
 //사진 업로드 버튼
 document.getElementById('trigger').addEventListener('click', ()=> {
     document.getElementById('review_multiple').click();
@@ -420,13 +451,16 @@ function postBasketToServer(basketData){
         contentType: 'application/json',
         data: JSON.stringify(basketData),
         success: function(data, status, xhr){
-        if(data == 1){
-	        basketReload();        
-        }else if(data == 2){
-        	alert("이미 등록된 메뉴입니다.");
-        }else
-        	location.href='/member/login'; 
-        },
+	        if(data == 1){
+		        basketReload();
+	        }else if(data == 2){
+	        	alert("이미 등록된 메뉴입니다.");
+	        }else if(data == 3){
+	        	alert("다른 음식점에서 이미 담은 메뉴가 있습니다. 담긴 메뉴를 취소하고 다시 추가하세요.");
+	        }else{
+	        	location.href='/member/login'; 
+	        }
+	    },
         error: function(xhr, status, error){
         console.log(error);
         }
@@ -670,8 +704,13 @@ var observer = new MutationObserver(mutations => {
     console.log(text.substring(0, text.length-1));
   	sum += Number(text.substring(0, text.length-1));
   }
-  	localStorage.setItem("orderTotalPrice", sum);
+  localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
+	
+  let count = priceList.length;
+  document.getElementById("basket").innerText = "장바구니("+count+")";
+  
+
 });
 
 // 감지 설정
@@ -685,3 +724,12 @@ var config = {
 };
 
 observer.observe(target, config);
+
+function order(){
+	const orderPrice = Number(localStorage.getItem("orderTotalPrice"));
+	if(orderPrice < Number(diner_min_pay)){
+		alert("최소 주문 금액은 "+diner_min_pay+"원입니다.");
+		return;
+	}
+	location.href="/order/page";	
+}

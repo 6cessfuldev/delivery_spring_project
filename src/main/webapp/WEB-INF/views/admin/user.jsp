@@ -12,7 +12,7 @@
             <th scope="col">이름</th>
             <th scope="col">연락처</th>
             <th scope="col">생년월일</th>
-            <th scope="col">네이버로그인</th>
+            <th scope="col">소셜로그인</th>
             <th scope="col">가입일</th>
             <th scope="col">주문수</th>
             <th scope="col">리뷰수</th>
@@ -26,10 +26,10 @@
                 <td>${user.user_name}</td>
                 <td>${user.user_phone}</td>
                 <td>${user.user_birth}</td>
-                <c:if test="${user.user_naver_id eq null}">
+                <c:if test="${user.provider eq null}">
                 <td>N</td>
                 </c:if>
-                <c:if test="${user.user_naver_id ne null}">
+                <c:if test="${user.provider ne null}">
                 <td>Y</td>
                 </c:if>
                 <td>${user.user_register_date}</td>

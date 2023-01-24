@@ -22,10 +22,12 @@ user_phone varchar(40),
 user_birth date,
 user_register_date datetime default now(),
 user_modify_date datetime,
+user_login_fail tinyint(1) not null default 0,
 user_role varchar(20) default "USER",
 provider varchar(45),
 providerId varchar(45),
 primary key(user_id));
+
 
 ## file(파일)
 create table file(
@@ -37,6 +39,7 @@ file_name varchar(512) not null,
 file_type tinyint(1) default 0,
 file_reg_date datetime default now(),
 primary key(file_code));
+
 
 ## diner(음식점)
 
@@ -61,6 +64,7 @@ diner_boss_comment_count int default 0,
 FOREIGN KEY (file_code)
 REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(diner_code));
+
 
 ## food(음식)
 create table food(
@@ -124,7 +128,6 @@ log_code int auto_increment,
 user_id varchar(60) not null,
 log_date datetime,
 log_out_date datetime,
-log_fail_count tinyint(1) not null default 0,
 FOREIGN KEY (user_id)
 REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(log_code));
@@ -156,8 +159,11 @@ primary key(order_code));
 
 create table order_food(
 order_code bigint not null,
-order_food_info varchar(2000) not null
+order_food_info varchar(2000) not null,
+FOREIGN KEY (order_code)
+REFERENCES `order`(order_code) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
 
 ## review (리뷰)
 	
@@ -192,4 +198,16 @@ review_img_reg_date datetime default now(),
 FOREIGN KEY (review_code)
 REFERENCES review(review_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(review_img_code));
+
+
+## dibs (찜하기)
+
+crete table dibs(
+user_id varchar(60) not null,
+diner_code int not null,
+FOREIGN KEY (user_id)
+REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (diner_code)
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 

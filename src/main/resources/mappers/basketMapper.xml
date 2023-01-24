@@ -36,9 +36,17 @@
 	 select ifnull(max(diner_code),0) from basket a right join food b on a.food_code = b.food_code where user_id = #{user_id} limit 0,1
 </select>
 
+<select id="selectCount" resultType="int">
+	select count(*) from basket where user_id = #{user_id}
+</select>
+
 
 <select id="selectDinerByUserId" resultType="com.ezen.delivery.domain.DinerVO">
-	      select * from diner where diner_code = (select ifnull(max(diner_code),0) from basket a right join food b on a.food_code = b.food_code where user_id = #{user_id} limit 0,1)
+	select * from diner where diner_code = (select ifnull(max(diner_code),0) from basket a right join food b on a.food_code = b.food_code where user_id = #{user_id} limit 0,1)
+</select>
+
+<select id="selectDinerCodeByBasketCode" resultType="int">
+	select diner_code from basket b join food f on b.food_code = f.food_code where basket_code = #{basket_code} 
 </select>
 </mapper>
 

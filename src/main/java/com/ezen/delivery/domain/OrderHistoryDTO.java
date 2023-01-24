@@ -13,5 +13,7 @@ public class OrderHistoryDTO {
 	private String food_name;
 	private int total_price;
 	private int order_count;
+	private String user_email;
+	private FileVO fivo;
 
 }
