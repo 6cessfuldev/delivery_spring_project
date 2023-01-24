@@ -35,7 +35,7 @@ select diner_code, file_code, diner_name, diner_address, diner_min_pay, diner_no
 
 <select id="selectCathListByDistance" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where diner_category like concat('%', #{category}, '%') order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+	where diner_category like concat('%', #{category}, '%') and ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <select id="selectCathListByReview" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">

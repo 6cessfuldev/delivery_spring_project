@@ -75,3 +75,10 @@
     </nav>
     
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    
+    <script type="text/javascript">
+	  function logout(){
+		  console.log("logout click");
+		  $("#logout").submit();
+	  }
+    </script>
