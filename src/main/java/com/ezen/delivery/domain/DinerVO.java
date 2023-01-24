@@ -30,4 +30,5 @@ public class DinerVO {
 	private String diner_addr_lat;
 	private double diner_score_avg;
 	private int diner_review_count;
+	private int diner_boss_comment_count;
 }

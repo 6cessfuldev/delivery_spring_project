@@ -229,23 +229,23 @@ function getReviewList(diner_code){
                  bossDiv += `${reviewDTO.rvo.review_boss_comment}</div>`;
                  review.innerHTML += div;
                  if(reviewDTO.rvo.review_boss_comment != null){
-                    review.innerHTML += bossDiv;
+                    review.innerHTML += bossDiv;  
                  }
+                 
+                
 
                  count++;        
-            
+                 
  
             }
            } else {
                let div = `<div>첫번째 리뷰를 작성해주세요!</div>`;
                review.innerHTML += div;
            }
-           
+
        })
 
 }
-
-
 
 
 //사장님댓글

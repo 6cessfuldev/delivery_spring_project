@@ -248,7 +248,7 @@
 						<!-- diner-score -->
 					
 						<div class="review-count">
-							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 2</p>
+							<p>리뷰 ${diner.diner_review_count} / 사장님댓글 ${diner.diner_boss_comment_count}</p>
 						</div>
 					
 						<!-- 별점 -->

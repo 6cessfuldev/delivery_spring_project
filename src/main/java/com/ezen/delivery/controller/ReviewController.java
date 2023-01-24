@@ -87,7 +87,6 @@ public class ReviewController {
 	}
 
 	
-	
 	//삭제
 	@DeleteMapping(value="/delete/{review_code}", produces = {MediaType.TEXT_PLAIN_VALUE})
 	   public ResponseEntity<String> remove(@PathVariable("review_code")int review_code){
@@ -99,6 +98,10 @@ public class ReviewController {
 	      isOk *= rihd.deleteFile(rivo);
 	      return isUp>0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	//페이징
+	
+
 	
 	
 }

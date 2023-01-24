@@ -57,6 +57,7 @@ diner_delivery_fee int default 0,
 diner_addr_point point,
 diner_score_avg double,
 diner_review_count int default 0,
+diner_boss_comment_count int default 0,
 FOREIGN KEY (file_code)
 REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE RESTRICT,
 primary key(diner_code));

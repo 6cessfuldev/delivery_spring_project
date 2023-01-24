@@ -26,5 +26,8 @@ public interface ReviewDAO {
 
 	List<ReviewVO> selectBossComment(int review_code);
 
+	int commentCount(int diner_code);
+
+
 
 }

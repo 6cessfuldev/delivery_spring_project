@@ -27,6 +27,9 @@
 	select count(*) from review where diner_code = #{diner_code}
 </select>
 
+<select id="commentCount" resultType="int">
+	select count(review_boss_comment) from review where diner_code = #{diner_code}
+</select>
 
 <update id="updateComment" parameterType="com.ezen.delivery.domain.ReviewVO">
 	update review set review_boss_comment=#{review_boss_comment}
