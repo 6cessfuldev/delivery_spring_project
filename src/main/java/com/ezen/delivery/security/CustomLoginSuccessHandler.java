@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.ezen.delivery.security.oauth2.PrincipalDetails;
+import com.ezen.delivery.service.DinerService;
 import com.ezen.delivery.service.LoginService;
 
 import lombok.extern.slf4j.Slf4j;

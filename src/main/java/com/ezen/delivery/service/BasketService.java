@@ -23,5 +23,7 @@ public interface BasketService {
 	public DinerVO getDiner(String user_id);
 
 	public int getCount(String user_id);
+
+	public int getDinerCodeByBasketCode(int basket_code);
 	
 }

@@ -25,7 +25,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.ezen.delivery" />
+	<context:component-scan base-package="com.ezen.delivery" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 	
 	<beans:bean id="multipartResolver"
    class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
@@ -33,16 +35,15 @@
 
 
 	<!-- 개발 단계에는 번거로우니 주석 처리 -->
-	<!-- 지우지 말 것!!!!!!!!!!!!!!!!!! -->
 	<interceptors>
-		<!-- <interceptor>
+		<interceptor>
             <mapping path="/member/login"></mapping>
             <beans:bean id="LoginInterceptor" class="com.ezen.delivery.interceptor.LoginInterceptor"></beans:bean>
         </interceptor>
-        <interceptor>
-            <mapping path="/admin/**"></mapping>
-            <beans:bean id="AdminIntreceptor" class="com.ezen.delivery.interceptor.AdminInterceptor"></beans:bean>
-        </interceptor> -->
+		<interceptor>
+            <mapping path="/**"></mapping>
+            <beans:bean id="BasketInterceptor" class="com.ezen.delivery.interceptor.BasketInterceptor"></beans:bean>
+        </interceptor>        
 		<interceptor>
 			<mapping path="/order/**" />
 			<beans:bean id="OrderInterceptor"

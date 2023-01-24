@@ -385,13 +385,16 @@ function postBasketToServer(basketData){
         contentType: 'application/json',
         data: JSON.stringify(basketData),
         success: function(data, status, xhr){
-        if(data == 1){
-	        basketReload();        
-        }else if(data == 2){
-        	alert("이미 등록된 메뉴입니다.");
-        }else
-        	location.href='/member/login'; 
-        },
+	        if(data == 1){
+		        basketReload();
+	        }else if(data == 2){
+	        	alert("이미 등록된 메뉴입니다.");
+	        }else if(data == 3){
+	        	alert("다른 음식점에서 이미 담은 메뉴가 있습니다. 담긴 메뉴를 취소하고 다시 추가하세요.");
+	        }else{
+	        	location.href='/member/login'; 
+	        }
+	    },
         error: function(xhr, status, error){
         console.log(error);
         }
@@ -637,6 +640,11 @@ var observer = new MutationObserver(mutations => {
   }
   localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
+	
+  let count = priceList.length;
+  document.getElementById("basket").innerText = "장바구니("+count+")";
+  
+
 });
 
 // 감지 설정

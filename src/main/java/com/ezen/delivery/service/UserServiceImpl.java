@@ -5,14 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import com.ezen.delivery.domain.UserVO;
 import com.ezen.delivery.repository.UserDAO;
@@ -28,8 +25,6 @@ public class UserServiceImpl implements UserService {
 	private UserDAO udao;
 	@Inject
 	PasswordEncoder passwordEncoder;
-	@Inject
-	private AuthenticationManager authenticationManager;
 
 	@Override
 	public boolean signUp(UserVO uvo) {
