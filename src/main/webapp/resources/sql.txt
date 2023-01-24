@@ -202,7 +202,7 @@ primary key(review_img_code));
 
 ## dibs (찜하기)
 
-crete table dibs(
+create table dibs(
 user_id varchar(60) not null,
 diner_code int not null,
 FOREIGN KEY (user_id)

@@ -64,8 +64,6 @@ public class AdminController {
    @Inject
    private OrderService osv;
 
-	@Inject
-	private LoginService lsv;
 	
 	@GetMapping("/")
 	public String main() {
