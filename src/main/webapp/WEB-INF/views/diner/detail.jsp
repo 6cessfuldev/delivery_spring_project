@@ -75,7 +75,76 @@
 						<img src="/upload/${fn:replace(fivo.file_save_dir, '\\','/')}/${fivo.file_uuid}_${fivo.file_name}" alt="" width="70" height="70">
 					</div>
 					<div class="diner-infos">
-						<p class="score">★★★★☆</p>
+						<p class="score">
+							<c:choose>
+							<c:when test="${diner.diner_score_avg == 5.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 4.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 4.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 3.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 3.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 2.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 2.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 1.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 1.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:otherwise>
+								등록된 리뷰가 없습니다.
+							</c:otherwise>
+						</c:choose>
+						</p>
 						<fmt:formatNumber value="${diner.diner_min_pay}" var="minPay" pattern="#,###" />
 						<p>최소주문금액 ${minPay}원</p>
 						<p>결제 <span>${diner.diner_method_pay}</span></p>
@@ -90,13 +159,13 @@
 			<div class="diner-menu">
 				<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-					<button class="active bg-light" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">메뉴</button>
+					<button class="active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">메뉴</button>
 					</li>
 					<li class="nav-item" role="presentation">
-					<button class="bg-light" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">리뷰</button>
+					<button class="" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">리뷰</button>
 					</li>
 					<li class="nav-item" role="presentation">
-					<button class="clicked bg-light" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">정보</button>
+					<button class="" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">정보</button>
 					</li>
 				</ul>
 				<div class="tab-content" id="myTabContent">
@@ -422,7 +491,14 @@
 		<input type="text" id="x" name="lng" value="${sessionScope.pvo.lng}" hidden>
 		<input type="text" id="y" name="lat" value="${sessionScope.pvo.lat}" hidden>
 		<input type="text" id="category" name="category" value="${sessionScope.pvo.category}" hidden>
-		<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+			<c:choose>
+				<c:when test="${sessionScope.pvo.order ne '' && sessionScope.pvo.order ne null}">
+					<input type="text" id="order" name="order" value="${sessionScope.pvo.order}" hidden>
+				</c:when>
+				<c:otherwise>
+					<input type="text" id="order" name="order" value="1" hidden>
+				</c:otherwise>
+			</c:choose> 
 	</form>
 
 <!-- Button trigger modal -->
@@ -497,7 +573,6 @@
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 	const order_code = '<c:out value="${order_code}" />';
 	const diner_min_pay = '<c:out value="${diner.diner_min_pay}" />';
-	alert('<c:out value="${isDibs}" />');
 
 	if(order_code!=''){
 		$("#home-tab-pane").removeClass("show");
