@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <title>먹어요</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 <jsp:include page="../include/header.jsp"></jsp:include>
-<link type="text/css" rel="stylesheet" href="/resources/css/myDibsList.css">
+<link type="text/css" rel="stylesheet"
+	href="/resources/css/myDibsList.css">
 
 <jsp:include page="../include/myPageHeader.jsp"></jsp:include>
 
@@ -16,7 +19,6 @@
 	<section class="d-flex justify-content-center">
 		<div class="wrapper">
 			<h2>찜 리스트</h2>
-			
 				<c:forEach items="${ddtoList }" var="dib">
 			<div class="card mb-3" style="max-width: 900px;">
 				  <div class="row g-0 align-items-center">
@@ -95,25 +97,28 @@
 							<c:otherwise>
 								등록된 리뷰가 없습니다.
 							</c:otherwise>
-						</c:choose>
-						</p>
-						<fmt:formatNumber value="${dib.dvo.diner_min_pay}" var="minPay" pattern="#,###" />
-						<p>최소주문금액 ${minPay}원</p>
-						<p>결제 <span>${dib.dvo.diner_method_pay}</span></p>
+										</c:choose>
+									</p>
+									<fmt:formatNumber value="${dib.dvo.diner_min_pay}" var="minPay"
+										pattern="#,###" />
+									<p>최소주문금액 ${minPay}원</p>
+									<p>
+										결제 <span>${dib.dvo.diner_method_pay}</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="btn border-secondary">리뷰보기</div>
+							<div class="btn border-secondary">삭제</div>
+						</div>
 					</div>
-				      </div>
-				    </div>
-				    <div class="col-md-2">
-				    	<div class="btn border-secondary">리뷰보기</div>
-				    	<div class="btn border-secondary">삭제</div>
-				    </div>
-				  </div>
-			</div>
-				</c:forEach>
-						
+				</div>
+			</c:forEach>
+
 		</div>
 	</section>
-	
+
 
 </main>
 

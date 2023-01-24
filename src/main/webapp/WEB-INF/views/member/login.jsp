@@ -37,14 +37,16 @@
 			</form>
 		</div>
 		<br>
-		<a href="/oauth2/authorization/google">구글 로그인</a>
-		<a href="/oauth2/authorization/naver">네이버 로그인</a>
-		<a href="/oauth2/authorization/facebook">페이스북 로그인</a>
-		<a href="/oauth2/authorization/kakao">카카오 로그인</a>
+		<div class="login-group">
+			<img id="facebookBtn" src="/resources/source/facebook_login.png" onclick="location.href='/oauth2/authorization/facebook';">
+			<img id="kakaoBtn" src="/resources/source/kakao_login.png" onclick="location.href='/oauth2/authorization/kakao';">
+			<img id="googleBtn" src="/resources/source/google_login.png" onclick="location.href='/oauth2/authorization/google';">
+			<img id="naverBtn" src="/resources/source/naver_login.png" onclick="location.href='/oauth2/authorization/naver';">
+		</div>
 		
 		<!-- 네이버 로그인 버튼 노출 영역 -->
-		<div id="naver_id_login"></div>
-		<!-- //네이버 로그인 버튼 노출 영역 -->
+		<!-- <div id="naver_id_login"></div>
+		//네이버 로그인 버튼 노출 영역
 		<script type="text/javascript">
 			var naver_id_login = new naver_id_login("BwPXQd2HaNZ5eWMSnF7z",
 					"http://localhost:8089/member/callback");
@@ -58,7 +60,7 @@
 			function gotoMain() {
 				location.href = "/index?user.user_id=${user.user_id}";
 			}
-		</script>
+		</script> -->
 
 
 		<br> <br> <br> <img src="/resources/source/event.gif"
@@ -76,3 +78,4 @@
 		alert("아이디 또는 비밀번호를 확인해주세요.");
 	}
 </script>
+

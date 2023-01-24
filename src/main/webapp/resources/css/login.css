@@ -90,6 +90,24 @@ input[id="login_check"]:checked::after{
 /* #login_buttonA2{
     float: right;
 } */
+.login-group{
+	background-color: white;
+	cursor: pointer;
+}
+
+#googleBtn{
+	height:43px;
+}
+#facebookBtn{
+	height:39px;
+}
+#naverBtn{
+	height:39px;
+}
+#kakaoBtn{
+	height:39px;
+}
+
 #login_img{
     width: 700px;
     height: 600px;
