@@ -158,7 +158,9 @@ primary key(order_code));
 
 create table order_food(
 order_code bigint not null,
-order_food_info varchar(2000) not null
+order_food_info varchar(2000) not null,
+FOREIGN KEY (order_code)
+REFERENCES `order`(order_code) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 
@@ -201,6 +203,10 @@ primary key(review_img_code));
 
 crete table dibs(
 user_id varchar(60) not null,
-diner_code int not null
+diner_code int not null,
+FOREIGN KEY (user_id)
+REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (diner_code)
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
