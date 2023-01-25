@@ -45,39 +45,61 @@ $('#order_addrInput').change(()=>{
 var IMP = window.IMP;
 IMP.init("imp88331024");
 
+function clearClickPay(){
+	let payBtn = $(".payBtn");
+	payBtn.forEach(el => {
+		if(el.hasClass("order_pay_click")){
+			el.removeClass("order_pay_click");
+		}
+	});
+}
 
 function paycoPay(){
 	param.order_pg = 'payco';
 	param.order_merchant_uid = 'PARTNERTEST';
+	clearClickPay();
+	$(".payco").addClass("order_pay_click");
 }
 
 function kakaoPay() {
 	param.order_pg = 'kakaopay';
 	param.order_merchant_uid = 'TC0ONETIME';
+	clearClickPay();
+	$(".kakaopay").addClass("order_pay_click");
 }
 
 function tossPay(){
 	param.order_pg = 'uplus';
 	param.order_pay_method = 'trans'
 	param.order_merchant_uid = 'tlgdacomxpay';
+	clearClickPay();
+	$(".tosspay").addClass("order_pay_click");
 }
 
 function creditCardPay(){
 	param.order_pg = 'nice';
 	param.order_merchant_uid = 'nictest00m';
+	clearClickPay();
+	$(".creditcardpay").addClass("order_pay_click");
 }
 
 function danalPay(){
 	param.order_pg = 'danal';
 	param.order_pay_method = 'phone';
 	param.order_merchant_uid = 'A010002002';
+	clearClickPay();
+	$(".danalpay").addClass("order_pay_click");
 }
 
 function cashPay(){
 	param.order_pay_method = '현금결제';
+	clearClickPay();
+	$(".cashpay").addClass("order_pay_click");
 }
 function CardPay(){
 	param.order_pay_method = '카드결제';
+	clearClickPay();
+	$(".cardpay").addClass("order_pay_click");
 }
 
 

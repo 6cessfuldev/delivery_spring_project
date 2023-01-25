@@ -13,8 +13,7 @@ const swiper = new Swiper('.swiper', {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-  
-    // And if we need scrollbar
+      // And if we need scrollbar
     scrollbar: {
       el: '.swiper-scrollbar',
     },
@@ -243,7 +242,13 @@ function getReviewList(diner_code){
                  div += `<br>`;
                  if(reviewDTO.flist.length > 0){      
                     for(let img of reviewDTO.flist){
-                      let real = "/upload/"+img.review_img_save_dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+             		               		  
+             		  //윈도우 경로
+             		  let save_dir = img.review_img_save_dir.split('\\');
+                      let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
+                      let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+             		  //리눅스 경로
+                      //let real = "/upload/"+img.review_img_save_dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
                       let imgTest = '<img src="'+real+'" id="review_img">';
                       div += imgTest;
                       }
@@ -484,9 +489,12 @@ $(".modal-order").click(function(){
 // 모달창 내용 채우기
 function spreadChoice(data){
 
+	//리눅스 경로
+	//let save_dir = data.filevo.file_save_dir;
+	
+	//윈도우 경로
 	let save_dir = data.filevo.file_save_dir;
 	let splitArr = save_dir.split(`\\`);
-
 	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
 	
@@ -709,11 +717,11 @@ var observer = new MutationObserver(mutations => {
   if(count >0){
     a.innerText = "장바구니("+count+")";
     a.className ="nav-link text-light";
-    box.className ="box bg-secondary";
+    box.className ="box2 hasBasket";
   }else{
     a.innerText = "장바구니";
     a.className ="nav-link";
-    box.className ="box";
+    box.className ="box2";
   }
 
 });
