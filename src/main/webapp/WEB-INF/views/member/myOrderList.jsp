@@ -17,10 +17,10 @@
 
 		<fmt:parseDate value="${fn:substring(uohList[0].order_code, 0, 8)}" var="dateValue" pattern="yyyyMMdd"/>
 		<div class="col-sm-8 card-wrap">
-		  <h5 class="card-head"><fmt:formatDate value="${dateValue }" pattern="yyyy.MM.dd"/> 주문</h5>
-		  	<div  class="btn-group">
+		  <h5 class="card-head">
+		  <fmt:formatDate value="${dateValue }" pattern="yyyy.MM.dd"/> 주문</h5>
+		  	<div class="btn-group">
 			     <div class="btn border-secondary review-btn" style="--bs-border-opacity: .5;" onclick="location.href='/diner/review?order_code=${uohList[0].order_code}';">리뷰 작성하기</div>
-			     <div class="btn border-secondary review-btn" style="--bs-border-opacity: .5;">교환 반품 신청</div>
 			</div>
 			<div>
 		</div>

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.delivery.domain.DibsVO;
@@ -72,6 +73,16 @@ public class DibsController {
 		model.addAttribute("ddtoList", ddtoList);
 		
 		return "/member/myDibsList";
+	}
+	
+	@GetMapping("/remove")
+	public String removeDibs(@RequestParam(name="diner_code")int diner_code, Authentication authentication) {
+		if(authentication==null) {
+			return "/member/login"; 			
+		}
+		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+		disv.creatOrDelete(new DibsVO(principalDetails.getUsername(), diner_code));
+		return "/diner/detail?diner_code="+diner_code;
 	}
 	
 }

@@ -36,6 +36,11 @@ header>nav>.nav-item{
 	border-left:none;
 }
 
+.box2:hover{
+	background-color: olive;
+	color:white;
+}
+
 @media screen and (max-width: 1200px) {
 
     header>.logo{

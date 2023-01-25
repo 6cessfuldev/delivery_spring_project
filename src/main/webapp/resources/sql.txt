@@ -151,7 +151,7 @@ order_niceMobileV2 varchar(20) not null,
 order_IMP_UID varchar(100) not null,
 diner_code int not null,
 FOREIGN KEY (diner_code)
-REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE cascade,
 primary key(order_code));
 
 
@@ -161,7 +161,7 @@ create table order_food(
 order_code bigint not null,
 order_food_info varchar(2000) not null,
 FOREIGN KEY (order_code)
-REFERENCES `order`(order_code) ON UPDATE CASCADE ON DELETE RESTRICT
+REFERENCES `order`(order_code) ON UPDATE CASCADE ON DELETE cascade
 );
 
 
@@ -211,3 +211,22 @@ FOREIGN KEY (diner_code)
 REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+/* create function */
+DELIMITER $$
+
+CREATE
+    FUNCTION `u_st_distance_sphere`(`pt1` POINT, `pt2` POINT)
+    RETURNS DECIMAL(10,2)
+    BEGIN
+	RETURN 6371000 * 2 * ASIN(SQRT(POWER(SIN((ST_Y(pt2) - ST_Y(pt1)) * PI()/180 / 2), 2) + COS(ST_Y(pt1) * PI()/180 ) * COS(ST_Y(pt2) * PI()/180) * POWER(SIN((ST_X(pt2) - ST_X(pt1)) * PI()/180 / 2), 2) ));
+    END$$
+
+DELIMITER ;
+
+SELECT mach_id, ST_X(pt1) AS lat, ST_Y(pt1) AS lng, ST_X(pt2) AS priv_lat, ST_Y(pt2) AS priv_lng
+, ST_DISTANCE(pt2, pt1) AS dist, U_ST_DISTANCE_SPHERE(pt2, pt1) AS dist1
+FROM
+(
+SELECT mach_id, mach_pt AS pt1, LAG(mach_pt,1) OVER(PARTITION BY mach_id ORDER BY reg_seq) AS pt2
+FROM mach_position
+) AS mp;

@@ -152,7 +152,6 @@
 		var places = new kakao.maps.services.Places();
 		
 		var callback = function(result, status) {
-			console.log(result);
 			if (status === kakao.maps.services.Status.OK) {
 				addSearchBox(result);
 			}
@@ -182,7 +181,15 @@
 			exten.show();
 			for(let i=0; i<result.length; i++ ){
 
+				
 				let addr = result[i];
+
+				if(i==0){
+					$("#jibunAddr").val(addr.address_name);
+					$("#x").val(addr.x);
+					$("#y").val(addr.y);
+				}
+				
 				let classname = "addr"+i;
 				
 				let div = $('<div>').prop({className: classname});

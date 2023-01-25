@@ -11,7 +11,6 @@
 
     <div>
         <img src="/resources/source/error.png" alt="" height="500px">
-        <h4><c:out value="${Exception.message}" /></h4>
     </div>
 
 

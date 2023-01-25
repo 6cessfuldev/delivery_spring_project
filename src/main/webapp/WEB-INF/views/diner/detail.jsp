@@ -61,7 +61,7 @@
 			<div class=diner-header>
 				<div class="diner-name">
 					<span class=diner-name-field>${diner.diner_name}</span>
-					<span class="dib-field">
+					<span class="dib-field" style="cursor:pointer;">
 						<c:choose>
 							<c:when test="${isDibs eq 0}"> ♡</c:when>
 							<c:when test="${isDibs ne 0}"> ♥</c:when>
@@ -210,7 +210,8 @@
 										<div class="diner-menu-card d-flex align-items-center justify-content-between" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
 											<div class="diner-menu-table">
 												<p class="diner-menu-title">${food.foodvo.food_name}</p>
-												<p class="diner-menu-price">${food.foodvo.food_price }</p>
+												<fmt:formatNumber value="${food.foodvo.food_price}" var="price" pattern="#,###" />
+												<p class="diner-menu-price">${food.foodvo.food_price }원</p>
 											</div>
 											<div class="diner-menu-img">
 												<img src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}" alt="" width="100px" height="100px">
@@ -322,7 +323,76 @@
 						<div class="diner-score d-flex justify-content-center">
 							<div class="diner-score-total">
 								<p class="total-score">${diner.diner_score_avg}</p>
-								<p class="total-star">★★★★☆</p><!-- 평균 맞춰서 색 채워야함 -->
+								<p class="total-star">
+							<c:choose>
+							<c:when test="${diner.diner_score_avg == 5.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 4.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 4.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 3.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 3.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 2.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 2.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 1.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 1.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:otherwise>
+								등록된 리뷰가 없습니다.
+							</c:otherwise>
+						</c:choose>
+						</p>
 							</div>					
 						</div>
 						<!-- diner-score -->

@@ -243,11 +243,7 @@ function getReviewList(diner_code){
                  div += `<br>`;
                  if(reviewDTO.flist.length > 0){      
                     for(let img of reviewDTO.flist){
-                      console.log(img);
-                      let save_dir = img.review_img_save_dir.split('\\');
-                      let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
-                      console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
-                      let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+                      let real = "/upload/"+img.review_img_save_dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
                       let imgTest = '<img src="'+real+'" id="review_img">';
                       div += imgTest;
                       }
@@ -708,8 +704,17 @@ var observer = new MutationObserver(mutations => {
   document.getElementById("total").innerText = sum+"원";
 	
   let count = priceList.length;
-  document.getElementById("basket").innerText = "장바구니("+count+")";
-  
+  	let a = document.getElementById("basket");
+    let box = document.getElementById("basket-box");
+  if(count >0){
+    a.innerText = "장바구니("+count+")";
+    a.className ="nav-link text-light";
+    box.className ="box bg-secondary";
+  }else{
+    a.innerText = "장바구니";
+    a.className ="nav-link";
+    box.className ="box";
+  }
 
 });
 

@@ -11,7 +11,7 @@ public enum OAuth2Provider {
         @Override
         public ClientRegistration.Builder getBuilder(String registrationId) {
             ClientRegistration.Builder builder = getBuilder(registrationId,
-                    ClientAuthenticationMethod.POST, "http://localhost:8089/login/oauth2/code/naver");
+                    ClientAuthenticationMethod.POST, "http://yukssungmin.cafe24.com/login/oauth2/code/naver");
             builder.scope("profile");
             builder.authorizationUri("https://nid.naver.com/oauth2.0/authorize");
             builder.tokenUri("https://nid.naver.com/oauth2.0/token");
@@ -27,7 +27,7 @@ public enum OAuth2Provider {
         @Override
         public ClientRegistration.Builder getBuilder(String registrationId) {
             ClientRegistration.Builder builder = getBuilder(registrationId,
-                    ClientAuthenticationMethod.POST, "http://localhost:8089/login/oauth2/code/kakao");
+                    ClientAuthenticationMethod.POST, "http://yukssungmin.cafe24.com/login/oauth2/code/kakao");
             builder.scope("profile_nickname", "account_email");
             builder.authorizationUri("https://kauth.kakao.com/oauth/authorize");
             builder.tokenUri("https://kauth.kakao.com/oauth/token");
@@ -43,7 +43,7 @@ public enum OAuth2Provider {
         @Override
         public ClientRegistration.Builder getBuilder(String registrationId) {
             ClientRegistration.Builder builder = getBuilder(registrationId,
-                    ClientAuthenticationMethod.BASIC, "http://localhost:8089/login/oauth2/code/google");
+                    ClientAuthenticationMethod.BASIC, "http://yukssungmin.cafe24.com/login/oauth2/code/google");
             builder.scope("openid", "profile", "email");
             builder.authorizationUri("https://accounts.google.com/o/oauth2/v2/auth");
             builder.tokenUri("https://www.googleapis.com/oauth2/v4/token");
@@ -60,7 +60,7 @@ public enum OAuth2Provider {
         @Override
         public ClientRegistration.Builder getBuilder(String registrationId) {
             ClientRegistration.Builder builder = getBuilder(registrationId,
-                    ClientAuthenticationMethod.POST, "http://localhost:8089/login/oauth2/code/facebook");
+                    ClientAuthenticationMethod.POST, "http://yukssungmin.cafe24.com/login/oauth2/code/facebook");
             builder.scope("public_profile", "email");
             builder.authorizationUri("https://www.facebook.com/v2.8/dialog/oauth");
             builder.tokenUri("https://graph.facebook.com/v2.8/oauth/access_token");

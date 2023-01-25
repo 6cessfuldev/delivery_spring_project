@@ -233,13 +233,13 @@ function addList(){
 				let splitArr = save_dir.split(`\\`);
                 console.log(splitArr);
 				save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
-				let src = "/upload/"+save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
+				let src = "/upload/"+result[i].fivo.file_save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
 				
                 add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].dvo.diner_code}"'>`;
                 add+=`<div class="diner-img">`;
                 add+=`<img src="${src}"	 alt="" width="80px" height="80px"></div>`;
                 add+=`<div class="diner-body"><h5 class="diner-title">${result[i].dvo.diner_name}</h5>`;
-                add+=`<p class="diner-text"><span class="score">★3.8</span> | 리뷰 1902 | 사장님댓글 791 </p>`;
+                add+=`<p class="diner-text"><span class="score">★${result[i].dvo.diner_score_avg}</span> | 리뷰 ${result[i].dvo.diner_review_count} | 사장님댓글 0 </p>`;
                 add+=`<p class="diner-text"><span class="del-option">${result[i].dvo.diner_method_pay}</span> |`;
                 add+=`<span>${result[i].dvo.diner_min_pay}원 이상 배달</span></p>`;
                 add+=`<p class="delivery-time"> 22분 </p></div></div>`;

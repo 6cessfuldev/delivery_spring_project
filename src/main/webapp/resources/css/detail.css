@@ -280,6 +280,7 @@ main{
 }
 
 .total-star{
+	font-size:15px;
 	text-align: center;
 	color:rgb(192, 192, 12);
 }
