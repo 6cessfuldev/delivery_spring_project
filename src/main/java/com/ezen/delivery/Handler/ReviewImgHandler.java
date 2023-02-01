@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewImgHandler {
 
 	
-	private final String UP_DIR ="/yukssungmin/tomcat/webapps/delivery/upload";
+	private final String UP_DIR ="D:\\delivery\\upload";
 	
 	public List<ReviewImgVO> uploadFiles(MultipartFile[] files){
 		LocalDate date = LocalDate.now();

@@ -13,7 +13,7 @@
 		<h1 >"어디로 배달해 드릴까요?"</h1> <br>
 		<div class="search-box">
 			<button type="button" class="gps-btn" onclick="getLocation()">
-				<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+				<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#f2B72c" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
   					<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
 				</svg>
 			</button>
@@ -73,11 +73,11 @@
 	
 	let exten = $(".search-extention");
 	
-	//카테고리 버튼 주소가 입력되었을 때만 활성화
+	//카테고리 버튼: 주소가 입력되었을 때만 활성화
 	function clickCategory(category){
 		console.log("click");
-		let input = exten.find("#jibunAddr")
-		if(input.val() == "" || input.val()==null){
+		let input = $("#jibunAddr").val();
+		if(input == "" || input==null){
 			alert("주소를 입력해주세요.");
 		}else{
 			$("#category").val(category);

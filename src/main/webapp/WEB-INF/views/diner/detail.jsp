@@ -58,7 +58,7 @@
 	<div class=" col-sm-8 contents bg-light d-flex justify-content-center pt-3">
 		
 		<div class="diner-detail">
-			<div class=diner-header>
+			<div class="diner-header">
 				<div class="diner-name">
 					<span class=diner-name-field>${diner.diner_name}</span>
 					<span class="dib-field" style="cursor:pointer;">
@@ -536,10 +536,7 @@
 
 		<div class="col-sm-3 basket">
 			<div class="sub-title">
-				<span>주문</span> <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-					<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-					<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-				  </svg></span>
+				<span>주문</span>
 			</div>
 			
 			<div id="basket-menu-list"></div>
@@ -629,7 +626,7 @@
     </div>
   </div>
 </div>
-<form action="/order" method="post" id="modal-form">
+<form action="/order/" method="post" id="modal-form">
         	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
         	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
         	<input type="text" name="user_id" val="<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>" hidden>

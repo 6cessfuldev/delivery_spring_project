@@ -40,7 +40,8 @@
 
 		<multipart-config>
 			<location>
-				/yukssungmin/tomcat/webapps/delivery/upload
+				<!-- /yukssungmin/tomcat/webapps/delivery/upload -->
+				D:\delivery\upload
 			</location>
 			<max-file-size>20971520</max-file-size>
 			<max-request-size>41943040</max-request-size>

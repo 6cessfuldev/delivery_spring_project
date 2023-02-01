@@ -229,11 +229,16 @@ function addList(){
                 //일단 이미지 없으면 띄우지 않기
                 if(result[i].fivo == null) continue;
                 
-                let save_dir = result[i].fivo.file_save_dir;
+                //리눅스 경로
+                //let save_dir = result[i].fivo.file_save_dir;
+				
+				//윈도우 경로
+				let save_dir = result[i].fivo.file_save_dir;
 				let splitArr = save_dir.split(`\\`);
                 console.log(splitArr);
 				save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
-				let src = "/upload/"+result[i].fivo.file_save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
+
+				let src = "/upload/"+save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
 				
                 add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].dvo.diner_code}"'>`;
                 add+=`<div class="diner-img">`;

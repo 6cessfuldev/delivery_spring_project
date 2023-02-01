@@ -21,23 +21,24 @@ header>.logo{
 }
 
 .box>.nav-link,.box2>.nav-link {
-    color: rgba(59, 56, 56, 0.938);
+	color: grey;
 }
 header>nav>.nav-item{
 
 }
-.box,.box2{
-    border: 1px solid rgba(59, 56, 56, 0.938);
-    /*  margin-right:10px; */
-   /*  border-radius: 10px; */
 
+.hasBasket{
+	background-color: #f2B72c;
 }
+
 .box2{
-	border-left:none;
+	border-collapse: collapse;
+	border : 1px solid grey;
 }
 
 .box2:hover{
-	background-color: olive;
+	border : none;
+	background-color: #ff8000;
 	color:white;
 }
 
