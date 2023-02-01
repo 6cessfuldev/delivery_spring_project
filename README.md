@@ -1,5 +1,10 @@
 # 먹어요 Delivery: 배달서비스 플랫폼 웹사이트
 
+🚴 Motive : 배달서비스 플랫폼 [요기요](https://www.yogiyo.co.kr/) 웹페이지의 기능들을 최대한 구현해보고 싶었다!🔥
+
+🥅 Goal : 전부 다 구현하긴 어렵고 배달서비스 사업자를 위한 기능은 배제하고 배달서비스 사용자를 위한 기능 위주로 구현해보자!💪
+
+  
 ## 사이트 링크 : http://yukssungmin.cafe24.com
 
 ## 주요 기능
@@ -19,13 +24,20 @@
 - Back
   - Java, - version 1.8, Spring, Mybatis, Spring Security 5, Maven, Junit4, MySQL
 
+## 메인 로직
+
 ## 개발 기간
 - 2022.12.29 ~ 1.25 (4주)
 
 ## 기획 & 설계
-[기능 명세서]
-[페이지 기획서]
-[API 명세서]
-[API 문서]
-[DB 명세서]
-![DB](https://github.com/6cessfuldev/delivery_spring_project/blob/main/erd.jpg?raw=true)
+[기능 명세서](https://speckle-energy-fe9.notion.site/300be396353f4ad79b7ebd1b5f8e643d)  
+  
+[API 문서](https://speckle-energy-fe9.notion.site/API-880af2429f3942b9aae1b2fd92b038a7)  
+  
+[DB 명세서](https://speckle-energy-fe9.notion.site/DB-599b7a08e4c941238b8833ac7c2f282a)  
+  
+![DB](https://github.com/6cessfuldev/delivery_spring_project/blob/main/erd.jpg?raw=true)  
+  
+
+## README 참고 자료
+https://github.com/sungeun101/cafemate
