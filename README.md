@@ -39,5 +39,5 @@
 ![DB](https://github.com/6cessfuldev/delivery_spring_project/blob/main/erd.jpg?raw=true)  
   
 
-## README 참고 자료
+## README 형식 참고 자료
 https://github.com/sungeun101/cafemate
