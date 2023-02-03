@@ -22,7 +22,7 @@
 - Front
   - Javascript, JQuery, Bootstrap
 - Back
-  - Java, - version 1.8, Spring, Mybatis, Spring Security 5, Maven, Junit4, MySQL
+  - Java - version 1.8, Spring, Mybatis, Spring Security 5, Maven, Junit4, MySQL
 
 ## 메인 로직
 
