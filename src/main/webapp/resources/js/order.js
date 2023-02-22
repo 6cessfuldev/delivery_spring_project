@@ -19,7 +19,6 @@ let param = {
 function findAddr(){
     new daum.Postcode({
         oncomplete: function(data) {
-            console.log(data);
             var roadAddr = data.roadAddress; 
             var jibunAddr = data.jibunAddress;
             document.getElementById('order_post').value = data.zonecode;
@@ -47,25 +46,21 @@ IMP.init("imp88331024");
 
 function clearClickPay(){
 	let payBtn = $(".payBtn");
-	payBtn.forEach(el => {
-		if(el.hasClass("order_pay_click")){
-			el.removeClass("order_pay_click");
-		}
-	});
+	payBtn.css("backgroundColor", "rgba(2, 2, 2, 0.61)");
 }
 
 function paycoPay(){
 	param.order_pg = 'payco';
 	param.order_merchant_uid = 'PARTNERTEST';
 	clearClickPay();
-	$(".payco").addClass("order_pay_click");
+	$(".payco").css("background","#f2B72c");
 }
 
 function kakaoPay() {
 	param.order_pg = 'kakaopay';
 	param.order_merchant_uid = 'TC0ONETIME';
 	clearClickPay();
-	$(".kakaopay").addClass("order_pay_click");
+	$(".kakaopay").css("background","#f2B72c");
 }
 
 function tossPay(){
@@ -73,14 +68,14 @@ function tossPay(){
 	param.order_pay_method = 'trans'
 	param.order_merchant_uid = 'tlgdacomxpay';
 	clearClickPay();
-	$(".tosspay").addClass("order_pay_click");
+	$(".tosspay").css("background","#f2B72c");
 }
 
 function creditCardPay(){
 	param.order_pg = 'nice';
 	param.order_merchant_uid = 'nictest00m';
 	clearClickPay();
-	$(".creditcardpay").addClass("order_pay_click");
+	$(".creditcardpay").css("background","#f2B72c");
 }
 
 function danalPay(){
@@ -88,25 +83,24 @@ function danalPay(){
 	param.order_pay_method = 'phone';
 	param.order_merchant_uid = 'A010002002';
 	clearClickPay();
-	$(".danalpay").addClass("order_pay_click");
+	$(".danalpay").css("background","#f2B72c");
 }
 
 function cashPay(){
 	param.order_pay_method = '현금결제';
 	clearClickPay();
-	$(".cashpay").addClass("order_pay_click");
+	$(".cashpay").css("background","#f2B72c");
 }
 function CardPay(){
 	param.order_pay_method = '카드결제';
 	clearClickPay();
-	$(".cardpay").addClass("order_pay_click");
+	$(".cardpay").css("background","#f2B72c");
 }
 
 
 
 // 결제 요청
 function requestPay() {
- 	console.log(param);
  	param.order_buyer_tel = $("#order_phone").val();
 
 	if(param.order_buyer_postcode == null || param.order_buyer_postcode == "" || param.order_buyer_addr == null || param.order_buyer_addr == "") {
@@ -149,7 +143,6 @@ function requestPay() {
 			 param.order_IMP_UID = rsp.imp_uid;
 			 param.order_code = rsp.merchant_uid;
 			 paymentComplete(param);
-			 console.log(rsp);
 			 location.href="/order/myOrderList";
 		  } else {
 			alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
@@ -192,7 +185,6 @@ function paymentComplete(data){
         /*dataType: 'json',*/
         
         success: function (data, status, xhr) {
-        	console.log(status);
             if (data == "1") {
                 alert("서버 요청 성공");
             }

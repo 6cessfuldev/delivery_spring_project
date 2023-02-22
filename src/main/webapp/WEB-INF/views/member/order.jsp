@@ -12,8 +12,7 @@
 
 </head>
 <body>
-<main>
-   <div id="col-sm-8 contents bg-light d-flex justify-content-center pt-3">
+   <div id="order_wrapper">
         <div id="order_content">
             <!-- <div id="order_img">
                 <a href="#" id="order_iconA"><img id="order_icon" src="/resources/source/home.png"></a>
@@ -26,8 +25,9 @@
                 <input type="text" id="order_phone" value="${user.user_phone}" placehoder="핸드폰번호를 입력하세요.">
                 <input type="checkbox" id="order_check">
                 <label for="order_check" id="order_checkLabel"><span>안심번호 사용</span></label>
+
        		</div>
-       		<br>
+       		<br><br>
 	        <div id="order_checkDiv">
 	            <br>
 	            <input type="checkbox" id="order_checkbox">&nbsp;&nbsp;&nbsp;일회용 수저, 포크 안 주셔도 돼요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -42,18 +42,18 @@
 	                <option>도착하기 전에 전화해주세요</option>
 	            </select></p>
 	        </div>
-	        <br>
+	        <br><br>
 	        <div id="order_pay">
 	            <p id="order_payP">바로결제</p>
-	                <button onclick="paycoPay()" type="button" id="order_payBut" class="payco payBtn">페이코</button>
-	                <button onclick="kakaoPay()" type="button" id="order_payBut" class="kakaopay payBtn">카카오페이</button>
-	                <button onclick="tossPay()" type="button" id="order_payBut2" class="tosspay payBtn">계좌이체</button><br>
-	                <button onclick="creditCardPay()" type="button" id="order_payBut2" class="creditcardpay payBtn">신용카드</button>
-	                <button onclick="danalPay()" type="button" id="order_payBut2" class="danalpay payBtn">핸드폰결제</button>
+	                <button onclick="paycoPay()" type="button" id="order_payBut" class="payBtn payco">페이코</button>
+	                <button onclick="kakaoPay()" type="button" id="order_payBut" class="payBtn kakaopay">카카오페이</button>
+	                <button onclick="tossPay()" type="button" id="order_payBut2" class="payBtn tosspay">계좌이체</button><br>
+	                <button onclick="creditCardPay()" type="button" id="order_payBut2" class="payBtn creditcardpay">신용카드</button>
+	                <button onclick="danalPay()" type="button" id="order_payBut2" class="payBtn danalpay">핸드폰결제</button>
 	                <br><br>
 	                <p id="order_payP">만나서결제</p>
-	            <button type="button" onclick="cashPay()" id="order_cash" class="cashpay payBtn">현금</button>
-	            <button type="button" onclick="CardPay()" id="order_card" class="cardpay payBtn">카드</button>
+	            <button type="button" onclick="cashPay()" id="order_cash" class="payBtn cashpay">현금</button>
+	            <button type="button" onclick="CardPay()" id="order_card" class="payBtn cardpay">카드</button>
 	        </div>
 	        <div id="order_payInfo">
 	            <ul id="order_ul">
@@ -67,14 +67,7 @@
 	            <button onclick="requestPay()" type="button" id="order_payAll">결제하기</button>
 	        </div>
         </div>
-        
-        <div class="col-sm-3 menu">
-        와우
-        </div>
-        
     </div>
-    
-</main>   
     <jsp:include page="../include/footer2.jsp"></jsp:include>
     <script>
         let user_email = '<c:out value="${user.user_email}"/>';

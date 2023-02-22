@@ -1,21 +1,16 @@
 @charset "UTF-8";
 #order_wrapper{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
     background-color: rgba(250, 250, 250);
 }
 #order_content{
 	padding-top:100px;
-    margin-right: 10px;
-	width: 650px;
+    margin: auto;
     text-align: center;
+    width: 1000px;
 }
-
-.contents{
-	width: 100%;
-	background-color: rgb(235, 232, 232);
-	box-shadow: inset 0px 6px 6px -6px #666;
-	
-}
-
 #order_icon{
     float: left;
     padding-top: 30px;
@@ -23,7 +18,7 @@
     height: 100px;
 }
 #order{
-    width: 650px;
+    width: 900px;
     height: 230px;
     margin: auto;
     background-color: white;
@@ -38,12 +33,12 @@
     color: rgba(88, 77, 77, 0.938);
   }
 #order_post, #order_addr{
-    width: 300px;
+    width: 400px;
     height: 40px;
     border: 1px solid rgb(214, 209, 209);
 }
 #order_addrInput{
-    width: 650px;
+    width: 810px;
     height: 40px;
     border: 1px solid rgb(214, 209, 209);
 }
@@ -96,7 +91,7 @@ input[id="order_check"]:checked::after{
     background-color: rgba(96, 145, 81);
 }
 #order_checkDiv{
-    width: 650px;
+    width: 900px;
     height: 185px;
     margin: auto;
     background-color: white;
@@ -122,19 +117,19 @@ input[id="order_checkbox"]:checked::after{
     font-size: 16px;
 }
 #order_req{
-    width: 650px;
+    width: 750px;
     height: 30px;
     margin-top: 10px;
     border: 1px solid rgb(214, 209, 209);
 }
 #order_reqSel{
-    width: 650px;
+    width: 742px;
     height: 30px;
     color: rgba(88, 77, 77, 0.938);
     border: 1px solid rgb(214, 209, 209);
 }
 #order_pay{
-    width: 650px;
+    width: 900px;
     height: 280px;
     margin: auto;
     background-color: white;
@@ -147,16 +142,6 @@ input[id="order_checkbox"]:checked::after{
     font-size: 17px;
     font-weight: 600;
 }
-
-#order_pay:hover{
-	background-color:#609151; 
-}
-
-.order_pay_click{
-	background-color:#609151; 
-}
-
-
  #order_payBut,#order_payBut2,#order_cash,#order_card{
     width: 200px;
     height: 40px;
@@ -171,7 +156,7 @@ input[id="order_checkbox"]:checked::after{
     margin-top: 10px;
 } 
 #order_payInfo{
-    width: 650px;
+    width: 900px;
     height: 280px;
     margin: auto;
     background-color: white;
@@ -186,7 +171,7 @@ input[id="order_checkbox"]:checked::after{
     font-weight: 600;
 }
 #order_payAll{
-    width: 150px;
+    width: 230px;
     height: 55px;
     border: none;
     background-color: rgba(96, 145, 81);

@@ -15,20 +15,13 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- 서버용 -->
-	<!-- <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://203.245.44.15:3306/yukssungmin?allowPublicKeyRetrieval=true"></property>
-		<property name="username" value="yukssungmin"></property>
-		<property name="password" value="delivery9395*"></property>
-	</bean> -->
-	
-	<!-- 로컬호스트용 -->
+	<context:property-placeholder location="classpath:*.properties" />
+
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/deliverydb?allowPublicKeyRetrieval=true"></property>
-		<property name="username" value="springUser"></property>
-		<property name="password" value="mysql"></property>
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
@@ -50,8 +43,8 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="587" />
-		<property name="username" value="yukssungmin" />
-		<property name="password" value="dds62@qqs62" />
+		<property name="username" value="${mail.username}" />
+		<property name="password" value="{mail.password}" />
 		<!-- 보안연결 SSL과 관련된 설정 -->
 		<property name="javaMailProperties">
 			<props>

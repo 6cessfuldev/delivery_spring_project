@@ -634,7 +634,6 @@
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
 	let user_id = <sec:authorize access='!isAuthenticated()'>""</sec:authorize><sec:authorize access='isAuthenticated()'>"<sec:authentication property='principal.username'/>"</sec:authorize>;
-	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 	const order_code = '<c:out value="${order_code}" />';
@@ -651,7 +650,6 @@
 	function readFile2(fileNames) {
 	    const target = document.getElementsByName(fileNames);
 	    const fileLength = target[0].files.length;
-	    console.log(fileLength);
 	      if (fileLength<1) return;
 	
 	      $.each(target[0].files, function(index, file){
@@ -667,7 +665,6 @@
 	                img.setAttribute("src", e.target.result);               
 	               div.appendChild(xBtn);
 	               div.appendChild(img);
-	           console.log("index"+index);
 	              document.querySelector("div#image_container").appendChild(div);
 	              
 	           }

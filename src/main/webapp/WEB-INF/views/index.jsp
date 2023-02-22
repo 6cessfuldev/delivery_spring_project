@@ -13,7 +13,7 @@
 		<h1 >"어디로 배달해 드릴까요?"</h1> <br>
 		<div class="search-box">
 			<button type="button" class="gps-btn" onclick="getLocation()">
-				<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#f2B72c" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+				<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
   					<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
 				</svg>
 			</button>
@@ -75,7 +75,6 @@
 	
 	//카테고리 버튼: 주소가 입력되었을 때만 활성화
 	function clickCategory(category){
-		console.log("click");
 		let input = $("#jibunAddr").val();
 		if(input == "" || input==null){
 			alert("주소를 입력해주세요.");
@@ -114,8 +113,6 @@
 		var coord = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		var callback = function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
-				console.log(result[0]);
-				
 				if(searchAddress(result[0].address.address_name)==null){
 					searchAddr(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
 				}else{
@@ -138,9 +135,7 @@
 			exten.hide();
 			exten.html("");
 		}
-			
-			
-		console.log(keyword);
+
 		if (!checkSearchedWord(keyword)) {
 			return ;
 		}
@@ -165,7 +160,6 @@
 	})
 
 	$("#search-input").on("click keyup", function(){
-		console.log("change");
 		let keyword = $("#search-input").val();
 		searchAddr(keyword);
 	})
@@ -195,7 +189,6 @@
 				let div = $('<div>').prop({className: classname});
 				div.addClass('addr');
 				div.click(function(){
-					console.log(addr);
 					exten.hide();
 					$("#search-input").val(addr.address_name);	
 					$("#jibunAddr").val(addr.address_name);

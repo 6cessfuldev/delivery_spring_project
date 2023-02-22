@@ -20,32 +20,32 @@ select diner_code, file_code, diner_name, diner_address, diner_min_pay, diner_no
 
 <select id="selectListByDistance" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10
+	where U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <50000 ]]> order by U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10
 </select>
 
 <select id="selectListByReview" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_review_count desc limit #{startNum}, 10
+	where U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <50000 ]]> order by diner_review_count desc limit #{startNum}, 10
 </select>
 
 <select id="selectListByScore" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_score_avg desc limit #{startNum}, 10
+	where U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <50000 ]]> order by diner_score_avg desc limit #{startNum}, 10
 </select>
 
 <select id="selectCathListByDistance" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where diner_category like concat('%', #{category}, '%') and ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
+	where diner_category like concat('%', #{category}, '%') and U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <50000 ]]> order by U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) limit #{startNum}, 10 
 </select>
 
 <select id="selectCathListByReview" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where diner_category like concat('%', #{category}, '%') and ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_review_count desc limit #{startNum}, 10
+	where diner_category like concat('%', #{category}, '%') and U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <50000 ]]> order by diner_review_count desc limit #{startNum}, 10
 </select>
 
 <select id="selectCathListByScore" parameterType="com.ezen.delivery.domain.PagingVO" resultType="com.ezen.delivery.domain.DinerVO">
 	<include refid="select_diner"></include>
-	where diner_category like concat('%', #{category}, '%') and ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <10000 ]]> order by diner_score_avg desc limit #{startNum}, 10
+	where diner_category like concat('%', #{category}, '%') and U_ST_Distance_Sphere(diner_addr_point, point(#{lng}, #{lat})) <![CDATA[ <50000 ]]> order by diner_score_avg desc limit #{startNum}, 10
 </select>
 
 <insert id="insert">

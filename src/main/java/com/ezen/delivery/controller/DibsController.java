@@ -82,7 +82,7 @@ public class DibsController {
 		}
 		PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 		disv.creatOrDelete(new DibsVO(principalDetails.getUsername(), diner_code));
-		return "/diner/detail?diner_code="+diner_code;
+		return "/member/myDibsList";
 	}
 	
 }

@@ -4,7 +4,6 @@ var code = "";
 $('#user_email').keyup(function () {
 
     let user_email = $('#user_email').val();
-    console.log(user_email);
 
     $.ajax({
         url: "/member/userEmailCheck",
@@ -74,9 +73,7 @@ const add_checkBox = async () => {
 
             // 인증번호 비교
             $(".cBtn").click(function () {
-                console.log("click cBtn");
-                var inputCode = $(".mail_check_input").val();        // 입력코드    
-                console.log(inputCode);
+                var inputCode = $(".mail_check_input").val();        // 입력코드
                 var checkResult = $("#mail_check_input_box_warn");    // 비교 결과 
 
                 if (inputCode == code) {
@@ -92,25 +89,17 @@ const add_checkBox = async () => {
             var email = $(".email_input").val(); // 입력한 이메일
 
             $.ajax({
-
                 type: "GET",
                 url: "mailCheck?email=" + email,
                 success: function (data) {
-
-                    // console.log("data : " + data);
-
                     code = data;
-                    console.log(code);
+                    //console.log(code);
                 }
-
             });
-
         } else {
             alert('이메일 주소를 확인해주세요.');
         }
-
     }
-
 }
 
 
@@ -118,7 +107,6 @@ const add_checkBox = async () => {
 $('#user_id').keyup(function () {
 
     let user_id = $('#user_id').val();
-    console.log(user_id);
 
     $.ajax({
 

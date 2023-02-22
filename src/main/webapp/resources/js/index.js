@@ -1,7 +1,3 @@
-$("#search-btn").click(function(){
-    console.log(this);
-})
-
 function searchJuso(){
 	if (!checkSearchedWord(document.form.keyword)) {
 		return ;
@@ -46,7 +42,6 @@ $.ajax({
     dataType: 'json',
     async:false, //동기식 처리
     success: function(data, status, xhr){
-    	console.log(data);
     	result = 1; 
     },
     error: function(xhr, status, error){

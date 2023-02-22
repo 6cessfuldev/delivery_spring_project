@@ -26,7 +26,6 @@ function showPosition(position) {
 	var coord = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	var callback = function(result, status) {
 		if (status === kakao.maps.services.Status.OK) {
-			console.log(result[0]);
 			
 			if(searchAddress(result[0].address.address_name)==null){
 				searchAddr(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
@@ -53,8 +52,6 @@ function searchAddr(keyword){
         exten.html("");
     }
         
-        
-    console.log(keyword);
     if (!checkSearchedWord(keyword)) {
         return ;
     }
@@ -85,7 +82,6 @@ function searchAddr(keyword){
 	
 	function addSearchBox(result){	
 		if(result==null) {
-			console.log("data null");
 			return;
 		}
 		
@@ -101,7 +97,6 @@ function searchAddr(keyword){
 				let div = $('<div>').prop({className: classname});
 				div.addClass('addr');
 				div.click(function(){
-					console.log(addr);
 					exten.hide();
 					$("#search-input").val(addr.address_name);	
 					$("#jibunAddr").val(addr.address_name);
@@ -164,12 +159,10 @@ $(".category").children('ul').children('li').click(function(){
 
 	let cat = $(this).children('div').attr('id');
 	cat = cat.substring(5,cat.length);
-	console.log(cat);
     $("#category").val(cat);
     $("#addr-form").submit();
 })
 
-console.log($("#category-option"));
 $("#category-option option[value="+category+"]").attr('selected', true); 
 
 //좁은 화면에서 나타나는 카테고리 셀렉 태그
@@ -184,7 +177,6 @@ $("#category-option").on("change", ()=>{
 //셀렉 태그 값 변경 시 졍렬 순서 기준에 따라 새로 리스트 가져오기
 $("#search-option").on("change", ()=>{
 	let index = $("#search-option option").index($("#search-option option:selected"));
-	console.log(index);
 	$("#order").val(index);
 	$("#addr-form").submit();
 })
@@ -219,7 +211,6 @@ function addList(){
 	if(listCnt<0) return;
 
     getListMoreFromServer(listCnt).then(result => {
-        console.log(result);
         if(result!=null && result.length>0){
             for(let i=0; i<result.length; i++){
                 if(i%2==0){
@@ -230,13 +221,12 @@ function addList(){
                 if(result[i].fivo == null) continue;
                 
                 //리눅스 경로
-                //let save_dir = result[i].fivo.file_save_dir;
+                let save_dir = result[i].fivo.file_save_dir;
 				
 				//윈도우 경로
-				let save_dir = result[i].fivo.file_save_dir;
-				let splitArr = save_dir.split(`\\`);
-                console.log(splitArr);
-				save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+				//let save_dir = result[i].fivo.file_save_dir;
+				//let splitArr = save_dir.split(`\\`);
+				//save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 
 				let src = "/upload/"+save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
 				
