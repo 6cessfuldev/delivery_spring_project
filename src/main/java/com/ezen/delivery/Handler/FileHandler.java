@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FileHandler {
 
 	
-	private final String UP_DIR = "D:\\delivery\\upload";
+	private final String UP_DIR = "/yukssungmin/tomcat/webapps/delivery/upload";
 	
 	public FileVO uploadFiles(MultipartFile file){
 		LocalDate date = LocalDate.now();

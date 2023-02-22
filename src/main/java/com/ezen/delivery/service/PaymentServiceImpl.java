@@ -22,13 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@PropertySource(value = {"classpath:/application.yml"})
+/* @PropertySource(value = {"classpath:/application.yml"}) */
 public class PaymentServiceImpl implements PaymentService {
 
-	@Value("${imp_key}")
+	@Value("${import.imp_key}")
 	private String imp_key;
 	
-	@Value("${imp_secret}")
+	@Value("${import.imp_secret}")
 	private String imp_secret;
 	
 	@Data

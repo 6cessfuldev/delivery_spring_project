@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@PropertySource("classpath:application.yml")
+/* @PropertySource("classpath:application.yml") */
 public class OrderServiceImpl implements OrderService {
 	
 	@Inject

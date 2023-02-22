@@ -154,7 +154,6 @@
 <script>
 let category = '<c:out value="${sessionScope.pvo.category}" />';
 $("#search-option option:eq("+"${sessionScope.pvo.order}"+")").prop("selected", true);
-console.log(category);
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e8b552c46357c215f64b284e4da814a9&libraries=services"></script>
 <script src="/resources/js/list.js"></script>

@@ -109,8 +109,8 @@
 							</div>
 						</div>
 						<div class="card-end col-md-2">
-							<div class="btn border-secondary">리뷰보기</div>
-							<div class="btn border-secondary">삭제</div>
+							<div class="btn border-secondary" onclick="location.href='/diner/detail?diner_code=${dib.dvo.diner_code}';">둘러보기</div>
+							<div class="btn border-secondary" onclick="location.href='/dibs/remove?diner_code=${dib.dvo.diner_code}';">삭제</div>
 						</div>
 					</div>
 				</div>

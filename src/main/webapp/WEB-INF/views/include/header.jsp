@@ -26,13 +26,13 @@
 				<li>
 				</li>
 				<sec:authorize access="!isAuthenticated()">
-					<li class="nav-item"><div class="box"><a href="/member/login" class="nav-link" aria-current="page">로그인</a></div></li>
+					<li class="nav-item"><div class="box2"><a href="/member/login" class="nav-link" aria-current="page">로그인</a></div></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<li class="nav-item"><div class="box"><a href="/admin/" class="nav-link" aria-current="page">관리자</a></div></li>
+					<li class="nav-item"><div class="box2"><a href="/admin/" class="nav-link" aria-current="page">관리자</a></div></li>
 					</sec:authorize>
-					<li class="nav-item"><div class="box" id="basket-box"><a href="/basket/diner" class="nav-link" id='basket'>장바구니</a></div></li>
+					<li class="nav-item"><div class="box2" id="basket-box"><a href="/basket/diner" class="nav-link" id='basket'>장바구니</a></div></li>
 					<li class="nav-item"><div class="box2"><a href="/member/detail_userInfo" class="nav-link">마이페이지</a></div></li>
 					<li class="nav-item"><div class="box2" onclick="logout()"><a href="#" class="nav-link" aria-current="page">로그아웃</a></div></li>
 				</sec:authorize>
@@ -48,7 +48,7 @@
 		  a.innerText = "장바구니("+basket_count+")";
 		  a.className +=" text-light";
 		  let box = document.getElementById("basket-box");
-		  box.className +=" bg-secondary";
+		  box.className +=" hasBasket";
 	  }
 	  
 	  function logout(){

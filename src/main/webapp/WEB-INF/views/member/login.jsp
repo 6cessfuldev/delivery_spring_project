@@ -73,7 +73,6 @@
 
 <script type="text/javascript">
 	const msg = '<c:out value="${msg}"/>';
-	console.log(msg);
 	if (msg === "0") {
 		alert("아이디 또는 비밀번호를 확인해주세요.");
 	}

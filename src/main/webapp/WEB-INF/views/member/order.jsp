@@ -45,15 +45,15 @@
 	        <br><br>
 	        <div id="order_pay">
 	            <p id="order_payP">바로결제</p>
-	                <button onclick="paycoPay()" type="button" id="order_payBut">페이코</button>
-	                <button onclick="kakaoPay()" type="button" id="order_payBut">카카오페이</button>
-	                <button onclick="tossPay()" type="button" id="order_payBut2">계좌이체</button><br>
-	                <button onclick="creditCardPay()" type="button" id="order_payBut2">신용카드</button>
-	                <button onclick="danalPay()" type="button" id="order_payBut2">핸드폰결제</button>
+	                <button onclick="paycoPay()" type="button" id="order_payBut" class="payBtn payco">페이코</button>
+	                <button onclick="kakaoPay()" type="button" id="order_payBut" class="payBtn kakaopay">카카오페이</button>
+	                <button onclick="tossPay()" type="button" id="order_payBut2" class="payBtn tosspay">계좌이체</button><br>
+	                <button onclick="creditCardPay()" type="button" id="order_payBut2" class="payBtn creditcardpay">신용카드</button>
+	                <button onclick="danalPay()" type="button" id="order_payBut2" class="payBtn danalpay">핸드폰결제</button>
 	                <br><br>
 	                <p id="order_payP">만나서결제</p>
-	            <button type="button" onclick="cashPay()" id="order_cash">현금</button>
-	            <button type="button" onclick="CardPay()" id="order_card">카드</button>
+	            <button type="button" onclick="cashPay()" id="order_cash" class="payBtn cashpay">현금</button>
+	            <button type="button" onclick="CardPay()" id="order_card" class="payBtn cardpay">카드</button>
 	        </div>
 	        <div id="order_payInfo">
 	            <ul id="order_ul">

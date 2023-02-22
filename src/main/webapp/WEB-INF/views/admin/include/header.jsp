@@ -29,7 +29,7 @@
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
 		<form id="logout" action="/logout" method="post"></form>
-		  <li class="nav-item"><div class="box" onclick="logout()"><a href="#" class="nav-link" aria-current="page">로그아웃</a></div></li>
+		  <li class="nav-item px-5"><div class="box2" onclick="logout()"><a href="#" class="nav-link" aria-current="page">로그아웃</a></div></li>
 		</sec:authorize>
 		</ul>
 	  </header>

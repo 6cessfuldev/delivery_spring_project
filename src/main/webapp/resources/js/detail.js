@@ -13,8 +13,7 @@ const swiper = new Swiper('.swiper', {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-  
-    // And if we need scrollbar
+      // And if we need scrollbar
     scrollbar: {
       el: '.swiper-scrollbar',
     },
@@ -29,14 +28,12 @@ $(".category").children('ul').children('li').click(function(){
 	let cat = $(this).children('div').attr('id');
 	cat = cat.substring(5,cat.length);
     $("#category").val(cat);
-    console.log($("#order").val());
     $("#addr-form").submit();
 })
 
 //셀렉 태그 값 변경 시 졍렬 순서 기준에 따라 새로 리스트 가져오기
 $("#search-option").on("change", ()=>{
 	let index = $("#search-option option").index($("#search-option option:selected"));
-	console.log(index);
 	$("#order").val(index);
 	$("#addr-form").submit();
 })
@@ -85,7 +82,6 @@ $("#regBtn").click(function(){
 
 function regist(){
     let file = $('#review_multiple').val();
-   console.log("파일:"+file);
     const regExp = new RegExp("\.(exe|sh|bat|msi|dll|js)$");
     const regExpImg = new RegExp("\.(jpg|jpeg|png|gif)$");
     const maxSize = 1024*1024*20; //20MB
@@ -97,18 +93,10 @@ function regist(){
         const formData = new FormData();
         const data = $('#review_multiple');
         const revText = document.getElementById('review_con').value;
-       
-        console.log('폼 데이터 : ' + formData);
-        console.log('data : ' + data );
-        console.log(data[0]); 
-        console.log(data[0].files);
-        console.log(data[0].files[0]);
-        console.log(data[0].files[1]);
         
         for(let i = 0; i < data.length; i++){
             if(data[i].files.length>0){
                 for(let j = 0; j < data[i].files.length; j++){
-                    console.log(data[i].files[j]);
                     formData.append('file',data[i].files[j]);   
                 }
                 if(revText == null || revText == ''){
@@ -144,9 +132,7 @@ function regist(){
                     //formData.append('review_order_code',orderCode);
                 }
             }
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-          }
+
         $.ajax({
             url:'/review/upload',
             type : 'post',
@@ -162,7 +148,6 @@ function regist(){
                     $('#review_multiple').val('');                   
                     document.querySelector("div#image_container").innerHTML='';
                     $('#review_con').val('');
-                    console.log(result);
                     alert("리뷰를 등록했습니다.");
                     getReviewList(diner_code);
                 }else{
@@ -182,11 +167,9 @@ function regist(){
 
 //리뷰 뿌리기
 async function spreadReviewServer(diner_code){
-    console.log(diner_code);
     try {
         const resp = await fetch('/review/list/'+diner_code);
         const result = await resp.json();
-        console.log(result);
         return result;
     } catch (error) {
         console.log(error);
@@ -195,7 +178,6 @@ async function spreadReviewServer(diner_code){
 
 function getReviewList(diner_code){
     spreadReviewServer(diner_code).then(result =>{ 
-        console.log(result);
         const review = document.getElementById('review-head');
         review.innerHTML = "";
         const star1 = '★☆☆☆☆';
@@ -209,7 +191,6 @@ function getReviewList(diner_code){
             for(let reviewDTO of result){ 
                 let img_box=document.createElement('div');
                  const star = reviewDTO.rvo.review_score;
-                 console.log(star);
 
                  let star0='';
                  for(let i=0; i<reviewDTO.rvo.review_score; i++){
@@ -243,11 +224,13 @@ function getReviewList(diner_code){
                  div += `<br>`;
                  if(reviewDTO.flist.length > 0){      
                     for(let img of reviewDTO.flist){
-                      console.log(img);
-                      let save_dir = img.review_img_save_dir.split('\\');
-                      let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
-                      console.log("/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name);
-                      let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+             		               		  
+             		  //윈도우 경로
+             		  //let save_dir = img.review_img_save_dir.split('\\');
+                      //let dir = save_dir[0]+"/"+save_dir[1]+"/"+save_dir[2];
+                      //let real = "/upload/"+dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
+             		  //리눅스 경로
+                      let real = "/upload/"+img.review_img_save_dir+"/"+img.review_img_uuid+"_"+img.review_img_name;
                       let imgTest = '<img src="'+real+'" id="review_img">';
                       div += imgTest;
                       }
@@ -283,9 +266,6 @@ function getReviewList(diner_code){
 function commentPost(bossData) {
    // const commentData = $('.bossCommentText').val();
     const commentData = bossData.review_boss_comment;
-   //console.log(commentData);
-    console.log(bossData);
-   //console.log(bossData.review_code);
     if(commentData == null || commentData == ''){
         alert("댓글 등록을 실패했습니다.");
         return;
@@ -312,17 +292,13 @@ function commentPost(bossData) {
 $(document).on("click",".bossCommentBtn",function (e){
 	if(e.target.classList.contains('bossCommentBtn')){
 	    let div = e.target.closest('div');
-	    console.log(div.classList);
         let review_codeVal = div.dataset.review_code;
         const input = e.target.previousSibling;
-        console.log(input.classList);
         const commentData = input.value;
-        console.log(commentData);
         const bossData = {
              review_boss_comment : commentData,
              review_code : review_codeVal
         }
-     console.log(bossData);
      commentPost(bossData);
     
     }
@@ -345,7 +321,6 @@ async function removeReviewServer(review_code){
         return result;
 
     } catch (error) {
-        console.log("removeReviewServer error");
         console.log(error);
     }
 }
@@ -354,9 +329,7 @@ async function removeReviewServer(review_code){
 document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('deleteBtn')){
       let div = e.target.closest('div');
-      console.log(div.classList);
       let review_codeVal = div.dataset.review_code;
-      console.log(review_codeVal);
          removeReviewServer(review_codeVal).then(result => {
             if(result>0){
                 if(user_id == user_id){
@@ -385,7 +358,6 @@ function openModal(food_code){
     type: 'GET',
     dataType: 'json',
     success: function(data, status, xhr){
-      console.log(data);
       spreadChoice(data);
       addBasketEvent(data);
       addModalForm(data);   
@@ -412,7 +384,6 @@ function addBasketEvent(data){
 	$(".add-basket").on("click",()=> {
 		
 		let options = $(".form-check-input");
-	    console.log(options);
 	    let optionList = [];
 	    for(let option of options){
 	    	if(option.checked){
@@ -429,7 +400,6 @@ function addBasketEvent(data){
 	      	basket_order_count : modalAmount,
 	      	choiceList : optionList
 	    };
-	    console.log(basketData);
 	    
 	    postBasketToServer(basketData);
 	    $(".btn-close").click();	    
@@ -474,13 +444,11 @@ $(".modal-order").click(function(){
 	let cnt = 0;
 	for(let choice of choices){
 		if(choice.checked){
-			console.log("choice :"+choice.value);
 			let choiceForm = $('<input type="text" name="choiceList['+ cnt++ +'].choice_code" value="'+choice.value+'" hidden>');
 			modalForm.append(choiceForm);
 		}
 	}
 	$("#modal_order_food_count").val($(".modal-amount").text());
-	console.log($("#modal-form"));
 	modalForm.submit();
 	
 })
@@ -488,10 +456,13 @@ $(".modal-order").click(function(){
 // 모달창 내용 채우기
 function spreadChoice(data){
 
+	//리눅스 경로
 	let save_dir = data.filevo.file_save_dir;
-	let splitArr = save_dir.split(`\\`);
-
-	save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+	
+	//윈도우 경로
+	//let save_dir = data.filevo.file_save_dir;
+	//let splitArr = save_dir.split(`\\`);
+	//save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
 	let src = "/upload/"+save_dir+"/"+data.filevo.file_uuid+"_"+data.filevo.file_name;
 	
 	$(".modal-img").css("background-image", "url('" + src + "')");
@@ -564,16 +535,13 @@ function calculate(){
 $(".order-btn").hide();
 //장바구니 데이터 요청과 장바구니 새로고침 메서드 호출
 function basketReload(){
-	console.log("Reload");
 	if(user_id == null || user_id == "") return;
-    console.log(user_id);
     $.ajax({
         url: '/basket/list/',
         type: 'POST',
         data: {user_id : user_id},
         dataType: 'json',
         success: function(data, status, xhr){
-        	console.log(data);
         	
 			refreshBasket(data);
         
@@ -587,7 +555,6 @@ function basketReload(){
 function refreshBasket(data){
 	let basket = $("#basket-menu-list");
 	basket.html(" ");
-	console.log(data.length);
 	//장바구니 값이 없을 경우 주문 버튼 사라짐
 	if(data.length<1 || data == null){
 		$(".order-btn").hide();
@@ -625,7 +592,6 @@ function refreshBasket(data){
 		minusBtn.click(()=>{
 			if(Number(amount.text())>1){
 				if(changeAmount(bdto.basket_code,Number(amount.text())-1, basketItem)!=1) {
-					console.log("1");
 					return;
 				} 
 				amount.text(Number(amount.text())-1);
@@ -665,7 +631,6 @@ function changeAmount(basket_code, amount, basketItem){
 	    dataType: 'json',
 	    async:false, //동기식 처리
 	    success: function(data, status, xhr){
-	    	console.log(data);
 	    	result = 1; 
 	    },
 	    error: function(xhr, status, error){
@@ -683,7 +648,6 @@ function removeBasket(basket_code, basketItem){
         dataType: 'json',
         async: false,
         success: function(data, status, xhr){
-        	console.log(data);
         	basketItem.remove();
         	basketReload();    
         },
@@ -701,15 +665,23 @@ var observer = new MutationObserver(mutations => {
   let sum = 0;
   for(let price of priceList){
     let text = price.innerText;
-    console.log(text.substring(0, text.length-1));
   	sum += Number(text.substring(0, text.length-1));
   }
   localStorage.setItem("orderTotalPrice", sum);
   document.getElementById("total").innerText = sum+"원";
 	
   let count = priceList.length;
-  document.getElementById("basket").innerText = "장바구니("+count+")";
-  
+  	let a = document.getElementById("basket");
+    let box = document.getElementById("basket-box");
+  if(count >0){
+    a.innerText = "장바구니("+count+")";
+    a.className ="nav-link text-light";
+    box.className ="box2 hasBasket";
+  }else{
+    a.innerText = "장바구니";
+    a.className ="nav-link";
+    box.className ="box2";
+  }
 
 });
 

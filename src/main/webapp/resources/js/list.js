@@ -26,7 +26,6 @@ function showPosition(position) {
 	var coord = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
 	var callback = function(result, status) {
 		if (status === kakao.maps.services.Status.OK) {
-			console.log(result[0]);
 			
 			if(searchAddress(result[0].address.address_name)==null){
 				searchAddr(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
@@ -53,8 +52,6 @@ function searchAddr(keyword){
         exten.html("");
     }
         
-        
-    console.log(keyword);
     if (!checkSearchedWord(keyword)) {
         return ;
     }
@@ -85,7 +82,6 @@ function searchAddr(keyword){
 	
 	function addSearchBox(result){	
 		if(result==null) {
-			console.log("data null");
 			return;
 		}
 		
@@ -101,7 +97,6 @@ function searchAddr(keyword){
 				let div = $('<div>').prop({className: classname});
 				div.addClass('addr');
 				div.click(function(){
-					console.log(addr);
 					exten.hide();
 					$("#search-input").val(addr.address_name);	
 					$("#jibunAddr").val(addr.address_name);
@@ -164,12 +159,10 @@ $(".category").children('ul').children('li').click(function(){
 
 	let cat = $(this).children('div').attr('id');
 	cat = cat.substring(5,cat.length);
-	console.log(cat);
     $("#category").val(cat);
     $("#addr-form").submit();
 })
 
-console.log($("#category-option"));
 $("#category-option option[value="+category+"]").attr('selected', true); 
 
 //좁은 화면에서 나타나는 카테고리 셀렉 태그
@@ -184,7 +177,6 @@ $("#category-option").on("change", ()=>{
 //셀렉 태그 값 변경 시 졍렬 순서 기준에 따라 새로 리스트 가져오기
 $("#search-option").on("change", ()=>{
 	let index = $("#search-option option").index($("#search-option option:selected"));
-	console.log(index);
 	$("#order").val(index);
 	$("#addr-form").submit();
 })
@@ -219,7 +211,6 @@ function addList(){
 	if(listCnt<0) return;
 
     getListMoreFromServer(listCnt).then(result => {
-        console.log(result);
         if(result!=null && result.length>0){
             for(let i=0; i<result.length; i++){
                 if(i%2==0){
@@ -229,17 +220,21 @@ function addList(){
                 //일단 이미지 없으면 띄우지 않기
                 if(result[i].fivo == null) continue;
                 
+                //리눅스 경로
                 let save_dir = result[i].fivo.file_save_dir;
-				let splitArr = save_dir.split(`\\`);
-                console.log(splitArr);
-				save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+				
+				//윈도우 경로
+				//let save_dir = result[i].fivo.file_save_dir;
+				//let splitArr = save_dir.split(`\\`);
+				//save_dir = splitArr[0]+"/"+splitArr[1]+"/"+splitArr[2];
+
 				let src = "/upload/"+save_dir+"/"+result[i].fivo.file_uuid+"_"+result[i].fivo.file_name;
 				
                 add+=`<div class="diner-card bg-white" id="diner-card" style="cursor:pointer;" onclick='location.href="/diner/detail?diner_code=${result[i].dvo.diner_code}"'>`;
                 add+=`<div class="diner-img">`;
                 add+=`<img src="${src}"	 alt="" width="80px" height="80px"></div>`;
                 add+=`<div class="diner-body"><h5 class="diner-title">${result[i].dvo.diner_name}</h5>`;
-                add+=`<p class="diner-text"><span class="score">★3.8</span> | 리뷰 1902 | 사장님댓글 791 </p>`;
+                add+=`<p class="diner-text"><span class="score">★${result[i].dvo.diner_score_avg}</span> | 리뷰 ${result[i].dvo.diner_review_count} | 사장님댓글 0 </p>`;
                 add+=`<p class="diner-text"><span class="del-option">${result[i].dvo.diner_method_pay}</span> |`;
                 add+=`<span>${result[i].dvo.diner_min_pay}원 이상 배달</span></p>`;
                 add+=`<p class="delivery-time"> 22분 </p></div></div>`;

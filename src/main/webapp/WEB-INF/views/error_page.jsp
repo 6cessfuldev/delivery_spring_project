@@ -10,8 +10,7 @@
 <body>
 
     <div>
-        <img src="/resources/source/error.png" alt="" height="500px">
-        <h4><c:out value="${Exception.message}" /></h4>
+        <img src="/resources/source/error.png" alt="" width="100%">
     </div>
 
 

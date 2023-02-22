@@ -58,10 +58,10 @@
 	<div class=" col-sm-8 contents bg-light d-flex justify-content-center pt-3">
 		
 		<div class="diner-detail">
-			<div class=diner-header>
+			<div class="diner-header">
 				<div class="diner-name">
 					<span class=diner-name-field>${diner.diner_name}</span>
-					<span class="dib-field">
+					<span class="dib-field" style="cursor:pointer;">
 						<c:choose>
 							<c:when test="${isDibs eq 0}"> ♡</c:when>
 							<c:when test="${isDibs ne 0}"> ♥</c:when>
@@ -210,7 +210,8 @@
 										<div class="diner-menu-card d-flex align-items-center justify-content-between" onClick='openModal(${food.foodvo.food_code})' style="cursor:pointer;">
 											<div class="diner-menu-table">
 												<p class="diner-menu-title">${food.foodvo.food_name}</p>
-												<p class="diner-menu-price">${food.foodvo.food_price }</p>
+												<fmt:formatNumber value="${food.foodvo.food_price}" var="price" pattern="#,###" />
+												<p class="diner-menu-price">${food.foodvo.food_price }원</p>
 											</div>
 											<div class="diner-menu-img">
 												<img src="/upload/${fn:replace(food.filevo.file_save_dir, '\\','/')}/${food.filevo.file_uuid}_${food.filevo.file_name}" alt="" width="100px" height="100px">
@@ -322,7 +323,76 @@
 						<div class="diner-score d-flex justify-content-center">
 							<div class="diner-score-total">
 								<p class="total-score">${diner.diner_score_avg}</p>
-								<p class="total-star">★★★★☆</p><!-- 평균 맞춰서 색 채워야함 -->
+								<p class="total-star">
+							<c:choose>
+							<c:when test="${diner.diner_score_avg == 5.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 4.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 4.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 3.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 3.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 2.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 2.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 1.5}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star-half"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:when test="${diner.diner_score_avg >= 1.0}">
+								<i class="bi bi-star-fill"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+								<i class="bi bi-star"></i>
+							</c:when>
+							<c:otherwise>
+								등록된 리뷰가 없습니다.
+							</c:otherwise>
+						</c:choose>
+						</p>
 							</div>					
 						</div>
 						<!-- diner-score -->
@@ -466,10 +536,7 @@
 
 		<div class="col-sm-3 basket">
 			<div class="sub-title">
-				<span>주문</span> <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-					<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-					<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-				  </svg></span>
+				<span>주문</span>
 			</div>
 			
 			<div id="basket-menu-list"></div>
@@ -559,7 +626,7 @@
     </div>
   </div>
 </div>
-<form action="/order" method="post" id="modal-form">
+<form action="/order/" method="post" id="modal-form">
         	<input type="text" name="food_code" id="modal_food_code" value="" hidden>
         	<input type="text" name="order_food_count" id="modal_order_food_count" value="" hidden>       	
         	<input type="text" name="user_id" val="<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username'/></sec:authorize>" hidden>
@@ -567,7 +634,6 @@
 <script type="text/javascript">
 	let diner_code = "<c:out value='${diner.diner_code}' />";
 	let user_id = <sec:authorize access='!isAuthenticated()'>""</sec:authorize><sec:authorize access='isAuthenticated()'>"<sec:authentication property='principal.username'/>"</sec:authorize>;
-	console.log("id : "+user_id);
 	let category = '<c:out value="${sessionScope.pvo.category}" />';
 	const diner_codeVal = '<c:out value="${diner.diner_code}" />';
 	const order_code = '<c:out value="${order_code}" />';
@@ -584,7 +650,6 @@
 	function readFile2(fileNames) {
 	    const target = document.getElementsByName(fileNames);
 	    const fileLength = target[0].files.length;
-	    console.log(fileLength);
 	      if (fileLength<1) return;
 	
 	      $.each(target[0].files, function(index, file){
@@ -600,7 +665,6 @@
 	                img.setAttribute("src", e.target.result);               
 	               div.appendChild(xBtn);
 	               div.appendChild(img);
-	           console.log("index"+index);
 	              document.querySelector("div#image_container").appendChild(div);
 	              
 	           }

@@ -25,9 +25,12 @@ public class BasketInterceptor implements HandlerInterceptor {
 			ModelAndView modelAndView) throws Exception {
 	
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
 		if(authentication!=null && authentication.getPrincipal()!="anonymousUser") {
+			
 			PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 			String user_id = principalDetails.getUsername();
+			
 			int basketCount = bsv.getCount(user_id);
 			request.setAttribute("basket_count", basketCount);
 		}

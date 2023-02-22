@@ -2,13 +2,10 @@ package com.ezen.delivery;
 
 import javax.inject.Inject;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ezen.delivery.security.oauth2.PrincipalDetails;
 import com.ezen.delivery.service.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +33,11 @@ public class HomeController {
 		return "/diner/detail";
 	}
 	
-	
+	@RequestMapping(value = "/throw", method = RequestMethod.GET)
+	public void testThrow() throws Exception {	
+		
+		throw new Exception("예외 테스트 입니다.");
+		
+
+	}
 }

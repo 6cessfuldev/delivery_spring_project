@@ -62,7 +62,7 @@ diner_score_avg double,
 diner_review_count int default 0,
 diner_boss_comment_count int default 0,
 FOREIGN KEY (file_code)
-REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE SET NULL,
 primary key(diner_code));
 
 
@@ -77,9 +77,9 @@ food_state varchar(10) default "N",
 file_code int,
 diner_code int,
 FOREIGN KEY(file_code)
-REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES file(file_code) ON UPDATE CASCADE ON DELETE CASCADE,
 FOREIGN KEY (diner_code)
-REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(food_code));
 
 
@@ -91,7 +91,7 @@ food_code int not null,
 choice_content varchar(45) not null,
 choice_price int not null,
 FOREIGN KEY (food_code)
-REFERENCES food(food_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES food(food_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(choice_code));
 
 
@@ -103,9 +103,9 @@ user_id varchar(60) not null,
 food_code int not null,
 basket_order_count int not null,
 FOREIGN KEY (user_id)
-REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 FOREIGN KEY (food_code)
-REFERENCES food(food_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES food(food_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(basket_code));
 
 
@@ -115,9 +115,9 @@ create table basket_detail(
 basket_code int not null,
 choice_code int not null,
 FOREIGN KEY (basket_code)
-REFERENCES basket(basket_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES basket(basket_code) ON UPDATE CASCADE ON DELETE CASCADE,
 FOREIGN KEY (choice_code)
-REFERENCES choice(choice_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES choice(choice_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(basket_code));
 
 
@@ -129,7 +129,7 @@ user_id varchar(60) not null,
 log_date datetime,
 log_out_date datetime,
 FOREIGN KEY (user_id)
-REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(log_code));
 
 
@@ -151,7 +151,7 @@ order_niceMobileV2 varchar(20) not null,
 order_IMP_UID varchar(100) not null,
 diner_code int not null,
 FOREIGN KEY (diner_code)
-REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(order_code));
 
 
@@ -161,7 +161,7 @@ create table order_food(
 order_code bigint not null,
 order_food_info varchar(2000) not null,
 FOREIGN KEY (order_code)
-REFERENCES `order`(order_code) ON UPDATE CASCADE ON DELETE RESTRICT
+REFERENCES `order`(order_code) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -178,9 +178,9 @@ review_reg_date datetime default now(),
 review_mod_date datetime default now(),
 review_boss_comment text,
 FOREIGN KEY (user_id)
-REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 FOREIGN KEY (diner_code)
-REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(review_code));
 
 
@@ -196,7 +196,7 @@ review_img_name varchar(512) not null,
 review_img_type tinyint(1) default 0,
 review_img_reg_date datetime default now(),
 FOREIGN KEY (review_code)
-REFERENCES review(review_code) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES review(review_code) ON UPDATE CASCADE ON DELETE CASCADE,
 primary key(review_img_code));
 
 
@@ -206,8 +206,28 @@ create table dibs(
 user_id varchar(60) not null,
 diner_code int not null,
 FOREIGN KEY (user_id)
-REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
 FOREIGN KEY (diner_code)
-REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE RESTRICT
+REFERENCES diner(diner_code) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+## mariaDB용
+/* create function */
+DELIMITER $$
+
+CREATE
+    FUNCTION `u_st_distance_sphere`(`pt1` POINT, `pt2` POINT)
+    RETURNS DECIMAL(10,2)
+    BEGIN
+	RETURN 6371000 * 2 * ASIN(SQRT(POWER(SIN((ST_Y(pt2) - ST_Y(pt1)) * PI()/180 / 2), 2) + COS(ST_Y(pt1) * PI()/180 ) * COS(ST_Y(pt2) * PI()/180) * POWER(SIN((ST_X(pt2) - ST_X(pt1)) * PI()/180 / 2), 2) ));
+    END$$
+
+DELIMITER ;
+
+SELECT mach_id, ST_X(pt1) AS lat, ST_Y(pt1) AS lng, ST_X(pt2) AS priv_lat, ST_Y(pt2) AS priv_lng
+, ST_DISTANCE(pt2, pt1) AS dist, U_ST_DISTANCE_SPHERE(pt2, pt1) AS dist1
+FROM
+(
+SELECT mach_id, mach_pt AS pt1, LAG(mach_pt,1) OVER(PARTITION BY mach_id ORDER BY reg_seq) AS pt2
+FROM mach_position
+) AS mp;

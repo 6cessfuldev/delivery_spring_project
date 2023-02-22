@@ -113,12 +113,12 @@ main{
 }
 
 .category>.nav>li:hover{
-	background-color: black;
+	background-color: #f2B72c;;
 	color: white;
 }
 
 .active{
-	background-color: black;
+	background-color: #f2B72c;;
 	color: white;
 }
 

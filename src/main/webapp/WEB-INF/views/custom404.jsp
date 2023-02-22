@@ -31,8 +31,7 @@ html, body{
 </head>
 <body>
     <div class="container">
-        <img src="/resources/source/error.png" alt="">
-        ${ex}
+        <img src="/resources/source/error.png" alt="" width="100%">
     </div>
 </body>
 </html>

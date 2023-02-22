@@ -74,6 +74,9 @@ input[id="login_check"]:checked::after{
     font-size: 18px;
     color: white;
 }
+#login_button:hover{
+	background: #f2B72c; 
+}
 /* #login_buttonA1,#login_buttonA2{
     width: 415px;
     height: 45px;

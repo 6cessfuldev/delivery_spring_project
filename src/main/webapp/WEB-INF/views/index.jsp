@@ -73,11 +73,10 @@
 	
 	let exten = $(".search-extention");
 	
-	//카테고리 버튼 주소가 입력되었을 때만 활성화
+	//카테고리 버튼: 주소가 입력되었을 때만 활성화
 	function clickCategory(category){
-		console.log("click");
-		let input = exten.find("#jibunAddr")
-		if(input.val() == "" || input.val()==null){
+		let input = $("#jibunAddr").val();
+		if(input == "" || input==null){
 			alert("주소를 입력해주세요.");
 		}else{
 			$("#category").val(category);
@@ -114,8 +113,6 @@
 		var coord = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		var callback = function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
-				console.log(result[0]);
-				
 				if(searchAddress(result[0].address.address_name)==null){
 					searchAddr(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
 				}else{
@@ -138,9 +135,7 @@
 			exten.hide();
 			exten.html("");
 		}
-			
-			
-		console.log(keyword);
+
 		if (!checkSearchedWord(keyword)) {
 			return ;
 		}
@@ -152,7 +147,6 @@
 		var places = new kakao.maps.services.Places();
 		
 		var callback = function(result, status) {
-			console.log(result);
 			if (status === kakao.maps.services.Status.OK) {
 				addSearchBox(result);
 			}
@@ -166,7 +160,6 @@
 	})
 
 	$("#search-input").on("click keyup", function(){
-		console.log("change");
 		let keyword = $("#search-input").val();
 		searchAddr(keyword);
 	})
@@ -182,13 +175,20 @@
 			exten.show();
 			for(let i=0; i<result.length; i++ ){
 
+				
 				let addr = result[i];
+
+				if(i==0){
+					$("#jibunAddr").val(addr.address_name);
+					$("#x").val(addr.x);
+					$("#y").val(addr.y);
+				}
+				
 				let classname = "addr"+i;
 				
 				let div = $('<div>').prop({className: classname});
 				div.addClass('addr');
 				div.click(function(){
-					console.log(addr);
 					exten.hide();
 					$("#search-input").val(addr.address_name);	
 					$("#jibunAddr").val(addr.address_name);
